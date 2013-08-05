@@ -1,11 +1,11 @@
 require.config({
     shim: {
-        "splunkjs/mvc/d3chart/d3/d3.v2": {
+        "testapp/contrib/d3chart/d3/d3.v2": {
             deps: [],
             exports: "d3"
         },
         "testapp/contrib/cal-heatmap/cal-heatmap": {
-            deps: ["splunkjs/mvc/d3chart/d3/d3.v2"],
+            deps: ["testapp/contrib/d3chart/d3/d3.v2"],
             exports: "cal"
         }
     }
@@ -20,7 +20,7 @@ require.config({
 define(function(require, exports, module) {
 
     var _ = require('underscore');
-    var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
+    var d3 = require("testapp/contrib/d3chart/d3/d3.v2");
     var cal = require("testapp/contrib/cal-heatmap/cal-heatmap");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
