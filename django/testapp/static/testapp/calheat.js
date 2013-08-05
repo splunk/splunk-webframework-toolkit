@@ -1,11 +1,11 @@
 require.config({
     shim: {
-        "testapp/contrib/d3chart/d3/d3.v2": {
+        "splunkjs/mvc/d3chart/d3/d3.v2": {
             deps: [],
             exports: "d3"
         },
         "testapp/contrib/cal-heatmap/cal-heatmap": {
-            deps: ["testapp/contrib/d3chart/d3/d3.v2"],
+            deps: ["splunkjs/mvc/d3chart/d3/d3.v2"],
             exports: "cal"
         }
     }
@@ -20,7 +20,7 @@ require.config({
 define(function(require, exports, module) {
 
     var _ = require('underscore');
-    var d3 = require("testapp/contrib/d3chart/d3/d3.v2");
+    var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
     var cal = require("testapp/contrib/cal-heatmap/cal-heatmap");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
@@ -33,6 +33,9 @@ define(function(require, exports, module) {
         options: {
             managerid: "search1",   // your MANAGER ID
             data: "preview",  // Results type
+            domain: 'hour',
+            subdomain: 'min',
+            maxSeries: '3',
 
             options: {} // the default for custom heatmap options.
         },
@@ -42,10 +45,6 @@ define(function(require, exports, module) {
         initialize: function() {
             _.extend(this.options, {
                 formatName: _.identity,
-                formatTitle: function(d) {
-                    return (d.source.name + ' -> ' + d.target.name +
-                            ': ' + d.value); 
-                }
             });
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
@@ -57,25 +56,28 @@ define(function(require, exports, module) {
         },
 
         createView: function() { 
-            // for (var i=0; i<this.settings.get("maxSeries"); i++)
-            //     this.$el.html("<button id='"+this.id+"-previous' class='btn' style='margin: 5px;'> Previous </button> <button id='"+this.id+"-next' class='btn' style='margin: 5px;'> Next </button>");
             return true;
         },
 
         // making the data look how we want it to for updateView to do its job
+        // in this case, it looks like this:
+        // [(one for each in maxSeries: {timestamp1: count, timestamp2: count, ... }]
         formatData: function(data) {
             var maxSeries = this.settings.get('maxSeries')+1;
             var myfields = this.resultsModel.data().fields
-            myfields = _.first(myfields, maxSeries+1);
+            var domain = this.settings.get('domain');
+            var subdomain = this.settings.get('subdomain');
+            // myfields = _.first(myfields, maxSeries+1);
+            // console.log(data)
             for (var i=0; i<myfields.length; i++) {
                 myfields[i] = _.pick(myfields[i], 'name');
                 myfields[i] = _.values(myfields[i]);
             }
-            myfields = _.without(_.flatten(myfields), "_time");
+            myfields = _.filter(_.flatten(myfields), function(d){return d[0] !== "_" });
+            console.log(myfields)
             var myresults = this.resultsModel.data().results 
 
-            var domain = 'hour';
-            var subdomain = 'min';
+            
 
             if (data && data[0] != null) {
                 if (parseInt(data[0]._span) > 60) {
@@ -83,7 +85,7 @@ define(function(require, exports, module) {
                     subdomain = 'hour';
                 }
                 var formattedData = [];
-                for(var i = 0; i < maxSeries; i++) {
+                for(var i = 0; i < myfields.length; i++) {
                     formattedData.push({});
                 }
 
@@ -108,21 +110,22 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data) {
+            console.log(data);
             var that = this;
             userOptions = this.settings.get('options')
-            var maxSeries = 3; //this.settings.get('maxSeries');
+            var maxSeries = this.settings.get('maxSeries');
             var i = 0;
 
             this.$el.html('');
             console.log(data);
             // default options here.
             for (var i=0; i<maxSeries; i++) {
-                $("<div class='buttons'> <button id='previous-"+i+"' class='btn' style='margin: 5px;'> Previous </button> <button id='next-"+i+"' class='btn' style='margin: 5px;'> Next </button></div>")
+                $("<div class='cal-heatmap-buttons'> <button id='previous-cal-heatmap"+i+"' class='btn' style='margin: 5px;'> Previous </button> <button id='next-cal-heatmap"+i+"' class='btn' style='margin: 5px;'> Next </button></div>")
                     .appendTo(this.el)[0];
-                options = _.extend({
-                    itemSelector: $("<div class='floatleft'/>").appendTo(this.el)[0],
-                    previousSelector: "#previous-"+i,
-                    nextSelector: "#next-"+i,
+                var options = _.extend({
+                    itemSelector: $("<div/>").appendTo(this.el)[0],
+                    previousSelector: "#previous-cal-heatmap"+i,
+                    nextSelector: "#next-cal-heatmap"+i,
                     data: data.timestamps[i],
                     domain: data.domain,
                     subdomain: data.subdomain,
