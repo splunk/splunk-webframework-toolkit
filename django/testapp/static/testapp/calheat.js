@@ -1,26 +1,19 @@
-require.config({
-    shim: {
-        "splunkjs/mvc/d3chart/d3/d3.v2": {
-            deps: [],
-            exports: "d3"
-        },
-        "testapp/contrib/cal-heatmap/cal-heatmap": {
-            deps: ["splunkjs/mvc/d3chart/d3/d3.v2"],
-            exports: "cal"
-        }
-    }
-});
-
-// calheat!
-// shows a cool looking heatmap based on different time signatures
-// requires a timechart search. it dynamically guesses how to set up the
-// way to show the time, but you can define any settings you want in the html
-// docs: http://kamisama.github.io/cal-heatmap
-
-define(function(require, exports, module) {
-
+ require.config({
+     shim: {
+        "testapp/contrib/d3chart/d3/d3.v2": {
+             deps: [],
+             exports: "d3"
+         },
+         "testapp/contrib/cal-heatmap/cal-heatmap": {
+            deps: ["testapp/contrib/d3chart/d3/d3.v2"],
+             exports: "cal"
+         }
+     }
+@@ -20,7 +20,7 @@ require.config({
+ define(function(require, exports, module) {
+ 
     var _ = require('underscore');
-    var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
+    var d3 = require("testapp/contrib/d3chart/d3/d3.v2");
     var cal = require("testapp/contrib/cal-heatmap/cal-heatmap");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
