@@ -35,10 +35,10 @@ define(function(require, exports, module) {
             zoom: 'true',
             directional: 'true',
             count: 'count',
-            groupKey: 'cef_name'
-            charge: '-80',
-            gravity: '0.1',
-            linkDistance: '100'
+            groupKey: 'cef_name',
+            mycharge: '-80',
+            mygravity: '0.1',
+            mylinkDistance: '100'
         },
 
         output_mode: "json",
@@ -160,9 +160,15 @@ define(function(require, exports, module) {
 
             // We provide these by default
             // in case the view lacks sliders
-            this.charge = this.settings.get('charge');
-            this.gravity = this.settings.get('gravity');
-            this.linkDistance = this.settings.get('linkDistance');
+            // this.charge = -80;
+            // this.gravity = .1;
+            // this.linkDistance = 200;
+
+            this.charge = this.settings.get('mycharge');
+            this.gravity = this.settings.get('mygravity');
+            this.linkDistance = this.settings.get('mylinkDistance');
+
+            alert(this.charge+", "+this.gravity+", "+this.linkDistance);
 
             // the div id that we will select later
             this.div_id = '#' + this.id + '_forcedirected';
