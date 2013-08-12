@@ -1,0 +1,19 @@
+{% extends 'splunkdj:base_with_account_bar.html' %}
+{% load splunkmvc %}
+{% load forcedirected %}
+{% block title %}{{testapp}}forcedirected!!!{% endblock title %}
+{% block content %}
+    <h3>Chosen Select!</h3>
+    {% forcedirected
+        id="myselect"
+        managerid="search1"
+        charge="$charge$"|token_safe
+    %}
+{% endblock content %}
+
+{% block managers %}
+	{% searchmanager id="search1"
+		search='|inputlookup forcedirected.csv | stats count by src_ip dest_cnc_channel_host cef_name | sort - count'
+	%}
+{% endblock managers %}
+

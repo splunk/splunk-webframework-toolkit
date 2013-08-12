@@ -1,0 +1,119 @@
+.ForceDirectedContainer {
+    height: 700px;
+    overflow-y: auto;
+    width: auto;
+    font-family: arial;
+    position: relative;
+}
+.ForceDirectedContainer circle.node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+
+.ForceDirectedContainer .link, .ForceDirectedContainer #arrowEnd {
+    stroke: #999;
+    stroke-opacity: .6;
+    fill: none;
+}
+.ForceDirectedContainer #arrowEnd {
+    fill: #999;
+}
+.ForceDirectedContainer #status {
+    display: none; 
+    font-size: 20px;
+    left: 45%;
+    position: absolute;
+    top: 40%;
+}
+.ForceDirectedContainer #reset_button {
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    float: right;
+    margin: 10px 20px 20px 0;
+    width: 150px;
+}
+.ForceDirectedContainer #highlight_label {
+    float: left;
+    margin: 15px 0 0 10px;
+}
+.ForceDirectedContainer #highlight_button {
+    border: 1px solid #9B9B9B;
+    border-radius: 4px;
+    float: left;
+    /*margin: 10px 0 0 10px;*/
+    width: 205px;
+    box-shadow: none;
+    margin-top: 7px;
+}
+
+.ForceDirectedContainer circle.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.ForceDirectedContainer circle.nodeHighlight,
+.ForceDirectedContainer circle.highlight  {
+    stroke-width: 2px;
+    stroke: #E89595;
+}
+
+.linkHighlight {
+    stroke: red !important;
+}
+
+.ForceDirectedContainer circle.nodeHighlight.highlight {
+    stroke-width: 3px;
+}
+
+
+.ForceDirectedContainer line.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+.ForceDirectedContainer #chart {
+  width: 100%;
+  height: 100%;
+}
+
+.ForceDirectedContainer #tooltipContainer {
+    border: 1px solid hsl(0, 0%, 80%);
+    position: absolute;
+    min-width: 200px;
+    min-height: 50px;
+    border-radius:3px;
+    z-index:100;
+    background: #3A3A3A;
+    padding: 10px;
+    color: white;
+    top:50px;
+}
+
+.ForceDirectedContainer .group-swatch {
+    width:20px;
+    height:20px;
+    float:left;
+    margin:2px;
+    margin-right: 10px
+}
+
+.ForceDirectedContainer .group-name {
+    padding-top: 5px;
+}
+
+.ForceDirectedContainer .tooltipLabel {
+    font-weight:bold;
+    padding-right:5px;
+}
+
+.ForceDirectedContainer .tooltipRow {
+    margin-bottom:10px;
+}
+
+.ForceDirectedContainer .panCursor {
+    cursor: move;
+}
+
+.scSliders .scSlidersContent {
+    margin: 12px 0px !important;
+}
