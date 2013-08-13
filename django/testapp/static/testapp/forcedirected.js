@@ -30,15 +30,15 @@ define(function(require, exports, module) {
             data: "preview",  // Results type
 
             // default values
-            height: "400px",
-            width: "400px",
+            height: "600",
+            width: "600",
             zoom: 'true',
             directional: 'true',
             count: 'count',
             groupKey: 'cef_name',
-            mycharge: '-80',
-            mygravity: '0.1',
-            mylinkDistance: '100'
+            charges: -80,
+            gravity: 0.1,
+            linkDistance: 80
         },
 
         output_mode: "json",
@@ -53,10 +53,18 @@ define(function(require, exports, module) {
             });
 
             this.svg_id = this.id + '_svg';
-            this.width = 500;
-            this.height = this.width;
+            
 
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
+
+            this.width = this.settings.get('width');
+            this.height = this.width;
+
+            // in the case that any options are changed, it will dynamically update
+            // without having to refresh.
+            this.settings.on("change:charges", this._onDataChanged, this);
+            this.settings.on("change:gravity", this._onDataChanged, this);
+            this.settings.on("change:linkDistance", this._onDataChanged, this);
 
         },
 
@@ -164,11 +172,9 @@ define(function(require, exports, module) {
             // this.gravity = .1;
             // this.linkDistance = 200;
 
-            this.charge = this.settings.get('mycharge');
-            this.gravity = this.settings.get('mygravity');
-            this.linkDistance = this.settings.get('mylinkDistance');
-
-            alert(this.charge+", "+this.gravity+", "+this.linkDistance);
+            this.charge = this.settings.get('charges');
+            this.gravity = this.settings.get('gravity');
+            this.linkDistance = this.settings.get('linkDistance');
 
             // the div id that we will select later
             this.div_id = '#' + this.id + '_forcedirected';
@@ -176,7 +182,7 @@ define(function(require, exports, module) {
 
             // force and svg elements
             this.color = null;
-            this.force = 60;
+            
             this.svg = null;
 
             // buttons and labels
@@ -197,9 +203,9 @@ define(function(require, exports, module) {
 
             this.groupNameLookup = data.groupLookup;            
 
-            var r = 6,
-            height = this.height,
-            width = this.width - r,
+            var r = 6
+            var height = this.height
+            var width = this.width - r,
             link, node, self=this, 
             svg, svgRoot;
 
