@@ -35,10 +35,9 @@ define(function(require, exports, module) {
             zoom: 'true',
             directional: 'true',
             count: 'count',
-            groupKey: 'cef_name',
             charges: -80,
             gravity: 0.1,
-            linkDistance: 80
+            linkDistance: 80,
         },
 
         output_mode: "json",
@@ -74,16 +73,25 @@ define(function(require, exports, module) {
 	    },
 
         // making the data look how we want it to for updateView to do its job
-        formatData: function(data) {   
-            var group = this.settings.get('groupKey');
+        formatData: function(data) { 
             names = []
             groupNames = {}
             groupCount = 0
             output = {'nodes': [], 'links': []} 
             var myfields = this.resultsModel.data().fields;
-            var first = myfields[0].name;
-            var second = myfields[1].name;
-            var occurance = myfields[2].name;
+            if (this.settings.get('firstField') && this.settings.get('secondField')) {
+                var first = this.settings.get('firstField');
+                var second = this.settings.get('secondField');
+            } else {
+                var first = myfields[0].name;
+                var second = myfields[1].name;
+                var occurance = myfields[2].name;
+            }
+
+            if (this.settings.get('groupKey')){
+                var group = this.settings.get('groupKey');
+            } else var group=myfields[2].name;
+            
             var grouplookup = [];
             var groupFlag = false;
 
@@ -96,6 +104,7 @@ define(function(require, exports, module) {
                 groupID = 0
                 var groupTag = 0;
                 grouplookup = _.keys(groupNames);
+                console.log(grouplookup);
 
 
                 if (row[group]) {
