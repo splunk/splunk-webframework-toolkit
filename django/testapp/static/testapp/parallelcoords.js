@@ -57,6 +57,7 @@ define(function(require, exports, module) {
         // in this case, it looks like this:
         // [(one for each in maxSeries: {timestamp1: count, timestamp2: count, ... }]
         formatData: function(data) {
+            console.log(data);
             var unicode = function(d) {return d;}
             var field_list = _.pluck(this.resultsModel.data().fields, 'name');
             var datas = data;
@@ -70,6 +71,7 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data) {
+            console.log(data);
             this.namespace = this.settings.get('namespace');
             var selected_fields = [];
             var viz = $("<div id='"+this.id+"_scParallelCoordsCheckbox' class=scParallelCoordsCheckboxContainer>").appendTo(this.el);
