@@ -1,0 +1,18 @@
+{% extends 'splunkdj:base_with_account_bar.html' %}
+{% load splunkmvc %}
+{% load parallelsets %}
+{% block title %}{{testapp}}parallel-sets yo!!!{% endblock title %}
+{% block content %}
+    <h3>Purrallels!</h3>
+    {% parallelsets
+        id="myparallel"
+        managerid="search1"
+    %}
+{% endblock content %}
+
+{% block managers %}
+	{% searchmanager id="search1"
+		search='index=_internal sourcetype=splunkd_access method!=GET| head 1000 | table method status'
+	%}
+{% endblock managers %}
+

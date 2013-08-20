@@ -1,0 +1,12 @@
+.bubblesTooltip {
+	position: absolute;
+    background-color: #424242;
+    border-radius: 3px 3px 3px 3px;
+    padding: 7px;
+    font-size: 1.0em;
+    color: white;
+}
+
+.node:hover{
+    opacity: .7;
+}

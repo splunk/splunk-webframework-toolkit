@@ -1,0 +1,9 @@
+{% extends 'splunkdj:base_with_account_bar.html' %}
+{% load splunkmvc %}
+{% load appchecker %}
+{% block title %}{{testapp}}come on work pls{% endblock title %}
+{% block content %}
+    <h3>Custom View</h3>
+    {% appchecker id="myappcheck" appName="framework" %}
+{% endblock content %}
+
