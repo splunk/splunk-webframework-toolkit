@@ -1,14 +1,15 @@
- require.config({
-     shim: {
-        "wftoolkit/contrib/d3chart/d3/d3.v2": {
-             deps: [],
-             exports: "d3"
-         },
-         "wftoolkit/contrib/cal-heatmap/cal-heatmap": {
-            deps: ["wftoolkit/contrib/d3chart/d3/d3.v2"],
-             exports: "cal"
-         }
-     }
+require.config({
+    shim: {
+       "wftoolkit/contrib/d3chart/d3/d3.v2": {
+            deps: [],
+            exports: "d3"
+        },
+        "wftoolkit/contrib/cal-heatmap/cal-heatmap": {
+           deps: ["wftoolkit/contrib/d3chart/d3/d3.v2"],
+            exports: "cal"
+        }
+    }
+});
 
      // calheat!
 // shows a cool looking heatmap based on different time signatures
@@ -16,7 +17,6 @@
 // way to show the time, but you can define any settings you want in the html
 // docs: http://kamisama.github.io/cal-heatmap
 
-require.config({
  define(function(require, exports, module) {
  
     var _ = require('underscore');
