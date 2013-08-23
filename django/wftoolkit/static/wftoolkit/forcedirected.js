@@ -82,92 +82,35 @@ define(function(require, exports, module) {
             groupCount = 0
             output = {'nodes': [], 'links': []} 
             var myfields = this.resultsModel.data().fields;
-            var first = this.settings.get('firstField');
-            var second = this.settings.get('secondField');
-            var occurance = myfields[2].name;
-            var group = this.settings.get('groupKey');
+            var first = myfields[0].name; 
+            var second = myfields[1].name; 
+            var group = myfields[2].name; 
             
             var grouplookup = [];
             var groupFlag = false;
 
-            for (var i=0; i<data.length; i++) {
-                var row = data[i];
-                linkSourceIndex = null 
-                linkTargetIndex = null
-                firstName = null
-                secondName = null
-                groupID = 0
-                var groupTag = 0;
-                grouplookup = _.keys(groupNames);
-                console.log(grouplookup);
+            var nodes = {};
+            var links = [];
+            data.forEach(function(link) {
+                var sourceName = link[first];
+                var targetName = link[second];
+                var groupName = link[group];
+                var newLink = {};
+                newLink.source = nodes[sourceName] || 
+                    (nodes[sourceName] = {name: sourceName, group: groupName});
+                newLink.target = nodes[targetName] || 
+                    (nodes[targetName] = {name: targetName, group: groupName});
+                newLink.value = +link.count;
+                links.push(newLink);
+            });
 
-
-                if (row[group]) {
-                    groupName = String(row[group])
-
-                    for (var k=0; k<groupNames.length; k++)
-                        if (groupNames[k] == groupName)
-                            groupFlag = true;
-
-                    if (groupFlag == false){
-                        groupID = grouplookup.length-1;
-                        if (groupID < 0) groupID = 0;
-                        groupNames[groupName] = groupCount
-                        groupCount += 1
-                    } else
-                        groupID = groupNames[groupName]
-                }
-
-
-                
-                function fn (n, xn){
-                    for (var i=0; i<n.length; i++)
-                        if (n[i] == xn) return true;
-                }
-
-                if (first) {
-                    firstName = String(row[first])
-                    if (!fn(names, firstName)) {
-                        names.push(firstName)
-                        linkSourceIndex = (names.length - 1);
-                        output['nodes'].push({'source': firstName, 'group': groupID})
-                    } else
-                        linkSourceIndex = names[firstName];
-                }
-
-                if (second) {
-                    secondName = String(row[second])
-                    if (!fn(names, secondName)){
-                        names.push(secondName)
-                        linkTargetIndex = (names.length-1);
-                        output['nodes'].push({'source': secondName, 'group': groupID})
-                    }
-                    else
-                        linkTargetIndex = names[secondName];
-                }
-
-                // A link is a connection between our two measured quantities
-                // The number of occurances (provided via search) gives us the link strength
-                if ((linkSourceIndex > -1) && (linkTargetIndex > -1) && (row[occurance] != null)){
-                    // # The weight of a link is determined by how often the pair occurs
-                    linkWeight = parseInt(String(row[occurance]))
-                    output['links'].push({'source': linkSourceIndex, 'target': linkTargetIndex, 'value': linkWeight})
-                }
-            }
-
-            console.log(_.keys(groupNames).length);
-
-            output['groupNames'] = groupNames
-            output['groupLookup'] = Object.keys(groupNames)
-
-            return output;
+            return {nodes: d3.values(nodes), links: links};
             
         },
 
         updateView: function(viz, data){
 
             var that = this;
-            console.log(data);
             ////////////////////////////////////////////////////////////////////////////
 
             // We provide these by default
@@ -256,7 +199,6 @@ define(function(require, exports, module) {
               .append("svg:path")
             .attr("d", "M0,-5L10,0L0,5");
 
-            console.log(data.links);
             link = this.svg.selectAll("line.link")
                     .data(data.links)
                     .enter().append('path')
@@ -266,7 +208,7 @@ define(function(require, exports, module) {
                                 return "url(#" + "arrowEnd" + ")";
                             }
                         })
-                        .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+                        .style("stroke-width", function(d) { return Math.max(Math.round(Math.log(d.value)), 1); });
 
             link.on('mouseover', function(d) {
                     d3.select(this).classed('linkHighlight', true);
@@ -288,7 +230,7 @@ define(function(require, exports, module) {
                         .call(self.force.drag);
 
             node.append("title")
-                .text(function(d) { return d.source; });
+                .text(function(d) { return d.name; });
 
             node.on('click', function(d) { self.onNodeClick(d); })
                 .on('mouseover', function(d) {
@@ -367,7 +309,7 @@ define(function(require, exports, module) {
 
                 that.tooltips.open('nodes', {
                     slots: {
-                        val: d.source,
+                        val: d.name,
                         group: groupName    
                     },
                     swatch: that.color(d.group)
@@ -404,7 +346,7 @@ define(function(require, exports, module) {
             function onNodeClick(d) {
                 var context = this.getContext(),
                     form = context.get('form') || {};
-                form[this.fields.field1] = d.source;
+                form[this.fields.field1] = d.name;
                 form[this.fields.field2] = d.group;
 
                 context.set('form', form);
@@ -488,8 +430,6 @@ define(function(require, exports, module) {
                             }
                         }
                     };
-
-                    console.log(layouts);
 
                     isReady = true;
                 };

@@ -13,7 +13,7 @@
 
 {% block managers %}
 	{% searchmanager id="search1"
-		search='|inputlookup forcedirected.csv | stats count by src_ip dest_cnc_channel_host cef_name | sort - count'
+		search='index=_internal | head 10000 | rename component as group | stats count by sourcetype source group | sort - count | head 50'
 	%}
 {% endblock managers %}
 
