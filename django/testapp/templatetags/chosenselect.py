@@ -8,7 +8,7 @@ def chosenselect(context, id, *args, **kwargs):       # The template tag
         "chosenselect",                           # The custom view's CSS class name
         id,
         "view",
-        "testapp/chosenselect",             # Path to the JavaScript class/file for the view
+        "wftoolkit/chosenselect",             # Path to the JavaScript class/file for the view
         kwargs
     )
 

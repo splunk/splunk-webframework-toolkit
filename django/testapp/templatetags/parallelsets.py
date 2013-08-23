@@ -8,7 +8,7 @@ def parallelsets(context, id, *args, **kwargs):       # The template tag
         "parallelsets",                           # The custom view's CSS class name
         id,
         "view",
-        "testapp/parallelsets",             # Path to the JavaScript class/file for the view
+        "wftoolkit/parallelsets",             # Path to the JavaScript class/file for the view
         kwargs
     )
 

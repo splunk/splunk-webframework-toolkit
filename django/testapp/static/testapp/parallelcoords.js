@@ -4,7 +4,7 @@
 //             deps: [],
 //             exports: "d3"
 //         },
-//         "testapp/contrib/d3.parcoords": {
+//         "wftoolkit/contrib/d3.parcoords": {
 //             deps: ["splunkjs/mvc/d3chart/d3/d3.v2"],
 //             exports: "d3.parcoords"
 //         }
@@ -21,10 +21,10 @@ define(function(require, exports, module) {
 
     var _ = require('underscore');
     //var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
-    //var d3parcoords = require("testapp/contrib/d3.parcoords");
+    //var d3parcoords = require("wftoolkit/contrib/d3.parcoords");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
-    require("css!testapp/contrib/d3.parcoords.css");
+    require("css!wftoolkit/contrib/d3.parcoords.css");
 
     var ParCoords = SimpleSplunkView.extend({
 

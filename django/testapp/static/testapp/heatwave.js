@@ -19,7 +19,7 @@ define(function(require, exports, module) {
     var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
-    // require("css!testapp/heatwave.css");
+    // require("css!wftoolkit/heatwave.css");
 
     var Heatwave = SimpleSplunkView.extend({
 

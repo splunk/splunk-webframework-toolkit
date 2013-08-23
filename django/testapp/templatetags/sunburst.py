@@ -8,7 +8,7 @@ def sunburst(context, id, *args, **kwargs):       # The template tag
         "sunburst",                           # The custom view's CSS class name
         id,
         "view",
-        "testapp/sunburst",             # Path to the JavaScript class/file for the view
+        "wftoolkit/sunburst",             # Path to the JavaScript class/file for the view
         kwargs
     )
 

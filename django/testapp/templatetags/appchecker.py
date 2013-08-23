@@ -8,6 +8,6 @@ def appchecker(context, id, *args, **kwargs):       # The template tag
         "appchecker",                           # The custom view's CSS class name
         id,
         "view",
-        "testapp/appchecker",             # Path to the JavaScript class/file for the view
+        "wftoolkit/appchecker",             # Path to the JavaScript class/file for the view
         kwargs
     )

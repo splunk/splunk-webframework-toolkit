@@ -8,6 +8,6 @@ def heatwave(context, id, *args, **kwargs):       # The template tag
         "heatwave",                           # The custom view's CSS class name
         id,
         "view",
-        "testapp/heatwave",             # Path to the JavaScript class/file for the view
+        "wftoolkit/heatwave",             # Path to the JavaScript class/file for the view
         kwargs
     )

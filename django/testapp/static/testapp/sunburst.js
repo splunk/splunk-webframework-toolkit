@@ -16,7 +16,7 @@ define(function(require, exports, module) {
     var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
-    require("css!testapp/sunburst.css");
+    require("css!wftoolkit/sunburst.css");
 
     var Sunburst = SimpleSplunkView.extend({
 

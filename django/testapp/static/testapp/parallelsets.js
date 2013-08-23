@@ -4,7 +4,7 @@ require.config({
             deps: [],
             exports: "d3"
         },
-        "testapp/contrib/d3.parsets": {
+        "wftoolkit/contrib/d3.parsets": {
             deps: ["splunkjs/mvc/d3chart/d3/d3.v2"],
             exports: "d3.parsets"
         },
@@ -22,9 +22,9 @@ define(function(require, exports, module) {
     var _ = require('underscore');
     var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
-    var d3p = require('testapp/contrib/d3.parsets');
+    var d3p = require('wftoolkit/contrib/d3.parsets');
 
-    require("css!testapp/parallelsets.css");
+    require("css!wftoolkit/parallelsets.css");
 
     var parallelSets = SimpleSplunkView.extend({
 

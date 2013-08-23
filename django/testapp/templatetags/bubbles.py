@@ -8,6 +8,6 @@ def bubbles(context, id, *args, **kwargs):       # The template tag
         "bubbles",                           # The custom view's CSS class name
         id,
         "view",
-        "testapp/bubbles",             # Path to the JavaScript class/file for the view
+        "wftoolkit/bubbles",             # Path to the JavaScript class/file for the view
         kwargs
     )

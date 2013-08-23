@@ -8,7 +8,7 @@ def forcedirected(context, id, *args, **kwargs):       # The template tag
         "forcedirected",                           # The custom view's CSS class name
         id,
         "view",
-        "testapp/forcedirected",             # Path to the JavaScript class/file for the view
+        "wftoolkit/forcedirected",             # Path to the JavaScript class/file for the view
         kwargs
     )
 

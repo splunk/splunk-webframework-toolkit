@@ -9,7 +9,7 @@ define(function(require, exports, module) {
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
     var chosen = require('splunkjs/mvc/chosen');
 
-    require("css!testapp/chosen.css");
+    require("css!wftoolkit/chosen.css");
 
     var ChosenSelect = SimpleSplunkView.extend({
 

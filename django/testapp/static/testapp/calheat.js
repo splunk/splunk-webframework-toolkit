@@ -1,11 +1,11 @@
  require.config({
      shim: {
-        "testapp/contrib/d3chart/d3/d3.v2": {
+        "wftoolkit/contrib/d3chart/d3/d3.v2": {
              deps: [],
              exports: "d3"
          },
-         "testapp/contrib/cal-heatmap/cal-heatmap": {
-            deps: ["testapp/contrib/d3chart/d3/d3.v2"],
+         "wftoolkit/contrib/cal-heatmap/cal-heatmap": {
+            deps: ["wftoolkit/contrib/d3chart/d3/d3.v2"],
              exports: "cal"
          }
      }
@@ -20,11 +20,11 @@ require.config({
  define(function(require, exports, module) {
  
     var _ = require('underscore');
-    var d3 = require("testapp/contrib/d3chart/d3/d3.v2");
-    var cal = require("testapp/contrib/cal-heatmap/cal-heatmap");
+    var d3 = require("wftoolkit/contrib/d3chart/d3/d3.v2");
+    var cal = require("wftoolkit/contrib/cal-heatmap/cal-heatmap");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
-    require("css!testapp/contrib/cal-heatmap/cal-heatmap.css");
+    require("css!wftoolkit/contrib/cal-heatmap/cal-heatmap.css");
 
     var calHeat = SimpleSplunkView.extend({
 

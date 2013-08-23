@@ -8,7 +8,7 @@ def parallelcoords(context, id, *args, **kwargs):       # The template tag
         "parallelcoords",                           # The custom view's CSS class name
         id,
         "view",
-        "testapp/parallelcoords",             # Path to the JavaScript class/file for the view
+        "wftoolkit/parallelcoords",             # Path to the JavaScript class/file for the view
         kwargs
     )
 

@@ -8,7 +8,7 @@ def calheat(context, id, *args, **kwargs):       # The template tag
         "calheat",                           # The custom view's CSS class name
         id,
         "view",
-        "testapp/calheat",             # Path to the JavaScript class/file for the view
+        "wftoolkit/calheat",             # Path to the JavaScript class/file for the view
         kwargs
     )
 

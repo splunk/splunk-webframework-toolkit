@@ -1,4 +1,4 @@
-<view template="testapp:/templates/redirect.tmpl" isVisible="false"><label>Home</label></view>
+<view template="wftoolkit:/templates/redirect.tmpl" isVisible="false"><label>Home</label></view>
 
 {% searchbar id="testsearch" managerid="test-search" %}
 
