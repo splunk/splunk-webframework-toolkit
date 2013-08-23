@@ -1,0 +1,63 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}{{app_label}} - Data Binding with Tokens {% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+
+    <style>
+        .some-padding {
+            padding: 10px 10px 10px 0;
+        }
+        .tip {
+            font-size: 10px;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+
+    <div class="dashboard-body container-fluid main-section-body">
+        <div class="dashboard-row some-padding">
+            Index: {% textbox id="textbox1" default="_internal" value="$index$"|token_safe %} <span class="tip">Tip: hit enter</span>
+        </div>
+        
+        <div class="dashboard-row">
+            <div class="dashboard-cell span-full">
+                <div class="dashboard-panel">
+                    <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h3>All events from _internal</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% resulttable id="resulttable1" managerid="search1" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-row some-padding">
+            {# NB: two-way data binding implement via assigning 
+               the "value" attribute to the same token as the other textbox #}
+            {% textbox id="textbox2" value="$index$"|token_safe %}
+        </div>
+
+
+    </div>
+            
+
+{% endblock content%}
+
+{% block managers %}
+    
+    {% searchmanager
+        id="search1"
+        search='index="$index$" | head 100'|token_safe
+    %}
+    
+
+{% endblock managers %}

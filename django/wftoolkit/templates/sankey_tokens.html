@@ -1,0 +1,78 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+{% load sankey %}
+
+{% block title %}Custom View with Searchbar{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+<style>        
+.sankey-artists, #sankey1 {
+  height: 500px;
+}
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="dashboard-body container-fluid main-section-body">
+  <div class="row">
+    <div class="span12 dashboard-header clearfix">
+      <h2>Custom Sankey Visualization Bound to Searchbar</h2>
+    </div>
+  </div>
+
+  <div class="dashboard-row">
+   <div class="dashboard-cell" style="width: 100%;">
+    <div class="dashboard-panel">
+      <div class="dashboard-element">
+        <div class="panel-head">
+        </div>
+
+        <div class="panel-body">
+          {% searchbar id="main-searchbar" managerid="search" %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard-row">
+  <div class="dashboard-cell" style="width: 100%;">
+    <div class="dashboard-panel">
+      <div class="dashboard-element">
+        <div class="panel-head">
+        </div>
+
+        <div class="panel-body">
+          {% sankey id="sankey1" managerid="search" %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+{% endblock content%}
+
+{% block managers %}
+
+{% searchmanager id="search" search='index=faa DestCityName=* OriginCityName=* AND DestCityName!="" AND OriginCityName!="" | head 100 | stats count by OriginCityName DestCityName' %}
+
+{% endblock managers %}
+
+{% block js %}    
+<script>    
+require(["splunkjs/ready!", "underscore"], function(mvc, _) {
+
+        var search = mvc.Components.getInstance('search');
+        var searchbar = mvc.Components.getInstance('main-searchbar');
+        searchbar.on("change", function() { 
+          search.set('search', searchbar.val());
+        });
+
+      });
+
+</script>
+{% endblock js %}

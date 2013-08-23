@@ -9,7 +9,9 @@ def home(request):
         "app_name": "wftoolkit"
     }
 
-@render_to('app_name:helloworld.html')
+@render_to()
 @login_required
-def helloworld(request):
-    return {}
+def render_page(request, tmpl="wftoolkit:home.html"):
+    return {
+        "TEMPLATE": "wftoolkit:%s.html" % tmpl
+    }

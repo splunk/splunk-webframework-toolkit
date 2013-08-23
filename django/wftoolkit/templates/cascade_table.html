@@ -1,0 +1,67 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}{{app_label}} - Cascading Dropdowns {% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+{% endblock css %}
+
+{% block content %}
+
+    <div class="dashboard-body container-fluid main-section-body">
+        <div class="dashboard-row">
+            <h1>Cascading dropdowns</h1>
+            <h3>Fill in each dropdown:</h3>
+            <div>
+                Origin City: {% select id="select-origin" value="$origin$"|token_safe labelField="OriginCityName" valueField="OriginCityName" managerid="search-origin-city" %}
+            </div>
+            <div>
+                Destination City: {% select id="select-dest" value="$dest$"|token_safe labelField="DestCityName" valueField="DestCityName" managerid="search-dest-city" %}
+            </div>
+            
+
+        </div>
+        
+        <div class="dashboard-row">
+            <div class="dashboard-cell span-full">
+                <div class="dashboard-panel">
+                    <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h3>Some events!</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% resulttable id="resulttable1" managerid="search-events" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+            
+
+{% endblock content%}
+
+{% block managers %}
+
+    {% searchmanager
+        id="search-origin-city"
+        search="index=faa OriginCityName=* | head 1000 | dedup OriginCityName | sort OriginCityName"|token_safe
+    %}
+
+    {% searchmanager
+        id="search-dest-city" 
+        search='index=faa OriginCityName="$origin$" | dedup DestCityName | sort DestCityName'|token_safe
+    %}
+
+    {% searchmanager
+        id="search-events"
+        search='index=faa OriginCityName="$origin$" DestCityName="$dest$"'|token_safe
+    %}
+
+{% endblock managers %}

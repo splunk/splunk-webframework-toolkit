@@ -1,36 +1,43 @@
-{% extends "splunkdj:base_with_account_bar.html" %}
+{% extends "splunkdj:base_with_app_bar.html" %}
 
 {% load splunkmvc %}
 
-{% block title %}{{app_name}} Home Page{% endblock title %}
+{% block title %}Toolkit Overview {% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
-
-    <style>        
-        .main-area {
-            margin: 0px auto;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            padding: 10px;
-            width: 300px;
-        }    
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
 {% endblock css %}
 
 {% block content %}
 
-    <div>
-        <div class="main-area">
-            <p>Template message: {{message}}</p>
-            <p class="muted">You should also look in the JavaScript console...</p>
+<div class="dashboard-body container-fluid main-section-body">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Splunk Web Framework Toolkit </h2>
         </div>
     </div>
-
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        This is the Splunk Web Framework Toolkit. In this app you will find documentation, samples, and stencil code to help you get started and keep building with the Splunk Web Framework.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            
 {% endblock content%}
 
 {% block js %}    
     <script>
-        console.log("Custom JavaScript Goes Here (look in your template)!");
+        
     </script>
 {% endblock js %}

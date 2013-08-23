@@ -1,0 +1,144 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}{{app_label}} - Overview {% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+
+    <style>
+        .span-full {
+            width: 100%;
+        }
+        .span-half {
+            width: 50%;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-body container-fluid main-section-body">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Basic Dashboard Using Javascript</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 1</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        This is an example of a basic dashboard. To edit this page edit <strong>wftoolkit/django/wftoolkit/templates/dashboardjs.html</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-half">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 2</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Add content to this cell. See the template comments for more.</p>
+                        
+                        <!-- 
+                        When creating views with javascript, we don't need any Django tags.
+                        views can be attached anywhere in the html DOM deemed necessary,
+                        but it is convenient to have hooks to hang them on. In this page 
+                        we are using hooks with ids (like the following) in every cell that 
+                        we will attach views to in script later. 
+                        -->
+                        <div id="#cell2-hook"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell span-half">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 3</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Add content to this cell. See the template comments for more.</p>
+                        <div id="#cell3-hook"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 4</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Add content to this cell. See the template comments for more.</p>
+                        <div id="#cell4-hook"></div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Adding a Searchbar</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 5</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        Here we will insert a searchbar that affects a search. In this case the searchbar is created in javascript and attached here. See the comments in source for more.
+                        </p>
+                        <div id="#cell5-hook"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 6</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        Add a view here with the same manager as the searchbar. Again, create it in javascript and attach it here.
+                        </p>
+                        <div id="#cell6-hook"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            
+{% endblock content%}
+
+{% block js %}    
+    <script>
+    
+        
+    </script>
+{% endblock js %}

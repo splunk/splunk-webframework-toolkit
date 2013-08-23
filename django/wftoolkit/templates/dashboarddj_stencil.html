@@ -1,0 +1,196 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}{{app_label}} - Overview {% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+
+    <style>
+        .span-full {
+            width: 100%;
+        }
+        .span-half {
+            width: 50%;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-body container-fluid main-section-body">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Basic Dashboard Using Django</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 1</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        This is an example of a basic dashboard. To edit this page edit <b>wftoolkit/django/wftoolkit/templates/dashboarddj.html</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-half">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 2</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Add content to this cell. See the template comments for more.</p>
+
+                        <!-- 
+                        TODO: Add a Django template here to include a view in this cell.
+                        The view should get an id, as well as the id of a search manager
+                        that you would like it to get its data from. For example, to add
+                        a table called 'sample-table' with search manager 'sample-manager':
+
+                        {% resulttable id="sample-table" managerid="sample-manager" %}
+                        -->  
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell span-half">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 3</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Add content to this cell. See the template comments for more.</p>
+
+                        <!-- 
+                        TODO: Add another Django template here. many controls can take options
+                        in-line. For example, charts have a 'type' setting that can be set
+                        to get different chart types. To create a pie chart:
+
+                        {% chart id="sample-chart" type="pie" managerid="sample-manager" %}
+                        -->
+                                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 4</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Add content to this cell. See the template comments for more.</p> 
+                        
+                        <!-- 
+                        TODO: Add another Django template here. 
+                        --> 
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Adding a Searchbar</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 5</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        Here we will add a searchbar that affects a search. Views tied to the search will be updated when the search is run. See comments in the source for more.
+                        </p>
+
+                        <!-- 
+                        TODO: Add a searchbar here. Searchbar is a special type of control in that we would like it 
+                        to not only listen to its search manager (to keep settings in sync), but also *update* its
+                        search manager when search properties (such as the query) change. To this end we set the default 
+                        search query, then use token binding to bind the value of the searchbar to a token that the search
+                        manager will also bind to. For example, 
+
+                        {% searchbar    
+                            id="sample-searchbar"
+                            default="index=_internal | head 100" 
+                            value="$query$"|token_safe  
+                            managerid="sample-bound-manager" %}
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 6</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        Add a view here with the same manager as the searchbar.
+                        </p>
+
+                        <!-- 
+                        TODO: Add a view here that will be listen to the same search as
+                        the searchbar is bound to. When the searchbar search is updated,
+                        this view will be as well.
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            
+{% endblock content%}
+
+{% block managers %}
+
+    <!-- 
+    TODO: Add a search manager for the non-searchbar views. A search manager defines the 
+    context of a search to be run and manages that search by communicating with the Splunk server. 
+    Views listen to search managers are get data from the resulting search job. A search manager 
+    should have an 'id' and, to get data, a 'search'. Like views, search managers can also take 
+    options declared here, such as earliest_time and latest_time. To create a basic search manager:
+
+    {% searchmanager id="sample-manager" search="search index=_internal | head 100 | stats count by sourcetype" %}
+
+    This search will fetch data and any views setting it as their managerid will be populated 
+    with the data. 
+    -->
+
+    <!-- 
+    TODO: Add the search manager that is bound to the searchbar here. No need to set it's search as
+    it will get it from the $query$ token. For example:
+
+    {% searchmanager id="sample-bound-manager" search="$query$"|token_safe %}
+    -->
+
+{% endblock managers %}
+
+{% block js %}    
+    {# No Javascript needed #}
+{% endblock js %}
