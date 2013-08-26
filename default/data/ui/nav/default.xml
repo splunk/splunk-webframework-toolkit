@@ -17,8 +17,8 @@
         <a href="/dj/redirector/wftoolkit/bubbles">Bubbles</a>
         <a href="/dj/redirector/wftoolkit/forcedirected">Force Directed</a>
         <a href="/dj/redirector/wftoolkit/calheat">Cal Heat</a>
-        <a href="/dj/redirector/wftoolkit/parcoords">Parallel Coordinates</a>
-        <a href="/dj/redirector/wftoolkit/parsets">Parallel Sets</a>
+        <a href="/dj/redirector/wftoolkit/parallelcoords">Parallel Coordinates</a>
+        <a href="/dj/redirector/wftoolkit/parallelsets">Parallel Sets</a>
     </collection>
     <collection label="Examples">
         <a href="/dj/redirector/wftoolkit/dashboarddj">Dashboard in Django</a>
