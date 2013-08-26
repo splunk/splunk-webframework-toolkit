@@ -41,6 +41,9 @@ urlpatterns = patterns('',
     url(r'^dashboardjs_stencil/$', render('wftoolkit:dashboardjs_stencil.html'), name='dashboardjs_stencil'),
     url(r'^dashboard_stencil1/$', render('wftoolkit:dashboard_stencil1.html'), name='dashboard_stencil1'),
 
+    # Toolkit Controls
+    url(r'^heatwave/$', render('wftoolkit:heatwave.html'), name='heatwave'),
+
 
 
     url(r'^map/$', render('wftoolkit:map.html'), name='map'),
