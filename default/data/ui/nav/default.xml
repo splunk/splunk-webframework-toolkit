@@ -14,6 +14,11 @@
     <collection label="Toolkit Components">
         <a href="/dj/redirector/wftoolkit/sankey">Sankey Chart</a>
         <a href="/dj/redirector/wftoolkit/globe">Globe</a>
+        <a href="/dj/redirector/wftoolkit/bubbles">Bubbles</a>
+        <a href="/dj/redirector/wftoolkit/forcedirected">Force Directed</a>
+        <a href="/dj/redirector/wftoolkit/calheat">Cal Heat</a>
+        <a href="/dj/redirector/wftoolkit/parcoords">Parallel Coordinates</a>
+        <a href="/dj/redirector/wftoolkit/parsets">Parallel Sets</a>
     </collection>
     <collection label="Examples">
         <a href="/dj/redirector/wftoolkit/dashboarddj">Dashboard in Django</a>
