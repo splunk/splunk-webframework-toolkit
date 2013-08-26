@@ -15,8 +15,8 @@ urlpatterns = patterns('',
     # Kevin's stuff
     url(r'^bubbles/$', render('wftoolkit:bubbles.html'), name='bubbles'),
     url(r'^calheat/$', render('wftoolkit:calheat.html'), name='calheat'),
-    url(r'^parsets/$', render('wftoolkit:parsets.html'), name='parsets'),
-    url(r'^parcoords/$', render('wftoolkit:parcoords.html'), name='parcoords'),
+    url(r'^parsets/$', render('wftoolkit:parallelsets.html'), name='parsets'),
+    url(r'^parcoords/$', render('wftoolkit:parallelcoords.html'), name='parcoords'),
     url(r'^forcedirected/$', render('wftoolkit:forcedirected.html'), name='forcedirected'),
     # Examples
     url(r'^dashboarddj/$', render('wftoolkit:dashboarddj.html'), name='dashboarddj'),
