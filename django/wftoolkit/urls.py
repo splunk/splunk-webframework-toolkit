@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^searchcontrols/$', render('wftoolkit:searchcontrols.html'), name='searchcontrols'),
     url(r'^sankey/$', render('wftoolkit:sankey.html'), name='sankey'),
     url(r'^globe/$', render('wftoolkit:globe.html'), name='globe'),
+    # Kevin's stuff
     url(r'^bubbles/$', render('wftoolkit:bubbles.html'), name='bubbles'),
     url(r'^calheat/$', render('wftoolkit:calheat.html'), name='calheat'),
     url(r'^parsets/$', render('wftoolkit:parsets.html'), name='parsets'),
