@@ -1,0 +1,24 @@
+{% extends 'splunkdj:base_with_account_bar.html' %}
+{% load splunkmvc %}
+{% load forcedirected %}
+{% block title %}{{wftoolkit}}forcedirected!!!{% endblock title %}
+{% block content %}
+    <h3>Force Directed!</h3>
+    {% forcedirected
+        id="myselect"
+        managerid="search1"
+        charge="$charge$"|token_safe
+    %}
+
+    {% resulttable
+    	id="interactive-table"
+    	managerid="search1" 
+    %}
+{% endblock content %}
+
+{% block managers %}
+	{% searchmanager id="search1"
+		search='bc_uri=/sync/addtolibrary/* | stats count by artist_name track_name device | sort - count'
+	%}
+{% endblock managers %}
+
