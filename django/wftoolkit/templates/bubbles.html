@@ -22,11 +22,11 @@
 
 {% block managers %}
 	{% searchmanager id="search1"
-		search='bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name'
+		search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name'
 	%}
 
 	{% searchmanager id="interactive-search" 
-     search="$searchtoken$"|token_safe
+     search="| inputlookup musicdata.csv | search $searchtoken$"|token_safe
      autostart=True
      cache=False
      preview=True
@@ -36,7 +36,8 @@
 <script>
 	
 require(["splunkjs/ready!", "underscore"], function(mvc, _) {
-	mvc.Components.get("mybubbles");
+	// TODO: cleanup. What is this for? Doesn't seem to work
+    mvc.Components.get("mybubbles");
 	_.delay(function() { 
 		that = mvc.Components.get("mybubbles");
 		that.settings.set("nameField", "artist_name");

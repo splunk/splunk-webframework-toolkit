@@ -1,4 +1,4 @@
-{% extends "splunkdj:base_with_app_bar.html" %}
+{% extends "toolkit_controls_base.html" %}
 
 {% load splunkmvc %}
 {% load wftoolkit %}
@@ -6,10 +6,8 @@
 {% block title %}{{app_name}} Custom View with Searchbar{% endblock title %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}examplesfx/contrib/jqueryui/css/ui-lightness/jquery-ui-1.9.2.custom.min.css">
-<style>        
+{{block.super}}
+<style type="text/css">
 .sankey-artists, #sankey1 {
   height: 500px;
   margin: 10px;
@@ -18,46 +16,12 @@
 </style>
 {% endblock css %}
 
-{% block content %}
-<div class="dashboard-body container-fluid main-section-body">
-  <div class="row">
-    <div class="span12 dashboard-header clearfix">
-      <h2>Sankey Chart</h2>
-    </div>
-  </div>
+  {% block heading %}Sankey Chart!{% endblock heading %}
+  {% block explanation %}The Sankey Chart visualizes flows between nodes.{% endblock explanation %}
 
-  <div class="dashboard-row">
-   <div class="dashboard-cell" style="width: 100%;">
-    <div class="dashboard-panel">
-      <div class="dashboard-element">
-        <div class="panel-head">
-        </div>
-
-        <div class="panel-body">
-          <p>The Sankey Chart visualizes flows between nodes.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="dashboard-row">
-  <div class="dashboard-cell" style="width: 100%;">
-    <div class="dashboard-panel">
-      <div class="dashboard-element">
-        <div class="panel-head">
-        </div>
-
-        <div class="panel-body">
-          {% sankey id="sankey1" managerid="search" %}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div>
-{% endblock content%}
+  {% block example %}
+    {% sankey id="sankey1" managerid="search" %}
+  {% endblock example %}
 
 {% block managers %}
 
@@ -86,6 +50,5 @@ require(["splunkjs/ready!", "underscore"], function(mvc, _) {
           }
         });
     });
-
 </script>
 {% endblock js %}

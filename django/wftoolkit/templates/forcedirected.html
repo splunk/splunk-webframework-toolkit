@@ -18,7 +18,7 @@
 
 {% block managers %}
 	{% searchmanager id="search1"
-		search='bc_uri=/sync/addtolibrary/* | stats count by artist_name track_name device | sort - count'
+		search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name track_name eventtype | sort - count'
 	%}
 {% endblock managers %}
 

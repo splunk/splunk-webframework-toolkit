@@ -24,3 +24,14 @@ def sankey(context, id, *args, **kwargs):
         "wftoolkit/sankeyfx", # Path to javascript library
         kwargs
     )
+
+@register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
+def calheat(context, id, *args, **kwargs):       # The template tag
+    return component_context(
+        context,
+        "calheat",                           # The custom view's CSS class name
+        id,
+        "view",
+        "wftoolkit/calheat",             # Path to the JavaScript class/file for the view
+        kwargs
+    )
