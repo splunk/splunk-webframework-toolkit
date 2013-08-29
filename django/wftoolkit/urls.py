@@ -36,6 +36,9 @@ urlpatterns = patterns('',
     url(r'^chartclick/$', render('wftoolkit:chartclick.html'), name='chartclick'),
     url(r'^custom_table_expand/$', render('wftoolkit:custom_table_expand.html'), name='custom_table_expand'),
     url(r'^custom_table_cells/$', render('wftoolkit:custom_table_cells.html'), name='custom_table_cells'),
+    #Extended examples
+    url(r'^airline_drilldown/$', render('wftoolkit:airline_drilldown.html'), name='airline_drilldown'),
+    url(r'^d3_chart/$', render('wftoolkit:d3_chart.html'), name='d3_chart'),
     #TODO: skipped the sankey pages
     url(r'^drilldown/$', render('wftoolkit:drilldown.html'), name='drilldown'),
     url(r'^drilldown_target/$', render('wftoolkit:drilldown_target.html'), name='drilldown_target'),
