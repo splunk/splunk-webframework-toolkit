@@ -21,7 +21,7 @@
 
 {% block managers %}
 	{% searchmanager id="search1"
-		search='index=_internal sourcetype=splunkd_access | head 1000 | fields method status'
+		search='index=_internal sourcetype=splunkd_access | head 10 | fields method status'
 	%}
 {% endblock managers %}
 {% block js %}
