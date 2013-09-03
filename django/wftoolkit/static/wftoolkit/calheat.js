@@ -17,6 +17,57 @@ require.config({
 // way to show the time, but you can define any settings you want in the html
 // docs: http://kamisama.github.io/cal-heatmap
 
+// ---settings---
+
+// domain: (hour, day, week, month, year)
+// subdomain: (min, x_min, hour, x_hour, day, x_day, week, x_week, month, x_month)
+//       -- x_ variants are used to rotate the reading order to left to right, then top to bottom.
+// maxSeries
+
+// TODO:
+// add a setting for each option at http://kamisama.github.io/cal-heatmap/#options
+
+
+
+// the data is expected in this format (epoch time): 
+// {
+//    "timestamps":[
+//       {
+//          "1378225500":"8",
+//          "1378225560":"8",
+//          "1378225620":"8",
+//       },
+//       {
+//          "1378230300":"4",
+//          "1378230360":"4",
+//          "1378230660":"2"
+//       },
+//       {
+//          "1378225500":"7",
+//          "1378225560":"7",
+//       },
+//       {
+//          "1378225500":"6",
+//          "1378225560":"6",
+//          "1378225620":"7",
+//       },
+//       {
+//          "1378225500":"41",
+//          "1378225560":"41",
+//       },
+//       {
+//          "1378225500":"22",
+//          "1378225560":"22",
+//       }
+//    ],
+
+// -- we add this part onto the actual data --
+
+//    "start":"2013-09-03T16:25:00.000Z",
+//    "domain":"hour",
+//    "subdomain":"min"
+// }
+
  define(function(require, exports, module) {
  
     var _ = require('underscore');
@@ -33,9 +84,9 @@ require.config({
         options: {
             managerid: "search1",   // your MANAGER ID
             data: "preview",  // Results type
-            domain: 'hour',
-            subdomain: 'min',
-            maxSeries: '3',
+            domain: 'hour', // the largest unit it will differentiate by in squares
+            subdomain: 'min', // the smaller unit the calheat goes off of
+            maxSeries: '3', // 
 
             options: {} // the default for custom heatmap options.
         },
@@ -67,8 +118,7 @@ require.config({
             var myfields = this.resultsModel.data().fields
             var domain = this.settings.get('domain');
             var subdomain = this.settings.get('subdomain');
-            // myfields = _.first(myfields, maxSeries+1);
-            // console.log(data)
+
             for (var i=0; i<myfields.length; i++) {
                 myfields[i] = _.pick(myfields[i], 'name');
                 myfields[i] = _.values(myfields[i]);
@@ -110,15 +160,12 @@ require.config({
         },
 
         updateView: function(viz, data) {
-            console.log(data);
             var that = this;
             userOptions = this.settings.get('options')
             var maxSeries = this.settings.get('maxSeries');
             var i = 0;
 
             this.$el.html('');
-            console.log(data);
-            // default options here.
             for (var i=0; i<maxSeries; i++) {
                 $("<div class='cal-heatmap-buttons'> <button id='previous-cal-heatmap"+i+"' class='btn' style='margin: 5px;'> Previous </button> <button id='next-cal-heatmap"+i+"' class='btn' style='margin: 5px;'> Next </button></div>")
                     .appendTo(this.el)[0];

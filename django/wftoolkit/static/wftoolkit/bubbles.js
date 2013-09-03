@@ -8,7 +8,17 @@ require.config({
 });
 
 // Bubbles!
-// This takes in three things: nameField, valueField, and groupingField(often the same as name)
+// this displays information as different 'bubbles,' their unique values represented with
+// the size of the bubble.
+// supports drilldown clicks
+
+// available settings:
+// - nameField: the field to use as the label on each bubble
+// - valueField: the field to use as the value of each bubble (also dictates size)
+// - groupingField: the field to use for grouping similar data (usually the same field as nameField)
+
+// ---expected data format---
+// a splunk search like this: source=foo | stats count by artist_name, track_name
 
 define(function(require, exports, module) {
 
@@ -20,7 +30,7 @@ define(function(require, exports, module) {
 
     var Bubbles = SimpleSplunkView.extend({
 
-        className: "bubblesview", // doesn't matter what this is called
+        className: "splunk-toolkit-bubbles",
 
         options: {
             mychartid: "search1",   // your MANAGER ID

@@ -11,11 +11,16 @@ require.config({
     }
 });
 
-// calheat!
-// shows a cool looking heatmap based on different time signatures
-// requires a timechart search. it dynamically guesses how to set up the
-// way to show the time, but you can define any settings you want in the html
-// docs: http://kamisama.github.io/cal-heatmap
+// parallel coords!
+// a visualisation technique for multidimensional categorical data
+// you can drag the vertical axis for each section to filter things (try it out for yourself)
+
+// --- settings ---
+// none for the time being.
+// TODO: add settings to choose which data goes where
+
+// --- expected data format ---
+// a splunk search like this: index=_internal sourcetype=splunkd_access | table method status
 
 define(function(require, exports, module) {
 
@@ -28,13 +33,11 @@ define(function(require, exports, module) {
 
     var parallelSets = SimpleSplunkView.extend({
 
-        className: "splunk-toolkit-parellelsets",
+        className: "splunk-toolkit-parellel-coords",
 
         options: {
             managerid: "search1",   // your MANAGER ID
             data: "preview",  // Results type
-
-            options: {} // the default for custom heatmap options.
         },
 
         output_mode: "json",

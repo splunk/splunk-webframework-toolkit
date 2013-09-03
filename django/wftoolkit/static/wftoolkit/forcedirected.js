@@ -10,8 +10,81 @@ require.config({
 // Force Directed Graphs!
 // these require an input of (at least) 3 fields in the format
 // 'stats count by field1 field2 field3'
-//  the option 'groupKey' is what you want your items grouped by
-// 
+
+// ---- settings ----
+// height, width
+// zoom: the ability to zoom (true, false)
+// directional: true, false
+// count: what field to count by
+// charges, gravity: change the look of the graph, play around with these!
+// linkDistance: the distance between each node
+
+// ---- expected data format ----
+// a splunk search like this: source=*somedata* | stats count by artist_name track_name device
+// {
+//    "nodes":[
+//       {
+//          "source":"Bruno Mars",
+//          "group":0
+//       },
+//       {
+//          "source":"It Will Rain",
+//          "group":0
+//       },
+//       {
+//          "source":"Cobra Starship",
+//          "group":1
+//       },
+//       {
+//          "source":"You Make Me Feel",
+//          "group":1
+//       },
+//       {
+//          "source":"Gym Class Heroes",
+//          "group":2
+//       },
+//       {
+//          "source":"Stereo Hearts",
+//          "group":2
+//       },
+//    ],
+//    "links":[
+//       {
+//          "source":0,
+//          "target":1,
+//          "value":null
+//       },
+//       {
+//          "source":2,
+//          "target":3,
+//          "value":null
+//       },
+//       {
+//          "source":4,
+//          "target":5,
+//          "value":null
+//       },
+//    ],
+
+// - we add this part -
+
+//    "groupNames":{
+//       "iphone":49,
+//       "android":53,
+//       "blackberry":48,
+//       "ipad":52,
+//       "ipod":50
+//    },
+//    "groupLookup":[
+//       "iphone",
+//       "android",
+//       "blackberry",
+//       "ipad",
+//       "ipod"
+//    ]
+// }
+
+
 
 define(function(require, exports, module) {
 
@@ -23,7 +96,7 @@ define(function(require, exports, module) {
 
     var ForceDirected = SimpleSplunkView.extend({
 
-        className: "forcedirectedview", // doesn't matter what this is called
+        className: "splunk-toolkit-force-directed",
 
         options: {
             mychartid: "search1",   // your MANAGER ID
@@ -109,15 +182,9 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data){
+            console.log(JSON.stringify(data));
 
             var that = this;
-            ////////////////////////////////////////////////////////////////////////////
-
-            // We provide these by default
-            // in case the view lacks sliders
-            // this.charge = -80;
-            // this.gravity = .1;
-            // this.linkDistance = 200;
 
             this.charge = this.settings.get('charges');
             this.gravity = this.settings.get('gravity');
@@ -233,9 +300,7 @@ define(function(require, exports, module) {
                 .text(function(d) { return d.name; });
 
             node.on('click', function(d) { self.onNodeClick(d); })
-                .on('mouseover', function(d) {
-                    // console.log(d3.select(this));
-                    
+                .on('mouseover', function(d) {                    
                     d3.select(this).classed('nodeHighlight', true);
                     openNodeTooltip(d); 
                 })
