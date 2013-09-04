@@ -3,7 +3,7 @@
 {% load wftoolkit %}
 {% block title %}{{wftoolkit}}cal-heatmap!!!{% endblock title %}
 {% block content %}
-    <h3>Chosen Select!</h3>
+    <h3>Cal Heatmap!</h3>
     {% calheat 
         id="myheat"
         managerid="search1"
@@ -24,6 +24,7 @@
 
 {% block js %}
 <script>
+// you can define options here rather than in the django
 	require(["splunkjs/ready!"], function(mvc) {
 		var heat = mvc.Components.getInstance("myheat");
 		heat.settings.set("options", {

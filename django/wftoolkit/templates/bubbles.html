@@ -33,18 +33,3 @@
      preview=True
   	%}
 {% endblock managers %}
-{% block js %}
-<script>
-	
-require(["splunkjs/ready!", "underscore"], function(mvc, _) {
-	// TODO: cleanup. What is this for? Doesn't seem to work
-    mvc.Components.get("mybubbles");
-	_.delay(function() { 
-		that = mvc.Components.get("mybubbles");
-		that.settings.set("nameField", "artist_name");
-	}, 10000); 
-})
-
-</script>
-{% endblock js %}
-
