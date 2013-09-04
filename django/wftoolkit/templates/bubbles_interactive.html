@@ -1,0 +1,50 @@
+{% extends 'splunkdj:base_with_app_bar.html' %}
+{% load splunkmvc %}
+{% load bubbles %}
+{% block title %}{{wftoolkit}}bbbbubbles{% endblock title %}
+{% block content %}
+    <h3>Bubbles!</h3>
+    {% bubbles 
+    	id="mybubbles" 
+    	managerid="search1"
+    	nameField="track_name"
+    	valueField="count"
+    	groupingField="artist_name"
+    	value="$searchtoken$"|token_safe
+    %}
+
+    <h3>Drilldown</h3>
+    Click a bubble to get a more detailed look at your data
+    {% resulttable
+    	id="interactive-table"
+    	managerid="interactive-search" 
+    %}
+{% endblock content %}
+
+{% block managers %}
+	{% searchmanager id="search1"
+		search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name'
+	%}
+
+	{% searchmanager id="interactive-search" 
+     search="| inputlookup musicdata.csv | search $searchtoken$"|token_safe
+     autostart=True
+     cache=False
+     preview=True
+  	%}
+{% endblock managers %}
+{% block js %}
+<script>
+	
+require(["splunkjs/ready!", "underscore"], function(mvc, _) {
+	// TODO: cleanup. What is this for? Doesn't seem to work
+    mvc.Components.get("mybubbles");
+	_.delay(function() { 
+		that = mvc.Components.get("mybubbles");
+		that.settings.set("nameField", "artist_name");
+	}, 10000); 
+})
+
+</script>
+{% endblock js %}
+

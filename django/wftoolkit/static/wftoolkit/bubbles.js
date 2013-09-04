@@ -100,9 +100,12 @@ define(function(require, exports, module) {
             this.$el.html(''); // clearing all prior junk from the view
 
             // blowing bubbles with d3
-            var diameter = 960,
+            var diameter = Math.min(this.$el.height(), this.$el.width());
                 format = d3.format(",d"),
                 color = d3.scale.category20c();
+            console.log(this.$el.height());
+            console.log(this.$el.width());
+            console.log(diameter);
 
             var bubble = d3.layout.pack()
                 .sort(null)
