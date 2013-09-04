@@ -4,10 +4,10 @@ require.config({
             deps: [],
             exports: "d3"
         },
-        "wftoolkit/contrib/d3.parsets": {
+        "wftoolkit/contrib/d3.parcoords": {
             deps: ["splunkjs/mvc/d3chart/d3/d3.v2"],
-            exports: "d3.parsets"
-        },
+            exports: "d3.parcoords"
+        }
     }
 });
 
@@ -26,18 +26,20 @@ define(function(require, exports, module) {
 
     var _ = require('underscore');
     var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
+    var d3parcoords = require("wftoolkit/contrib/d3.parcoords");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
-    var d3p = require('wftoolkit/contrib/d3.parsets');
 
-    require("css!wftoolkit/parallelsets.css");
+    require("css!wftoolkit/contrib/d3.parcoords.css");
 
-    var parallelSets = SimpleSplunkView.extend({
+    var ParCoords = SimpleSplunkView.extend({
 
-        className: "splunk-toolkit-parellel-coords",
+        className: "splunk-toolkit-parcoords",
 
         options: {
             managerid: "search1",   // your MANAGER ID
             data: "preview",  // Results type
+
+            options: {} // the default for custom heatmap options.
         },
 
         output_mode: "json",
@@ -56,16 +58,15 @@ define(function(require, exports, module) {
         },
 
         createView: function() { 
-            return true
+            this.$el.html(''); // clearing all prior junk from the view (eg. 'waiting for data...')
+            return true;
         },
 
         // making the data look how we want it to for updateView to do its job
-        // in this case, it looks like this:
-        // [(one for each in maxSeries: {timestamp1: count, timestamp2: count, ... }]
         formatData: function(data) {
-            var unicode = function(d) {return d;}
             var field_list = _.pluck(this.resultsModel.data().fields, 'name');
             var datas = data;
+            field_list = _.filter(_.flatten(field_list), function(d){return d[0] !== "_" });
 
             data = {
                 'results': datas,
@@ -76,44 +77,34 @@ define(function(require, exports, module) {
 
         updateView: function(viz, data) {
             this.$el.html('');
-            viz = $("<div id='"+this.id+"_scParallelSets' class=scParallelSetsContainer>").appendTo(this.el);
-            this.div_id = '#'+viz.attr('id');
-            this.div = d3.select(this.div_id);
-            this.curved_id = '#' + this.id + '_curved';
-            this.svg_id = '#'+this.id + '_svg';
-            
-            this.choices = [];
+            var fields = data.fields;
+            viz = $("<div style='width:800px;height:150px' id='"+this.id+"_parallelcoords' class='parcoords'>").appendTo(this.el);
+            var colorgen = d3.scale.category20();
+            var colors = {};
+            _(data.results).chain()
+                .pluck(fields[0])
+                .uniq()
+                .each(function(d,i) {
+                    colors[d] = colorgen(i);
+                });
 
-            var fields = data.fields,
-                fields_clone = null,
-                new_fields = [],
-                old_fields = [],
-                i,
-                field,
-                t,
-                partition;
 
-            // simply destroy the old vis
-            d3.select(this.svg_id).remove();
-            this.chart = d3p().dimensions(fields);
-            this.vis = this.div.append("svg")
-                .attr("width", this.chart.width())
-                .attr("height", this.chart.height())
-                .attr("id", this.svg_id);
+            var color = function(d) {return colors[d[fields[0]]]; };
 
-            partition = d3.layout.partition()
-                .sort(null)
-                .size([this.chart.width(), this.chart.height() * 5])
-                .children(function (d) {
-                    return d.children ? d3.values(d.children) : null;
-                })
-                .value(function (d) {return d.count;});
 
-            this.vis.datum(data.results).call(this.chart);
+            var pc_progressive = d3.parcoords()('#' + this.id + '_parallelcoords')
+                .data(data.results)
+                .color(color)   
+                .alpha(0.4)
+                .margin({ top: 24, left: 150, bottom: 12, right: 0 })
+                .mode("queue")
+                .render()
+                .brushable()  // enable brushing
+                .interactive()  // command line mode
 
-            t = this.vis.transition().duration(500);
-            t.call(this.chart.tension(0.5));
-        }
+              pc_progressive.svg.selectAll("text")
+                .style("font", "10px sans-serif");
+                    }
     });
-    return parallelSets;
+    return ParCoords;
 });

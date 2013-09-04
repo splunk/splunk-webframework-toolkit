@@ -21,6 +21,7 @@ require.config({
 
 // ---- expected data format ----
 // a splunk search like this: source=*somedata* | stats count by artist_name track_name device
+// each group is an artist/song pairing
 // {
 //    "nodes":[
 //       {

@@ -26,10 +26,11 @@ require.config({
 
 // TODO:
 // add a setting for each option at http://kamisama.github.io/cal-heatmap/#options
+// rather than using the JS method in the HTML like i'm doing now.
 
 
 
-// the data is expected in this format (epoch time): 
+// the data is expected in this format (epoch time: event count): 
 // {
 //    "timestamps":[
 //       {

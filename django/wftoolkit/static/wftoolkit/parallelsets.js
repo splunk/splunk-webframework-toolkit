@@ -58,15 +58,14 @@ define(function(require, exports, module) {
 
         // making the data look how we want it to for updateView to do its job
         formatData: function(data) {
-            var unicode = function(d) {return d;}
             var field_list = _.pluck(this.resultsModel.data().fields, 'name');
-            var datas = data;
+            var datas;
 
-            data = {
-                'results': datas,
+            datas = {
+                'results': data,
                 'fields': field_list
             }
-            return data;
+            return datas;
         },
 
         updateView: function(viz, data) {
@@ -75,19 +74,8 @@ define(function(require, exports, module) {
             viz = $("<div id='"+this.id+"_scParallelSets' class=scParallelSetsContainer>").appendTo(this.el);
             this.div_id = '#'+viz.attr('id');
             this.div = d3.select(this.div_id);
-            this.curved_id = '#' + this.id + '_curved';
             this.svg_id = '#'+this.id + '_svg';
-            
-            this.choices = [];
-
-            var fields = data.fields,
-                fields_clone = null,
-                new_fields = [],
-                old_fields = [],
-                i,
-                field,
-                t,
-                partition;
+            var fields = data.fields;
 
             d3.select(this.svg_id).remove();
             this.chart = d3p().dimensions(fields);
@@ -95,14 +83,6 @@ define(function(require, exports, module) {
                 .attr("width", this.chart.width())
                 .attr("height", this.chart.height())
                 .attr("id", this.svg_id);
-
-            partition = d3.layout.partition()
-                .sort(null)
-                .size([this.chart.width(), this.chart.height() * 5])
-                .children(function (d) {
-                    return d.children ? d3.values(d.children) : null;
-                })
-                .value(function (d) {return d.count;});
 
             this.vis.datum(data.results).call(this.chart);
 
