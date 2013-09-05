@@ -1,37 +1,36 @@
-{% extends 'splunkdj:base_with_app_bar.html' %}
+{% extends "toolkit_controls_base.html" %}
+
 {% load splunkmvc %}
 {% load wftoolkit %}
-{% block title %}{{wftoolkit}}cal-heatmap!!!{% endblock title %}
-{% block content %}
-    <h3>Cal Heatmap!</h3>
+
+{% block title %}Callendar Heatmap{% endblock title %}
+
+{% block css %}
+{{block.super}}
+{% endblock css %}
+
+  {% block heading %}Callendar Heatmap{% endblock heading %}
+
+  {% block explanation %}Callendar Heatmap.{% endblock explanation %}
+
+  {% block example %}
     {% calheat 
         id="myheat"
         managerid="search1"
         value="$searchtoken$"|token_safe
         maxSeries=5
     %}
-
-
-{% endblock content %}
+  {% endblock example %}
 
 {% block managers %}
-	{% searchmanager id="search1"
-		search='index=_internal sourcetype=splunkd metrics | head 10000 | timechart count by group span=1m'
-	%}
 
+  {% searchmanager id="search1"
+    search='index=_internal sourcetype=splunkd metrics | head 10000 | timechart count by group span=1m'
+  %}
 
 {% endblock managers %}
 
 {% block js %}
-<script>
-// you can define options here rather than in the django
-	require(["splunkjs/ready!"], function(mvc) {
-		var heat = mvc.Components.getInstance("myheat");
-		heat.settings.set("options", {
-			//define options here
-			legend: [2, 5, 10, 20, 50]
-		});
-	});
-</script>
+
 
 {% endblock js %}

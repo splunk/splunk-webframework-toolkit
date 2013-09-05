@@ -46,3 +46,48 @@ def bubbles(context, id, *args, **kwargs):       # The template tag
         "wftoolkit/bubbles",             # Path to the JavaScript class/file for the view
         kwargs
     )
+
+@register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
+def forcedirected(context, id, *args, **kwargs):       # The template tag
+    return component_context(
+        context,
+        "forcedirected",                           # The custom view's CSS class name
+        id,
+        "view",
+        "wftoolkit/forcedirected",             # Path to the JavaScript class/file for the view
+        kwargs
+    )
+
+@register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
+def parallelsets(context, id, *args, **kwargs):       # The template tag
+    return component_context(
+        context,
+        "parallelsets",                           # The custom view's CSS class name
+        id,
+        "view",
+        "wftoolkit/parallelsets",             # Path to the JavaScript class/file for the view
+        kwargs
+    )
+
+@register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
+def sunburst(context, id, *args, **kwargs):       # The template tag
+    return component_context(
+        context,
+        "sunburst",                           # The custom view's CSS class name
+        id,
+        "view",
+        "wftoolkit/sunburst",             # Path to the JavaScript class/file for the view
+        kwargs
+    )
+
+@register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
+def resultsview(context, id, *args, **kwargs):       # The template tag
+    return component_context(
+        context,
+        "splunk-toolkit-results-viewer",                           # The custom view's CSS class name
+        id,
+        "view",
+        "wftoolkit/resultsview",             # Path to the JavaScript class/file for the view
+        kwargs
+    )
+

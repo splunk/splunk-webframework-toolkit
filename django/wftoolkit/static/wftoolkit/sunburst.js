@@ -27,7 +27,7 @@ define(function(require, exports, module) {
 
     var Sunburst = SimpleSplunkView.extend({
 
-        className: "sunburstview", // doesn't matter what this is called
+        className: "splunk-toolkit-sunburst", // doesn't matter what this is called
 
         options: {
             mychartid: "search1",   // your MANAGER ID

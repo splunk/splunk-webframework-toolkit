@@ -72,6 +72,8 @@ define(function(require, exports, module) {
                 'results': datas,
                 'fields': field_list
             }
+            debugger;
+            console.log(data);
             return data;
         },
 

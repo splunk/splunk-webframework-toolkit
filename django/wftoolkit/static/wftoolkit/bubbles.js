@@ -103,9 +103,6 @@ define(function(require, exports, module) {
             var diameter = Math.min(this.$el.height(), this.$el.width());
                 format = d3.format(",d"),
                 color = d3.scale.category20c();
-            console.log(this.$el.height());
-            console.log(this.$el.width());
-            console.log(diameter);
 
             var bubble = d3.layout.pack()
                 .sort(null)
@@ -152,7 +149,6 @@ define(function(require, exports, module) {
                 }
 
                 recurse(null, data);
-                console.log(classes);
                 return {children: classes};
             }
 

@@ -183,8 +183,6 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data){
-            console.log(JSON.stringify(data));
-
             var that = this;
 
             this.charge = this.settings.get('charges');

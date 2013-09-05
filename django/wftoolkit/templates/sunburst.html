@@ -1,18 +1,38 @@
-{% extends 'splunkdj:base_with_account_bar.html' %}
+{% extends "toolkit_controls_base.html" %}
+
 {% load splunkmvc %}
-{% load sunburst %}
-{% block title %}{{testapp}}sunburst!!!{% endblock title %}
-{% block content %}
-    <h3>Sunburst!</h3>
+{% load wftoolkit %}
+
+{% block title %}Sunburst{% endblock title %}
+
+{% block css %}
+{{block.super}}
+<style type="text/css">
+.splunk-toolkit-sunburst{
+  margin: 10px;
+  padding: 3px;
+}
+</style>
+{% endblock css %}
+
+  {% block heading %}Sunburst{% endblock heading %}
+  {% block explanation %}Sunburst.{% endblock explanation %}
+
+  {% block example %}
     {% sunburst 
-        id="mysunburst"
-        managerid="search2"
+        id="example-sunburst"
+        managerid="search1"
     %}
-{% endblock content %}
+  {% endblock example %}
 
 {% block managers %}
-	{% searchmanager id="search2"
-		search='index=_internal sourcetype=splunkd metrics group=queue | fields name max_size_kb | head 50 | table name max_size_kb'
-	%}
+
+  {% searchmanager id="search1"
+    search='index=_internal sourcetype=splunkd metrics group=queue | fields name max_size_kb | head 50 | table name max_size_kb'
+  %}
+
 {% endblock managers %}
 
+{% block js %}    
+
+{% endblock js %}

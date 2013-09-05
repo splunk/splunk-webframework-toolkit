@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^parsets/$', render('wftoolkit:parallelsets.html'), name='parallelsets'),
     url(r'^parcoords/$', render('wftoolkit:parallelcoords.html'), name='parallelcoords'),
     url(r'^forcedirected/$', render('wftoolkit:forcedirected.html'), name='forcedirected'),
+    url(r'^sunburst/$', render('wftoolkit:sunburst.html'), name='sunburst'),
     # Examples
     url(r'^dashboarddj/$', render('wftoolkit:dashboarddj.html'), name='dashboarddj'),
     url(r'^dashboardjs/$', render('wftoolkit:dashboardjs.html'), name='dashboardjs'),
@@ -56,4 +57,5 @@ urlpatterns = patterns('',
 
 
     url(r'^map/$', render('wftoolkit:map.html'), name='map'),
+    url(r'^json_viewer/$', render('wftoolkit:json_viewer.html'), name='json_viewer'),
 )

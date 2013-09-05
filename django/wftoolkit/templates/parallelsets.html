@@ -1,18 +1,38 @@
-{% extends 'splunkdj:base_with_app_bar.html' %}
+{% extends "toolkit_controls_base.html" %}
+
 {% load splunkmvc %}
-{% load parallelsets %}
-{% block title %}{{wftoolkit}}parallel-sets yo!!!{% endblock title %}
-{% block content %}
-    <h3>Parallel Sets!</h3>
-    {% parallelsets
-        id="myparallel"
+{% load wftoolkit %}
+
+{% block title %}Parallel Sets{% endblock title %}
+
+{% block css %}
+{{block.super}}
+<style type="text/css">
+.splunk-toolkit-parellel-sets{
+  margin: 10px;
+  padding: 3px;
+}
+</style>
+{% endblock css %}
+
+  {% block heading %}Parallel Sets{% endblock heading %}
+  {% block explanation %}Parallel Sets{% endblock explanation %}
+
+  {% block example %}
+    {%  parallelsets
+        id="example-sets"
         managerid="search1"
     %}
-{% endblock content %}
+  {% endblock example %}
 
 {% block managers %}
-	{% searchmanager id="search1"
-		search='index=_internal sourcetype=splunkd_access method!=GET| head 1000 | table method status'
-	%}
+
+  {% searchmanager id="search1"
+    search='index=_internal sourcetype=splunkd_access method!=GET| head 1000 | table method status'
+  %}
+
 {% endblock managers %}
 
+{% block js %}    
+
+{% endblock js %}

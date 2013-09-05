@@ -1,19 +1,30 @@
-{% extends 'splunkdj:base_with_app_bar.html' %}
+{% extends "toolkit_controls_base.html" %}
+
 {% load splunkmvc %}
-{% load forcedirected %}
-{% block title %}{{wftoolkit}}forcedirected!!!{% endblock title %}
-{% block content %}
-    <h3>Force Directed!</h3>
-    {% forcedirected
-        id="myselect"
-        managerid="search1"
-        charge="$charge$"|token_safe
-    %}
-{% endblock content %}
+{% load wftoolkit %}
+
+{% block title %}Force-Directed Graph{% endblock title %}
+
+{% block css %}
+{{block.super}}
+
+{% endblock css %}
+
+  {% block heading %}Force-Directed Graph{% endblock heading %}
+  {% block explanation %}Force-directed graph.{% endblock explanation %}
+
+  {% block example %}
+    {% forcedirected id="force-directed" managerid="search1" %}
+  {% endblock example %}
 
 {% block managers %}
-	{% searchmanager id="search1"
-		search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name track_name eventtype | sort - count'
-	%}
+
+  {%  searchmanager id="search1"
+      search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name track_name eventtype | sort - count'
+  %}
+
 {% endblock managers %}
 
+{% block js %}    
+
+{% endblock js %}
