@@ -252,7 +252,22 @@ define(function(require, exports, module) {
             }
 
             function calculateYDomain(data){
-                var allFields= data.map(function (col) { return col.map( function (d) { return d[0]; }); });
+                // data = [["thing", "stuff"], [[0,1]], [[1,2]]];  
+                // var allFields= data.map(function (col) {
+                //         return col.map( function (d) {
+                //             return d[0]; 
+                //     }); 
+                // });
+
+                var allFields = _.map(data, function (d){
+                    // debugger;
+                    return _.map(d, function (e){
+                        return _.first(e)
+                    })
+
+                });
+                console.log(allFields)
+
                 return d3.merge(allFields);
                 //return data[this.argmax(data)].map(function (d) {return d[0];});
                 //var that= this;
@@ -283,6 +298,8 @@ define(function(require, exports, module) {
 
                 var axis= this.heatMap.select("g.axis.y").transition().duration(this.durationTime).ease("linear")
                     .call(yAxis);
+
+                console.log(axis)
 
                 var that= this;
                 this.heatMap.select("g.axis.y").selectAll("text")

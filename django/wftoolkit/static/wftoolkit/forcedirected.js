@@ -104,14 +104,14 @@ define(function(require, exports, module) {
             data: "preview",  // Results type
 
             // default values
-            height: "600",
-            width: "600",
+            height: "900",
+            width: "900",
             zoom: 'true',
             directional: 'true',
             count: 'count',
-            charges: -80,
-            gravity: 0.1,
-            linkDistance: 80,
+            charges: -100,
+            gravity: .01,
+            linkDistance: 200,
             firstField: 'myfields[0].name',
             secondField: 'myfields[1].name',
             groupKey: 'myfields[2].name'
@@ -122,10 +122,6 @@ define(function(require, exports, module) {
         initialize: function() {
             _.extend(this.options, {
                 formatName: _.identity,
-                formatTitle: function(d) {
-                    return (d.source.name + ' -> ' + d.target.name +
-                            ': ' + d.value); 
-                }
             });
 
             this.svg_id = this.id + '_svg';
@@ -383,16 +379,20 @@ define(function(require, exports, module) {
             function openLinkTooltip(d){
                 var groupName;
 
+                d.source.name + ' -> ' + d.target.name +
+                            ': ' + d.value; 
+
                 if(this.groupNameLookup !== undefined){
                     groupName = this.groupNameLookup[d.group];
                 } else {
                     groupName = d.group;
                 }
 
+
                 that.tooltips.open('links', {
                     slots: {
-                        source: d.source.source,
-                        target: d.target.source    
+                        source: d.source.name,
+                        target: d.target.name    
                     }
                 });
             }

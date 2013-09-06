@@ -20,7 +20,7 @@
 {% block managers %}
 
   {%  searchmanager id="search1"
-      search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name track_name eventtype | sort - count'
+      search='| inputlookup faa.demo.csv | head 300 | stats count by OriginCityName, DestCityName, DestStateName | sort count'
   %}
 
 {% endblock managers %}

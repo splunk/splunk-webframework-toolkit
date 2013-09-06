@@ -12,7 +12,7 @@
 
 {% block managers %}
 	{% searchmanager id="search1"
-		search='index="_internal" source="*metrics.log" group="pipeline" | stats sum(executes) as total_executes by _time processor | head 1 | timechart sum(total_executes) by processor'
+		search='index="_internal" source="*metrics.log" group="pipeline"| head 100  | stats sum(executes) as total_executes by _time processor | timechart sum(total_executes) by processor'
 	%}
 {% endblock managers %}
 
