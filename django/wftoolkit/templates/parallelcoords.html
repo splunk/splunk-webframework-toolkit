@@ -1,24 +1,32 @@
-{% extends 'splunkdj:base_with_app_bar.html' %}
+{% extends "toolkit_controls_base.html" %}
 
 {% load splunkmvc %}
-{% load parallelcoords %}
+{% load wftoolkit %}
 
-{% block title %}{{wftoolkit}}parallel coords{% endblock title %}
-{% block content %}
+{% block title %}Parallel Coordinates{% endblock title %}
 
-    <h3>Parallel Coordinates!</h3>
+{% block css %}
+{{block.super}}
+{% endblock css %}
 
+  {% block heading %}Parallel Coordinates{% endblock heading %}
+  {% block explanation %}Parallel Coordinates{% endblock explanation %}
+
+  {% block example %}
     {% parallelcoords
-        id="myparcoords"
+        id="example"
         managerid="search1"
     %}
-{% endblock content %}
+  {% endblock example %}
 
 {% block managers %}
-	{% searchmanager id="search1"
-		search='index=_internal sourcetype=splunkd_access | head 1000 | fields method status'
-	%}
+
+  {% searchmanager id="search1"
+    search='index=_internal sourcetype=splunkd_access | head 100 | fields method status'
+  %}
+
 {% endblock managers %}
-{% block js %}
+
+{% block js %}    
 
 {% endblock js %}

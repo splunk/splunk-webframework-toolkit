@@ -64,16 +64,23 @@ define(function(require, exports, module) {
 
         // making the data look how we want it to for updateView to do its job
         formatData: function(data) {
+
+            // Decide what fields we want
+            // TODO: this should be specifialbe
             var field_list = _.pluck(this.resultsModel.data().fields, 'name');
-            var datas = data;
             field_list = _.filter(_.flatten(field_list), function(d){return d[0] !== "_" });
 
+            // Filter data by the desired fields
+            // TODO: this is including some demo data.
+            console.log(data);
+            var filteredData = _.map(data, function(d){
+                return _.pick(d, field_list, "_serial", "_subsecond", "_cd", "_sourcetype");
+            });
+
             data = {
-                'results': datas,
+                'results': filteredData,
                 'fields': field_list
             }
-            debugger;
-            console.log(data);
             return data;
         },
 
@@ -90,9 +97,7 @@ define(function(require, exports, module) {
                     colors[d] = colorgen(i);
                 });
 
-
             var color = function(d) {return colors[d[fields[0]]]; };
-
 
             var pc_progressive = d3.parcoords()('#' + this.id + '_parallelcoords')
                 .data(data.results)
@@ -102,9 +107,9 @@ define(function(require, exports, module) {
                 .mode("queue")
                 .render()
                 .brushable()  // enable brushing
-                .interactive()  // command line mode
+                .interactive();  // command line mode
 
-              pc_progressive.svg.selectAll("text")
+            pc_progressive.svg.selectAll("text")
                 .style("font", "10px sans-serif");
                     }
     });
