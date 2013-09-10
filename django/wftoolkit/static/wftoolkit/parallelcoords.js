@@ -73,7 +73,7 @@ define(function(require, exports, module) {
             // Filter data by the desired fields
             // TODO: this is including some demo data.
             var filteredData = _.map(data, function(d){
-                return _.pick(d, field_list, "_serial", "_subsecond", "_cd", "_sourcetype");
+                return _.pick(d, field_list);
             });
 
             data = {
@@ -86,7 +86,7 @@ define(function(require, exports, module) {
         updateView: function(viz, data) {
             this.$el.html('');
             var fields = data.fields;
-            viz = $("<div style='width:800px;height:150px' id='"+this.id+"_parallelcoords' class='parcoords'>").appendTo(this.el);
+            viz = $("<div style='width:800px;height:300px' id='"+this.id+"_parallelcoords' class='parcoords'>").appendTo(this.el);
             var colorgen = d3.scale.category20();
             var colors = {};
             _(data.results).chain()

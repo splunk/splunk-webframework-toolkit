@@ -22,7 +22,7 @@
 {% block managers %}
 
   {% searchmanager id="search1"
-    search='index=_internal sourcetype=splunkd_access | head 100 | fields method status'
+    search='| inputlookup faa.demo.csv | search DestCityName=* OriginCityName=* AirlineDescription=*| head 50 | fields AirlineDescription OriginCityName DestCityName '
   %}
 
 {% endblock managers %}
