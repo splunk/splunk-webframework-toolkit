@@ -5,6 +5,7 @@
     padding: 7px;
     font-size: 1.0em;
     color: white;
+    opacity:0;
 }
 
 .node:hover{

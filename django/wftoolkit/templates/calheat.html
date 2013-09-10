@@ -3,22 +3,24 @@
 {% load splunkmvc %}
 {% load wftoolkit %}
 
-{% block title %}Callendar Heatmap{% endblock title %}
+{% block title %}Calendar Heatmap{% endblock title %}
 
 {% block css %}
 {{block.super}}
 {% endblock css %}
 
-  {% block heading %}Callendar Heatmap{% endblock heading %}
+  {% block heading %}Calendar Heatmap{% endblock heading %}
 
-  {% block explanation %}Callendar Heatmap.{% endblock explanation %}
+  {% block explanation %}Calendar Heatmap.{% endblock explanation %}
 
   {% block example %}
     {% calheat 
         id="myheat"
         managerid="search1"
         value="$searchtoken$"|token_safe
-        maxSeries=5
+        maxSeries=1
+        domain="day"
+        subdomain="hour"
     %}
   {% endblock example %}
 
@@ -31,6 +33,14 @@
 {% endblock managers %}
 
 {% block js %}
-
+<script>
+  require(["splunkjs/ready!"], function(mvc) {
+    var heat = mvc.Components.getInstance("myheat");
+    heat.settings.set("options", {
+      //define options here
+      legend: [2, 5, 10, 20, 50],
+    });
+  });
+</script>
 
 {% endblock js %}

@@ -30,7 +30,7 @@ require.config({
 
 
 
-// the data is expected in this format (epoch time: event count): 
+// the data is expected in this format after formatData (epoch time: event count): 
 // {
 //    "timestamps":[
 //       {
