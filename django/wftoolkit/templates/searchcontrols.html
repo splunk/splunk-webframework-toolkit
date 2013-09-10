@@ -106,6 +106,24 @@ timerange.on("change", function() {
                         </div> 
                     </div>
                     <!-- END SEARCH BAR -->
+                    <!-- SEARCH CONTROLS -->
+                    <div class="section" id="searchcontrols">
+                        <h3>Search Controls</h3>
+                        <p>The <code>searchcontrols</code> view allows users to control a search is various ways such as pausing, continuing, or cancelling a search.</p>
+
+                        <p>Use the <code>&#123;% searchcontrols %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
+
+                        <h4>Example</h4>
+                        <p>In this example, <b>Searchbar</b>, <b>Search Controls</b>, and <b>Table</b> views are bound to the same search. The search bar can dispatch a search to be displayed in the table, the search controls can control the execution of the search.</p>
+
+                        <div class="bs-docs-example">
+                            {% searchbar id="searchcontrols-searchbar" managerid="example-searchcontrols-search" %}
+                            {% searchcontrols id="example-searchcontrols" managerid="example-searchcontrols-search" %}
+                            {% table id="searchcontrols-table" managerid="example-searchcontrols-search" pageSize="5" %}
+                        </div>
+
+                    </div>
+                    <!-- END SEARCH CONTROLS -->
                     <!-- TIMELINE -->
                     <div class="section" id="timeline">
                             
@@ -285,6 +303,8 @@ new SearchManager({
 
     {% searchmanager id="example-bar-search" search="index=_internal | head 100 " %}
 
+    {% searchmanager id="example-searchcontrols-search" search="index=_internal | head 100 " %}
+
     {% searchmanager id="timerange-search" search="index=_internal | head 10000 |stats count" %}
 
     {% searchmanager id="example-timeline-search" search="index=_internal | head 1000" preview=True status_buckets=300 %}
@@ -328,6 +348,22 @@ require(["splunkjs/ready!"], function(mvc) {
             manager.search.set(timeline.val());
         });
     })();
+
+    // Search controls sample
+    (function() {
+        var manager = splunkjs.mvc.Components.getInstance("example-searchcontrols-search");
+        var searchbar = splunkjs.mvc.Components.getInstance("searchcontrols-searchbar");
+        var searchcontrols = splunkjs.mvc.Components.getInstance("example-searchcontrols");
+        
+        searchbar.on("change", function() {
+            manager.query.set("search", searchbar.val()); 
+        });
+        
+        // timeline.on("change", function() {
+        //     manager.search.set(timeline.val());
+        // });
+    })();
+
 
     // Search bar sample
     (function() {

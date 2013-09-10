@@ -30,7 +30,7 @@
                     <div class="panel-head">
                     </div>
                     <div class="panel-body html">
-    <p>The <b>SplunkMap</b> view binds a map to a search that interprets geographic data and displays it on a map. Data with <code>latitude</code> and <code>longitude</code> fields are used to populate map markers according to location. <b>SplunkMap</b> works best with the <b>geostats</b> search command, which provides clustering and spatial statistics in the Splunk search language.</p>
+    <p>The <b>SplunkMap</b> view binds a map to a search that interprets geographic data and displays it on a map. Data with <code>lat</code> and <code>lon</code> fields are used to populate map markers according to location. <b>SplunkMap</b> works best with the <b>geostats</b> search command, which provides clustering and spatial statistics in the Splunk search language.</p>
 
     <h4>Example</h4>
     <p>In this example, we use the <code>&#123;% splunkmap %&#125;</code> tag to create the <b>SplunkMap</b> view, which is bound to a search that includes latitude and longitude values. Search results (markers) are automatically displayed at their locations on the map and are sized based on the output of <b>geostats</b>.</p>
@@ -55,7 +55,7 @@
 &#123;% endblock content %&#125;
 
 &#123;% block managers %&#125; 
-    &#123;% searchmanager id="geosearch" search="| inputlookup earthquakes.csv | rename Lat as latitude Lon as longitude | geostats count" %&#125; 
+    &#123;% searchmanager id="geosearch" search="| inputlookup earthquakes.csv | rename Lat as lat Lon as lon | geostats count" %&#125; 
 &#123;% endblock managers%&#125;</pre>
                 </div>
                 <div class="tab-pane" id="js">
@@ -90,7 +90,7 @@ new SearchManager({
 {% endblock content %}
 
 {% block managers %}
-    {% searchmanager id="geosearch" search="| inputlookup earthquakes.csv | rename Lat as latitude Lon as longitude | geostats count" %}
+    {% searchmanager id="geosearch" search="| inputlookup earthquakes.csv | rename Lat as lat Lon as lon | geostats count" %}
 {% endblock managers %}
 
 {% block js %}

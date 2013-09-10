@@ -72,7 +72,6 @@ define(function(require, exports, module) {
 
             // Filter data by the desired fields
             // TODO: this is including some demo data.
-            console.log(data);
             var filteredData = _.map(data, function(d){
                 return _.pick(d, field_list, "_serial", "_subsecond", "_cd", "_sourcetype");
             });

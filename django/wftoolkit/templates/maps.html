@@ -25,7 +25,7 @@
                     </div>
                     <div class="panel-body ">
                         <p>
-                        This example shows Splunk's map view. This view can plot clustered data that have fields for <code>latitude</code> and <code>longitude</code>. Splunk's map view is designed to work with the new <b>geostats</b> command which can calculate aggregate spatial statistics to be displayed on the map.
+                        This example shows Splunk's map view. This view can plot clustered data that have fields for <code>lat</code> and <code>lon</code>. Splunk's map view is designed to work with the new <b>geostats</b> command which can calculate aggregate spatial statistics to be displayed on the map.
                         </p>
                     </div>
                 </div>
@@ -33,19 +33,31 @@
         </div>  
     </div>
     <div class="dashboard-row">
-        <div class="dashboard-cell" style="width: 50%;">
+        <div class="dashboard-cell" style="width: 33%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Map of Earthquakes Clustered by Count</h3>
+                        <h3>Map of Earthquakes Clustered by Count (Splunk Tiles)</h3>
                     </div>
                     <div class="panel-body">
-                        {% splunkmap id="example-map" managerid="map-search" tileSource="openStreetMap" %}
+                        {% splunkmap id="example-map" managerid="map-search" %}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="dashboard-cell" style="width: 50%;">
+        <div class="dashboard-cell" style="width: 33%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Map of Earthquakes Clustered by Count (Open Street Map)</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% splunkmap id="example-map2" managerid="map-search" tileSource="openStreetMap" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 33%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
@@ -66,9 +78,9 @@
 {% endblock content%}
 
 {% block managers %}
-    {% searchmanager id="geosearch" search="| inputlookup earthquakes.csv | rename Lat as latitude Lon as longitude | geostats count" preview=True cache=True %}
+    {% searchmanager id="geosearch" search="| inputlookup earthquakes.csv | rename Lat as lat Lon as lon | geostats count" preview=True cache=True %}
 
-    {% searchmanager id="map-search" search="| inputlookup earthquakes.csv | rename Lat as latitude Lon as longitude | geostats count" preview=True cache=True %}    
+    {% searchmanager id="map-search" search="| inputlookup earthquakes.csv | rename Lat as lat Lon as lon | geostats count" preview=True cache=True %}    
 {% endblock managers %}
 
 {% block js %}

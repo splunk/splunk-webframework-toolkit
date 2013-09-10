@@ -20,6 +20,7 @@
         <a href="/dj/redirector/wftoolkit/parallelcoords">Parallel Coordinates</a>
         <a href="/dj/redirector/wftoolkit/parallelsets">Parallel Sets</a>
         <a href="/dj/redirector/wftoolkit/sunburst">Sunburst</a>
+        <!-- heatwave -->
     </collection>
     <collection label="Examples">
         <a href="/dj/redirector/wftoolkit/dashboarddj">Dashboard in Django</a>

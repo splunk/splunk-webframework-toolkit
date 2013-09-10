@@ -161,7 +161,7 @@
    {% searchmanager id="dropdown-search" search="| inputlookup faa.demo.csv | head 5000 | stats count by DestCityName"%}
 
    {% searchmanager id="unbound-search" search="| inputlookup faa.demo.csv | head 5000 | stats count by DestCityName"%}
-   {% searchmanager id="mapsearch" search='| inputlookup faa.demo.csv | search DestCityName="$cityName$" | rename OriginLatitude as latitude, OriginLongitude as longitude | geostats count'|token_safe %}
+   {% searchmanager id="mapsearch" search='| inputlookup faa.demo.csv | search DestCityName="$cityName$" | rename OriginLatitude as lat, OriginLongitude as lon | geostats count'|token_safe %}
    
    {% searchmanager id="DoubleBoundSearch" search='| inputlookup faa.demo.csv | head 50000 | search DestCityName="$cityName$" AirlineDescription="$carrier$" | stats count by OriginCityName'|token_safe %}
    
