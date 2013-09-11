@@ -9,29 +9,29 @@
 {{block.super}}
 <style type="text/css">
 .splunk-toolkit-bubbles{
-  height: 600px;
-  margin: 10px;
-  padding: 3px;
+    height: 600px;
+    margin: 10px;
+    padding: 3px;
 }
 </style>
 {% endblock css %}
 
-  {% block heading %}Bubble Chart{% endblock heading %}
-  {% block explanation %}The Bubble Chart visualized magnitude of data optionally grouped by category.{% endblock explanation %}
+    {% block heading %}Bubble Chart{% endblock heading %}
+    {% block explanation %}The Bubble Chart visualized magnitude of data optionally grouped by category.{% endblock explanation %}
 
-  {% block example %}
-    {% bubbles 
-      id="bubbles1" 
-      managerid="search1"
-      nameField="track_name"
-      valueField="count"
-      groupingField="artist_name"
-    %}
-  {% endblock example %}
+    {% block example %}
+        {% bubbles 
+            id="bubbles1" 
+            managerid="search1"
+            nameField="track_name"
+            valueField="count"
+            groupingField="artist_name"
+        %}
+    {% endblock example %}
 
 {% block managers %}
 
-  {% searchmanager id="search1" search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name' %}
+    {% searchmanager id="search1" search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name' %}
 
 {% endblock managers %}
 

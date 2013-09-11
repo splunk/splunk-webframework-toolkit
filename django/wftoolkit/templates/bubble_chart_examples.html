@@ -1,11 +1,18 @@
-{% extends "splunkdj:base_with_app_bar.html" %}
+{% extends "toolkit_controls_base.html" %}
 
 {% load splunkmvc %}
-{% block title %}Toolkit Component Sample{% endblock title %}
+{% load wftoolkit %}
+
+{% block title %}Bubble Chart Examples{% endblock title %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+{{block.super}}
+<style type="text/css">
+.splunk-toolkit-bubbles{
+    margin: 10px;
+    padding: 3px;
+}
+</style>
 {% endblock css %}
 
 {% block content %}
@@ -24,7 +31,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <p>{% block explanation %}This is a toolkit control.{% endblock explanation %}</p>
+                        <p>Some Bubble Chart examples.</p>
                     </div>
                 </div>
             </div>
@@ -61,9 +68,11 @@
         </div>
     </div>
 </div>
-{% endblock content%}
+{% endblock content %}
 
 {% block managers %}
+
+    {% searchmanager id="search1" search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name' %}
 
 {% endblock managers %}
 

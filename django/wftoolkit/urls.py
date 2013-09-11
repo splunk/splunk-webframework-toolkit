@@ -50,6 +50,7 @@ urlpatterns = patterns('',
     #Extended examples
     url(r'^airline_drilldown/$', render('wftoolkit:airline_drilldown.html'), name='airline_drilldown'),
     url(r'^d3_chart/$', render('wftoolkit:d3_chart.html'), name='d3_chart'),
+    url(r'^bubble_chart_examples/$', render('wftoolkit:bubble_chart_examples.html'), name='bubble_chart_examples'),
     url(r'^json_viewer/$', render('wftoolkit:json_viewer.html'), name='json_viewer'),
     # Code Stencils
     url(r'^dashboarddj_stencil/$', render('wftoolkit:dashboarddj_stencil.html'), name='dashboarddj_stencil'),
