@@ -55,5 +55,6 @@ urlpatterns = patterns('',
     url(r'^dashboarddj_stencil/$', render('wftoolkit:dashboarddj_stencil.html'), name='dashboarddj_stencil'),
     url(r'^dashboardjs_stencil/$', render('wftoolkit:dashboardjs_stencil.html'), name='dashboardjs_stencil'),
     url(r'^dashboard_stencil1/$', render('wftoolkit:dashboard_stencil1.html'), name='dashboard_stencil1'),
+    url(r'^dashboard_stencil2/$', render('wftoolkit:dashboard_stencil2.html'), name='dashboard_stencil2'),
    
 )

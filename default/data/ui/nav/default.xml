@@ -53,6 +53,7 @@
         <a href="/dj/redirector/wftoolkit/dashboarddj_stencil/">Dashboard Example in Django</a>
         <a href="/dj/redirector/wftoolkit/dashboardjs_stencil/">Dashboard Example in JavaScript</a>
         <a href="/dj/redirector/wftoolkit/dashboard_stencil1/">Simple Stencil</a>
+        <a href="/dj/redirector/wftoolkit/dashboard_stencil2/">Multiple Row Stencil</a>
     </collection>
     <collection label="Useful Links">
         <a href="http://dev.splunk.com/view/app-framework/SP-CAAAEMA">Framework Documentation</a>

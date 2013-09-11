@@ -28,7 +28,7 @@
 {% block managers %}
 
   {% searchmanager id="search1"
-    search='index=faa OriginCityName="*, CA" DestState=* | head 50 | table OriginCityName, DestState'
+    search='| inputlookup faa.demo.csv | search OriginCityName="*, CA" DestState=* | head 50 | table OriginCityName, DestState'
   %}
 
 {% endblock managers %}

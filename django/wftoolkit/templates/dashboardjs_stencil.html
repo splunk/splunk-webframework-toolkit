@@ -72,6 +72,10 @@
                     </div>
                     <div class="panel-body">
                         <p>Add content to this cell. See the template comments for more.</p>
+
+                        <!-- 
+                        Here is another hook to add things to cell 3. See the javascript section for more.
+                        -->
                         <div id="#cell3-hook"></div>
                     </div>
                 </div>
@@ -87,6 +91,10 @@
                     </div>
                     <div class="panel-body">
                         <p>Add content to this cell. See the template comments for more.</p>
+
+                        <!-- 
+                        Here is another hook to add things to cell 4. See the javascript section for more.
+                        -->
                         <div id="#cell4-hook"></div>
                     </div>  
                 </div>
@@ -109,6 +117,10 @@
                         <p>
                         Here we will insert a searchbar that affects a search. In this case the searchbar is created in javascript and attached here. See the comments in source for more.
                         </p>
+
+                        <!-- 
+                        Here is another hook to add things to cell 5. See the javascript section for more.
+                        -->
                         <div id="#cell5-hook"></div>
                     </div>
                 </div>
@@ -126,6 +138,10 @@
                         <p>
                         Add a view here with the same manager as the searchbar. Again, create it in javascript and attach it here.
                         </p>
+
+                        <!-- 
+                        Here is another hook to add things to cell 5. See the javascript section for more.
+                        -->
                         <div id="#cell6-hook"></div>
                     </div>
                 </div>
@@ -138,7 +154,36 @@
 
 {% block js %}    
     <script>
-    
+    // When working with splunk components in javascript, we want to make sure that
+    // the necessary libraries are loaded before we use them. We use requirejs to 
+    // load the splunk mvc controler and other libraries. Inside of the callback,
+    // the dependencies we need will be defined. Here we require the necessary 
+    // components for this sample, and assign them to variable in the callback
+    // function signature. NOTE: dependencies must be required and assigned to 
+    // variables in the SAME ORDER. 
+ 
+    require(
+        ["splunkjs/ready!", 
+        "underscore",
+        "splunkjs/mvc/chartview",
+        "splunkjs/mvc/tableview",
+        "splunkjs/mvc/searchmanager",
+        "splunkjs/mvc/singleview" ], 
+        function(
+                mvc, 
+                _,
+                ChartView,
+                TableView,
+                SearchManager,
+                SingleView
+    ) {
         
+        // Here, the required libraries are ready. 
+
+        // TODO: add code to create elements in javascript. For each view 
+        // we need to create the view
+
+    });
+       
     </script>
 {% endblock js %}
