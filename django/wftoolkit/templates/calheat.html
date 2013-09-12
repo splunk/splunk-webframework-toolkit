@@ -25,7 +25,7 @@
 {% block managers %}
 
   {% searchmanager id="search1"
-    search='index=faa OriginCityName=*| head 100 | timechart count by OriginCityName'
+    search='index=_internal bytes=*| head 30000'
   %}
 
 {% endblock managers %}
@@ -36,7 +36,7 @@
     var heat = mvc.Components.getInstance("myheat");
     heat.settings.set("options", {
       //define options here
-      legend: [10, 30, 60, 80, 100],
+      legend: [100000, 300000, 700000, 100000, 500000],
     });
   });
 </script>
