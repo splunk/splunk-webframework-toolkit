@@ -18,16 +18,14 @@
         id="myheat"
         managerid="search1"
         value="$searchtoken$"|token_safe
-        maxSeries=1
-        domain="day"
-        subdomain="hour"
+        domain="hour"
+        subdomain="min"
     %}
   {% endblock example %}
-
 {% block managers %}
 
   {% searchmanager id="search1"
-    search='index=_internal sourcetype=splunkd metrics | head 10000 | timechart count by group span=1m'
+    search='index=faa OriginCityName=*| head 100 | timechart count by OriginCityName'
   %}
 
 {% endblock managers %}
@@ -38,7 +36,7 @@
     var heat = mvc.Components.getInstance("myheat");
     heat.settings.set("options", {
       //define options here
-      legend: [2, 5, 10, 20, 50],
+      legend: [10, 30, 60, 80, 100],
     });
   });
 </script>
