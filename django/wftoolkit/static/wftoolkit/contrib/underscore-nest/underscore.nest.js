@@ -1,3 +1,7 @@
+define(function(require, exports, module) {
+
+  var _ = require('underscore');
+
 /**
 * underscore.nest - v0.1.1 - 7/13/2012
 * http://github.com/iros/underscore.nest/
@@ -101,3 +105,7 @@
   }
 
 }(this, _));
+
+  return _.nest;
+
+});

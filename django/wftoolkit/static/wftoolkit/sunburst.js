@@ -4,10 +4,10 @@ require.config({
             deps: [],
             exports: "d3"
         },
-        "wftoolkit/contrib/underscore-nest/underscore.nest": {
+        /*"wftoolkit/contrib/underscore-nest/underscore.nest": {
             deps: ['underscore'],
             exports: "window.nest"
-        }
+        }*/
     }
 });
 
@@ -69,7 +69,6 @@ define(function(require, exports, module) {
             var field_list = _.without(_.pluck(this.resultsModel.data().fields, 'name'), 'name');
             var dataresults = nester.nest(data, field_list)
             dataresults['name']=("flare")
-            console.log(JSON.stringify(data));
 
             // alert(field_list)
 
@@ -109,7 +108,6 @@ define(function(require, exports, module) {
                 .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
             var root = data.results;
-            console.log(partition.nodes(root))
 
             var g = svg.selectAll("g")
                 .data(partition.nodes(root))
@@ -119,8 +117,6 @@ define(function(require, exports, module) {
                 .attr("d", arc)
                 .style("fill", function(d) {return color((d.children ? d : d.parent).name); })
                 .on("click", click);
-
-            console.log(path);
 
             var text = g.append("text")
                 .attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
