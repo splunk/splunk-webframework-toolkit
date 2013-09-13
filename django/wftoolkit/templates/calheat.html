@@ -20,12 +20,13 @@
         value="$searchtoken$"|token_safe
         domain="hour"
         subdomain="min"
+        start="current"
     %}
   {% endblock example %}
 {% block managers %}
 
   {% searchmanager id="search1"
-    search='index=faa OriginCityName=*| head 100 | timechart count by OriginCityName'
+    search='index=_internal bytes=*| head 30000'
   %}
 
 {% endblock managers %}
@@ -36,8 +37,18 @@
     var heat = mvc.Components.getInstance("myheat");
     heat.settings.set("options", {
       //define options here
-      legend: [10, 30, 60, 80, 100],
+      legend: [100000, 300000, 700000, 100000, 500000],
     });
+
+
+    // The following is for demo purposes only. Disregard when using this example!
+    // It sets the starting position 3 hours behind the current hour.
+
+    var d = new Date();
+    var d2 = new Date();
+    d2.setHours(d.getHours() - 3);
+    heat.settings.set("start", d2);
+
   });
 </script>
 
