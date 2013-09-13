@@ -99,7 +99,7 @@ define(function(require, exports, module) {
 
             this.$el.html(''); // clearing all prior junk from the view
             // blowing bubbles with d3
-            var diameter = Math.min(this.$el.height(), this.$el.width());
+            var diameter = Math.min(this.$el.height(), this.$el.width()) || 500,
                 format = d3.format(",d"),
                 color = d3.scale.category20c();
 

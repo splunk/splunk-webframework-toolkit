@@ -7,7 +7,12 @@
 
 {% block css %}
 {{block.super}}
-
+<style type="text/css">
+#force-directed{
+    height: 600px;
+    width: 600px;
+}
+</style>
 {% endblock css %}
 
   {% block heading %}Force-Directed Graph{% endblock heading %}

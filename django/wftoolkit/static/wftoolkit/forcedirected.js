@@ -85,8 +85,6 @@ require.config({
 //    ]
 // }
 
-
-
 define(function(require, exports, module) {
 
     var _ = require('underscore');
@@ -104,14 +102,12 @@ define(function(require, exports, module) {
             data: "preview",  // Results type
 
             // default values
-            height: "900",
-            width: "900",
             zoom: 'true',
             directional: 'true',
             count: 'count',
             charges: -100,
             gravity: .01,
-            linkDistance: 200,
+            linkDistance: 150,
             firstField: 'myfields[0].name',
             secondField: 'myfields[1].name',
             groupKey: 'myfields[2].name'
@@ -123,27 +119,33 @@ define(function(require, exports, module) {
             _.extend(this.options, {
                 formatName: _.identity,
             });
-
-            this.svg_id = this.id + '_svg';
             
-
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
-
-            this.width = this.settings.get('width');
-            this.height = this.width;
 
             // in the case that any options are changed, it will dynamically update
             // without having to refresh.
             this.settings.on("change:charges", this._onDataChanged, this);
             this.settings.on("change:gravity", this._onDataChanged, this);
             this.settings.on("change:linkDistance", this._onDataChanged, this);
-
         },
 
         createView: function() {
-            this.$el.html(''); // clearing all prior junk from the view (eg. 'waiting for data...')
-            return $("<div id="+this.id+"_forcedirected class=ForceDirectedContainer>").appendTo(this.el);
-	    },
+            var margin = {top: 1, right: 1, bottom: 1, left: 1};
+            var availableWidth = parseInt(this.$el.width());
+            var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
+
+            this.$el.html("");
+
+            var svg = d3.select(this.el)
+                .append("svg")
+                .attr("width", availableWidth)
+                .attr("height", availableHeight)
+                .attr("pointer-events", "all")
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            return { container: this.$el, svg: svg, width: availableWidth, height: availableHeight };
+        },
 
         // making the data look how we want it to for updateView to do its job
         formatData: function(data) { 
@@ -181,67 +183,35 @@ define(function(require, exports, module) {
         updateView: function(viz, data){
             var that = this;
 
+            // Get settings
             this.charge = this.settings.get('charges');
             this.gravity = this.settings.get('gravity');
             this.linkDistance = this.settings.get('linkDistance');
-
-            // the div id that we will select later
-            this.div_id = '#' + this.id + '_forcedirected';
-            this.container = viz;
-
-            // force and svg elements
-            this.color = null;
-            
-            this.svg = null;
-
-            // buttons and labels
-            this.label = null;
-            this.reset_button = null;
-            this.text_input = null;
-
             this.zoomable = this.settings.get("zoom");
             this.isDirectional = stringToBool(this.settings.get("directional"));
             this.zoomFactor = 0.5;
       
-            this.results_endpoint = 'results';
-
-            this.status_message = $('#status', this.container);
-
-            this.has_controls = false;
-            this.ready_to_dispatch = false;
-
             this.groupNameLookup = data.groupLookup;            
 
-            var r = 6
-            var height = this.height
-            var width = this.width - r,
-            link, node, self=this, 
-            svg, svgRoot;
+            // Set up graph
+            var r = 6;
+            var height = viz.height;
+            var width = viz.width - r;
+            var force = d3.layout.force()
+                            .gravity(this.gravity)
+                            .charge(this.charge)
+                            .linkDistance(this.linkDistance)
+                            .size([width, height]);
 
             this.color = d3.scale.category20();
+        
+            this.svg = viz.svg.append("svg:g");
 
-            this.force = d3.layout.force()
-                             .gravity(self.gravity)
-                             .charge(self.charge)
-                             .linkDistance(self.linkDistance)
-                             .size([width, height *= 9 / 10]);
-
-            // Setup SVG
-            svgRoot = d3.select(this.div_id).append("svg:svg")
-                           .attr("width", width)
-                           .attr("height", height)
-                           .attr("pointer-events", "all");
-            
-            svg = svgRoot
-                    .append("svg:g");
-
-            this.tooltips = new Tooltips(svg);
+            this.tooltips = new Tooltips(this.svg);
 
             if(this.zoomable){
-                initPanZoom(svgRoot);
+                initPanZoom(viz.svg);
             }
-
-            this.svg = svg.append("svg:g");
 
             this.svg.style("opacity", 1e-6)
                 .transition()
@@ -261,12 +231,12 @@ define(function(require, exports, module) {
               .append("svg:path")
             .attr("d", "M0,-5L10,0L0,5");
 
-            link = this.svg.selectAll("line.link")
+            var link = this.svg.selectAll("line.link")
                     .data(data.links)
                     .enter().append('path')
                         .attr("class", "link")
                         .attr("marker-end", function(d) {
-                            if(self.isDirectional){
+                            if(that.isDirectional){
                                 return "url(#" + "arrowEnd" + ")";
                             }
                         })
@@ -278,33 +248,33 @@ define(function(require, exports, module) {
                 }) 
                 .on('mouseout', function(d) { 
                     d3.select(this).classed('linkHighlight', false);
-                    self.tooltips.close(); 
+                    that.tooltips.close(); 
                 });
 
-            node = this.svg.selectAll("circle.node")
+            var node = this.svg.selectAll("circle.node")
                     .data(data.nodes)
                     .enter().append("svg:circle")
                         .attr("class", "node")
                         .attr("r", r - 1)
                         .style("fill", function(d) {
-                            return self.color(d.group); 
+                            return that.color(d.group); 
                         })
-                        .call(self.force.drag);
+                        .call(force.drag);
 
             node.append("title")
                 .text(function(d) { return d.name; });
 
-            node.on('click', function(d) { self.onNodeClick(d); })
+            node.on('click', function(d) { that.onNodeClick(d); })
                 .on('mouseover', function(d) {                    
                     d3.select(this).classed('nodeHighlight', true);
                     openNodeTooltip(d); 
                 })
                 .on('mouseout', function(d) { 
                     d3.select(this).classed('nodeHighlight', false);
-                    self.tooltips.close();
+                    that.tooltips.close();
                 });
 
-            this.force.nodes(data.nodes)
+            force.nodes(data.nodes)
                 .links(data.links)
                     .on("tick", function() {
                         link.attr("d", function(d) {
@@ -353,7 +323,7 @@ define(function(require, exports, module) {
 
             // zoomin'
             function panZoom() {
-                svg.attr("transform",
+                that.svg.attr("transform",
                     "translate(" + d3.event.translate + ")"
                     + " scale(" + d3.event.scale + ")");        
             }
@@ -448,7 +418,7 @@ define(function(require, exports, module) {
                     isReady = false,
                     layouts;
 
-                setup(svg, viz);
+                setup(svg, viz.container);
 
                 function setup(svg, $container){
                     var self = this,

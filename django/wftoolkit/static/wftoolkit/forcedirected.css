@@ -1,58 +1,31 @@
-.ForceDirectedContainer {
-    height: 700px;
+.splunk-toolkit-force-directed {
     overflow-y: auto;
-    width: auto;
     font-family: arial;
     position: relative;
+    height: 95%;
+    width: 95%;
 }
-.ForceDirectedContainer circle.node {
+.splunk-toolkit-force-directed circle.node {
     stroke: #fff;
     stroke-width: 1.5px;
 }
 
-.ForceDirectedContainer .link, .ForceDirectedContainer #arrowEnd {
+.splunk-toolkit-force-directed .link, .splunk-toolkit-force-directed #arrowEnd {
     stroke: #999;
     stroke-opacity: .6;
     fill: none;
 }
-.ForceDirectedContainer #arrowEnd {
+.splunk-toolkit-force-directed #arrowEnd {
     fill: #999;
 }
-.ForceDirectedContainer #status {
-    display: none; 
-    font-size: 20px;
-    left: 45%;
-    position: absolute;
-    top: 40%;
-}
-.ForceDirectedContainer #reset_button {
-    border: 1px solid #CCCCCC;
-    border-radius: 4px;
-    float: right;
-    margin: 10px 20px 20px 0;
-    width: 150px;
-}
-.ForceDirectedContainer #highlight_label {
-    float: left;
-    margin: 15px 0 0 10px;
-}
-.ForceDirectedContainer #highlight_button {
-    border: 1px solid #9B9B9B;
-    border-radius: 4px;
-    float: left;
-    /*margin: 10px 0 0 10px;*/
-    width: 205px;
-    box-shadow: none;
-    margin-top: 7px;
-}
 
-.ForceDirectedContainer circle.node {
+.splunk-toolkit-force-directed circle.node {
   stroke: #fff;
   stroke-width: 1.5px;
 }
 
-.ForceDirectedContainer circle.nodeHighlight,
-.ForceDirectedContainer circle.highlight  {
+.splunk-toolkit-force-directed circle.nodeHighlight,
+.splunk-toolkit-force-directed circle.highlight  {
     stroke-width: 2px;
     stroke: #E89595;
 }
@@ -61,22 +34,22 @@
     stroke: red !important;
 }
 
-.ForceDirectedContainer circle.nodeHighlight.highlight {
+.splunk-toolkit-force-directed circle.nodeHighlight.highlight {
     stroke-width: 3px;
 }
 
 
-.ForceDirectedContainer line.link {
+.splunk-toolkit-force-directed line.link {
   stroke: #999;
   stroke-opacity: .6;
 }
 
-.ForceDirectedContainer #chart {
+.splunk-toolkit-force-directed #chart {
   width: 100%;
   height: 100%;
 }
 
-.ForceDirectedContainer #tooltipContainer {
+.splunk-toolkit-force-directed #tooltipContainer {
     border: 1px solid hsl(0, 0%, 80%);
     position: absolute;
     min-width: 200px;
@@ -89,7 +62,7 @@
     top:50px;
 }
 
-.ForceDirectedContainer .group-swatch {
+.splunk-toolkit-force-directed .group-swatch {
     width:20px;
     height:20px;
     float:left;
@@ -97,20 +70,20 @@
     margin-right: 10px
 }
 
-.ForceDirectedContainer .group-name {
+.splunk-toolkit-force-directed .group-name {
     padding-top: 5px;
 }
 
-.ForceDirectedContainer .tooltipLabel {
+.splunk-toolkit-force-directed .tooltipLabel {
     font-weight:bold;
     padding-right:5px;
 }
 
-.ForceDirectedContainer .tooltipRow {
+.splunk-toolkit-force-directed .tooltipRow {
     margin-bottom:10px;
 }
 
-.ForceDirectedContainer .panCursor {
+.splunk-toolkit-force-directed .panCursor {
     cursor: move;
 }
 

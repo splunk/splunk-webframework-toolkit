@@ -64,6 +64,33 @@
         </div>
         
     </div>
+    <!-- <div class="dashboard-row"> -->
+        <!-- <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Pie</h3>
+                    </div>
+                    <div class="panel-body">
+                            <div id="hook3" class="splunkdj-view chart-box"></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Flights arriving by city</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="hook4" class="splunkdj-view chart-box"/></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+    <!-- </div> -->
 </div>
 
 {% endblock content%}
@@ -81,13 +108,13 @@
         // new SearchManager({
         //      "id": "search1",
         //      "latest_time": null,
-        //      "search": 'index=faa ArrDelay=* earliest="1359590400" latest="1359676799" | timechart span=1h avg(DepDelayMinutes) AS AvgDepDelay avg(ArrDelayMinutes) AS AvgArrDelay | appendcols [search index=faa earliest="1359590400" latest="1359676799" | timechart span=1h count AS TotalFlights | rename _time as newtime, _span as newspan] | eval _time=ifnull(_time, newtime, _time) | eval _span=ifnull(_span, newspan, _span) | fields - newspan, newtime | table _time AvgDepDelay AvgArrDelay TotalFlights',
+        //      "search": "index=faa ArrDelay=* earliest=\"1359590400\" latest=\"1359676799\" | timechart span=1h avg(DepDelayMinutes) AS AvgDepDelay avg(ArrDelayMinutes) AS AvgArrDelay | appendcols [search index=faa earliest=\"1359590400\" latest=\"1359676799\" | timechart span=1h count AS TotalFlights | rename _time as newtime, _span as newspan] | eval _time=ifnull(_time, newtime, _time) | eval _span=ifnull(_span, newspan, _span) | fields - newspan, newtime | table _time AvgDepDelay AvgArrDelay TotalFlights",
         //      "auto_cancel": 90,
         //      "status_buckets": 0,
         //      "preview": true,
         //      "timeFormat": "%s.%Q",
         //      "wait": 0,
-        //      "app": "search",
+        //      "app": "demo_bubbles",
         //      "cache": true
         //  });
 
@@ -129,13 +156,13 @@
         new SearchManager({
             'id': "search2",
             'preview': true,
-            'search': "| inputlookup faa.demo.csv | search DestCityName=* | stats count by DestCityName | sort - count | head 10",
+            'search': "|inputlookup faa.demo.csv | search DestCityName=* | stats count by DestCityName | sort - count | head 10",
         });
 
         new SearchManager({
             'id': "search3",
             'preview': true,
-            'search': '| inputlookup faa.demo.csv  | head 100000 | search DestCityName="Atlanta, GA" AND DayOfWeek=1 | timechart span=1h count',
+            'search': '|inputlookup faa.demo.csv | head 100000 | search DestCityName="Atlanta, GA" AND DayOfWeek=1 | timechart span=1h count',
         });
 
         var bar_chart = new D3ChartView({
@@ -151,20 +178,6 @@
             chart.showValues(true);
         });
 
-        // var line_chart = new D3ChartView({
-        //     "id": "line",
-        //     "managerid": "search3",
-        //     "type": "lineChart",
-        //     "el": $('#hook3')
-        // }).render();
-
-        // line_chart.settings.set("setup", function(chart){
-        //     chart.color(d3.scale.category10().range());
-        //     chart.xAxis.tickFormat(function(d){
-        //         return d3.time.format("%H:%M")(new Date(d));
-        //     }); 
-        // });  
-
         var donut_chart = new D3ChartView({
             "id": "donut",
             "managerid": "search2",
@@ -174,9 +187,12 @@
 
         donut_chart.settings.set("setup", function(chart){
             chart.color(d3.scale.category10().range());
-            chart.staggerLabels(true);
-            chart.showValues(true);
-        });      
+            chart.donut(true);
+           // chart.staggerLabels(true);
+            //chart.showValues(true);
+        });
+
+             
     });
 </script>
 
