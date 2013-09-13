@@ -40,14 +40,14 @@
       legend: [100000, 300000, 700000, 100000, 500000],
     });
 
-    // The following is for the purpose of this demo only. It scrolls back a few pages
-    // threehoursago = new Date();
-    // alert(threehoursago)
-    // threehoursago -= 10800;
-    // alert(threehoursago)
-    // threehoursago = threehoursago.getTime();
-    // alert(threehoursago)
-    // heat.settings.set("start", valueOf())
+
+    // The following is for demo purposes only. Disregard when using this example!
+    // It sets the starting position 3 hours behind the current hour.
+
+    var d = new Date();
+    var d2 = new Date();
+    d2.setHours(d.getHours() - 3);
+    heat.settings.set("start", d2);
 
   });
 </script>
