@@ -27,7 +27,7 @@ require.config({
 
 // TODO:
 // add a setting for each option at http://kamisama.github.io/cal-heatmap/#options
-// rather than using the JS method in the HTML like i'm doing now.
+//      rather than using the JS method in the HTML like i'm doing now.
 
 
 
@@ -88,7 +88,7 @@ require.config({
             data: "preview",  // Results type
             domain: 'hour', // the largest unit it will differentiate by in squares
             subdomain: 'min', // the smaller unit the calheat goes off of
-            start: 'current',
+            start: 'current', // which data point to start the display at
 
             options: {} // the default for custom heatmap options.
         },
@@ -106,6 +106,8 @@ require.config({
             // whenever domain or subdomain are changed, we will re-render.
             this.settings.on("change:domain", this._onDataChanged, this);
             this.settings.on("change:subdomain", this._onDataChanged, this);
+            var uniqueID=Math.floor(Math.random()*1000001);
+            this.settings.set("uID", uniqueID);
         },
 
         createView: function() { 
@@ -114,7 +116,7 @@ require.config({
 
         // making the data look how we want it to for updateView to do its job
         // in this case, it looks like this:
-        // [(one for each in maxSeries: {timestamp1: count, timestamp2: count, ... }]
+        // {timestamp1: count, timestamp2: count, ... }
         formatData: function(data) {
             var myfields = this.resultsModel.data().fields
             var domain = this.settings.get('domain');
@@ -141,7 +143,6 @@ require.config({
                     for(var j=0; j<myfields.length; j++){
                         if (!isNaN(parseInt(myresults[i][myfields[j]]))) {
                             summed += parseInt(myresults[i][myfields[j]]);
-                            // alert(myresults[i][myfields[j]])
                         }
                     formattedData[time] = summed;
                     }
@@ -161,11 +162,15 @@ require.config({
 
                     start = earliest;
                 }
-                else start = new Date(data[0]._time);
-                // console.log(JSON.stringify(formattedData))
+                else if (startOption === 'current') {
+                    start = new Date(data[0]._time);
+                }
+                else {
+                    start = startOption;
+                }
                 return {
                     timestamps: formattedData,
-                    start: start, // to set start date to the earliest time, set this to 'start: earliest'
+                    start: start,
                     domain: domain,
                     subdomain: subdomain
                 };
@@ -175,19 +180,19 @@ require.config({
         },
 
         updateView: function(viz, data) {
-            console.log(data.start)
-            console.log(JSON.stringify(data))
             var that = this;
             userOptions = this.settings.get('options')
             var i = 0;
+            var uniqueID = this.settings.get('uID');
+
 
             this.$el.html('');
-            $("<div class='cal-heatmap-buttons'> <button id='previous-cal-heatmap"+i+"' class='btn' style='margin: 5px;'> Previous </button> <button id='next-cal-heatmap"+i+"' class='btn' style='margin: 5px;'> Next </button></div>")
+            $("<div class='cal-heatmap-buttons'> <button id='previous-cal-heatmap"+uniqueID+"' class='btn' style='margin: 5px;'> Previous </button> <button id='next-cal-heatmap"+uniqueID+"' class='btn' style='margin: 5px;'> Next </button></div>")
                 .appendTo(this.el)[0];
             var options = _.extend({
                 itemSelector: $("<div/>").appendTo(this.el)[0],
-                previousSelector: "#previous-cal-heatmap"+i,
-                nextSelector: "#next-cal-heatmap"+i,
+                previousSelector: "#previous-cal-heatmap"+uniqueID,
+                nextSelector: "#next-cal-heatmap"+uniqueID,
                 data: data.timestamps,
                 domain: data.domain,
                 subdomain: data.subdomain,
@@ -203,7 +208,7 @@ require.config({
                     that.settings.set("value", date.valueOf());
                 },
             }, userOptions)        
-            var cal = new CalHeatMap(); 
+            var cal = new CalHeatMap();
             
             cal.init(options); // create the calendar using either default or user defined options 
         }

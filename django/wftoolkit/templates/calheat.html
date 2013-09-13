@@ -20,6 +20,7 @@
         value="$searchtoken$"|token_safe
         domain="hour"
         subdomain="min"
+        start="current"
     %}
   {% endblock example %}
 {% block managers %}
@@ -38,6 +39,16 @@
       //define options here
       legend: [100000, 300000, 700000, 100000, 500000],
     });
+
+    // The following is for the purpose of this demo only. It scrolls back a few pages
+    // threehoursago = new Date();
+    // alert(threehoursago)
+    // threehoursago -= 10800;
+    // alert(threehoursago)
+    // threehoursago = threehoursago.getTime();
+    // alert(threehoursago)
+    // heat.settings.set("start", valueOf())
+
   });
 </script>
 
