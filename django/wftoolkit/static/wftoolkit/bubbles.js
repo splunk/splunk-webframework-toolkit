@@ -98,7 +98,6 @@ define(function(require, exports, module) {
             var that = this;
 
             this.$el.html(''); // clearing all prior junk from the view
-
             // blowing bubbles with d3
             var diameter = Math.min(this.$el.height(), this.$el.width());
                 format = d3.format(",d"),
@@ -168,8 +167,9 @@ define(function(require, exports, module) {
                         if(d.value !== undefined) { return 1; }
                         return 0;
                     })
-                    .style("left", (d3.event.pageX - 50) + "px")
-                    .style("top", (d3.event.pageY - 50) + "px");
+                    // .style({left:d.pageX,top:d.pageY});
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY) + "px");
             }
 
             // more tooltips
