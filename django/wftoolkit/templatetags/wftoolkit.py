@@ -102,3 +102,14 @@ def parallelcoords(context, id, *args, **kwargs):       # The template tag
         kwargs
     )
 
+@register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
+def fd2(context, id, *args, **kwargs):       # The template tag
+    return component_context(
+        context,
+        "fd2",                           # The custom view's CSS class name
+        id,
+        "view",
+        "wftoolkit/fd2",             # Path to the JavaScript class/file for the view
+        kwargs
+    )
+

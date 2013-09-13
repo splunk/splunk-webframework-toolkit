@@ -12,6 +12,10 @@
     margin: 10px;
     padding: 3px;
 }
+#bubbles2{
+    height: 200px;
+}
+
 </style>
 {% endblock css %}
 
@@ -19,19 +23,15 @@
 <div class="dashboard-body container-fluid main-section-body">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2> {% block heading %}Toolkit Component Sample{% endblock heading %} </h2>
+            <h2> {% block heading %}Bubble Chart Examples{% endblock heading %} </h2>
         </div>
     </div>
-
     <div class="dashboard-row">
         <div class="dashboard-cell" style="width: 100%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
-                    <div class="panel-head">
-                    </div>
-
                     <div class="panel-body">
-                        <p>Some Bubble Chart examples.</p>
+                    <p>These use the search: <b>| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=30</b></p>
                     </div>
                 </div>
             </div>
@@ -39,29 +39,86 @@
     </div>
 
     <div class="dashboard-row">
-        <div class="dashboard-cell" style="width: 100%;">
+        
+        <div class="dashboard-cell" style="width: 33%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
+                        <h3>No Options</h3>
                     </div>
-
                     <div class="panel-body">
-                        {% block example %}<p>Something should be here</p>{% endblock example %}
+                        <div id="chart1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 33%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>nameField="OriginCityName"</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% bubbles 
+                            id="bubbles1-2" 
+                            managerid="search2"
+                            nameField="OriginState"
+                        %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 33%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>nameField="OriginCityName"</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% bubbles 
+                            id="bubbles1-3" 
+                            managerid="search2"
+                            nameField="OriginCityName"
+                        %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="dashboard-row">
-        <div class="dashboard-cell" style="width: 100%;">
+        <div class="dashboard-cell" style="width: 33%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Usage</h3>
+                        <h3>Default Size</h3>
                     </div>
-
                     <div class="panel-body">
-                        {% block options %}<p>Explanation of options</p>{% endblock options %}
+                        {% bubbles 
+                            id="bubbles2" 
+                            managerid="search1"
+                            nameField="track_name"
+                            valueField="count"
+                            groupingField="artist_name"
+                        %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 33%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Size Set in Style</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% bubbles 
+                            id="bubbles3" 
+                            managerid="search1"
+                            nameField="track_name"
+                            valueField="count"
+                            groupingField="artist_name"
+                        %}
                     </div>
                 </div>
             </div>
@@ -74,8 +131,37 @@
 
     {% searchmanager id="search1" search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name' %}
 
+    {% searchmanager id="search2" search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=30' %}
+
 {% endblock managers %}
 
 {% block js %}    
+
+<script type="text/javascript">
+    require([
+        "splunkjs/ready!", 
+        "splunkjs/mvc/utils",
+        "underscore",
+        "jquery",
+        "wftoolkit/bubbles",
+        "splunkjs/mvc/dropdownview",
+        "wftoolkit/sankeyfx",
+        ], 
+        function(
+            mvc, 
+            utils,
+            _, 
+            $,
+            BubbleChart,
+            Dropdown,
+            Sankey
+        ){
+            new BubbleChart({
+                'id' : 'chart1',
+                'managerid' : 'search2',
+                'el' : $('#hook1')
+            }).render();
+        });
+</script>
 
 {% endblock js %}
