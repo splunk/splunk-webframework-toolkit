@@ -21,7 +21,7 @@ def sankey(context, id, *args, **kwargs):
         "splunk-toolkit-sankey",        # Splunk registry name
         id, 
         "view",
-        "wftoolkit/sankeyfx", # Path to javascript library
+        "wftoolkit/sankeychart", # Path to javascript library
         kwargs
     )
 

@@ -131,7 +131,7 @@ define(function(require, exports, module) {
 
         createView: function() {
             var margin = {top: 1, right: 1, bottom: 1, left: 1};
-            var availableWidth = parseInt(this.$el.width());
+            var availableWidth = parseInt(this.settings.get("width") || this.$el.width());
             var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
 
             this.$el.html("");

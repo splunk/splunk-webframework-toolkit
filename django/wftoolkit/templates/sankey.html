@@ -8,20 +8,21 @@
 {% block css %}
 {{block.super}}
 <style type="text/css">
-.splunk-toolkit-sankey{
-  height: 500px;
-  margin: 10px;
-  padding: 3px;
+#sankey1{
+    height: 500px;
+    width: 700px;
+    margin: 10px;
+    padding: 3px;
 }
 </style>
 {% endblock css %}
 
-  {% block heading %}Sankey Chart{% endblock heading %}
-  {% block explanation %}The Sankey Chart visualizes flows between nodes.{% endblock explanation %}
+    {% block heading %}Sankey Chart{% endblock heading %}
+    {% block explanation %}The Sankey Chart visualizes flows between nodes.{% endblock explanation %}
 
-  {% block example %}
-    {% sankey id="sankey1" managerid="search" %}
-  {% endblock example %}
+    {% block example %}
+        {% sankey id="sankey1" managerid="search" %}
+    {% endblock example %}
 
 {% block managers %}
 
@@ -31,23 +32,23 @@
 
 {% block js %}    
 <script>    
-require(["splunkjs/ready!", "underscore"], function(mvc, _) {
+    require(["splunkjs/ready!", "underscore"], function(mvc, _) {
 
         // Customize the sankey component.  As described in
-        // sankeyfx.js, the formatName is an option that expects a
+        // sankeychart.js, the formatName is an option that expects a
         // function.  That function takes a name from the search and
         // returns a formatted name.  In this case, replace access_log
         // strings for mobile clients with more readable names.
         mvc.Components.getInstance('sankey1').settings.set({
-          'formatName': function(name) { 
-            return {
-              'ua-mobile-android': 'Android',
-              'ua-mobile-ipad': 'iPad',
-              'ua-mobile-blackberry': 'Blackberry',
-              'ua-mobile-iphone': 'iPhone',
-              'ua-mobile-ipod': 'iPod'
-            }[name] || name;
-          }
+            'formatName': function(name) { 
+                return {
+                    'ua-mobile-android': 'Android',
+                    'ua-mobile-ipad': 'iPad',
+                    'ua-mobile-blackberry': 'Blackberry',
+                    'ua-mobile-iphone': 'iPhone',
+                    'ua-mobile-ipod': 'iPod'
+                }[name] || name;
+            }
         });
     });
 </script>

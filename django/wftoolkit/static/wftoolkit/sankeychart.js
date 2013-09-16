@@ -57,9 +57,9 @@ define(function(require, exports, module) {
         // needs.
 
         createView: function() {
-            var margin = {top: 1, right: 1, bottom: 6, left: 1};
-            var availableWidth = parseInt(this.$el.width() || 960, 10);
-            var availableHeight = parseInt(this.$el.height() || 400, 10);
+            var margin = {top: 1, right: 5, bottom: 5, left: 1};
+            var availableWidth = parseInt(this.settings.get("width") || this.$el.width());
+            var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
 
             this.$el.html("");
 
@@ -73,7 +73,7 @@ define(function(require, exports, module) {
             var sankey = d3.sankey()
                 .nodeWidth(15)
                 .nodePadding(10)
-                .size([availableWidth, availableHeight]);
+                .size([availableWidth-margin.right, availableHeight-margin.bottom]);
 
             var path = sankey.link();
             return { svg: svg, sankey: sankey, path: path, width: availableWidth, height: availableHeight };
