@@ -37,13 +37,13 @@ def calheat(context, id, *args, **kwargs):       # The template tag
     )
 
 @register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def bubbles(context, id, *args, **kwargs):       # The template tag
+def bubblechart(context, id, *args, **kwargs):       # The template tag
     return component_context(
         context,
-        "bubbles",                           # The custom view's CSS class name
+        "splunk-toolkit-bubble-chart",                           # The custom view's CSS class name
         id,
         "view",
-        "wftoolkit/bubbles",             # Path to the JavaScript class/file for the view
+        "wftoolkit/bubblechart",             # Path to the JavaScript class/file for the view
         kwargs
     )
 

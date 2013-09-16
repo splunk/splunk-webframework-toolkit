@@ -367,6 +367,7 @@ define(function(require, exports, module) {
                 });
             }
 
+            //TODO: This doesn't seem to be used in this file
             function getSafeVal(getobj, name) {
                 var retVal; 
                 if (getobj.hasOwnProperty(name) && getobj[name] !== null) {

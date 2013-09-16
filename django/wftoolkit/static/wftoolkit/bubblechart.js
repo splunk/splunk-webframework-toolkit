@@ -7,7 +7,7 @@ require.config({
     }
 });
 
-// Bubbles!
+// Bubble Chart
 // this displays information as different 'bubbles,' their unique values represented with
 // the size of the bubble.
 // supports drilldown clicks
@@ -26,11 +26,11 @@ define(function(require, exports, module) {
     var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
-    require("css!wftoolkit/bubbles.css");
+    require("css!wftoolkit/bubble_chart.css");
 
-    var Bubbles = SimpleSplunkView.extend({
+    var BubbleChart = SimpleSplunkView.extend({
 
-        className: "splunk-toolkit-bubbles",
+        className: "splunk-toolkit-bubble-chart",
 
         options: {
             mychartid: "search1",   // your MANAGER ID
@@ -115,7 +115,7 @@ define(function(require, exports, module) {
                 .attr("class", "bubble");
 
             var tooltip = d3.select("#" + this.id).append("div")
-                .attr("class", "bubblesTooltip");
+                .attr("class", "bubble-chart-tooltip");
 
             var node = svg.selectAll(".node")
                 .data(bubble.nodes(classes(data))
@@ -188,5 +188,5 @@ define(function(require, exports, module) {
             });
         }
     });
-    return Bubbles;
+    return BubbleChart;
 });

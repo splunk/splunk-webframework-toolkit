@@ -8,7 +8,7 @@
 {% block css %}
 {{block.super}}
 <style type="text/css">
-.splunk-toolkit-bubbles{
+.splunk-toolkit-bubble-chart{
     margin: 10px;
     padding: 3px;
 }
@@ -59,7 +59,7 @@
                         <h3>nameField="OriginCityName"</h3>
                     </div>
                     <div class="panel-body">
-                        {% bubbles 
+                        {% bubblechart 
                             id="bubbles1-2" 
                             managerid="search2"
                             nameField="OriginState"
@@ -75,7 +75,7 @@
                         <h3>nameField="OriginCityName"</h3>
                     </div>
                     <div class="panel-body">
-                        {% bubbles 
+                        {% bubblechart 
                             id="bubbles1-3" 
                             managerid="search2"
                             nameField="OriginCityName"
@@ -94,7 +94,7 @@
                         <h3>Default Size</h3>
                     </div>
                     <div class="panel-body">
-                        {% bubbles 
+                        {% bubblechart 
                             id="bubbles2" 
                             managerid="search1"
                             nameField="track_name"
@@ -112,7 +112,7 @@
                         <h3>Size Set in Style</h3>
                     </div>
                     <div class="panel-body">
-                        {% bubbles 
+                        {% bubblechart 
                             id="bubbles3" 
                             managerid="search1"
                             nameField="track_name"
@@ -143,7 +143,7 @@
         "splunkjs/mvc/utils",
         "underscore",
         "jquery",
-        "wftoolkit/bubbles",
+        "wftoolkit/bubblechart",
         "splunkjs/mvc/dropdownview",
         "wftoolkit/sankeychart",
         ], 

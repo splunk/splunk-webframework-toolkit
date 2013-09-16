@@ -1,10 +1,10 @@
 {% extends 'splunkdj:base_with_app_bar.html' %}
 {% load splunkmvc %}
-{% load bubbles %}
-{% block title %}{{wftoolkit}}bbbbubbles{% endblock title %}
+{% load wftoolkit %}
+{% block title %}{{wftoolkit}}Bubble Chart{% endblock title %}
 {% block content %}
-    <h3>Bubbles!</h3>
-    {% bubbles 
+    <h3>Bubble Chart</h3>
+    {% bubblechart 
     	id="mybubbles" 
     	managerid="search1"
     	nameField="track_name"

@@ -11,9 +11,6 @@ require.config({
     }
 });
 
-// Bubbles!
-// This takes in three things: nameField, valueField, and groupingField(often the same as name)
-
 define(function(require, exports, module) {
 
     var _ = require('underscore');

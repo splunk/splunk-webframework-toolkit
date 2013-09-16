@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     # Toolkit Components
     url(r'^sankey/$', render('wftoolkit:sankey.html'), name='sankey'),
     url(r'^globe/$', render('wftoolkit:globe.html'), name='globe'),
-    url(r'^bubbles/$', render('wftoolkit:bubbles.html'), name='bubbles'),
+    url(r'^bubble_chart/$', render('wftoolkit:bubble_chart.html'), name='bubble_chart'),
     url(r'^forcedirected/$', render('wftoolkit:forcedirected.html'), name='forcedirected'),
     url(r'^calheat/$', render('wftoolkit:calheat.html'), name='calheat'),
     url(r'^parcoords/$', render('wftoolkit:parallelcoords.html'), name='parallelcoords'),
