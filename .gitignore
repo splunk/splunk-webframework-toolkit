@@ -34,4 +34,9 @@ nosetests.xml
 .project
 .pydevproject
 
+# OS X
 .DS_Store
+
+# Splunk local app data
+local/
+metadata/

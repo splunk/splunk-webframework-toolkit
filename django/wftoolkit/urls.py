@@ -52,10 +52,10 @@ urlpatterns = patterns('',
     url(r'^d3_chart/$', render('wftoolkit:d3_chart.html'), name='d3_chart'),
     url(r'^bubble_chart_examples/$', render('wftoolkit:bubble_chart_examples.html'), name='bubble_chart_examples'),
     url(r'^json_viewer/$', render('wftoolkit:json_viewer.html'), name='json_viewer'),
+    url(r'^setup/$', 'wftoolkit.views.setup', name='setup'),
     # Code Stencils
     url(r'^dashboarddj_stencil/$', render('wftoolkit:dashboarddj_stencil.html'), name='dashboarddj_stencil'),
     url(r'^dashboardjs_stencil/$', render('wftoolkit:dashboardjs_stencil.html'), name='dashboardjs_stencil'),
     url(r'^dashboard_stencil1/$', render('wftoolkit:dashboard_stencil1.html'), name='dashboard_stencil1'),
     url(r'^dashboard_stencil2/$', render('wftoolkit:dashboard_stencil2.html'), name='dashboard_stencil2'),
-   
 )

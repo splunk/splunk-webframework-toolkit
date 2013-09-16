@@ -49,6 +49,7 @@
         <a href="/dj/redirector/wftoolkit/d3_chart">NVD3 Charts</a>
         <a href="/dj/redirector/wftoolkit/bubble_chart_examples">Bubble Chart Examples</a>
         <a href="/dj/redirector/wftoolkit/json_viewer">Splunk JSON Results Viewer</a>
+        <a href="/dj/redirector/wftoolkit/setup">Setup View (Basic)</a>
     </collection>
     <collection label="Code Stencils">
         <a href="/dj/redirector/wftoolkit/dashboarddj_stencil/">Dashboard Example in Django</a>
