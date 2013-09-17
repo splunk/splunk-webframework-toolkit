@@ -8,10 +8,9 @@
 {% block css %}
 {{block.super}}
 <style type="text/css">
-.splunk-toolkit-bubble-chart{
-    height: 600px;
-    margin: 10px;
-    padding: 3px;
+#bubble1{
+   height: 500px;
+   width: 500px;
 }
 </style>
 {% endblock css %}
@@ -21,17 +20,17 @@
 
     {% block example %}
         {% bubblechart 
-            id="bubbles1" 
+            id="bubble1" 
             managerid="search1"
-            nameField="track_name"
+            nameField="OriginCityName"
             valueField="count"
-            groupingField="artist_name"
+            groupingField="OriginState"
         %}
     {% endblock example %}
 
 {% block managers %}
 
-    {% searchmanager id="search1" search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name' %}
+    {% searchmanager id="search1" search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=30' %}
 
 {% endblock managers %}
 

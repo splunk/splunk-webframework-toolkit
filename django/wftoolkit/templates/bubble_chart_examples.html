@@ -8,14 +8,9 @@
 {% block css %}
 {{block.super}}
 <style type="text/css">
-.splunk-toolkit-bubble-chart{
-    margin: 10px;
-    padding: 3px;
+#bubble-chart1{
+    height: 500px;
 }
-#bubbles2{
-    height: 200px;
-}
-
 </style>
 {% endblock css %}
 
@@ -40,19 +35,20 @@
 
     <div class="dashboard-row">
         
-        <div class="dashboard-cell" style="width: 33%;">
+        <div class="dashboard-cell" style="width: 50%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
                         <h3>No Options</h3>
                     </div>
                     <div class="panel-body">
-                        <div id="chart1"></div>
+                        <div id="bubble-chart1"></div>
+                        <div id="nameFieldSelect"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="dashboard-cell" style="width: 33%;">
+        <!-- <div class="dashboard-cell" style="width: 33%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
@@ -83,10 +79,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
-    <div class="dashboard-row">
+   <!--  <div class="dashboard-row">
         <div class="dashboard-cell" style="width: 33%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
@@ -123,7 +119,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 {% endblock content %}
 
@@ -132,6 +128,7 @@
     {% searchmanager id="search1" search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name' %}
 
     {% searchmanager id="search2" search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=30' %}
+    {% searchmanager id="fieldSearch" search='| inputlookup faa.demo.csv | head 5000 | fieldsummary | where count>20' rf="*" %}
 
 {% endblock managers %}
 
@@ -153,14 +150,28 @@
             _, 
             $,
             BubbleChart,
-            Dropdown,
+            DropdownView,
             Sankey
         ){
-            new BubbleChart({
-                'id' : 'chart1',
+            var bubbles = new BubbleChart({
+                'id' : 'bubble-chart1',
                 'managerid' : 'search2',
-                'el' : $('#hook1')
+                'el' : $('#bubble-chart1')
             }).render();
+
+            var dropdown = new DropdownView({
+                            'id' : 'nameFieldSelect',
+                            'valueField' : 'field',
+                            'choices' : [
+                                {label: "Origin City", value: "OriginCityName"},
+                                {label: "Origin State", value: "OriginState"}
+                            ],
+                            'el' : $('#nameFieldSelect')
+            }).render()
+
+            dropdown.on("change", function(){
+                bubbles.settings.set("nameField", dropdown.val());
+            });
         });
 </script>
 

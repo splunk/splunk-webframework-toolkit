@@ -33,8 +33,8 @@ define(function(require, exports, module) {
         className: "splunk-toolkit-bubble-chart",
 
         options: {
-            mychartid: "search1",   // your MANAGER ID
-            data: "preview",  // Results type
+            managerid: null,   
+            data: "preview", 
 
             // default values
             nameField: "sourcetype",
@@ -60,10 +60,36 @@ define(function(require, exports, module) {
             // without having to refresh. copy the following line for whichever field
             // you'd like dynamic updating on
             this.settings.on("change:nameField", this._onDataChanged, this);
+
+            // Set up resize callback. The first argument is a this
+            // pointer which gets passed into the callback event
+            $(window).resize(this, _.debounce(this._handleResize, 20));
+        },
+
+        _handleResize: function(e){
+            
+            // e.data is the this pointer passed to the callback.
+            // here it refers to this object and we call render()
+            e.data.render();
         },
 
         createView: function() {
-            return true;
+
+            // Here we wet up the initial view layout
+            var margin = {top: 0, right: 0, bottom: 0, left: 0};
+            var availableWidth = parseInt(this.settings.get("width") || this.$el.width());
+            var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
+
+            this.$el.html("");
+
+            var svg = d3.select(this.el)
+                .append("svg")
+                .attr("width", availableWidth)
+                .attr("height", availableHeight)
+                .attr("pointer-events", "all")
+
+            // The returned object gets passed to updateView as viz
+            return { container: this.$el, svg: svg, margin: margin};
         },
 
         // making the data look how we want it to for updateView to do its job
@@ -94,38 +120,59 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data) {
-            var nameField = this.settings.get('nameField'); // this is for the tooltip/click stuff
             var that = this;
 
-            this.$el.html(''); // clearing all prior junk from the view
-            // blowing bubbles with d3
-            var diameter = Math.min(this.$el.height(), this.$el.width()) || 500,
-                format = d3.format(",d"),
-                color = d3.scale.category20c();
+            // Clear svg
+            var svg = $(viz.svg[0]);
+            svg.empty();
 
+            // Add the graph group as a child of the main svg
+            var graph = viz.svg
+                .append("g")
+                .attr("class", "bubble")
+                .attr("transform", "translate(" + viz.margin.left + "," + viz.margin.top + ")");
+
+            // Set format and color
+            var format = d3.format(",d");
+            var color = d3.scale.category20c();
+
+            // We have two phases in layout. We tell the 
+            // d3 lout how much room it has, then set
+            // the sizes of it's containers to match
+            // the size it returns. 
+            var containerHeight = this.$el.height();
+            var containerWidth = this.$el.width();  
+            var diameter = Math.min(containerWidth, containerHeight);
+
+            // Tell the layout to layout
             var bubble = d3.layout.pack()
                 .sort(null)
                 .size([diameter, diameter])
                 .padding(1.5);
 
-            d3.select("#" + this.id+ ">svg").remove();
-            var svg = d3.select("#" + this.id).append("svg")
-                .attr("width", diameter)
-                .attr("height", diameter)
-                .attr("class", "bubble");
+            // Set containers' sizes to match actual layout
+            var width = bubble.size()[0];
+            var height = bubble.size()[1];
+            graph.attr("width", width)
+                .attr("height", height);
+            svg.height(height);
+            svg.width(width);
 
-            var tooltip = d3.select("#" + this.id).append("div")
+            // Create tooltip
+            var tooltip = d3.select(this.el).append("div")
                 .attr("class", "bubble-chart-tooltip");
 
-            var node = svg.selectAll(".node")
+            var node = graph.selectAll(".node")
                 .data(bubble.nodes(classes(data))
                 .filter(function(d) { return !d.children; }))
                 .enter().append("g")
                 .attr("class", "node")
                 .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
-            node.append("title")
-                .text(function(d) { return d.className + ": " + format(d.value); });
+            // NOTE: this is taken out because we have a custom tooltip.
+            // It may need to be put back for accessibility
+            // node.append("title")
+            //     .text(function(d) { return d.className + ": " + format(d.value); });
 
             node.append("circle")
                 .attr("r", function(d) { return d.r; })
@@ -135,28 +182,28 @@ define(function(require, exports, module) {
                 .attr("dy", ".3em")
                 .style("text-anchor", "middle")
                 // ensure the text is truncated if the bubble is tiny
-                .text(function(d) { return d.className.substring(0, d.r / 3) + ": " + format(d.value); });
+                .text(function(d) { return d.className.substring(0, d.r / 3) + " " + format(d.value); });
 
-            text = svg.selectAll("text")
-
-            // re-flatten the child array
-            function classes() {
+            // Re-flatten the child array
+            function classes(data) {
                 var classes = [];
                 function recurse(name, node) {
-                if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-                else classes.push({packageName: name, className: node.name, value: node.size});
+                    if (node.children) 
+                        node.children.forEach(function(child) { 
+                            recurse(node.name, child); 
+                        });
+                    else 
+                        classes.push({packageName: name || "", className: node.name || "", value: node.size});
                 }
 
                 recurse(null, data);
                 return {children: classes};
             }
 
-            d3.select(self.frameElement).style("height", diameter + "px");
-
-            // tooltips
+            // Tooltips
             function doMouseEnter(d){
                 var text;
-                if(d.className === undefined){
+                if(d.className === undefined || d.className === ""){
                     text = "Event: " + d.value;
                 } else {
                     text = d.className+": " + d.value;
@@ -167,12 +214,11 @@ define(function(require, exports, module) {
                         if(d.value !== undefined) { return 1; }
                         return 0;
                     })
-                    // .style({left:d.pageX,top:d.pageY});
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY) + "px");
+                    .style("left", (d3.mouse(that.el)[0]) + "px")
+                    .style("top", (d3.mouse(that.el)[1]) + "px"); 
             }
 
-            // more tooltips
+            // More tooltips
             function doMouseOut(d){
                 tooltip.style("opacity", 1e-6);
             }
@@ -180,11 +226,11 @@ define(function(require, exports, module) {
             node.on("mouseover", doMouseEnter);
             node.on("mouseout", doMouseOut);
             
-            // drilldown clickings. edit this in order to change the search token that 
+            // Drilldown clickings. edit this in order to change the search token that 
             // is set to 'value' (a token in bubbles django), this will change the drilldown
             // search.
             node.on('click', function(e) { 
-                that.settings.set("value", nameField+'="'+e.className+'"')
+                that.settings.set("value", that.settings.get("nameField") +'="'+e.className+'"')
             });
         }
     });

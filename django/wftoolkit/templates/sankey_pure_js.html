@@ -8,7 +8,7 @@
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}examplesfx/contrib/jqueryui/css/ui-lightness/jquery-ui-1.9.2.custom.min.css">
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}wftoolkit/contrib/jqueryui/css/ui-lightness/jquery-ui-1.9.2.custom.min.css">
     <style>     
         .sankey-artists, #sankey-artists-downloaded {
             height: 500px;
@@ -150,19 +150,19 @@
         "splunkjs/mvc/dropdownview",
         "splunkjs/mvc/tableview",
         "splunkjs/mvc/searchmanager",
-        "examplesfx/sankeychart"
+        "wftoolkit/sankeychart"
     ];
 
     require(deps, function(_, mvc) {
         // The double-require pattern ensures that jQuery, which is loaded
         // by the ready command, are globally available before jQuery-UI
         // starts attaching new commands to it.
-        require(["examplesfx/contrib/jqueryui/js/jquery-ui-1.9.2.custom.min"], function() {
+        require(["wftoolkit/contrib/jqueryui/js/jquery-ui-1.9.2.custom.min"], function() {
             var SearchManager = require("splunkjs/mvc/searchmanager");
             var ChartView = require("splunkjs/mvc/chartview");
             var DropdownView = require("splunkjs/mvc/dropdownview");
             var TableView = require("splunkjs/mvc/tableview");
-            var Sankey = require("examplesfx/sankeychart");
+            var Sankey = require("wftoolkit/sankeychart");
             
             $('#accordion').accordion();
 

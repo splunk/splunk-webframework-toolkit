@@ -105,9 +105,9 @@ define(function(require, exports, module) {
             zoom: 'true',
             directional: 'true',
             count: 'count',
-            charges: -100,
-            gravity: .01,
-            linkDistance: 150,
+            charges: -2000,
+            gravity: .9,
+            linkDistance: 2,
             firstField: 'myfields[0].name',
             secondField: 'myfields[1].name',
             groupKey: 'myfields[2].name'
