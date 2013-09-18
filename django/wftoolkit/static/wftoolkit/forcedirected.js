@@ -98,16 +98,18 @@ define(function(require, exports, module) {
         className: "splunk-toolkit-force-directed",
 
         options: {
-            mychartid: "search1",   // your MANAGER ID
+            managerid: null,   // your MANAGER ID
             data: "preview",  // Results type
 
             // default values
             zoom: 'true',
             directional: 'true',
             count: 'count',
-            charges: -2000,
-            gravity: .9,
-            linkDistance: 2,
+            charges: -500,
+            gravity: 0.2,
+            linkDistance: 15,
+            swoop: 'false',
+            isStatic: 'true',
             firstField: 'myfields[0].name',
             secondField: 'myfields[1].name',
             groupKey: 'myfields[2].name'
@@ -188,6 +190,8 @@ define(function(require, exports, module) {
             this.gravity = this.settings.get('gravity');
             this.linkDistance = this.settings.get('linkDistance');
             this.zoomable = this.settings.get("zoom");
+            this.swoop = stringToBool(this.settings.get("swoop"));
+            this.isStatic = stringToBool(this.settings.get("isStatic"));
             this.isDirectional = stringToBool(this.settings.get("directional"));
             this.zoomFactor = 0.5;
       
@@ -280,7 +284,10 @@ define(function(require, exports, module) {
                         link.attr("d", function(d) {
                             var dx = d.target.x - d.source.x,
                                 dy = d.target.y - d.source.y,
+                                dr = 0;
+                            if(that.swoop){
                                 dr = Math.sqrt(dx * dx + dy * dy);
+                            }
                             return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
                         });
 
@@ -294,6 +301,17 @@ define(function(require, exports, module) {
                             });
 
                     }).start();
+
+            if(this.isStatic){
+                forwardAlpha(force, .005, 1000);
+            }
+
+            function forwardAlpha(layout, alpha, max) {
+                alpha = alpha || 0;
+                max = max || 1000;
+                var i = 0;
+                while(layout.alpha() > alpha && i++ < max) layout.tick();
+            }
 
             function stringToBool(x){
                 if(x.toLowerCase() === 'true'){
