@@ -49,15 +49,25 @@ define(function(require, exports, module) {
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
             
             this.settings.on("change:formatName", this.render, this);
+
+            // Set up resize callback. The first argument is a this
+            // pointer which gets passed into the callback event
+            $(window).resize(this, _.debounce(this._handleResize, 20));
+        },
+
+        _handleResize: function(e){
+            
+            // e.data is the this pointer passed to the callback.
+            // here it refers to this object and we call render()
+            e.data.render();
         },
 
         // The object this method returns will be passed to the
         // updateView() method as the first argument, to be
         // manipulated according to the data and the visualization's
         // needs.
-
         createView: function() {
-            var margin = {top: 1, right: 5, bottom: 5, left: 1};
+            var margin = {top: 10, right: 10, bottom: 10, left: 10};
             var availableWidth = parseInt(this.settings.get("width") || this.$el.width());
             var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
 
@@ -67,41 +77,54 @@ define(function(require, exports, module) {
                 .append("svg")
                 .attr("width", availableWidth)
                 .attr("height", availableHeight)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("pointer-events", "all")
 
-            var sankey = d3.sankey()
-                .nodeWidth(15)
-                .nodePadding(10)
-                .size([availableWidth-margin.right, availableHeight-margin.bottom]);
-
-            var path = sankey.link();
-            return { svg: svg, sankey: sankey, path: path, width: availableWidth, height: availableHeight };
+            return { svg: svg, margin: margin};
         },
 
         // Where the data and the visualization meet.  Both 'viz' and
         // 'data' are the data structures returned from their
         // respective construction methods, createView() above and
         // onData(), below.
-
         updateView: function(viz, data) {
-            // Clear the contents of the SVG
-            viz.svg.selectAll("g").remove();
-          
+            var that = this;
+            var containerHeight = this.$el.height();
+            var containerWidth = this.$el.width();
+
+            // Clear svg
+            var svg = $(viz.svg[0]);
+            svg.empty();
+            svg.height(containerHeight);
+            svg.width(containerWidth);
+
+            // Add the graph group as a child of the main svg
+            var graphWidth = containerWidth - viz.margin.left - viz.margin.right
+            var graphHeight = containerHeight - viz.margin.top - viz.margin.bottom;
+            var graph = viz.svg
+                .append("g")
+                .attr("width", graphWidth)
+                .attr("height", graphHeight)
+                .attr("transform", "translate(" + viz.margin.left + "," + viz.margin.top + ")");
+
             var formatName = this.settings.get('formatName');
             var formatTitle = this.settings.get('formatTitle');
-            var that = this;
 
-            viz.sankey
-                .nodes(data.nodes)
+            var sankey = d3.sankey()
+                .nodeWidth(15)
+                .nodePadding(10)
+                .size([graphWidth, graphHeight]);
+
+            var path = sankey.link();
+
+            sankey.nodes(data.nodes)
                 .links(data.links)
                 .layout(1); 
 
-            var link = viz.svg.append("g").selectAll(".link")
+            var link = graph.append("g").selectAll(".link")
                   .data(data.links)
                   .enter().append("path")
                   .attr("class", "link")
-                  .attr("d", viz.path)
+                  .attr("d", path)
                   .style("stroke-width", function(d) { return Math.max(1, d.dy); })
                   .sort(function(a, b) { return b.dy - a.dy; });
 
@@ -109,7 +132,7 @@ define(function(require, exports, module) {
                   .text(function(d) { 
                       return formatTitle(d); });
 
-            var node = viz.svg.append("g").selectAll(".node")
+            var node = graph.append("g").selectAll(".node")
                   .data(data.nodes)
                   .enter()
                       .append("g")
@@ -121,10 +144,9 @@ define(function(require, exports, module) {
             // Draw the rectangles at each end of the link that
             // correspond to a given node, and then decorate the chart
             // with the names for each node.
-
             node.append("rect")
                   .attr("height", function(d) { return d.dy; })
-                  .attr("width", viz.sankey.nodeWidth())
+                  .attr("width", sankey.nodeWidth())
                   .style("fill", function(d) { d.color = color(d.name.replace(/ .*/, "")); return d.color; })
                   .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
                   .append("title")
@@ -137,8 +159,8 @@ define(function(require, exports, module) {
                   .attr("text-anchor", "end")
                   .attr("transform", null)
                   .text(function(d) { return formatName(d.name); })
-                  .filter(function(d) { return d.x < viz.width / 2; })
-                  .attr("x", 6 + viz.sankey.nodeWidth())
+                  .filter(function(d) { return d.x < graphWidth / 2; })
+                  .attr("x", 6 + sankey.nodeWidth())
                   .attr("text-anchor", "start");
 
             // This view publishes the 'click:link' event that
@@ -148,7 +170,6 @@ define(function(require, exports, module) {
             // This allows us to accept events from the visualization
             // library and provide them consistently to other Splunk
             // views.
-
             var format_event_data = function(e) {
                 return { 
                     source: e.source.name, 
@@ -167,7 +188,6 @@ define(function(require, exports, module) {
         // new data is available, and triggers the actual rendering of
         // the visualization above.  The data passed here corresponds
         // to the basic format requested by the view.
-
         formatData: function(data) {
             var nodeList = _.uniq(_.pluck(data, 0).concat(_.pluck(data, 1)));
 
