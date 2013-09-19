@@ -27,17 +27,18 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data) {
-        
+
+            var fields = _.pluck(this.resultsModel.data().fields, "name");
             this.$el.html('');
             this.$el.append(
                 '<h5>Fields</h5>'+
-                '<pre>' + this.resultsModel.data().fields + '</pre>'+
+                '<pre>' + fields + '</pre>'+
                 '<h5>Results (may be truncated)</h5>'+
                 '<pre>' + JSON.stringify(data, undefined, 2) + '</pre>');
         },
 
         getData: function(){
-            return this.resultsModel.data().rows;
+            return this.resultsModel.data().results;
         }
     });
     return ResultsViewer;

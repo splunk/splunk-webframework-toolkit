@@ -4,10 +4,6 @@ require.config({
             deps: [],
             exports: "d3"
         },
-        /*"wftoolkit/contrib/underscore-nest/underscore.nest": {
-            deps: ['underscore'],
-            exports: "window.nest"
-        }*/
     }
 });
 
@@ -16,19 +12,17 @@ define(function(require, exports, module) {
     var _ = require('underscore');
     var nester = require("wftoolkit/contrib/underscore-nest/underscore.nest");
     var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
-    var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
-
-    
+    var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");  
 
     require("css!wftoolkit/sunburst.css");
 
     var Sunburst = SimpleSplunkView.extend({
 
-        className: "splunk-toolkit-sunburst", // doesn't matter what this is called
+        className: "splunk-toolkit-sunburst", 
 
         options: {
-            mychartid: "search1",   // your MANAGER ID
-            data: "preview",  // Results type
+            managerid: null,  
+            data: "preview", 
 
             // default values
             nameField: "sourcetype",
@@ -47,18 +41,40 @@ define(function(require, exports, module) {
                 }
             });
 
-            this.svg_id = this.id + '_svg';
-            this.width = 500;
-            this.height = this.width;
-
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
+
+            // TODO: enable push
+            // TODO: wire up changes
+
+            // Set up resize callback. The first argument is a this
+            // pointer which gets passed into the callback event
+            $(window).resize(this, _.debounce(this._handleResize, 20));
+        },
+
+        _handleResize: function(e){
+            
+            // e.data is the this pointer passed to the callback.
+            // here it refers to this object and we call render()
+            e.data.render();
         },
 
         createView: function() {
-            this.$el.html('');
-            $("<div id="+this.id+"_sunburst class=SunBurstContainer>").appendTo(this.el);
-        	return true;
-	    },
+            // Here we wet up the initial view layout
+            var margin = {top: 15, right: 15, bottom: 15, left: 15};
+            var availableWidth = parseInt(this.settings.get("width") || this.$el.width());
+            var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
+
+            this.$el.html("");
+
+            var svg = d3.select(this.el)
+                .append("svg")
+                .attr("width", availableWidth)
+                .attr("height", availableHeight)
+                .attr("pointer-events", "all")
+
+            // The returned object gets passed to updateView as viz
+            return { container: this.$el, svg: svg, margin: margin};
+        },
 
         // making the data look how we want it to for updateView to do its job
         formatData: function(data) {
@@ -77,9 +93,30 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data) {
-            var width = 960,
-                height = 700,
-                radius = Math.min(width, height) / 2;
+            var that = this;
+            var containerHeight = this.$el.height();
+            var containerWidth = this.$el.width(); 
+
+             // Clear svg
+            var svg = $(viz.svg[0]);
+            svg.empty();
+            svg.height(containerHeight);
+            svg.width(containerWidth);
+
+            // Add the graph group as a child of the main svg
+            var graphWidth = containerWidth - viz.margin.left - viz.margin.right
+            var graphHeight = containerHeight - viz.margin.top - viz.margin.bottom;
+            var graph = viz.svg
+                .append("g")
+                .attr("width", graphWidth)
+                .attr("height", graphHeight)
+                .attr("transform", "translate("  
+                        + ((graphWidth/2) + viz.margin.left ) + ","  
+                        + ((graphHeight/2) + viz.margin.top ) + ")");
+
+            var radius = Math.min(graphWidth, graphHeight) / 2;
+            
+            var color = d3.scale.category20c();
 
             var x = d3.scale.linear()
                 .range([0, 2 * Math.PI]);
@@ -87,16 +124,8 @@ define(function(require, exports, module) {
             var y = d3.scale.linear()
                 .range([0, radius]);
 
-            var color = d3.scale.category20c();
-
-            var svg = d3.select("#"+this.id).append("svg")
-                .attr("width", width)
-                .attr("height", height)
-                .append("g")
-                .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
-
             var partition = d3.layout.partition()
-                .value(function(d) { return d.max_size_kb; });
+                .value(function(d) { return d.size; });
 
             var arc = d3.svg.arc()
                 .startAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x))); })
@@ -106,7 +135,7 @@ define(function(require, exports, module) {
 
             var root = data.results;
 
-            var g = svg.selectAll("g")
+            var g = graph.selectAll("g")
                 .data(partition.nodes(root))
                 .enter().append("g");
 
@@ -143,8 +172,6 @@ define(function(require, exports, module) {
                   });
             }
 
-            d3.select(self.frameElement).style("height", height + "px");
-
             // Interpolate the scales!
             function arcTween(d) {
               var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
@@ -161,7 +188,7 @@ define(function(require, exports, module) {
               return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
             }
                     
-            }
+        }
     });
     return Sunburst;
 });

@@ -9,6 +9,7 @@
 {{block.super}}
 <style type="text/css">
 .splunk-toolkit-sunburst{
+  height: 700px;
   margin: 10px;
   padding: 3px;
 }
@@ -28,7 +29,7 @@
 {% block managers %}
 
   {% searchmanager id="search1"
-    search='index=_internal sourcetype=splunkd metrics group=queue | fields name max_size_kb | head 50 | table name max_size_kb'
+    search='index=_internal sourcetype=splunkd metrics group=queue | fields name max_size_kb | rename max_size_kb as size | head 50 | table name size'
   %}
 
 {% endblock managers %}
