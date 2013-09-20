@@ -1,21 +1,21 @@
-.scSunBurst path {
+.splunk-toolkit-sunburst path {
     stroke: #8D8C8C;
     stroke-width: 1;
     cursor: pointer;
 }
 
-.scSunBurst text {
+.splunk-toolkit-sunburst text {
     font: 11px sans-serif;
     cursor: pointer;
     fill: #3F3F3F !important;
 }
 
-.scSunBurst p#intro {
+.splunk-toolkit-sunburst p#intro {
     text-align: center;
     margin: 1em 0;
 }
 
-.scSunBurst #breadcrumbs { 
+.splunk-toolkit-sunburst #breadcrumbs { 
     display: none; 
 }
 

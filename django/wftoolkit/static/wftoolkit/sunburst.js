@@ -81,9 +81,7 @@ define(function(require, exports, module) {
             var unicode = function(d) {return d;}
             var field_list = _.without(_.pluck(this.resultsModel.data().fields, 'name'), 'name');
             var dataresults = nester.nest(data, field_list)
-            dataresults['name']=("flare")
-
-            // alert(field_list)
+           // dataresults['name']=("flare")
 
             data = {
                 'results': dataresults,

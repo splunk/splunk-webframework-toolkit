@@ -10,8 +10,6 @@
 <style type="text/css">
 .splunk-toolkit-sunburst{
   height: 700px;
-  margin: 10px;
-  padding: 3px;
 }
 </style>
 {% endblock css %}
@@ -29,7 +27,7 @@
 {% block managers %}
 
   {% searchmanager id="search1"
-    search='index=_internal sourcetype=splunkd metrics group=queue | fields name max_size_kb | rename max_size_kb as size | head 50 | table name size'
+    search='| inputlookup faa.demo.csv | stats count by AirlineDescription | rename count as size | rename AirlineDescription as name'
   %}
 
 {% endblock managers %}
