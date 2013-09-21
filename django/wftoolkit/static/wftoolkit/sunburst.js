@@ -16,6 +16,8 @@ define(function(require, exports, module) {
 
     require("css!wftoolkit/sunburst.css");
 
+    window.nester = nester;
+
     var Sunburst = SimpleSplunkView.extend({
 
         className: "splunk-toolkit-sunburst", 
@@ -25,9 +27,9 @@ define(function(require, exports, module) {
             data: "preview", 
 
             // default values
-            nameField: "sourcetype",
-            valueField: "count",
-            groupingField: "sourcetype"
+            chartTitle: null,
+            sizeField: "count",
+            groupingFields: null
         },
 
         output_mode: "json",
@@ -70,7 +72,7 @@ define(function(require, exports, module) {
                 .append("svg")
                 .attr("width", availableWidth)
                 .attr("height", availableHeight)
-                .attr("pointer-events", "all")
+                .attr("pointer-events", "all");
 
             // The returned object gets passed to updateView as viz
             return { container: this.$el, svg: svg, margin: margin};
@@ -78,14 +80,26 @@ define(function(require, exports, module) {
 
         // making the data look how we want it to for updateView to do its job
         formatData: function(data) {
-            var unicode = function(d) {return d;}
-            var field_list = _.without(_.pluck(this.resultsModel.data().fields, 'name'), 'name');
-            var dataresults = nester.nest(data, field_list)
-           // dataresults['name']=("flare")
-
+            var valueField = this.settings.get('sizeField');
+            var fieldList = this.settings.get("groupingFields");
+            if(fieldList){
+                fieldList = fieldList.split(/[ ,]+/);
+            }
+            else{
+                fieldList = _.pluck(this.resultsModel.data().fields, 'name');
+            }
+            var dataResults = nester.nest(data, fieldList, function(children) {
+                var total = 0;
+                _.each(children, function(child){
+                    var size = child[valueField];
+                    total += size;
+                })
+                return total;
+            });
+            dataResults['name'] = this.settings.get("chartTitle") || "";
             data = {
-                'results': dataresults,
-                'fields': field_list
+                'results': dataResults,
+                'fields': fieldList
             }
             return data;
         },
@@ -123,7 +137,7 @@ define(function(require, exports, module) {
                 .range([0, radius]);
 
             var partition = d3.layout.partition()
-                .value(function(d) { return d.size; });
+                .value(function(d) { return d['value']; });
 
             var arc = d3.svg.arc()
                 .startAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x))); })
@@ -143,7 +157,12 @@ define(function(require, exports, module) {
                 .on("click", click);
 
             var text = g.append("text")
-                .attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
+                .attr("transform", function(d) {
+                    var rot =  computeTextRotation(d);
+                    var scale = '1';
+                    //if(rot>90 && rot< 270) scale='-1';
+                    return "rotate(" + computeTextRotation(d) + ") scale("+scale+" 1)"; 
+                })
                 .attr("x", function(d) { return y(d.y); })
                 .attr("dx", "6") // margin
                 .attr("dy", ".35em") // vertical-align

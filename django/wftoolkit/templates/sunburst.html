@@ -21,13 +21,16 @@
     {% sunburst 
         id="example-sunburst"
         managerid="search1"
+        sizeField="size"
+        chartTitle="Cancelation Causes"
+        groupingFields="cancellation AirlineDescription"
     %}
   {% endblock example %}
 
 {% block managers %}
 
   {% searchmanager id="search1"
-    search='| inputlookup faa.demo.csv | stats count by AirlineDescription | rename count as size | rename AirlineDescription as name'
+    search='| inputlookup faa.demo.csv | search cancellation=* | stats count by cancellation, AirlineDescription | rename count as size'
   %}
 
 {% endblock managers %}
