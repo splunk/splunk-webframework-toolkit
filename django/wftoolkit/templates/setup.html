@@ -7,6 +7,15 @@
 {% block css %}
     <!-- For setup view styles -->
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkdj/setup.css" />
+    <style>
+        /* Left-align the setup view for consistency with other examples,
+         * overriding the default setup view styles */
+        .splunkdj-setup-form {
+            max-width: inherit;
+            _width: inherit;
+            margin: 30px;
+        }
+    </style>
     <!-- For pretty-printed code samples -->
     <link rel="stylesheet" href="{{STATIC_URL}}wftoolkit/prettify.css"/>
 {% endblock css %}
