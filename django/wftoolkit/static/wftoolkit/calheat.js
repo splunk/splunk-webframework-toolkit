@@ -93,7 +93,7 @@ require.config({
             options: {} // the default for custom heatmap options.
         },
 
-        output_mode: "json",
+        output_mode: "json_rows",
 
         initialize: function() {
             _.extend(this.options, {
@@ -118,38 +118,31 @@ require.config({
         // in this case, it looks like this:
         // {timestamp1: count, timestamp2: count, ... }
         formatData: function(data) {
-            var myfields = this.resultsModel.data().fields
+            var rawFields = this.resultsModel.data().fields;
             var domain = this.settings.get('domain');
             var subdomain = this.settings.get('subdomain');
-
-            for (var i=0; i<myfields.length; i++) {
-                myfields[i] = _.pick(myfields[i], 'name');
-                myfields[i] = _.values(myfields[i]);
-            }
-            myfields = _.filter(_.flatten(myfields), function(d){return d[0] !== "_" });
-            console.log(myfields)
-            var myresults = this.resultsModel.data().results
-            console.log(myresults)
-
             
+            var myfields = _.filter(rawFields, function(d){return d[0] !== "_" });
+            var objects = _.map(data, function(row) {
+                return _.object(rawFields, row);
+            });
 
-            if (data && data[0] != null) {
+            if (objects && objects[0] != null) {
                 var formattedData = {};
 
-                for(var i = 0; i < myresults.length; i++) {
+                for(var i = 0; i < objects.length; i++) {
                     var summed = 0;
-                    var time = new Date(myresults[i]._time)
+                    var time = new Date(objects[i]._time)
                     time = time.valueOf() / 1000
                     for(var j=0; j<myfields.length; j++){
-                        if (!isNaN(parseInt(myresults[i][myfields[j]]))) {
-                            summed += parseInt(myresults[i][myfields[j]]);
+                        if (!isNaN(parseInt(objects[i][myfields[j]]))) {
+                            summed += parseInt(objects[i][myfields[j]]);
                         }
                     formattedData[time] = summed;
                     }
                 }
 
-                var startOption = this.settings.get('start')
-                var start
+                var startOption = this.settings.get('start');
 
                 if (startOption === 'earliest'){
                     var d = 0;

@@ -109,13 +109,10 @@ define(function(require, exports, module) {
             gravity: 0.2,
             linkDistance: 15,
             swoop: 'false',
-            isStatic: 'true',
-            firstField: 'myfields[0].name',
-            secondField: 'myfields[1].name',
-            groupKey: 'myfields[2].name'
+            isStatic: 'true'
         },
 
-        output_mode: "json",
+        output_mode: "json_rows",
 
         initialize: function() {
             _.extend(this.options, {
@@ -154,11 +151,7 @@ define(function(require, exports, module) {
             names = []
             groupNames = {}
             groupCount = 0
-            output = {'nodes': [], 'links': []} 
-            var myfields = this.resultsModel.data().fields;
-            var first = myfields[0].name; 
-            var second = myfields[1].name; 
-            var group = myfields[2].name; 
+            output = {'nodes': [], 'links': []};
             
             var grouplookup = [];
             var groupFlag = false;
@@ -166,9 +159,9 @@ define(function(require, exports, module) {
             var nodes = {};
             var links = [];
             data.forEach(function(link) {
-                var sourceName = link[first];
-                var targetName = link[second];
-                var groupName = link[group];
+                var sourceName = link[0];
+                var targetName = link[1];
+                var groupName = link[2];
                 var newLink = {};
                 newLink.source = nodes[sourceName] || 
                     (nodes[sourceName] = {name: sourceName, group: groupName});
@@ -179,7 +172,6 @@ define(function(require, exports, module) {
             });
 
             return {nodes: d3.values(nodes), links: links};
-            
         },
 
         updateView: function(viz, data){

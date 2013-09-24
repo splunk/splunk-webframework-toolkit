@@ -32,7 +32,7 @@ define(function(require, exports, module) {
             groupingFields: null
         },
 
-        output_mode: "json",
+        output_mode: "json_rows",
 
         initialize: function() {
             _.extend(this.options, {
@@ -81,14 +81,18 @@ define(function(require, exports, module) {
         // making the data look how we want it to for updateView to do its job
         formatData: function(data) {
             var valueField = this.settings.get('sizeField');
+            var rawFields = this.resultsModel.data().fields;
             var fieldList = this.settings.get("groupingFields");
             if(fieldList){
                 fieldList = fieldList.split(/[ ,]+/);
             }
             else{
-                fieldList = _.pluck(this.resultsModel.data().fields, 'name');
+                fieldList = this.resultsModel.data().fields;
             }
-            var dataResults = nester.nest(data, fieldList, function(children) {
+            var objects = _.map(data, function(row) {
+                return _.object(rawFields, row);
+            });
+            var dataResults = nester.nest(objects, fieldList, function(children) {
                 var total = 0;
                 _.each(children, function(child){
                     var size = child[valueField];

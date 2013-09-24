@@ -41,7 +41,7 @@ define(function(require, exports, module) {
             data: "preview",  // Results type
         },
 
-        output_mode: "json",
+        output_mode: "json_rows",
 
         initialize: function() {
             _.extend(this.options, {
@@ -58,14 +58,15 @@ define(function(require, exports, module) {
 
         // making the data look how we want it to for updateView to do its job
         formatData: function(data) {
-            var field_list = _.pluck(this.resultsModel.data().fields, 'name');
-            var datas;
+            var fields = this.resultsModel.data().fields;
+            var objects = _.map(data, function(row) {
+                return _.object(fields, row);
+            });
 
-            datas = {
-                'results': data,
-                'fields': field_list
+            return {
+                'results': objects,
+                'fields': fields
             }
-            return datas;
         },
 
         updateView: function(viz, data) {

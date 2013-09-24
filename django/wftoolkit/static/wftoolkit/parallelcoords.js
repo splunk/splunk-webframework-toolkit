@@ -42,7 +42,7 @@ define(function(require, exports, module) {
             options: {} // the default for custom heatmap options.
         },
 
-        output_mode: "json",
+        output_mode: "json_rows",
 
         initialize: function() {
             _.extend(this.options, {
@@ -67,20 +67,16 @@ define(function(require, exports, module) {
 
             // Decide what fields we want
             // TODO: this should be specifialbe
-            var field_list = _.pluck(this.resultsModel.data().fields, 'name');
-            field_list = _.filter(_.flatten(field_list), function(d){return d[0] !== "_" });
-
-            // Filter data by the desired fields
-            // TODO: this is including some demo data.
-            var filteredData = _.map(data, function(d){
-                return _.pick(d, field_list);
+            var fields = _.filter(this.resultsModel.data().fields, function(d){return d[0] !== "_" });
+            var objects = _.map(data, function(row) {
+                return _.object(fields, row);
             });
 
             data = {
-                'results': filteredData,
-                'fields': field_list
+                'results': objects,
+                'fields': fields
             }
-            // alert(filteredData.length)
+            
             return data;
         },
 

@@ -27,8 +27,16 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data) {
-
-            var fields = _.pluck(this.resultsModel.data().fields, "name");
+            var rawFields = this.resultsModel.data().fields;
+            
+            var fields = rawFields;
+            if (!rawFields || rawFields.length === 0) {
+                fields = _.keys(data[0]);
+            }
+            else if (rawFields && _.isObject(rawFields[0])) {
+                fields = _.pluck(this.resultsModel.data().fields, "name");   
+            }
+            
             this.$el.html('');
             this.$el.append(
                 '<h5>Fields</h5>'+
