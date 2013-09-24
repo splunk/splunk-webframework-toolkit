@@ -25,7 +25,7 @@
 {% block managers %}
 
   {%  searchmanager id="search1"
-      search='| inputlookup faa.demo.csv |head 200 | stats count by OriginCityName, DestCityName, DestStateName | sort count'
+      search='| inputlookup faa.demo.csv | search OriginCityName=* DestCityName=* DestStateName=* AND NOT OriginCityName="" AND NOT DestCityName="" AND NOT DestStateName="" | head 200 | stats count by OriginCityName, DestCityName, DestStateName | sort count'
   %}
 
 {% endblock managers %}
