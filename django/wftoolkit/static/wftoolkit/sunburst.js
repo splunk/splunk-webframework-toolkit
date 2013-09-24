@@ -28,7 +28,7 @@ define(function(require, exports, module) {
 
             // default values
             chartTitle: null,
-            sizeField: "count",
+            sizeField: null,
             groupingFields: null
         },
 
@@ -48,6 +48,9 @@ define(function(require, exports, module) {
             // TODO: enable push
             // TODO: wire up changes
 
+            this.settings.on("change:sizeField", this._onDataChanged, this);
+            this.settings.on("change:groupingFields", this._onDataChanged, this);
+
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event
             $(window).resize(this, _.debounce(this._handleResize, 20));
@@ -62,7 +65,7 @@ define(function(require, exports, module) {
 
         createView: function() {
             // Here we wet up the initial view layout
-            var margin = {top: 15, right: 15, bottom: 15, left: 15};
+            var margin = {top: 30, right: 30, bottom: 30, left: 30};
             var availableWidth = parseInt(this.settings.get("width") || this.$el.width());
             var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
 
@@ -95,7 +98,7 @@ define(function(require, exports, module) {
             var dataResults = nester.nest(objects, fieldList, function(children) {
                 var total = 0;
                 _.each(children, function(child){
-                    var size = child[valueField];
+                    var size = child[valueField] || 1;
                     total += size;
                 })
                 return total;

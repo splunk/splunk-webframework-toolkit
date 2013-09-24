@@ -7,34 +7,86 @@
 
 {% block css %}
 {{block.super}}
-<style type="text/css">
-.splunk-toolkit-sunburst{
-  height: 700px;
-}
-</style>
 {% endblock css %}
 
-  {% block heading %}Sunburst{% endblock heading %}
-  {% block explanation %}Sunburst.{% endblock explanation %}
+    {% block heading %}Sunburst{% endblock heading %}
+    {% block explanation %}Sunburst.{% endblock explanation %}
 
-  {% block example %}
-    {% sunburst 
-        id="example-sunburst"
-        managerid="search1"
-        sizeField="size"
-        chartTitle="Cancelation Causes"
-        groupingFields="cancellation AirlineDescription"
-    %}
-  {% endblock example %}
+    {% block example %}
+        <div class="row" style="height: 500px;">
+            <div class="span9" style="height: 600px; width: 600px;">
+                {% sunburst 
+                    id="example-sunburst"
+                    managerid="search1"
+                    sizeField="count"
+                    chartTitle="Cancelations"
+                    groupingFields="cancellation AirlineDescription"
+                %}
+            </div>
+             <div class="span6">
+                <h5>GroupingFields:</h5>
+                {% multidropdown id="group-dropdown" %}
+                <h5>Size Field:</h5>
+                {% dropdown id="size-dropdown" default="count" %}
+            </div>
+        </div>
+        
+    {% endblock example %}
 
 {% block managers %}
 
-  {% searchmanager id="search1"
-    search='| inputlookup faa.demo.csv | search cancellation=* | stats count by cancellation, AirlineDescription | rename count as size'
-  %}
+    {% searchmanager id="search1"
+        search='| inputlookup faa.demo.csv | search cancellation=* | stats count by cancellation, AirlineDescription '
+    %}
 
 {% endblock managers %}
 
-{% block js %}    
+{% block js %}
+<script type="text/javascript">
+    require([
+        "splunkjs/ready!", 
+        "splunkjs/mvc/utils",
+        "underscore",
+        "jquery",
+        "wftoolkit/sunburst",
+        "splunkjs/mvc/dropdownview",
+        ], 
+        function(
+            mvc, 
+            utils,
+            _, 
+            $,
+            Sunburst,
+            DropdownView
+        ){
+            var sunburst = mvc.Components.getInstance("example-sunburst");
+            var groupdd = mvc.Components.getInstance("group-dropdown");
+            var sizedd = mvc.Components.getInstance("size-dropdown");
 
+            var groupChoices = [
+                                {label: "cancellation", value: "cancellation"},
+                                {label: "AirlineDescription", value: 'AirlineDescription'},
+                            ];
+
+            groupdd.settings.set("choices", groupChoices);
+            groupdd.val(['cancellation', 'AirlineDescription']);
+            groupdd.on("change", function(){
+                sunburst.settings.set("groupingFields", groupdd.val().join(" "));
+            });
+
+            var sizeChoices = [
+                                {label: "count", value: "count"},
+                                {label: "None", value: 'None'}
+                            ];
+            sizedd.settings.set("choices", sizeChoices);
+            sizedd.on("change", function(){
+                if(sizedd.val()==='None'){
+                   sunburst.settings.set("sizeField", null);
+                }
+                else{
+                   sunburst.settings.set("sizeField", sizedd.val());
+                }
+            });
+        });
+</script>   
 {% endblock js %}

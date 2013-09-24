@@ -1,3 +1,8 @@
+.splunk-toolkit-sunburst {
+    height: 100%;
+    width: 100%;
+}
+
 .splunk-toolkit-sunburst path {
     stroke: #8D8C8C;
     stroke-width: 1;
