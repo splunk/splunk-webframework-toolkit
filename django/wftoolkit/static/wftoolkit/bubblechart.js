@@ -35,11 +35,9 @@ define(function(require, exports, module) {
         options: {
             managerid: null,   
             data: "preview", 
-
-            // default values
-            nameField: "sourcetype",
-            valueField: "count",
-            groupingField: "sourcetype"
+            nameField: null,
+            valueField: 'count',
+            groupingField: null
         },
 
         output_mode: "json",
@@ -59,7 +57,9 @@ define(function(require, exports, module) {
             // in the case that any options are changed, it will dynamically update
             // without having to refresh. copy the following line for whichever field
             // you'd like dynamic updating on
+            this.settings.on("change:valueField", this._onDataChanged, this);
             this.settings.on("change:nameField", this._onDataChanged, this);
+            this.settings.on("change:groupingField", this._onDataChanged, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event
@@ -114,7 +114,7 @@ define(function(require, exports, module) {
                     Idx = bubblechart.children.length - 1;
                 }
 
-                bubblechart.children[Idx].children.push({ 'name': collection[i][nameField], 'size': collection[i][valueField] });
+                bubblechart.children[Idx].children.push({ 'name': collection[i][nameField], 'size': collection[i][valueField] || 1 });
             }
             return bubblechart; // this is passed into updateView as 'data'
         },

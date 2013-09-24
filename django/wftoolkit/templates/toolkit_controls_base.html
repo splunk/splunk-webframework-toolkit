@@ -9,7 +9,7 @@
 {% endblock css %}
 
 {% block content %}
-<div class="dashboard-body container-fluid main-section-body">
+<div class="dashboard-body container-fluid main-section-body html">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
             <h2> {% block heading %}Toolkit Component Sample{% endblock heading %} </h2>
@@ -32,7 +32,7 @@
     </div>
 
     <div class="dashboard-row">
-        <div class="dashboard-cell" style="width: 100%;">
+        <div class="dashboard-cell" style="width: 50%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
@@ -44,22 +44,23 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="dashboard-row">
-        <div class="dashboard-cell" style="width: 100%;">
+        <div class="dashboard-cell" style="width: 50%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
                         <h3>Usage</h3>
                     </div>
 
-                    <div class="panel-body">
+                    <div class="panel-body html">
                         {% block options %}<p>Explanation of options</p>{% endblock options %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+   <!--  <div class="dashboard-row">
+        
+    </div> -->
 </div>
 {% endblock content%}
 

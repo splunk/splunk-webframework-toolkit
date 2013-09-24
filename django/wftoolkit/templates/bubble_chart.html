@@ -15,24 +15,100 @@
 {% endblock css %}
 
     {% block heading %}Bubble Chart{% endblock heading %}
-    {% block explanation %}The Bubble Chart visualized magnitude of data optionally grouped by category.{% endblock explanation %}
+    {% block explanation %}The Bubble chart visualizes the magnitude of data values as circular areas. It may be harder to compare one value to anotehr at first glance in a Bubble chart than in a bar chart, but bubble charts are good for giving an overall impression of a large number of inputs in a small space. Data can optionally be grouped an colored by secondary fields to convey more information in the same area.
+    {% endblock explanation %}
 
     {% block example %}
-        {% bubblechart 
-            id="bubble1" 
-            managerid="search1"
-            nameField="OriginCityName"
-            valueField="count"
-            groupingField="OriginState"
-        %}
+        
+                {% bubblechart 
+                    id="bubble1" 
+                    managerid="search1"
+                    valueField="count"
+                    nameField="OriginCityName"
+                    groupingField="OriginState"
+                %}
     {% endblock example %}
+    {% block options%}
+        <p>
+            The Bubble chart can be included by requiring <code>wftoolkit/bubblechart</code> in javascript or using the <code>bubblechart</code> Django tag once <b>wftoolkit</b> is loaded. 
+        </p>
+        <p>
+            The Bubble chart works best with data that has magnitude and is grouped by category. For example, Splunk searches that include a <code>stats count by ...</code> tend to work well. Fields for labeling and grouping data can be specified as describe below.
+        </p>
+        <h4>Options:</h4>
+        <ul>
+            <p><code>managerid</code>: The search manager of the chart.</p>
+
+            <p><code>valueField</code>: The magnitude field in the data. Circles will be sized based on this field. If the field does not exist, circles will be uniform size. Defaults to <b>count</b>. Try it:</p>
+            {% dropdown id="value-dropdown" default="count" %}
+
+            <p><code>nameField</code>: The field used for naming circles. Try it:</p>
+            {% dropdown id="name-dropdown" default="OriginCityName" %}
+
+            <p><code>groupingField</code>: The field used for grouping data. Try it:</p>
+            {% dropdown id="group-dropdown" default="OriginState" %}
+        </ul>
+        
+        
+        
+    {% endblock options%}
 
 {% block managers %}
 
-    {% searchmanager id="search1" search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=30' %}
+    {% searchmanager id="search1" search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState cancellation | sort - count' %}
 
 {% endblock managers %}
 
-{% block js %}    
+{% block js %}
+<script type="text/javascript">
+    require([
+        "splunkjs/ready!", 
+        "splunkjs/mvc/utils",
+        "underscore",
+        "jquery",
+        "wftoolkit/bubblechart",
+        "splunkjs/mvc/dropdownview",
+        ], 
+        function(
+            mvc, 
+            utils,
+            _, 
+            $,
+            Bubbles,
+            DropdownView
+        ){
+            var bubbles = mvc.Components.getInstance("bubble1");
+            var valuedd = mvc.Components.getInstance("value-dropdown");
+            var groupdd = mvc.Components.getInstance("group-dropdown");
+            var namedd = mvc.Components.getInstance("name-dropdown");
+
+            var valueChoices = [
+                                {label: "Count", value: "count"},
+                                {label: "Bogus Value", value: "bogus"},
+                            ];
+            valuedd.settings.set("choices", valueChoices);
+            valuedd.on("change", function(){
+                bubbles.settings.set("valueField", valuedd.val());
+            });
+
+            var groupChoices = [
+                                {label: "Origin City", value: "OriginCityName"},
+                                {label: "Origin State", value: "OriginState"},
+                                {label: "Cancellation Cause", value: "cancellation"}
+                            ];
+
+            groupdd.settings.set("choices", groupChoices);
+            groupdd.on("change", function(){
+                bubbles.settings.set("groupingField", groupdd.val());
+            });
+
+            var nameChoices = groupChoices;
+            namedd.settings.set("choices", nameChoices);
+            namedd.on("change", function(){
+                bubbles.settings.set("nameField", namedd.val());
+            });
+            
+        });
+</script>     
 
 {% endblock js %}
