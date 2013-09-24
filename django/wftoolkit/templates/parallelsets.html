@@ -9,27 +9,27 @@
 {{block.super}}
 <style type="text/css">
 .splunk-toolkit-parellel-sets{
-  margin: 10px;
-  padding: 3px;
+    height: 500px;
+    width: 750px;  
 }
 </style>
 {% endblock css %}
 
-  {% block heading %}Parallel Sets{% endblock heading %}
-  {% block explanation %}Parallel Sets{% endblock explanation %}
+    {% block heading %}Parallel Sets{% endblock heading %}
+    {% block explanation %}Parallel Sets{% endblock explanation %}
 
-  {% block example %}
-    {%  parallelsets
-        id="example-sets"
-        managerid="search1"
-    %}
-  {% endblock example %}
+    {% block example %}
+        {%  parallelsets
+                id="example-sets"
+                managerid="search1"
+        %}
+    {% endblock example %}
 
 {% block managers %}
 
-  {% searchmanager id="search1"
-    search='| inputlookup faa.demo.csv | search OriginCityName="*, CA" DestState=* | head 50 | table OriginCityName, DestState'
-  %}
+    {% searchmanager id="search1"
+        search='| inputlookup faa.demo.csv | search OriginCityName="*, CA" DestState=* | head 50 | table OriginCityName, DestState'
+    %}
 
 {% endblock managers %}
 

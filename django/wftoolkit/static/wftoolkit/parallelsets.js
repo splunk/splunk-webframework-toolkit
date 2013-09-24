@@ -37,8 +37,8 @@ define(function(require, exports, module) {
         className: "splunk-toolkit-parellel-sets",
 
         options: {
-            managerid: "search1",   // your MANAGER ID
-            data: "preview",  // Results type
+            managerid: "search1",   
+            data: "preview",  
         },
 
         output_mode: "json_rows",
@@ -50,10 +50,35 @@ define(function(require, exports, module) {
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
             this.settings.enablePush("value");
+
+            // Set up resize callback. The first argument is a this
+            // pointer which gets passed into the callback event
+            $(window).resize(this, _.debounce(this._handleResize, 20));
+        },
+
+        _handleResize: function(e){
+            
+            // e.data is the this pointer passed to the callback.
+            // here it refers to this object and we call render()
+            e.data.render();
         },
 
         createView: function() { 
-            return true
+            // Here we wet up the initial view layout
+            var margin = {top: 10, right: 10, bottom: 10, left: 10};
+            var availableWidth = parseInt(this.settings.get("width") || this.$el.width());
+            var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
+
+            this.$el.html("");
+
+            var svg = d3.select(this.el)
+                .append("svg")
+                .attr("width", availableWidth)
+                .attr("height", availableHeight)
+                .attr("pointer-events", "all")
+
+            // The returned object gets passed to updateView as viz
+            return { container: this.$el, svg: svg, margin: margin};
         },
 
         // making the data look how we want it to for updateView to do its job
@@ -70,25 +95,36 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data) {
-            this.$el.html('');
-            // we can set viz ourselves since we're not using createView
-            viz = $("<div id='"+this.id+"_scParallelSets' class=scParallelSetsContainer>").appendTo(this.el);
-            this.div_id = '#'+viz.attr('id');
-            this.div = d3.select(this.div_id);
-            this.svg_id = '#'+this.id + '_svg';
+            var that = this;
+            var containerHeight = this.$el.height();
+            var containerWidth = this.$el.width();
+
+            // Clear svg
+            var svg = $(viz.svg[0]);
+            svg.empty();
+            svg.height(containerHeight);
+            svg.width(containerWidth);
+
+            // Add the graph group as a child of the main svg
+            var graphWidth = containerWidth - viz.margin.left - viz.margin.right
+            var graphHeight = containerHeight - viz.margin.top - viz.margin.bottom;
+            var graph = viz.svg
+                .append("g")
+                .attr("width", graphWidth)
+                .attr("height", graphHeight)
+                .attr("transform", "translate(" + viz.margin.left + "," + viz.margin.top + ")");
+            
             var fields = data.fields;
 
-            d3.select(this.svg_id).remove();
-            this.chart = d3p().dimensions(fields);
-            this.vis = this.div.append("svg")
-                .attr("width", this.chart.width())
-                .attr("height", this.chart.height())
-                .attr("id", this.svg_id);
+            this.parset = d3p()
+                .dimensions(fields)
+                .width(graphWidth)
+                .height(graphHeight);
 
-            this.vis.datum(data.results).call(this.chart);
+            graph.datum(data.results).call(this.parset);
 
-            t = this.vis.transition().duration(500);
-            t.call(this.chart.tension(0.5));
+            t = graph.transition().duration(500);
+            t.call(this.parset.tension(0.5));
         }
     });
     return parallelSets;
