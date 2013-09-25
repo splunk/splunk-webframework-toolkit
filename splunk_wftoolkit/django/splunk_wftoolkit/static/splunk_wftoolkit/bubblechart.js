@@ -230,7 +230,13 @@ define(function(require, exports, module) {
             // is set to 'value' (a token in bubbles django), this will change the drilldown
             // search.
             node.on('click', function(e) { 
-                that.settings.set("value", that.settings.get("nameField") +'="'+e.className+'"')
+                var clickEvent = {
+                    name: e.className,
+                    grouping: e.packageName,
+                    value: e.value
+                };
+                that.settings.set("value", e.className);
+                that.trigger("click", clickEvent);
             });
         }
     });

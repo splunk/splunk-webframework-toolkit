@@ -75,6 +75,29 @@
                 <td>{% dropdown id="group-dropdown" default="OriginState" %}</td>
             </tr>
         </table>
+        <h4>Events:</h4>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <td>Event</td>
+                <td>Properties</td>
+            </tr>
+            <tr>
+                <td><code>click</code></td>
+                <td>
+                    <ul>
+                        <li>
+                            <code>name</code>: the name of the clicked bubble
+                        </li>
+                        <li>
+                            <code>grouping</code>: the group name of the clicked bubble
+                        </li>
+                        <li>
+                            <code>value</code>: the size value of the clicked bubble
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
     {% endblock usage%}
 {% block codesample %}
     require([ 
@@ -88,6 +111,9 @@
             'managerid' : 'example-search',
             'el' : $('#example-chart')
         }).render();
+        bubbles.on('click', function(e) {
+            alert('Clicked on: ' + e.name);
+        });
     });
 {% endblock codesample %}
 
@@ -146,7 +172,6 @@
             namedd.on("change", function(){
                 bubbles.settings.set("nameField", namedd.val());
             });
-            
         });
 </script>     
 
