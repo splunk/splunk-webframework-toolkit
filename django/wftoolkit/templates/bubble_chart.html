@@ -16,17 +16,16 @@
 
     {% block heading %}Bubble Chart{% endblock heading %}
     {% block example %}
-        
-                {% bubblechart 
-                    id="bubble1" 
-                    managerid="search1"
-                    valueField="count"
-                    nameField="OriginCityName"
-                    groupingField="OriginState"
-                %}
+        {% bubblechart 
+            id="bubble1" 
+            managerid="search1"
+            valueField="count"
+            nameField="OriginCityName"
+            groupingField="OriginState"
+        %}
     {% endblock example %}
     {% block usage%}
-    <p>The Bubble chart visualizes the magnitude of data values as circular areas. It may be harder to compare one value to another at first glance in a Bubble chart than in a bar chart, but bubble charts are good for giving an overall impression of a large number of inputs in a small space. Data can optionally be grouped an colored by secondary fields to convey more information in the same area.</p>
+        <p>The Bubble chart visualizes the magnitude of data values as circular areas. It may be harder to compare one value to another at first glance in a Bubble chart than in a bar chart, but bubble charts are good for giving an overall impression of a large number of inputs in a small space. Data can optionally be grouped an colored by secondary fields to convey more information in the same area.</p>
 
         <ul>
             <li>require path: <code>wftoolkit/bubblechart</code></li>
@@ -57,7 +56,7 @@
             <tr>
                 <td><code>valueField</code></td>
                 <td><b>string</b></td>
-                <td>"count"</td>
+                <td><b>null</b>(defaults to all)</td>
                 <td>The magnitude field in the data. Circles will be sized based on this field. If the field does not exist, circles will be uniform size</td>
                 <td>{% dropdown id="value-dropdown" default="count" %}</td>
             </tr>
@@ -76,9 +75,6 @@
                 <td>{% dropdown id="group-dropdown" default="OriginState" %}</td>
             </tr>
         </table>
-        
-        
-        
     {% endblock usage%}
 {% block codesample %}
     require([ 

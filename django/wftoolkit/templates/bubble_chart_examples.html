@@ -55,7 +55,7 @@
 
     {% searchmanager id="search1" search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name' %}
 
-    {% searchmanager id="example-search" search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=30' %}
+    {% searchmanager id="example-search" search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=20' %}
     {% searchmanager id="fieldSearch" search='| inputlookup faa.demo.csv | head 5000 | fieldsummary | where count>20' rf="*" %}
 
 {% endblock managers %}
@@ -72,6 +72,7 @@
         "splunkjs/mvc/dropdownview",
         "wftoolkit/sankeychart",
         "wftoolkit/forcedirected",
+        "wftoolkit/sunburst",
         ], 
         function(
             mvc, 
@@ -81,11 +82,14 @@
             BubbleChart,
             DropdownView,
             SankeyChart,
-            ForceDirected
+            ForceDirected,
+            Sunburst
         ){
-            var forcegraph = new ForceDirected({
+            var sunburst = new Sunburst({
                 'id' : 'example',
                 'managerid' : 'example-search',
+                'groupingFields': 'OriginState OriginCityName',
+                'sizeField': 'count',
                 'el' : $('#example-chart')
             }).render();
 
