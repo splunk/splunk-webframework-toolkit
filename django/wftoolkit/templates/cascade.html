@@ -79,9 +79,12 @@
 {% block managers %}        
     {% searchmanager id="indexsearch" search="| eventcount summarize=false index=* OR index=_*" cache=True preview=False %}
     
-    {% searchmanager id="sourcetypesearch" search="| metadata index=$index$ OR index=_$index$ type=sourcetypes" cache=True preview=True autostart=False %}
+    {% searchmanager id="sourcetypesearch" 
+        search="| metadata index=$index$ OR index=_$index$ type=sourcetypes"|token_safe 
+        cache=True preview=True autostart=False %}
     
-    {% searchmanager id="simplesearch1" search="index=$index$ sourcetype=$sourcetype$ earliest=-5m | stats count" 
+    {% searchmanager id="simplesearch1" 
+        search="index=$index$ sourcetype=$sourcetype$ earliest=-5m | stats count"|token_safe 
         preview=True cache=60 status_buckets=300 autostart=False %}
 {% endblock managers %}
 
@@ -93,6 +96,7 @@
         var sourcetypes = mvc.Components.getInstance("sourcetypes");
         var simpleSearch1 = mvc.Components.getInstance("simplesearch1");
         var sourcetypeSearch = mvc.Components.getInstance("sourcetypesearch");
+        var tokens = mvc.Components.getInstance("default");
         
         // Add "all" choices to
         indexes.settings.set("choices", [
@@ -109,14 +113,14 @@
             }
             
             // Set the tokens for both managers
-            sourcetypeSearch.query.set("index", indexes.val());
+            tokens.set("index", indexes.val());
             
             // Start the searches
             sourcetypeSearch.startSearch();
         });
         
         $("#searchbutton").on("click", function() {
-            simpleSearch1.query.set({
+            tokens.set({
                 index: indexes.val(),
                 sourcetype: sourcetypes.val()
             });

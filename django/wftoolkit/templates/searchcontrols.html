@@ -96,7 +96,7 @@ var searchbar = splunkjs.mvc.Components.getInstance("example-search-bar");
 var timerange = searchbar.timerange;
 
 searchbar.on("change", function() {
-    manager.query.set("search", searchbar.val()); 
+    manager.set("search", searchbar.val()); 
 });
 
 timerange.on("change", function() {
@@ -356,7 +356,7 @@ require(["splunkjs/ready!"], function(mvc) {
         var searchcontrols = splunkjs.mvc.Components.getInstance("example-searchcontrols");
         
         searchbar.on("change", function() {
-            manager.query.set("search", searchbar.val()); 
+            manager.set("search", searchbar.val()); 
         });
     })();
 
@@ -368,7 +368,7 @@ require(["splunkjs/ready!"], function(mvc) {
         var timerange = searchbar.timerange;
 
         searchbar.on("change", function() {
-            manager.query.set("search", searchbar.val()); 
+            manager.set("search", searchbar.val()); 
         });
 
         timerange.on("change", function() {

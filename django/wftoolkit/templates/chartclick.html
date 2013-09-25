@@ -77,10 +77,12 @@
 {% endblock content%}
 
 {% block managers %}
-    {% searchmanager id="simplesearch1" search="| metadata type=sourcetypes index=_internal | rename totalCount as count | table sourcetype count" 
+    {% searchmanager id="simplesearch1" 
+        search="| metadata type=sourcetypes index=_internal | rename totalCount as count | table sourcetype count"
         preview=True cache=True autostart=True %}
         
-    {% searchmanager id="detailsearch" search="| metadata type=sourcetypes index=_internal | search sourcetype=$sourcetype$"
+    {% searchmanager id="detailsearch" 
+        search="| metadata type=sourcetypes index=_internal | search sourcetype=$sourcetype$"|token_safe
         preview=True cache=True autostart=False %}
 {% endblock managers %}
 
@@ -92,11 +94,12 @@
         var chart = mvc.Components.getInstance("sourcetype-chart");
         var single = mvc.Components.getInstance("detail-single");
         var detailSearch = mvc.Components.getInstance("detailsearch");
+        var tokens = mvc.Components.getInstance("default");
         
         chart.on("click:chart", function(e) {
             e.preventDefault();
             single.settings.set("beforeLabel", e.value + ":");
-            detailSearch.query.set("sourcetype", e.value);
+            tokens.set("sourcetype", e.value);
             detailSearch.startSearch();
         });
     });

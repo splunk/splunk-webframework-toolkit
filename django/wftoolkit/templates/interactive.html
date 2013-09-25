@@ -74,7 +74,8 @@
     {% searchmanager id="simplesearch1" search="| eventcount summarize=false index=* OR index=_* | table index count" 
         preview=True cache=True autostart=True %}
         
-    {% searchmanager id="simplesearch2" search="| eventcount summarize=false index=$index$ | table count" 
+    {% searchmanager id="simplesearch2" 
+        search="| eventcount summarize=false index=$index$ | table count"|token_safe
         preview=True cache=True autostart=False %}
 {% endblock managers %}
 
@@ -83,6 +84,7 @@
     require(["splunkjs/ready!"], function(mvc) {
         var table = mvc.Components.getInstance("table");
         var simpleSearch2 = mvc.Components.getInstance("simplesearch2");
+        var tokens = mvc.Components.getInstance("default");
         
         // Set the index whenever the table is click
         table.on("click:row", function(e) {
@@ -90,7 +92,7 @@
             
             var index = e.model.get("index");
             
-            simpleSearch2.query.set("index", index);
+            tokens.set("index", index);
             simpleSearch2.startSearch();
         });
     });
