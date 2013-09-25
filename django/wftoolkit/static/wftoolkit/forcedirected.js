@@ -100,16 +100,14 @@ define(function(require, exports, module) {
         options: {
             managerid: null,   // your MANAGER ID
             data: "preview",  // Results type
-
-            // default values
-            zoom: 'true',
-            directional: 'true',
+            zoom: true,
+            directional: true,
             count: 'count',
             charges: -500,
             gravity: 0.2,
             linkDistance: 15,
-            swoop: 'false',
-            isStatic: 'true'
+            swoop: false,
+            isStatic: true
         },
 
         output_mode: "json_rows",
@@ -126,10 +124,13 @@ define(function(require, exports, module) {
             this.settings.on("change:charges", this._onDataChanged, this);
             this.settings.on("change:gravity", this._onDataChanged, this);
             this.settings.on("change:linkDistance", this._onDataChanged, this);
+            this.settings.on("change:directional", this._onDataChanged, this);
+            this.settings.on("change:swoop", this._onDataChanged, this);
+            this.settings.on("change:isStatic", this._onDataChanged, this);
         },
 
         createView: function() {
-            var margin = {top: 1, right: 1, bottom: 1, left: 1};
+            var margin = {top: 10, right: 10, bottom: 10, left: 10};
             var availableWidth = parseInt(this.settings.get("width") || this.$el.width());
             var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
 
@@ -140,10 +141,8 @@ define(function(require, exports, module) {
                 .attr("width", availableWidth)
                 .attr("height", availableHeight)
                 .attr("pointer-events", "all")
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            return { container: this.$el, svg: svg, width: availableWidth, height: availableHeight };
+            return { container: this.$el, svg: svg, margin: margin };
         },
 
         // making the data look how we want it to for updateView to do its job
@@ -176,23 +175,40 @@ define(function(require, exports, module) {
 
         updateView: function(viz, data){
             var that = this;
+            var containerHeight = this.$el.height();
+            var containerWidth = this.$el.width();
+
+            // Clear svg
+            var svg = $(viz.svg[0]);
+            svg.empty();
+            svg.height(containerHeight);
+            svg.width(containerWidth);
+
+            // Add the graph group as a child of the main svg
+            var graphWidth = containerWidth - viz.margin.left - viz.margin.right
+            var graphHeight = containerHeight - viz.margin.top - viz.margin.bottom;
+            var graph = viz.svg
+                .append("g")
+                .attr("width", graphWidth)
+                .attr("height", graphHeight)
+                .attr("transform", "translate(" + viz.margin.left + "," + viz.margin.top + ")");
 
             // Get settings
             this.charge = this.settings.get('charges');
             this.gravity = this.settings.get('gravity');
             this.linkDistance = this.settings.get('linkDistance');
-            this.zoomable = this.settings.get("zoom");
-            this.swoop = stringToBool(this.settings.get("swoop"));
-            this.isStatic = stringToBool(this.settings.get("isStatic"));
-            this.isDirectional = stringToBool(this.settings.get("directional"));
+            this.zoomable = this.settings.get('zoom');
+            this.swoop = this.settings.get('swoop');
+            this.isStatic = this.settings.get('isStatic');
+            this.isDirectional = this.settings.get('directional');
             this.zoomFactor = 0.5;
       
             this.groupNameLookup = data.groupLookup;            
 
             // Set up graph
             var r = 6;
-            var height = viz.height;
-            var width = viz.width - r;
+            var height = graphHeight;
+            var width = graphWidth;
             var force = d3.layout.force()
                             .gravity(this.gravity)
                             .charge(this.charge)
@@ -200,21 +216,19 @@ define(function(require, exports, module) {
                             .size([width, height]);
 
             this.color = d3.scale.category20();
-        
-            this.svg = viz.svg.append("svg:g");
 
-            this.tooltips = new Tooltips(this.svg);
+            this.tooltips = new Tooltips(graph);
 
             if(this.zoomable){
                 initPanZoom(viz.svg);
             }
 
-            this.svg.style("opacity", 1e-6)
+            graph.style("opacity", 1e-6)
                 .transition()
                   .duration(1000)
                   .style("opacity", 1);
 
-            this.svg.append("svg:defs").selectAll("marker")
+            graph.append("svg:defs").selectAll("marker")
                 .data(["arrowEnd"])
               .enter().append("svg:marker")
                 .attr("id", String)
@@ -227,7 +241,7 @@ define(function(require, exports, module) {
               .append("svg:path")
             .attr("d", "M0,-5L10,0L0,5");
 
-            var link = this.svg.selectAll("line.link")
+            var link = graph.selectAll("line.link")
                     .data(data.links)
                     .enter().append('path')
                         .attr("class", "link")
@@ -247,7 +261,7 @@ define(function(require, exports, module) {
                     that.tooltips.close(); 
                 });
 
-            var node = this.svg.selectAll("circle.node")
+            var node = graph.selectAll("circle.node")
                     .data(data.nodes)
                     .enter().append("svg:circle")
                         .attr("class", "node")
@@ -303,13 +317,6 @@ define(function(require, exports, module) {
                 max = max || 1000;
                 var i = 0;
                 while(layout.alpha() > alpha && i++ < max) layout.tick();
-            }
-
-            function stringToBool(x){
-                if(x.toLowerCase() === 'true'){
-                    return true;
-                }
-                return false;
             }
 
             // draggin'
@@ -402,7 +409,7 @@ define(function(require, exports, module) {
             function highlightNodes(val) {
                 var self = this, groupName;
                 if(val !== ' ' && val !== ''){
-                    this.svg.selectAll('circle')
+                    graph.selectAll('circle')
                         .filter(function (d, i) {
                             groupName = self.groupNameLookup[d.group];
                             if(d.source.indexOf(val) >= 0 || groupName.indexOf(val) >= 0){
@@ -412,7 +419,7 @@ define(function(require, exports, module) {
                             }
                         });
                 } else {
-                    this.svg.selectAll('circle').classed('highlight', false);
+                    graph.selectAll('circle').classed('highlight', false);
                 }
             }
 
