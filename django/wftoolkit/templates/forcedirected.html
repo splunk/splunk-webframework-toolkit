@@ -9,7 +9,10 @@
 {{block.super}}
 <style type="text/css">
 #force-directed{
-        height: 500px;
+    height: 500px;
+}
+.splunk-textinput input{
+    width: 100px;
 }
 </style>
 {% endblock css %}
@@ -30,8 +33,7 @@
         </ul>
         <h4>Example Searches:</h4>
         <div><ul>
-            <li>index=_internal | head 20000 | stats count by sourcetype clientip</li>
-            <li>| inputlookup musicdata.csv | stats count by artist_name, eventtype</li>
+            <li>| inputlookup faa.demo.csv | head 200 | stats count by OriginCityName, DestCityName, DestStateName | sort count</li>
         </ul>
         </div>
         <h4>Options:</h4>
@@ -71,21 +73,27 @@
                 <td><b>number</b></td>
                 <td><b>-500</b></td>
                 <td>Sets the charge for the physics simulation.</td>
-                <td>****</td>
+                <td>
+                    {% textinput id="charge-tb" default="-500" %}
+                </td>
             </tr>
             <tr>
                 <td><code>gravity</code></td>
                 <td><b>number</b></td>
                 <td><b>0.2</b></td>
                 <td>Sets the gravity for the physics simulation. A larger number will cause graph nodes to cluster closer together.</td>
-                <td>****</td>
+                <td>
+                    {% textinput id="gravity-tb" default="0.2" %}
+                </td>
             </tr>
             <tr>
                 <td><code>linkDistance</code></td>
                 <td><b>number</b></td>
                 <td><b>15</b></td>
                 <td>Sets the initial link distance for the physics simulation. A larger number will push the nodes farther apart.</td>
-                <td>****</td>
+                <td>
+                    {% textinput id="link-tb" default="15" %}
+                </td>
             </tr>
             <tr>
                 <td><code>swoop</code></td>
@@ -143,6 +151,7 @@
         "wftoolkit/forcedirected",
         "splunkjs/mvc/dropdownview",
         "splunkjs/mvc/checkboxview",
+        "splunkjs/mvc/textinputview",
         ], 
         function(
             mvc, 
@@ -156,7 +165,11 @@
             var directionalcb = mvc.Components.getInstance("directional-cb");
             var swoopcb = mvc.Components.getInstance("swoop-cb");
             var isStaticcb = mvc.Components.getInstance("isStatic-cb");
+            var linktb = mvc.Components.getInstance("link-tb");
+            var gravitytb = mvc.Components.getInstance("gravity-tb");
+            var chargetb = mvc.Components.getInstance("charge-tb");
             
+            // Checkboxes
             directionalcb.on("change", function(){
                 force.settings.set("directional", directionalcb.val());
             });
@@ -166,7 +179,29 @@
             isStaticcb.on("change", function(){
                 force.settings.set("isStatic", isStaticcb.val());
             });
-            
+
+            // Textboxes
+            var errorMsg = "Enter a number"
+            linktb.on("change", function(){
+                checkTextInput(linktb, "linkDistance");
+            });
+            gravitytb.on("change", function(){
+                checkTextInput(gravitytb, "gravity");
+            });
+            chargetb.on("change", function(){
+                checkTextInput(chargetb, "charges");
+            });
+
+            // Texbox validator
+            function checkTextInput(tb, setting){
+                var numberValue = parseFloat(tb.val());
+                if(numberValue){
+                    force.settings.set(setting, numberValue);
+                }
+                else{
+                    tb.val("Enter a number")
+                }
+            }        
         });
 </script>     
 
