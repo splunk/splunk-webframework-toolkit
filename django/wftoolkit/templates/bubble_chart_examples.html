@@ -74,6 +74,7 @@
         "wftoolkit/forcedirected",
         "wftoolkit/sunburst",
         "wftoolkit/parallelsets",
+        "wftoolkit/parallelcoords",
         ], 
         function(
             mvc, 
@@ -85,13 +86,12 @@
             SankeyChart,
             ForceDirected,
             Sunburst,
-            ParallelSets
+            ParallelSets,
+            Parallelcoords
         ){
-            var sets = new ParallelSets({
+            var coords = new Parallelcoords({
                 'id' : 'example',
                 'managerid' : 'example-search',
-                'groupingFields': 'OriginState OriginCityName',
-                'sizeField': 'count',
                 'el' : $('#example-chart')
             }).render();
 

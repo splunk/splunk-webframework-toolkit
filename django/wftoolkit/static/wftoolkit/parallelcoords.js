@@ -36,10 +36,8 @@ define(function(require, exports, module) {
         className: "splunk-toolkit-parcoords",
 
         options: {
-            managerid: "search1",   // your MANAGER ID
+            managerid: null,   // your MANAGER ID
             data: "preview",  // Results type
-
-            options: {} // the default for custom heatmap options.
         },
 
         output_mode: "json_rows",
@@ -55,6 +53,17 @@ define(function(require, exports, module) {
             // whenever domain or subdomain are changed, we will re-render.
             this.settings.on("change:domain", this._onDataChanged, this);
             this.settings.on("change:subdomain", this._onDataChanged, this);
+        
+            // Set up resize callback. The first argument is a this
+            // pointer which gets passed into the callback event
+            $(window).resize(this, _.debounce(this._handleResize, 20));
+        },
+
+        _handleResize: function(e){
+            
+            // e.data is the this pointer passed to the callback.
+            // here it refers to this object and we call render()
+            e.data.render();
         },
 
         createView: function() { 
