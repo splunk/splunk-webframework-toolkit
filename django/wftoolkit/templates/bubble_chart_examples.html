@@ -73,6 +73,7 @@
         "wftoolkit/sankeychart",
         "wftoolkit/forcedirected",
         "wftoolkit/sunburst",
+        "wftoolkit/parallelsets",
         ], 
         function(
             mvc, 
@@ -83,9 +84,10 @@
             DropdownView,
             SankeyChart,
             ForceDirected,
-            Sunburst
+            Sunburst,
+            ParallelSets
         ){
-            var sunburst = new Sunburst({
+            var sets = new ParallelSets({
                 'id' : 'example',
                 'managerid' : 'example-search',
                 'groupingFields': 'OriginState OriginCityName',

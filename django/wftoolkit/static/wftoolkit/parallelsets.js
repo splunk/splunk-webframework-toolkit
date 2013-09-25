@@ -37,8 +37,9 @@ define(function(require, exports, module) {
         className: "splunk-toolkit-parellel-sets",
 
         options: {
-            managerid: "search1",   
-            data: "preview",  
+            managerid: null,   
+            data: "preview",
+            tension: 0.5  
         },
 
         output_mode: "json_rows",
@@ -50,6 +51,8 @@ define(function(require, exports, module) {
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
             this.settings.enablePush("value");
+
+            this.settings.on("change:tension", this._onDataChanged, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event
@@ -114,6 +117,7 @@ define(function(require, exports, module) {
                 .attr("height", graphHeight)
                 .attr("transform", "translate(" + viz.margin.left + "," + viz.margin.top + ")");
             
+            var tension = this.settings.get("tension");
             var fields = data.fields;
 
             this.parset = d3p()
@@ -124,7 +128,7 @@ define(function(require, exports, module) {
             graph.datum(data.results).call(this.parset);
 
             t = graph.transition().duration(500);
-            t.call(this.parset.tension(0.5));
+            t.call(this.parset.tension(tension));
         }
     });
     return parallelSets;

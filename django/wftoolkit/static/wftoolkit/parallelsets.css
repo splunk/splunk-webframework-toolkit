@@ -16,6 +16,7 @@ path.active { fill-opacity: .9; }
 
 rect {
 	fill:white;
+    opacity: 0;
 }
 
 line {

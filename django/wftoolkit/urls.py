@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^forcedirected/$', render('wftoolkit:forcedirected.html'), name='forcedirected'),
     url(r'^calheat/$', render('wftoolkit:calheat.html'), name='calheat'),
     url(r'^parcoords/$', render('wftoolkit:parallelcoords.html'), name='parallelcoords'),
-    url(r'^parsets/$', render('wftoolkit:parallelsets.html'), name='parallelsets'),
+    url(r'^parallelsets/$', render('wftoolkit:parallelsets.html'), name='parallelsets'),
     url(r'^sunburst/$', render('wftoolkit:sunburst.html'), name='sunburst'),
     url(r'^heatwave/$', render('wftoolkit:heatwave.html'), name='heatwave'),
     # Examples
