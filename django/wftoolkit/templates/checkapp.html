@@ -1,9 +1,0 @@
-{% extends 'splunkdj:base_with_app_bar.html' %}
-{% load splunkmvc %}
-{% load appchecker %}
-{% block title %}{{wftoolkit}}App Checker{% endblock title %}
-{% block content %}
-    <h3>Custom View</h3>
-    {% appchecker id="myappcheck" appName="framework" %}
-{% endblock content %}
-

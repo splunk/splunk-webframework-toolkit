@@ -1,0 +1,59 @@
+<nav color="#0C8F98">
+    <view name="default" default="true"/>
+    <a href="/dj/redirector/splunk_wftoolkit/home">Home</a>
+    <a href="/dj/redirector/splunk_wftoolkit/basics">Basics</a>
+    <collection label="Framework Components">
+        <a name="managers" href="/dj/redirector/splunk_wftoolkit/managers">Managers</a>        
+        <a name="charts" href="/dj/redirector/splunk_wftoolkit/charts">Charts</a>        
+        <a name="tables" href="/dj/redirector/splunk_wftoolkit/tables">Tables</a>        
+        <a name="forms" href="/dj/redirector/splunk_wftoolkit/forms">Forms</a>        
+        <a name="dataview" href="/dj/redirector/splunk_wftoolkit/dataview">Dataview</a>        
+        <a name="searchcontrols" href="/dj/redirector/splunk_wftoolkit/searchcontrols">Search Controls</a>        
+        <a name="map" href="/dj/redirector/splunk_wftoolkit/map">Map</a>        
+    </collection>
+    <collection label="Toolkit Components">
+        <a href="/dj/redirector/splunk_wftoolkit/sankey">Sankey Chart</a>
+        <a href="/dj/redirector/splunk_wftoolkit/bubble_chart">Bubble Chart</a>
+        <a href="/dj/redirector/splunk_wftoolkit/forcedirected">Force Directed</a>
+        <a href="/dj/redirector/splunk_wftoolkit/calendarheatmap">Calendar Heatmap</a>
+        <a href="/dj/redirector/splunk_wftoolkit/parallelcoords">Parallel Coordinates</a>
+        <a href="/dj/redirector/splunk_wftoolkit/parallelsets">Parallel Sets</a>
+        <a href="/dj/redirector/splunk_wftoolkit/sunburst">Sunburst</a>
+    </collection>
+    <collection label="Examples">
+        <a href="/dj/redirector/splunk_wftoolkit/dashboarddj">Dashboard in Django</a>
+        <a href="/dj/redirector/splunk_wftoolkit/dashboardjs">Dashboard in JavaScript</a>
+        <a href="/dj/redirector/splunk_wftoolkit/savedsearch">Saved Search</a>
+        <a href="/dj/redirector/splunk_wftoolkit/postprocess">Post Process</a>
+        <a href="/dj/redirector/splunk_wftoolkit/cache">Caching</a>
+        <a href="/dj/redirector/splunk_wftoolkit/form">Forms</a>
+        <a href="/dj/redirector/splunk_wftoolkit/cascade">Cascading Inputs</a>
+        <a href="/dj/redirector/splunk_wftoolkit/properties">Search Properties</a>
+        <a href="/dj/redirector/splunk_wftoolkit/timerange">Time Range Pickers</a>
+        <a href="/dj/redirector/splunk_wftoolkit/timerange_group">Time Range Groups</a>
+        <a href="/dj/redirector/splunk_wftoolkit/multidropdown">Multidropdown</a>
+        <a href="/dj/redirector/splunk_wftoolkit/search">Search Timeline UI</a>
+        <a href="/dj/redirector/splunk_wftoolkit/interactive">Interactive Views</a>
+        <a href="/dj/redirector/splunk_wftoolkit/chartclick">Chart Clicks</a>
+        <a href="/dj/redirector/splunk_wftoolkit/custom_table_cells">Custom Table Cells</a>
+        <a href="/dj/redirector/splunk_wftoolkit/databindingjs">Databinding in JavaScript</a>
+        <a href="/dj/redirector/splunk_wftoolkit/maps">Maps</a>
+    </collection>
+    <collection label="Extended Examples">
+        <a href="/dj/redirector/splunk_wftoolkit/airline_drilldown">Airlines</a>
+        <a href="/dj/redirector/splunk_wftoolkit/d3_chart">NVD3 Charts</a>
+        <a href="/dj/redirector/splunk_wftoolkit/bubble_chart_examples">Bubble Chart Examples</a>
+        <a href="/dj/redirector/splunk_wftoolkit/json_viewer">Splunk JSON Results Viewer</a>
+        <a href="/dj/redirector/splunk_wftoolkit/setup">Setup View (Basic)</a>
+    </collection>
+    <collection label="Code Stencils">
+        <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Dashboard Example in Django</a>
+        <a href="/dj/redirector/splunk_wftoolkit/dashboardjs_stencil/">Dashboard Example in JavaScript</a>
+        <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil1/">Simple Stencil</a>
+        <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil2/">Multiple Row Stencil</a>
+    </collection>
+    <collection label="Useful Links">
+        <a href="http://dev.splunk.com/view/app-framework/SP-CAAAEMA">Framework Documentation</a>
+        <a href="http://apps.splunk.com/">Splunkbase</a>
+    </collection>
+</nav>

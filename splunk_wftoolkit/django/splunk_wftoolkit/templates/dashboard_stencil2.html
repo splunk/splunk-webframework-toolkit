@@ -1,0 +1,203 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Simple Dashboard{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+<style>
+
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="dashboard-body container-fluid main-section-body">
+    
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Simple Dashboard</h2>
+        </div>
+    </div>
+
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Panel Title</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- Panel contents here -->
+                    <p>
+                    This is an example of a very simple dashboard. To edit this page edit <b>splunk_wftoolkit/django/splunk_wftoolkit/templates/dashboard_stencil2.html</b>
+                    </p>
+                    <p>
+                    This is a single cell row.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Panel Title</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- Panel contents here -->
+                    <p>
+                    A double cell row.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Panel Title</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- Panel contents here -->
+                    <p>
+                    A double cell row.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 33.33%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Panel Title</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- Panel contents here -->
+                    <p>
+                    A triple cell row.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 33.33%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Panel Title</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- Panel contents here -->
+                    <p>
+                    A triple cell row.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 33.33%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Panel Title</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- Panel contents here -->
+                    <p>
+                    A triple cell row.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 25%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Panel Title</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- Panel contents here -->
+                    <p>
+                    A four cell row.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 25%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Panel Title</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- Panel contents here -->
+                    <p>
+                    A four cell row.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 25%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Panel Title</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- Panel contents here -->
+                    <p>
+                    A four cell row.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 25%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Panel Title</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- Panel contents here -->
+                    <p>
+                    A four cell row.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content%}
+
+{% block managers %}
+
+    <!-- Add any Django-declared search managers here -->
+
+{% endblock managers %}
+
+{% block js %}    
+<script>    
+require(["splunkjs/ready!", "underscore"], function(mvc, _) {
+
+    // JavaScript goes here
+
+});
+
+</script>
+{% endblock js %}

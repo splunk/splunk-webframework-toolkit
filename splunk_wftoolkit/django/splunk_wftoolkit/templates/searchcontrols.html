@@ -1,0 +1,397 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}{{app_name}} Search Control Views{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{{STATIC_URL}}splunk_wftoolkit/prettify.css"/>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
+<link rel="stylesheet" href="{{STATIC_URL}}splunk_wftoolkit/custom.css"/>
+
+<style type="text/css">
+    .allow-overflow {
+        /* panel-body sets overflow: hidden, so we need
+        to override it so that we can properly render the 
+        search control popup */
+        overflow: visible !important;
+    }
+</style>
+{% endblock css %}
+
+{% block content %}
+<!-- SEARCH BAR -->
+<div class="dashboard-body container-fluid main-section-body component-page" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Search Control Views</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" >
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-body html allow-overflow">
+                        <h3>Search bar</h3>
+                        <p>The <b>SearchBar</b> view represents a search input that can be bound to a search manager. However, unlike most other views, <b>SearchBar</b> provides a query <i>to</i> the search manager and modifies it rather than taking results <i>from</i> the search manager.</p>
+
+                        <p>Use the <code>&#123;% searchbar %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
+
+                        <h4>Options</h4>
+                        <p>You can set the following property:</p>
+                        <ul>
+                            <p><code>timerange</code>: When <code>true</code>, the search bar includes a time range input.</p>
+                        </ul>
+                    
+                        <h4>Example</h4>
+                        <p>The following example shows a <b>SearchBar</b> view with a <b>TimeRange</b> and a <b>Table</b> view, all bound to the same search manager. A default search is used, but if a new one is entered, the table is updated.</p>                
+                    
+                        <div class="bs-docs-example">
+                            {% searchbar id="example-search-bar" managerid="example-bar-search" %}
+
+                            {% table id="bar-table" managerid="example-bar-search" pageSize="5" %}
+                        </div>
+
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#django" data-toggle="tab">Django</a>
+                            </li>
+                            <li>
+                                <a href="#js" data-toggle="tab">JavaScript</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content code-sample">
+                        <div class="tab-pane active django" id="django">
+                            <pre class="prettyprint linenums lang-js">
+&#123;% block content %&#125;
+    &#123;% searchbar id="example-search-bar" managerid="example-bar-search" %&#125;
+    &#123;% table id="bar-table" managerid="example-bar-search" pageSize="5" %&#125;
+&#123;% endblock content %&#125; 
+&#123;% block managers %&#125; 
+    &#123;% searchmanager id="example-bar-search" search="index=_internal | head 100 | timechart count by sourcetype span=100s" %&#125;   
+&#123;% endblock managers %&#125;
+                            </pre>
+                        </div>
+                        <div class="tab-pane js" id="js">
+                            <pre class="prettyprint linenums lang-js">
+var SearchBarView = require("splunkjs/mvc/searchbarview");
+new SearchBarView({
+    id: "example-search-bar",
+    managerid: "example-bar-search",
+    el: $("#divToHangOn")
+}).render();
+
+var TableView = require("splunkjs/mvc/tableview");
+new TableView({
+    id: "example-table",
+    managerid: "example-bar-search",
+    pageSize: "5",
+    el: $("#divToHangOn2") // seperate div
+}).render();
+
+var SearchManager = require("splunkjs/mvc/searchmanager");
+new SearchManager({
+    id: "example-bar-search",
+    search: "index=_internal | head 100 | timechart count by sourcetype span=100s",
+});    
+
+// Hooking up events (both JavaScript and Django)
+var manager = splunkjs.mvc.Components.getInstance("example-bar-search");
+var searchbar = splunkjs.mvc.Components.getInstance("example-search-bar");
+var timerange = searchbar.timerange;
+
+searchbar.on("change", function() {
+    manager.set("search", searchbar.val()); 
+});
+
+timerange.on("change", function() {
+    manager.search.set(timerange.val()); 
+});
+                            </pre>
+                        </div> 
+                    </div>
+                    <!-- END SEARCH BAR -->
+                    <!-- SEARCH CONTROLS -->
+                    <div class="section" id="searchcontrols">
+                        <h3>Search Controls</h3>
+                        <p>The <code>searchcontrols</code> view allows users to control a search is various ways such as pausing, continuing, or cancelling a search.</p>
+
+                        <p>Use the <code>&#123;% searchcontrols %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
+
+                        <h4>Example</h4>
+                        <p>In this example, <b>Searchbar</b>, <b>Search Controls</b>, and <b>Table</b> views are bound to the same search. The search bar can dispatch a search to be displayed in the table, the search controls can control the execution of the search.</p>
+
+                        <div class="bs-docs-example">
+                            {% searchbar id="searchcontrols-searchbar" managerid="example-searchcontrols-search" %}
+                            {% searchcontrols id="example-searchcontrols" managerid="example-searchcontrols-search" %}
+                            {% table id="searchcontrols-table" managerid="example-searchcontrols-search" pageSize="5" %}
+                        </div>
+
+                    </div>
+                    <!-- END SEARCH CONTROLS -->
+                    <!-- TIMELINE -->
+                    <div class="section" id="timeline">
+                            
+                        <h3>Timeline</h3>
+                        <p>The <b>Timeline</b> view displays an event timeline of a given search and allows interactive modification of the search time range. This view modifies and is modified by its search manager.</p>
+
+                        <p>Use the <code>&#123;% timeline %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
+
+                        <h4>Options</h4>
+                        <p>You can set the following property using templates tags or JavaScript:</p>
+                        <ul>
+                            <p><code>data</code>: The name of the results model.</p>
+                        </ul>
+
+                        <h4>Example</h4>
+                        <p>In this example, <b>TimeRange</b>, <b>Timeline</b>, and <b>Table</b> views are bound to the same search. The time range can be changed by the time range input or the timeline. Custom time ranges can be interactively selected using the timeline.</p>
+
+                        <div class="bs-docs-example">
+                            {% timerange id="timeline-timerange" preset="today" managerid="example-timeline-search" %}
+                            {% timeline id="example-timeline" managerid="example-timeline-search" %}
+                            {% table id="timeline-table" managerid="example-timeline-search" pageSize="5" %}
+                        </div>
+
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#django2" data-toggle="tab">Django</a>
+                            </li>
+                            <li>
+                                <a href="#js2" data-toggle="tab">JavaScript</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content code-sample">
+                            <div class="tab-pane active django" id="django2">
+                                <pre class="prettyprint linenums lang-js">
+&#123;% block content %&#125;
+    &#123;% timerange id="example-timerange" preset="today" managerid="example-timeline-search" %&#125;
+    &#123;% timeline id="example-timeline" managerid="example-timeline-search" %&#125;
+    &#123;% table id="example-table" managerid="example-timeline-search" pageSize="5" %&#125;
+&#123;% endblock content %&#125; 
+&#123;% block managers %&#125; 
+    &#123;% searchmanager id="example-timeline-search" search="index=_internal" preview=True status_buckets=300 %&#125;
+&#123;% endblock managers %&#125;
+                                </pre>
+                            </div>
+                            <div class="tab-pane js" id="js2">
+                                <pre class="prettyprint linenums lang-js">
+var TimeRangeView = require("splunkjs/mvc/timerangeview");
+new TimeRangeView({
+    id: "example-timerange",
+    managerid: "example-timeline-search",
+    preset: "today",
+    el: $("#divToHangOn")
+}).render();
+
+var TimelineView = require("splunkjs/mvc/timelineview");
+new TimelineView({
+    id: "example-timeline",
+    managerid: "example-timeline-search",
+    el: $("#divToHangOn2")
+}).render();
+
+var TableView = require("splunkjs/mvc/tableview");
+new TableView({
+    id: "example-table",
+    managerid: "example-timeline-search",
+    pageSize: "5",
+    el: $("#divToHangOn3")
+}).render();
+
+var SearchManager = require("splunkjs/mvc/searchmanager");
+new SearchManager({
+    id: "example-timeline-search",
+    search: "index=_internal",
+    preview: "True",
+    status_buckets: 300
+});
+
+// Hooking up events (for JavaScript and Django)
+var manager = splunkjs.mvc.Components.getInstance("example-timeline-search");
+var timerange = splunkjs.mvc.Components.getInstance("timeline-timerange");
+var timeline = splunkjs.mvc.Components.getInstance("example-timeline");
+
+timerange.on("change", function() {
+    manager.search.set(timerange.val());
+});
+
+timeline.on("change", function() {
+    manager.search.set(timeline.val());
+});
+                                </pre> 
+                            </div>
+                        </div>
+                    </div>
+<!-- END TIMELINE -->
+
+<!-- TIME RANGE INPUT -->
+                    <div class="section" id="time-range">
+                        <h3>Time range</h3>
+                        <p>A <b>TimeRange</b> view can be used by itself to modify the time range for a search manager. This view can be used with a <b>SearchBar</b> view to modify the time range for the search bar's search.</p>
+                        <p>Use the <code>&#123;% timerange %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
+
+                        <h4>Options</h4>
+                        <p>You can set the following property using templates tags or JavaScript:</p>
+                        <ul>
+                            <p><code>preset</code>: When set, the time range input starts with the selected time range. The possible values are the time labels defined in <code>times.conf</code> (e.g. "Last 24 hours").
+                        </ul>
+
+                        <h4>Example</h4>
+                        <p>In this example, a <b>TimeRange</b> view is bound to the same search as a single value. As the time range changes with the time range input, the value changes based on the new time range.</p>
+
+                        <div class="bs-docs-example">
+                            {% timerange id="example-timerange" preset="Last 24 hours" managerid="timerange-search" %}
+                            {% single id="timerange-single" managerid="timerange-search" afterLabel="events" %}
+                        </div>
+
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#django3" data-toggle="tab">Django</a>
+                            </li>
+                            <li>
+                                <a href="#js3" data-toggle="tab">JavaScript</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content code-sample">
+                            <div class="tab-pane active django" id="django3">
+                                <pre class="prettyprint linenums lang-js">
+&#123;% block content %&#125;
+    &#123;% timerange id="example-timerange" preset="today" managerid="timerange-search" %&#125;
+    &#123;% single id="timerange-single" managerid="timerange-search" afterLabel="events" %&#125;
+&#123;% endblock content %&#125; 
+&#123;% block managers %&#125; 
+    &#123;% searchmanager id="timerange-search" search="index=_internal | stats count" %&#125;   
+&#123;% endblock managers %&#125;    
+                                </pre>
+                            </div>
+                            <div class="tab-pane js" id="js3">
+                                <pre class="prettyprint linenums lang-js">
+var TimeRangeView = require("splunkjs/mvc/timerangeview");
+new TimeRangeView({
+    id: "example-timerange",
+    managerid: "timerange-search",
+    preset: "today",
+    el: $("#divToHangOn")
+}).render();
+
+var SingleView = require("splunkjs/mvc/singleview");
+new SingleView({
+    id: "example-single",
+    managerid: "timerange-search",
+    afterLabel: "events",
+    el: $("#divToHangOn2")
+}).render();
+
+var SearchManager = require("splunkjs/mvc/searchmanager");
+new SearchManager({
+    id: "timerange-search",
+    search: "index=_internal | stats count",
+    preview: "True",
+    status_buckets: 300
+});
+                                </pre> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- END TIME RANGE INPUT -->
+
+
+{% endblock content %}
+
+{% block managers %}
+
+    {% searchmanager id="example-bar-search" search="index=_internal | head 100 " %}
+
+    {% searchmanager id="example-searchcontrols-search" search="index=_internal | head 100 " %}
+
+    {% searchmanager id="timerange-search" search="index=_internal | head 10000 |stats count" %}
+
+    {% searchmanager id="example-timeline-search" search="index=_internal | head 1000" preview=True status_buckets=300 %}
+
+{% endblock managers %}
+
+{% block js %}
+
+{{block.super}}
+
+<script type="text/javascript">
+
+require.config({
+    shim: {
+        "splunk_wftoolkit/prettify": {
+            deps: [],
+            exports: "prettyPrint"
+        } 
+    }
+});
+
+
+require(["splunk_wftoolkit/prettify", "bootstrap.tab"], function(prettyPrint) {
+    //formats code samples
+    prettyPrint();
+});
+
+
+require(["splunkjs/ready!"], function(mvc) {
+    // Timeline, TimeRange and Table sample
+    (function() {
+        var manager = splunkjs.mvc.Components.getInstance("example-timeline-search");
+        var timerange = splunkjs.mvc.Components.getInstance("timeline-timerange");
+        var timeline = splunkjs.mvc.Components.getInstance("example-timeline");
+        
+        timerange.on("change", function() {
+            manager.search.set(timerange.val());
+        });
+        
+        timeline.on("change", function() {
+            manager.search.set(timeline.val());
+        });
+    })();
+
+    // Search controls sample
+    (function() {
+        var manager = splunkjs.mvc.Components.getInstance("example-searchcontrols-search");
+        var searchbar = splunkjs.mvc.Components.getInstance("searchcontrols-searchbar");
+        var searchcontrols = splunkjs.mvc.Components.getInstance("example-searchcontrols");
+        
+        searchbar.on("change", function() {
+            manager.set("search", searchbar.val()); 
+        });
+    })();
+
+
+    // Search bar sample
+    (function() {
+        var manager = splunkjs.mvc.Components.getInstance("example-bar-search");
+        var searchbar = splunkjs.mvc.Components.getInstance("example-search-bar");
+        var timerange = searchbar.timerange;
+
+        searchbar.on("change", function() {
+            manager.set("search", searchbar.val()); 
+        });
+
+        timerange.on("change", function() {
+            manager.search.set(timerange.val()); 
+        });
+    })();
+    
+    // Time range input sample
+    (function() {
+        var manager = splunkjs.mvc.Components.getInstance("timerange-search");
+        var timerange = splunkjs.mvc.Components.getInstance("example-timerange")
+
+        timerange.on("change", function() {
+            manager.search.set(timerange.val()); 
+        });
+    })();
+    });
+    
+</script>
+
+{% endblock js %}

@@ -1,0 +1,151 @@
+{% extends "toolkit_controls_base.html" %}
+
+{% load splunkmvc %}
+{% load splunk_wftoolkit %}
+
+{% block title %}Sunburst{% endblock title %}
+
+{% block css %}
+{{block.super}}
+<style type="text/css">
+#example-sunburst{
+   height: 500px;
+}
+</style>
+{% endblock css %}
+
+    {% block heading %}Sunburst{% endblock heading %}
+    {% block explanation %}Sunburst.{% endblock explanation %}
+
+    {% block example %}
+        {% sunburst 
+            id="example-sunburst"
+            managerid="search1"
+            sizeField="count"
+            groupingFields="OriginState OriginCityName"
+        %}
+    {% endblock example %}
+    {% block usage %}
+    <p>The Sunburst shows Hierarchically grouped data. It is similar to a tree except that is uses a radial layout with the root at the center and the leaf nodes around the edges.</p>
+
+    <ul>
+    <li>require path: <code>splunk_wftoolkit/sunburst</code></li>
+    </ul>
+    <h4>Example Searches:</h4>
+    <div class="well"><ul>
+        <li>index=_internal | head 10000 | stats count by sourcetype clientip</li>
+        <li>| inputlookup faa.demo.csv | search cancellation=* | stats count by cancellation, AirlineDescription</li>
+    </ul>
+    </div>
+    <h4>Options:</h4>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <td>Option</td>
+            <td>Type</td>
+            <td>Default</td>
+            <td>Explanation</td>
+            <td>Try it</td>
+        </tr>
+        <tr>
+            <td><code>managerid</code></td>
+            <td><b>string</b></td>
+            <td><b>null</b></td>
+            <td>The search manager of the chart</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td><code>chartTitle</code></td>
+            <td><b>string</b></td>
+            <td><b>null</b></td>
+            <td>The name of the root node (displayed at graph center)</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td><code>groupingFields</code></td>
+            <td><b>string</b><p>(can be a space-separated list)</p></td>
+            <td><b>null</b></br>(defaults to all)</td>
+            <td>This is a list of fields to group children of the root node by. Each field essintially indicates the group of the next level in the tree.</td>
+            <td>{% multidropdown id="group-dropdown" %}</td>
+        </tr>
+        <tr>
+            <td><code>sizeField</code></td>
+            <td><b>string</b></td>
+            <td><b>null</b></td>
+            <td>Indicates the field used to determine the size of the radial groups. The default null value results in sizing based on number of chldren.</td>
+            <td>{% dropdown id="size-dropdown" default="count" %}</td>
+        </tr>
+    </table>
+    {% endblock usage %}
+{% block codesample %}
+    require([ 
+        "splunkjs/ready!", 
+        "jquery",
+        "splunk_wftoolkit/sunburst",
+    ], 
+    function(mvc, $,Sunburst) {
+        var sunburst = new Sunburst({
+            'id' : 'example',
+            'managerid' : 'example-search',
+            'el' : $('#example-chart')
+        }).render()
+    });
+{% endblock codesample %}
+
+{% block managers %}
+
+    {% searchmanager id="search1"
+        search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=15'
+        cache=True
+    %}
+
+{% endblock managers %}
+
+{% block js %}
+<script type="text/javascript">
+    require([
+        "splunkjs/ready!", 
+        "splunkjs/mvc/utils",
+        "underscore",
+        "jquery",
+        "splunk_wftoolkit/sunburst",
+        "splunkjs/mvc/dropdownview",
+        ], 
+        function(
+            mvc, 
+            utils,
+            _, 
+            $,
+            Sunburst,
+            DropdownView
+        ){
+            var sunburst = mvc.Components.getInstance("example-sunburst");
+            var groupdd = mvc.Components.getInstance("group-dropdown");
+            var sizedd = mvc.Components.getInstance("size-dropdown");
+
+            var groupChoices = [
+                                {label: "cancellation", value: "cancellation"},
+                                {label: "AirlineDescription", value: 'AirlineDescription'},
+                            ];
+
+            groupdd.settings.set("choices", groupChoices);
+            groupdd.val(['cancellation', 'AirlineDescription']);
+            groupdd.on("change", function(){
+                sunburst.settings.set("groupingFields", groupdd.val().join(" "));
+            });
+
+            var sizeChoices = [
+                                {label: "count", value: "count"},
+                                {label: "None", value: 'None'}
+                            ];
+            sizedd.settings.set("choices", sizeChoices);
+            sizedd.on("change", function(){
+                if(sizedd.val()==='None'){
+                   sunburst.settings.set("sizeField", null);
+                }
+                else{
+                   sunburst.settings.set("sizeField", sizedd.val());
+                }
+            });
+        });
+</script>   
+{% endblock js %}

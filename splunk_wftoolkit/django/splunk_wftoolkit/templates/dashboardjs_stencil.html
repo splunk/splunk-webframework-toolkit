@@ -1,0 +1,224 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Toolkit Dashboards{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+
+    <style>
+        .span-full {
+            width: 100%;
+        }
+        .span-half {
+            width: 50%;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-body container-fluid main-section-body">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Basic Dashboard Using Javascript</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 1</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        This is an example of a basic dashboard. To edit this page edit <strong>splunk_wftoolkit/django/splunk_wftoolkit/templates/dashboardjs.html</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-half">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 2</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Add content to this cell. See the template comments for more.</p>
+                        
+                        <!-- 
+                        When creating views with javascript, we don't need any Django tags.
+                        views can be attached anywhere in the html DOM deemed necessary,
+                        but it is convenient to have hooks to hang them on. In this page 
+                        we are using hooks with ids (like the following) in every cell that 
+                        we will attach views to in script later. 
+                        -->
+                        <div id="cell2-hook"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell span-half">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 3</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Add content to this cell. See the template comments for more.</p>
+
+                        <!-- 
+                        Here is another hook to add things to cell 3. See the javascript section for more.
+                        -->
+                        <div id="cell3-hook"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 4</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Add content to this cell. See the template comments for more.</p>
+
+                        <!-- 
+                        Here is another hook to add things to cell 4. See the javascript section for more.
+                        -->
+                        <div id="cell4-hook"></div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Adding a Searchbar</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 5</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        Here we will insert a searchbar that affects a search. In this case the searchbar is created in javascript and attached here. See the comments in source for more.
+                        </p>
+
+                        <!-- 
+                        Here is another hook to add things to cell 5. See the javascript section for more.
+                        -->
+                        <div id="cell5-hook"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell span-full">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Cell 6</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                        Add a view here with the same manager as the searchbar. Again, create it in javascript and attach it here.
+                        </p>
+
+                        <!-- 
+                        Here is another hook to add things to cell 5. See the javascript section for more.
+                        -->
+                        <div id="cell6-hook"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            
+{% endblock content%}
+
+{% block js %}    
+    <script>
+    // When working with splunk components in javascript, we want to make sure that
+    // the necessary libraries are loaded before we use them. We use requirejs to 
+    // load the splunk mvc controler and other libraries. Inside of the callback,
+    // the dependencies we need will be defined. Here we require the necessary 
+    // components for this sample, and assign them to variable in the callback
+    // function signature. NOTE: dependencies must be required and assigned to 
+    // variables in the SAME ORDER. 
+ 
+    require(
+        ["splunkjs/ready!", 
+        "underscore",
+        "splunkjs/mvc/chartview",
+        "splunkjs/mvc/tableview",
+        "splunkjs/mvc/searchmanager",
+        "splunkjs/mvc/singleview" ], 
+        function(
+                mvc, 
+                _,
+                ChartView,
+                TableView,
+                SearchManager,
+                SingleView
+    ) {
+        
+        // Here, the required libraries are ready. 
+
+        // TODO: add code to create elements in javascript. For each view 
+        // we need to create the view, tell it what search manager to use (which
+        // we will create later), and tell it which $el in the DOM to hang on. 
+        // For example, to create a chart in cell 2 (on cell2-hook):
+        //
+        // new ChartView({
+        //     id: "chart1",
+        //     managerid: "example-search1",
+        //     el: $("#cell2-hook")
+        // }).render();
+
+        // TODO: create more views in the various cells
+
+
+        // TODO: create managers for views to get data from. Views need
+        // search managers to get data. We create them in a very similar
+        // way to creating views. They should have an id which views can
+        // refer to, but they do not need to be put into the DOM. For example,
+        // to creat a manager with a simple search:
+        //
+        // new SearchManager({
+        //     id: "example-search1",
+        //     earliest_time: "-24h@h",
+        //     latest_time: "now",
+        //     search: "index=_internal | stats count by sourcetype" 
+        // });
+
+        // TODO: try adding a searchbar to cell 5 (remember, you must require
+        // the necessary library) and a search for it to bind to. Also, add
+        // a control (such as a table) to display the data. In order for the 
+        // search bar to modify the search, you must also hook into its change
+        // event and update the manager. For example:
+        //
+        // searchbar.on("change", function() {
+        //    manager.set("search", searchbar.val()); 
+        // });
+
+
+    });
+       
+    </script>
+{% endblock js %}
