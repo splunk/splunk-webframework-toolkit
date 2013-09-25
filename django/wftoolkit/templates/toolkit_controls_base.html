@@ -6,6 +6,7 @@
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}wftoolkit/prettify.css"/>
 {% endblock css %}
 
 {% block content %}
@@ -13,21 +14,6 @@
     <div class="row">
         <div class="span12 dashboard-header clearfix">
             <h2> {% block heading %}Toolkit Component Sample{% endblock heading %} </h2>
-        </div>
-    </div>
-
-    <div class="dashboard-row">
-        <div class="dashboard-cell" style="width: 100%;">
-            <div class="dashboard-panel">
-                <div class="dashboard-element">
-                    <div class="panel-head">
-                    </div>
-
-                    <div class="panel-body">
-                        <p>{% block explanation %}This is a toolkit control.{% endblock explanation %}</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -52,15 +38,30 @@
                     </div>
 
                     <div class="panel-body html">
-                        {% block options %}<p>Explanation of options</p>{% endblock options %}
+                        {% block usage %}<p>Explanation of usage</p>{% endblock usage %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   <!--  <div class="dashboard-row">
-        
-    </div> -->
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Example Code</h3>
+                    </div>
+
+                    <div class="panel-body html">
+<pre class="prettyprint linenums lang-js">
+&ltdiv id="example-chart"&gt&lt/div&gt
+&ltscript&gt{% block codesample %}{% endblock codesample %}&lt/script&gt
+</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content%}
 
@@ -68,6 +69,20 @@
 
 {% endblock managers %}
 
-{% block js %}    
+{% block js %}
+<script type="text/javascript">
+require.config({
+    shim: {
+        "wftoolkit/prettify": {
+            deps: [],
+            exports: "prettyPrint"
+        } 
+    }
+});
+require(["wftoolkit/prettify"], function(prettyPrint) {
+    //formats code samples
+    prettyPrint();
+});    
+</script>
 
 {% endblock js %}

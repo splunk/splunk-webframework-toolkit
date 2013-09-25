@@ -8,7 +8,7 @@
 {% block css %}
 {{block.super}}
 <style type="text/css">
-#bubble-chart1{
+#example-chart{
     height: 500px;
 }
 </style>
@@ -42,8 +42,7 @@
                         <h3>No Options</h3>
                     </div>
                     <div class="panel-body">
-                        <div id="bubble-chart1"></div>
-                        <div id="nameFieldSelect"></div>
+                        <div id="example-chart"></div>
                     </div>
                 </div>
             </div>
@@ -56,7 +55,7 @@
 
     {% searchmanager id="search1" search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name' %}
 
-    {% searchmanager id="search2" search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=30' %}
+    {% searchmanager id="example-search" search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=30' %}
     {% searchmanager id="fieldSearch" search='| inputlookup faa.demo.csv | head 5000 | fieldsummary | where count>20' rf="*" %}
 
 {% endblock managers %}
@@ -72,6 +71,7 @@
         "wftoolkit/bubblechart",
         "splunkjs/mvc/dropdownview",
         "wftoolkit/sankeychart",
+        "wftoolkit/forcedirected",
         ], 
         function(
             mvc, 
@@ -80,27 +80,15 @@
             $,
             BubbleChart,
             DropdownView,
-            Sankey
+            SankeyChart,
+            ForceDirected
         ){
-            var bubbles = new BubbleChart({
-                'id' : 'bubble-chart1',
-                'managerid' : 'search2',
-                'el' : $('#bubble-chart1')
+            var forcegraph = new ForceDirected({
+                'id' : 'example',
+                'managerid' : 'example-search',
+                'el' : $('#example-chart')
             }).render();
 
-            var dropdown = new DropdownView({
-                            'id' : 'nameFieldSelect',
-                            'valueField' : 'field',
-                            'choices' : [
-                                {label: "Origin City", value: "OriginCityName"},
-                                {label: "Origin State", value: "OriginState"}
-                            ],
-                            'el' : $('#nameFieldSelect')
-            }).render()
-
-            dropdown.on("change", function(){
-                bubbles.settings.set("nameField", dropdown.val());
-            });
         });
 </script>
 

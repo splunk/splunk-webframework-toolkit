@@ -116,7 +116,7 @@ define(function(require, exports, module) {
             var containerHeight = this.$el.height();
             var containerWidth = this.$el.width(); 
 
-             // Clear svg
+            // Clear svg
             var svg = $(viz.svg[0]);
             svg.empty();
             svg.height(containerHeight);

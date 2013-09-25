@@ -32,11 +32,15 @@ define(function(require, exports, module) {
 
     var SankeyChart = SimpleSplunkView.extend({
         className: "splunk-toolkit-sankey",
+
+        options: {
+            managerid: null,   
+            data: "preview", 
+        },
         
         // This is how we extend the SimpleSplunkView's options value for
         // this object, so that these values are available when
         // SimpleSplunkView initializes.
-        
         initialize: function() {
             _.extend(this.options, {
                 formatName: _.identity,
