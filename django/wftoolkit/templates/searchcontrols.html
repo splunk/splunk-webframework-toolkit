@@ -10,7 +10,12 @@
 <link rel="stylesheet" href="{{STATIC_URL}}wftoolkit/custom.css"/>
 
 <style type="text/css">
-
+    .allow-overflow {
+        /* panel-body sets overflow: hidden, so we need
+        to override it so that we can properly render the 
+        search control popup */
+        overflow: visible !important;
+    }
 </style>
 {% endblock css %}
 
@@ -26,7 +31,7 @@
         <div class="dashboard-cell" >
             <div class="dashboard-panel">
                 <div class="dashboard-element">
-                    <div class="panel-body html">
+                    <div class="panel-body html allow-overflow">
                         <h3>Search bar</h3>
                         <p>The <b>SearchBar</b> view represents a search input that can be bound to a search manager. However, unlike most other views, <b>SearchBar</b> provides a query <i>to</i> the search manager and modifies it rather than taking results <i>from</i> the search manager.</p>
 
