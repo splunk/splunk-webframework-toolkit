@@ -75,6 +75,7 @@
         "wftoolkit/sunburst",
         "wftoolkit/parallelsets",
         "wftoolkit/parallelcoords",
+        "wftoolkit/globe",
         ], 
         function(
             mvc, 
@@ -87,9 +88,10 @@
             ForceDirected,
             Sunburst,
             ParallelSets,
-            Parallelcoords
+            Parallelcoords,
+            Globe
         ){
-            var coords = new Parallelcoords({
+            var globe = new Globe({
                 'id' : 'example',
                 'managerid' : 'example-search',
                 'el' : $('#example-chart')

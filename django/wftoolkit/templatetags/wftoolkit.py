@@ -4,17 +4,6 @@ from splunkdj.templatetags.tagutils import component_context
 register = template.Library()
 
 @register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def globe(context, id, *args, **kwargs):
-    return component_context(
-        context, 
-        "splunk-toolkit-globe",        # Splunk registry name
-        id, 
-        "view",
-        "wftoolkit/globefx",  # Path to javascript library
-        kwargs
-    )
-
-@register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
 def sankey(context, id, *args, **kwargs):
     return component_context(
         context, 
@@ -26,13 +15,13 @@ def sankey(context, id, *args, **kwargs):
     )
 
 @register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def calheat(context, id, *args, **kwargs):       # The template tag
+def calendarheatmap(context, id, *args, **kwargs):       # The template tag
     return component_context(
         context,
-        "calheat",                           # The custom view's CSS class name
+        "calendarheatmap",                           # The custom view's CSS class name
         id,
         "view",
-        "wftoolkit/calheat",             # Path to the JavaScript class/file for the view
+        "wftoolkit/calendarheatmap",             # Path to the JavaScript class/file for the view
         kwargs
     )
 

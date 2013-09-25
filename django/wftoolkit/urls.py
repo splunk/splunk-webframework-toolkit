@@ -14,14 +14,12 @@ urlpatterns = patterns('',
     url(r'^map/$', render('wftoolkit:map.html'), name='map'),
     # Toolkit Components
     url(r'^sankey/$', render('wftoolkit:sankey.html'), name='sankey'),
-    url(r'^globe/$', render('wftoolkit:globe.html'), name='globe'),
     url(r'^bubble_chart/$', render('wftoolkit:bubble_chart.html'), name='bubble_chart'),
     url(r'^forcedirected/$', render('wftoolkit:forcedirected.html'), name='forcedirected'),
-    url(r'^calheat/$', render('wftoolkit:calheat.html'), name='calheat'),
+    url(r'^calendarheatmap/$', render('wftoolkit:calendarheatmap.html'), name='calendarheatmap'),
     url(r'^parcoords/$', render('wftoolkit:parallelcoords.html'), name='parallelcoords'),
     url(r'^parallelsets/$', render('wftoolkit:parallelsets.html'), name='parallelsets'),
     url(r'^sunburst/$', render('wftoolkit:sunburst.html'), name='sunburst'),
-    url(r'^heatwave/$', render('wftoolkit:heatwave.html'), name='heatwave'),
     # Examples
     url(r'^dashboarddj/$', render('wftoolkit:dashboarddj.html'), name='dashboarddj'),
     url(r'^dashboardjs/$', render('wftoolkit:dashboardjs.html'), name='dashboardjs'),
@@ -36,21 +34,13 @@ urlpatterns = patterns('',
     url(r'^multidropdown/$', render('wftoolkit:multidropdown.html'), name='multidropdown'),
     url(r'^search/$', render('wftoolkit:search.html'), name='search'),
     url(r'^interactive/$', render('wftoolkit:interactive.html'), name='interactive'),
-    url(r'^tableexpand/$', render('wftoolkit:tableexpand.html'), name='tableexpand'),
     url(r'^chartclick/$', render('wftoolkit:chartclick.html'), name='chartclick'),
-    url(r'^custom_table_expand/$', render('wftoolkit:custom_table_expand.html'), name='custom_table_expand'),
     url(r'^custom_table_cells/$', render('wftoolkit:custom_table_cells.html'), name='custom_table_cells'),
-    url(r'^drilldown/$', render('wftoolkit:drilldown.html'), name='drilldown'),
-    url(r'^drilldown_target/$', render('wftoolkit:drilldown_target.html'), name='drilldown_target'),
     url(r'^databindingjs/$', render('wftoolkit:databindingjs.html'), name='databindingjs'),
     url(r'^maps/$', render('wftoolkit:maps.html'), name='maps'),
-    #TODO: skipped permalinking
-    #TODO: skipped the sankey pages
 
     #Extended examples
-    url(r'^airline_drilldown/$', render('wftoolkit:airline_drilldown.html'), name='airline_drilldown'),
     url(r'^d3_chart/$', render('wftoolkit:d3_chart.html'), name='d3_chart'),
-    url(r'^bubble_chart_examples/$', render('wftoolkit:bubble_chart_examples.html'), name='bubble_chart_examples'),
     url(r'^json_viewer/$', render('wftoolkit:json_viewer.html'), name='json_viewer'),
     url(r'^setup/$', 'wftoolkit.views.setup', name='setup'),
     # Code Stencils
@@ -58,4 +48,6 @@ urlpatterns = patterns('',
     url(r'^dashboardjs_stencil/$', render('wftoolkit:dashboardjs_stencil.html'), name='dashboardjs_stencil'),
     url(r'^dashboard_stencil1/$', render('wftoolkit:dashboard_stencil1.html'), name='dashboard_stencil1'),
     url(r'^dashboard_stencil2/$', render('wftoolkit:dashboard_stencil2.html'), name='dashboard_stencil2'),
+
+    url(r'^test/$', render('wftoolkit:test.html'), name='test'),
 )
