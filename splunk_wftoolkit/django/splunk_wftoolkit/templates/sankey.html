@@ -77,7 +77,7 @@
 
 {% block managers %}
 
-{% searchmanager id="search" search='| inputlookup musicdata.csv | stats count by artist_name, eventtype | where (eventtype="ua-mobile-android" OR eventtype="ua-mobile-ipad" OR eventtype="ua-mobile-blackberry" OR eventtype="ua-mobile-iphone" OR eventtype="ua-mobile-ipod")' %}
+    {% searchmanager id="search" search='| inputlookup musicdata.csv | stats count by artist_name, eventtype | where (eventtype="ua-mobile-android" OR eventtype="ua-mobile-ipad" OR eventtype="ua-mobile-blackberry" OR eventtype="ua-mobile-iphone" OR eventtype="ua-mobile-ipod")' cache=True %}
 
 {% endblock managers %}
 

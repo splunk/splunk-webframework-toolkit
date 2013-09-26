@@ -53,7 +53,7 @@
 
 {% block managers %}
 
-    {% searchmanager id="search1" search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name' %}
+    {% searchmanager id="search1" search='| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by artist_name, track_name' cache=True %}
 
     {% searchmanager id="example-search" search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=20' %}
     {% searchmanager id="fieldSearch" search='| inputlookup faa.demo.csv | head 5000 | fieldsummary | where count>20' rf="*" %}

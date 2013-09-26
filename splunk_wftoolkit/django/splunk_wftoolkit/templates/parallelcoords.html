@@ -74,6 +74,7 @@
 
     {% searchmanager id="search1"
         search='| inputlookup faa.demo.csv | search DestCityName="*, NY" OR DestCityName="*, CA" OR DestCityName="*, GA" OriginCityName="Seattle, WA" OR OriginCityName="San FranCisco, CA" OR OriginCityName="New York, NY" AirlineDescription=*| head 10000 | fields AirlineDescription OriginCityName DestCityName'
+        cache=True
     %}
 
 {% endblock managers %}

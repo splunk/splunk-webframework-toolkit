@@ -81,6 +81,7 @@
 
     {% searchmanager id="search1"
         search='| inputlookup faa.demo.csv | search OriginCityName="*, CA" DestState=* | head 40 | table AirlineDescription, OriginCityName, DestCityName'
+        cache=True
     %}
 
 {% endblock managers %}
