@@ -59,7 +59,7 @@
         <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil2/">Multi-panel dashboard</a>
     </collection>
 
-    <collection label="Useful Links">
+    <collection label="More Info">
         <a href="http://dev.splunk.com">Splunk Developer Portal</a>
         <a href="http://dev.splunk.com/view/web-framework/SP-CAAAER6">Web Framework Documentation</a>
         <a href="http://docs.splunk.com/Documentation/WebFramework">Web Framework Component Reference</a>
