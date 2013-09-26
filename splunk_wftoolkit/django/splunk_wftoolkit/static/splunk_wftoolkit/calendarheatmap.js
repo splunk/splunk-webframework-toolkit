@@ -89,7 +89,6 @@ require.config({
             data: "preview",  // Results type
             domain: 'hour', // the largest unit it will differentiate by in squares
             subdomain: 'min', // the smaller unit the calheat goes off of
-            start: 'current', // which data point to start the display at
 
             options: {} // the default for custom heatmap options.
         },
