@@ -1,57 +1,69 @@
 <nav color="#0C8F98">
     <view name="default" default="true"/>
     <a href="/dj/redirector/splunk_wftoolkit/home">Home</a>
-    <a href="/dj/redirector/splunk_wftoolkit/basics">Basics</a>
-    <collection label="Framework Components">
-        <a name="managers" href="/dj/redirector/splunk_wftoolkit/managers">Managers</a>        
-        <a name="charts" href="/dj/redirector/splunk_wftoolkit/charts">Charts</a>        
-        <a name="tables" href="/dj/redirector/splunk_wftoolkit/tables">Tables</a>        
-        <a name="forms" href="/dj/redirector/splunk_wftoolkit/forms">Forms</a>        
-        <a name="dataview" href="/dj/redirector/splunk_wftoolkit/dataview">Dataview</a>        
-        <a name="searchcontrols" href="/dj/redirector/splunk_wftoolkit/searchcontrols">Search Controls</a>        
-        <a name="map" href="/dj/redirector/splunk_wftoolkit/map">Map</a>        
+    <a href="/dj/redirector/splunk_wftoolkit/basics">Getting Started</a>
+
+    <collection label="Web Framework Components">
+        <a name="managers" href="/dj/redirector/splunk_wftoolkit/managers">Search managers</a>
+        <a name="charts" href="/dj/redirector/splunk_wftoolkit/charts">Charts</a>
+        <a name="tables" href="/dj/redirector/splunk_wftoolkit/tables">Tables</a>
+        <a name="forms" href="/dj/redirector/splunk_wftoolkit/forms">Forms</a>
+        <a name="searchcontrols" href="/dj/redirector/splunk_wftoolkit/searchcontrols">Search controls</a>
+        <a name="map" href="/dj/redirector/splunk_wftoolkit/map">Map</a>
+        <a name="dataview" href="/dj/redirector/splunk_wftoolkit/dataview">Data template</a>
     </collection>
+
     <collection label="Toolkit Components">
-        <a href="/dj/redirector/splunk_wftoolkit/sankey">Sankey Chart</a>
-        <a href="/dj/redirector/splunk_wftoolkit/bubble_chart">Bubble Chart</a>
-        <a href="/dj/redirector/splunk_wftoolkit/forcedirected">Force Directed</a>
-        <a href="/dj/redirector/splunk_wftoolkit/calendarheatmap">Calendar Heatmap</a>
-        <a href="/dj/redirector/splunk_wftoolkit/parallelcoords">Parallel Coordinates</a>
-        <a href="/dj/redirector/splunk_wftoolkit/parallelsets">Parallel Sets</a>
+        <a href="/dj/redirector/splunk_wftoolkit/sankey">Sankey chart</a>
+        <a href="/dj/redirector/splunk_wftoolkit/bubble_chart">Bubble chart</a>
+        <a href="/dj/redirector/splunk_wftoolkit/forcedirected">Force directed</a>
+        <a href="/dj/redirector/splunk_wftoolkit/calendarheatmap">Calendar heatmap</a>
+        <a href="/dj/redirector/splunk_wftoolkit/parallelcoords">Parallel coordinates</a>
+        <a href="/dj/redirector/splunk_wftoolkit/parallelsets">Parallel sets</a>
         <a href="/dj/redirector/splunk_wftoolkit/sunburst">Sunburst</a>
     </collection>
+
     <collection label="Examples">
         <a href="/dj/redirector/splunk_wftoolkit/dashboarddj">Dashboard in Django</a>
         <a href="/dj/redirector/splunk_wftoolkit/dashboardjs">Dashboard in JavaScript</a>
-        <a href="/dj/redirector/splunk_wftoolkit/savedsearch">Saved Search</a>
-        <a href="/dj/redirector/splunk_wftoolkit/postprocess">Post Process</a>
-        <a href="/dj/redirector/splunk_wftoolkit/cache">Caching</a>
-        <a href="/dj/redirector/splunk_wftoolkit/form">Forms</a>
-        <a href="/dj/redirector/splunk_wftoolkit/cascade">Cascading Inputs</a>
-        <a href="/dj/redirector/splunk_wftoolkit/properties">Search Properties</a>
-        <a href="/dj/redirector/splunk_wftoolkit/timerange">Time Range Pickers</a>
-        <a href="/dj/redirector/splunk_wftoolkit/timerange_group">Time Range Groups</a>
-        <a href="/dj/redirector/splunk_wftoolkit/multidropdown">Multidropdown</a>
-        <a href="/dj/redirector/splunk_wftoolkit/search">Search Timeline UI</a>
-        <a href="/dj/redirector/splunk_wftoolkit/interactive">Interactive Views</a>
-        <a href="/dj/redirector/splunk_wftoolkit/chartclick">Chart Clicks</a>
-        <a href="/dj/redirector/splunk_wftoolkit/custom_table_cells">Custom Table Cells</a>
-        <a href="/dj/redirector/splunk_wftoolkit/databindingjs">Databinding in JavaScript</a>
+
+        <a href="/dj/redirector/splunk_wftoolkit/savedsearch">Saved reports</a>
+        <a href="/dj/redirector/splunk_wftoolkit/postprocess">Post-process searches</a>
+        <a href="/dj/redirector/splunk_wftoolkit/properties">Search properties</a>
+        <a href="/dj/redirector/splunk_wftoolkit/cache">Cached searches</a>
+
+        <a href="/dj/redirector/splunk_wftoolkit/databindingjs">Databinding with tokens</a>
+
+        <a href="/dj/redirector/splunk_wftoolkit/form">Form inputs with tokens</a>
+        <a href="/dj/redirector/splunk_wftoolkit/cascade">Cascading form inputs</a>
+        <a href="/dj/redirector/splunk_wftoolkit/multidropdown">Multidropdown lists</a>
+
+        <a href="/dj/redirector/splunk_wftoolkit/search">Search timeline</a>
+        <a href="/dj/redirector/splunk_wftoolkit/timerange">Time range inputs</a>
+        <a href="/dj/redirector/splunk_wftoolkit/timerange_group">Grouped time range input</a>
+
+        <a href="/dj/redirector/splunk_wftoolkit/interactive">Interactive views</a>
+        <a href="/dj/redirector/splunk_wftoolkit/chartclick">Chart clicks</a>
+        <a href="/dj/redirector/splunk_wftoolkit/custom_table_cells">Custom tables</a>
         <a href="/dj/redirector/splunk_wftoolkit/maps">Maps</a>
+
+        <a href="/dj/redirector/splunk_wftoolkit/d3_chart">NVD3 charts</a>
+        <a href="/dj/redirector/splunk_wftoolkit/json_viewer">JSON results viewer</a>
+        <a href="/dj/redirector/splunk_wftoolkit/setup">Setup view for Django</a>
     </collection>
-    <collection label="Extended Examples">
-        <a href="/dj/redirector/splunk_wftoolkit/d3_chart">NVD3 Charts</a>
-        <a href="/dj/redirector/splunk_wftoolkit/json_viewer">Splunk JSON Results Viewer</a>
-        <a href="/dj/redirector/splunk_wftoolkit/setup">Setup View (Basic)</a>
+
+    <collection label="Layout Templates">
+        <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Basic dashboard for Django</a>
+        <a href="/dj/redirector/splunk_wftoolkit/dashboardjs_stencil/">Basic dashboard for JavaScript</a>
+        <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil1/">Single-panel dashboard</a>
+        <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil2/">Multi-panel dashboard</a>
     </collection>
-    <collection label="Code Stencils">
-        <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Dashboard Example in Django</a>
-        <a href="/dj/redirector/splunk_wftoolkit/dashboardjs_stencil/">Dashboard Example in JavaScript</a>
-        <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil1/">Simple Stencil</a>
-        <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil2/">Multiple Row Stencil</a>
-    </collection>
+
     <collection label="Useful Links">
-        <a href="http://dev.splunk.com/view/app-framework/SP-CAAAEMA">Framework Documentation</a>
-        <a href="http://apps.splunk.com/">Splunkbase</a>
+        <a href="http://dev.splunk.com">Splunk Developer Portal</a>
+        <a href="http://dev.splunk.com/view/web-framework/SP-CAAAER6">Web Framework Documentation</a>
+        <a href="http://docs.splunk.com/Documentation/WebFramework">Web Framework Component Reference</a>
+        <a href="http://apps.splunk.com/">Splunk&gt;Apps</a>
+        <a href="https://github.com/splunk">Splunk on GitHub</a>
     </collection>
 </nav>
