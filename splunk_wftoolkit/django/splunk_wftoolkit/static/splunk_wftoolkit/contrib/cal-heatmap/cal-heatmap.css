@@ -3,160 +3,108 @@
 
 .graph
 {
-	clear: both;
-	display: block;
-	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
-	overflow: hidden;
-	margin: 20px;
+    clear: both;
+    display: block;
+    font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+    overflow: hidden;
 }
 
 .graph-label
 {
-	fill: #999;
-	font-size: 10px
+    fill: #999;
+    font-size: 10px
+}
+
+.graph, .graph-legend rect {
+    shape-rendering: crispedges
 }
 
 .graph-rect
 {
-	fill: #ededed;
-	shape-rendering: crispedges;
+    fill: #ededed;
 }
 
-.graph-rect:hover
+.graph rect:hover
 {
-	/*stroke: #000;
-	stroke-width: 1px*/
-
-	fill: #ffffff;
-
-}
-
-.graph-legend
-{
-	margin-left: 20px;
+    stroke: #000;
+    stroke-width: 1px
 }
 
 .subdomain-text {
-	font-size: 8px;
-	fill: #999;
-	pointer-events: none;
+    font-size: 8px;
+    fill: #999;
+    pointer-events: none;
 }
 
 .hover_cursor:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .qi {
-	background-color: #999;
-	fill: #999;
+    background-color: #999;
+    fill: #999;
 }
 
 .q0
 {
-	background-color: #fff;
-	fill: #fff;
-	stroke: #ededed
+    background-color: #fff;
+    fill: #fff;
+    stroke: #ededed
 }
 
 .q1
 {
-	background-color: #dae289;
-	fill: #dae289
+    background-color: #dae289;
+    fill: #dae289
 }
 
 .q2
 {
-	background-color: #cedb9c;
-	fill: #9cc069
+    background-color: #cedb9c;
+    fill: #9cc069
 }
 
 .q3
 {
-	background-color: #b5cf6b;
-	fill: #669d45
+    background-color: #b5cf6b;
+    fill: #669d45
 }
 
 .q4
 {
-	background-color: #637939;
-	fill: #637939
+    background-color: #637939;
+    fill: #637939
 }
 
 .q5
 {
-	background-color: #3b6427;
-	fill: #3b6427
-}
-
-.q6 {
-	background-color: #1d3213;
-	fill: #1d3213
+    background-color: #3b6427;
+    fill: #3b6427
 }
 
 rect.highlight
 {
-	stroke:#444;
-	stroke-width:1;
+    stroke:#444;
+    stroke-width:1;
 }
 
 text.highlight
 {
-	fill: #444;
+    fill: #444;
 }
 
 rect.now
 {
-	stroke: red;
+    stroke: red;
 }
 
 text.now
 {
-	fill: red;
-	font-weight: 800;
+    fill: red;
+    font-weight: 800;
 }
 
 .domain-background {
-	fill: none;
-	shape-rendering: crispedges;
+    fill: none;
+    shape-rendering: crispedges;
 }
-
-.btn {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background-color: #F5F5F5;
-    background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
-    background-repeat: repeat-x;
-    border-color: #CCCCCC #CCCCCC #B3B3B3;
-    border-image: none;
-    border-radius: 4px 4px 4px 4px;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-    color: #333333;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 0;
-    padding: 4px 12px;
-    text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    vertical-align: middle;
-}
-
-/*.floatleft {
-	float: left;
-}
-
-.buttons {
-	float:none;
-	margin-top:20px;
-	display: table-cell !important;
-}
-
-#myheat{
-	display: table;
-}*/
-

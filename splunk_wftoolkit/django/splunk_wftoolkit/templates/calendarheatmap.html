@@ -17,14 +17,14 @@
                 managerid="search1"
                 domain="hour"
                 subdomain="min"
-                start="current"
         %}
     {% endblock example %}
 
 
 {% block managers %}
     {% searchmanager id="search1"
-        search='index=_internal bytes=*| head 30000'
+        search='index=_internal sourcetype=splunkd_access | head 10000 | timechart span=1m count by status'
+        cache=True
     %}
 {% endblock managers %}
 

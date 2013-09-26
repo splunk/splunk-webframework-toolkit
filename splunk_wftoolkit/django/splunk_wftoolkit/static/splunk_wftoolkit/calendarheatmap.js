@@ -78,6 +78,7 @@ require.config({
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
     require("css!splunk_wftoolkit/contrib/cal-heatmap/cal-heatmap.css");
+    require("css!./calendarheatmap.css");
 
     var calHeat = SimpleSplunkView.extend({
 
@@ -117,93 +118,91 @@ require.config({
         // making the data look how we want it to for updateView to do its job
         // in this case, it looks like this:
         // {timestamp1: count, timestamp2: count, ... }
-        formatData: function(data) {
+        formatData: function(data) {              
             var rawFields = this.resultsModel.data().fields;
             var domain = this.settings.get('domain');
             var subdomain = this.settings.get('subdomain');
             
-            var myfields = _.filter(rawFields, function(d){return d[0] !== "_" });
+            var filteredFields = _.filter(rawFields, function(d){return d[0] !== "_" });
             var objects = _.map(data, function(row) {
                 return _.object(rawFields, row);
             });
+            console.log(objects);
 
-            if (objects && objects[0] != null) {
-                var formattedData = {};
-
-                for(var i = 0; i < objects.length; i++) {
-                    var summed = 0;
-                    var time = new Date(objects[i]._time)
-                    time = time.valueOf() / 1000
-                    for(var j=0; j<myfields.length; j++){
-                        if (!isNaN(parseInt(objects[i][myfields[j]]))) {
-                            summed += parseInt(objects[i][myfields[j]]);
-                        }
-                    formattedData[time] = summed;
-                    }
-                }
-
-                var startOption = this.settings.get('start');
-
-                if (startOption === 'earliest'){
-                    var d = 0;
-                    for (var first in formattedData){
-                        d = first;
-                        break;
-                    }
-                    var earliest = new Date(0); 
-                    earliest.setUTCSeconds(d);
-
-                    start = earliest;
-                }
-                else if (startOption === 'current') {
-                    start = new Date(data[0]._time);
-                }
-                else {
-                    start = startOption;
-                }
-                return {
-                    timestamps: formattedData,
-                    start: start,
-                    domain: domain,
-                    subdomain: subdomain
-                };
+            var series = [];
+            for(var i = 0; i < filteredFields.length; i++) {
+                series.push({ name: filteredFields[i], timestamps: {} });
             }
-
-            return null;
+            
+            _.each(objects, function(object) {
+                // Get the timestamp for this object
+                var time = new Date(object['_time']);
+                var timeValue = time.valueOf() / 1000;
+                
+                // For each actual value, store it in the timestamp object
+                for(var i = 0; i < filteredFields.length; i++) {
+                    var value = object[filteredFields[i]];
+                    series[i].timestamps[timeValue] = parseInt(value, 10);
+                }
+            });
+            
+            return {
+                series: series,
+                domain: domain,
+                subdomain: subdomain,
+                start: new Date(objects[0]['_time']),
+                min: new Date(objects[0]['_time']),
+                max: new Date(objects[objects.length - 1]['_time']),
+            };
         },
 
-        updateView: function(viz, data) {
-            var that = this;
+        updateView: function(viz, data) {     
             userOptions = this.settings.get('options')
-            var i = 0;
-            var uniqueID = this.settings.get('uID');
-
-
-            this.$el.html('');
-            $("<div class='cal-heatmap-buttons'> <button id='previous-cal-heatmap"+uniqueID+"' class='btn' style='margin: 5px;'> Previous </button> <button id='next-cal-heatmap"+uniqueID+"' class='btn' style='margin: 5px;'> Next </button></div>")
-                .appendTo(this.el)[0];
-            var options = _.extend({
-                itemSelector: $("<div/>").appendTo(this.el)[0],
-                previousSelector: "#previous-cal-heatmap"+uniqueID,
-                nextSelector: "#next-cal-heatmap"+uniqueID,
-                data: data.timestamps,
-                domain: data.domain,
-                subdomain: data.subdomain,
-                start: data.start,
-                range: 4,
-                cellSize: 16,
-                cellPadding: 3,
-                domainGutter: 10,
-                highlight: ['now', new Date()],
-                legendMargin: [0, 0, 20, 0],
-                legendCellSize: 14,
-                onClick: function(date, value) { 
-                    that.settings.set("value", date.valueOf());
-                },
-            }, userOptions)        
-            var cal = new CalHeatMap();
             
-            cal.init(options); // create the calendar using either default or user defined options 
+            this.$el.html('');
+            
+            var that = this;
+            _.each(data.series, function(series, idx) {
+                var $el = $("<div class='heatmap-container'/>").appendTo(that.el);
+                var $title = $("<h4 class='heatmap-series-title'>Heatmap for: " + series.name + "</h4>").appendTo($el);
+                var $buttons = $("<div class='heatmap-buttons'/>").appendTo($el);
+                var $prev = $("<a class='heatmap-prev icon-arrow-left'></a>").appendTo($buttons);
+                var $next = $("<a class='heatmap-next icon-arrow-right'></a>").appendTo($buttons);
+                var options = _.extend({
+                    itemSelector: $el[0],
+                    previousSelector: $prev[0],
+                    nextSelector: $next[0],
+                    data: series.timestamps,
+                    domain: data.domain,
+                    subdomain: data.subdomain,
+                    start: data.start,
+                    range: 4,
+                    cellSize: 12,
+                    cellPadding: 3,
+                    domainGutter: 10,
+                    highlight: ['now', new Date()],
+                    legendMargin: [0, 0, 20, 0],
+                    legendCellSize: 14,
+                    minDate: data.min,
+                    maxDate: data.max,
+                    onMinDomainReached: function(hit) {
+                        $prev.attr("disabled", hit ? "disabled" : false);
+                    },
+                    onMaxDomainReached: function(hit) {
+                        $next.attr("disabled", hit ? "disabled" : false);
+                    },
+                    onClick: function(date, value) { 
+                        console.log("BOO", date, value);
+                    },
+                }, userOptions);
+                
+                var cal = new CalHeatMap();
+                cal.init(options); // create the calendar using either default or user defined options */
+                
+                if (idx < data.series.length - 1) {
+                    $("<hr/>").appendTo($el);
+                }
+            });
         }
     });
     return calHeat;
