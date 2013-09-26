@@ -170,7 +170,7 @@
                     nextSelector: $next[0],
                     data: series.timestamps,
                     domain: data.domain,
-                    subdomain: data.subdomain,
+                    subDomain: data.subdomain,
                     start: data.start,
                     range: 4,
                     cellSize: 12,
