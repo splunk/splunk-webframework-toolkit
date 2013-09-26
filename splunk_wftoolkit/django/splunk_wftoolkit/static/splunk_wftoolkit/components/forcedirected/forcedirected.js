@@ -116,6 +116,7 @@ define(function(require, exports, module) {
             this.settings.on("change:gravity", this._onDataChanged, this);
             this.settings.on("change:linkDistance", this._onDataChanged, this);
             this.settings.on("change:directional", this._onDataChanged, this);
+            this.settings.on("change:zoom", this._onDataChanged, this);
             this.settings.on("change:swoop", this._onDataChanged, this);
             this.settings.on("change:isStatic", this._onDataChanged, this);
         },

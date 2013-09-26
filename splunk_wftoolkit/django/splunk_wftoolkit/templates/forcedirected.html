@@ -57,7 +57,9 @@
                 <td><b>bool</b></td>
                 <td><b>true</b></td>
                 <td>Sets the graph layout to be zoomable or not. When false, the user may not zoom</td>
-                <td>-</td>
+                <td>
+                {% checkbox id="zoom-cb" default=True %}
+                </td>
             </tr>
             <tr>
                 <td><code>directional</code></td>
@@ -159,6 +161,7 @@
         ){
             var force = mvc.Components.getInstance("force-directed");
             var directionalcb = mvc.Components.getInstance("directional-cb");
+            var zoomcb = mvc.Components.getInstance("zoom-cb");
             var swoopcb = mvc.Components.getInstance("swoop-cb");
             var isStaticcb = mvc.Components.getInstance("isStatic-cb");
             var linktb = mvc.Components.getInstance("link-tb");
@@ -168,6 +171,9 @@
             // Checkboxes
             directionalcb.on("change", function(){
                 force.settings.set("directional", directionalcb.val());
+            });
+            zoomcb.on("change", function(){
+                force.settings.set("zoom", zoomcb.val());
             });
             swoopcb.on("change", function(){
                 force.settings.set("swoop", swoopcb.val());

@@ -70,11 +70,12 @@
         "jquery",
         "splunkjs/mvc/dropdownview",
         "splunk_wftoolkit/components/bubblechart/bubblechart",
-        "splunk_wftoolkit/components/sankeychart/sankeychart",
+        "splunk_wftoolkit/components/sankey/sankey",
         "splunk_wftoolkit/components/forcedirected/forcedirected",
         "splunk_wftoolkit/components/sunburst/sunburst",
         "splunk_wftoolkit/components/parallelsets/parallelsets",
-        "splunk_wftoolkit/components/parallelcoords/parallelcoords"
+        "splunk_wftoolkit/components/parallelcoords/parallelcoords",
+        "splunk_wftoolkit/components/calendarheatmap/calendarheatmap"
         ], 
         function(
             mvc, 
@@ -88,7 +89,15 @@
             Sunburst,
             ParallelSets,
             Parallelcoords,
+            CalendarHeatmap
         ){
+        var calendar = new CalendarHeatmap({
+            'id' : 'example',
+            'managerid' : 'example-search',
+            'el' : $('#example-chart')
+        }).render();
+
+
         });
 </script>
 
