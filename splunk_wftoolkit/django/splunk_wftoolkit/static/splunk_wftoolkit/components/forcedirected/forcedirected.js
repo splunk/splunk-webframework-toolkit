@@ -331,7 +331,7 @@ define(function(require, exports, module) {
 
             // zoomin'
             function panZoom() {
-                that.svg.attr("transform",
+                graph.attr("transform",
                     "translate(" + d3.event.translate + ")"
                     + " scale(" + d3.event.scale + ")");        
             }
