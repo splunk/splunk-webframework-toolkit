@@ -246,11 +246,11 @@ define(function(require, exports, module) {
 
             link.on('mouseover', function(d) {
                     d3.select(this).classed('linkHighlight', true);
-                    openLinkTooltip(d); 
+                    openLinkTooltip(d, this); 
                 }) 
                 .on('mouseout', function(d) { 
                     d3.select(this).classed('linkHighlight', false);
-                    that.tooltips.close(); 
+                    that.tooltips.close(this); 
                 });
 
             var node = graph.selectAll("circle.node")
@@ -269,11 +269,11 @@ define(function(require, exports, module) {
             node.on('click', function(d) { that.onNodeClick(d); })
                 .on('mouseover', function(d) {                    
                     d3.select(this).classed('nodeHighlight', true);
-                    openNodeTooltip(d); 
+                    openNodeTooltip(d, this); 
                 })
                 .on('mouseout', function(d) { 
                     d3.select(this).classed('nodeHighlight', false);
-                    that.tooltips.close();
+                    that.tooltips.close(this);
                 });
 
             force.nodes(data.nodes)
@@ -337,7 +337,7 @@ define(function(require, exports, module) {
                     + " scale(" + d3.event.scale + ")");        
             }
 
-            function openNodeTooltip(d){
+            function openNodeTooltip(d, node){
                 var groupName;
 
                 if(that.groupNameLookup !== undefined){
@@ -352,10 +352,10 @@ define(function(require, exports, module) {
                         group: groupName    
                     },
                     swatch: that.color(d.group)
-                });
+                }, node);
             }
 
-            function openLinkTooltip(d){
+            function openLinkTooltip(d, node){
                 var groupName;
 
                 d.source.name + ' -> ' + d.target.name +
@@ -373,7 +373,7 @@ define(function(require, exports, module) {
                         source: d.source.name,
                         target: d.target.name    
                     }
-                });
+                }, node);
             }
 
             //TODO: This doesn't seem to be used in this file
@@ -493,24 +493,26 @@ define(function(require, exports, module) {
                     }        
                 }
 
-                this.close = function(){
+                this.close = function(node){
                     // return false;
                     var self = this,
                         dx, dy;
+                        
+                    var mouseCoords = d3.mouse(node);
 
                     if(tooltipTimer !== null){
                         window.clearTimeout(tooltipTimer);
                     }
 
-                    dx = Math.abs(tooltipOpenCoords.x - d3.event.x);
-                    dy = Math.abs(tooltipOpenCoords.y - d3.event.y);
+                    dx = Math.abs(tooltipOpenCoords.x - mouseCoords[0]);
+                    dy = Math.abs(tooltipOpenCoords.y - mouseCoords[1]);
 
                     /*
                     only close the tooltip when the user has moved a certain distance away
                     this helps when an element is very small and the user might have 
                     difficulty keeping their mouse directly over it
                     */
-                    if(dy > 50 || dx > 50){
+                    if(dy > 10 || dx > 10){
                         tooltipIsOpen = false;    
                         tooltipTimer = window.setTimeout(function(){
                             $tooltipContainer.fadeOut(400);
@@ -518,11 +520,12 @@ define(function(require, exports, module) {
                     }
                 };
 
-                this.open = function(layout, data){
+                this.open = function(layout, data, node){
+                    var mouseCoords = d3.mouse(node);
                     tooltipIsOpen = true;
                     tooltipOpenCoords = {
-                        x: d3.event.x,
-                        y: d3.event.y
+                        x: mouseCoords[0] + 6 * 2,
+                        y: mouseCoords[1] + 6 * 3
                     };
                     
                     clearTooltips();
@@ -533,6 +536,10 @@ define(function(require, exports, module) {
                     if(layouts[layout]['swatch'] !== undefined){
                         layouts[layout]['swatch'].show().css('background-color', data.swatch);
                     }
+                    
+                    $tooltipContainer
+                        .css("left", tooltipOpenCoords.x)
+                        .css("top", tooltipOpenCoords.y);
                     $tooltipContainer.fadeIn(400);
                 };
             }
