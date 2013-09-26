@@ -57,11 +57,11 @@
     {% endblock usage%}
 {% block codesample %}
     require([ 
-            "splunkjs/ready!", 
-            "jquery",
-            "splunk_wftoolkit/parallelcoords",
+        "splunkjs/ready!", 
+        "jquery",
+        "splunk_wftoolkit/components/parallelcoords/parallelcoords",
     ], 
-    function(mvc, $,ParallelCoords) {
+    function(mvc, $, ParallelCoords) {
         var coords = new ParallelCoords({
             'id' : 'example',
             'managerid' : 'example-search',

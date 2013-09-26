@@ -68,35 +68,27 @@
         "splunkjs/mvc/utils",
         "underscore",
         "jquery",
-        "splunk_wftoolkit/bubblechart",
         "splunkjs/mvc/dropdownview",
-        "splunk_wftoolkit/sankeychart",
-        "splunk_wftoolkit/forcedirected",
-        "splunk_wftoolkit/sunburst",
-        "splunk_wftoolkit/parallelsets",
-        "splunk_wftoolkit/parallelcoords",
-        "splunk_wftoolkit/globe",
+        "splunk_wftoolkit/components/bubblechart/bubblechart",
+        "splunk_wftoolkit/components/sankeychart/sankeychart",
+        "splunk_wftoolkit/components/forcedirected/forcedirected",
+        "splunk_wftoolkit/components/sunburst/sunburst",
+        "splunk_wftoolkit/components/parallelsets/parallelsets",
+        "splunk_wftoolkit/components/parallelcoords/parallelcoords"
         ], 
         function(
             mvc, 
             utils,
             _, 
             $,
-            BubbleChart,
             DropdownView,
+            BubbleChart,
             SankeyChart,
             ForceDirected,
             Sunburst,
             ParallelSets,
             Parallelcoords,
-            Globe
         ){
-            var globe = new Globe({
-                'id' : 'example',
-                'managerid' : 'example-search',
-                'el' : $('#example-chart')
-            }).render();
-
         });
 </script>
 

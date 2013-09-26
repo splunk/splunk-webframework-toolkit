@@ -103,9 +103,9 @@
     require([ 
         "splunkjs/ready!", 
         "jquery",
-        "splunk_wftoolkit/bubblechart",
+        "splunk_wftoolkit/components/bubblechart/bubblechart",
     ], 
-    function(mvc, $,BubbleChart) {
+    function(mvc, $, BubbleChart) {
         var bubbles = new BubbleChart({
             'id' : 'example',
             'managerid' : 'example-search',

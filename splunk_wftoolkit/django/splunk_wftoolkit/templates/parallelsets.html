@@ -66,9 +66,9 @@
     require([ 
         "splunkjs/ready!", 
         "jquery",
-        "splunk_wftoolkit/parallelsets",
+        "splunk_wftoolkit/components/parallelsets/parallelsets",
     ], 
-    function(mvc, $,ParallelSets) {
+    function(mvc, $, ParallelSets) {
         var sets = new ParallelSets({
             'id' : 'example',
             'managerid' : 'example-search',
