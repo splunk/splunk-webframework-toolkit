@@ -74,6 +74,20 @@
             <td>Indicates the field used to determine the size of the radial groups. The default null value results in sizing based on number of chldren.</td>
             <td>{% dropdown id="size-dropdown" default="count" %}</td>
         </tr>
+        <tr>
+            <td><code>formatName</code></td>
+            <td><b>function</b></td>
+            <td><b>_.identity</b></td>
+            <td>A custom formatting function for node names. Takes each node name as an input and returns a formatted name</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td><code>formatTooltip</code></td>
+            <td><b>function</b></td>
+            <td><b>"{name}: {value}"</b></td>
+            <td>A custom formatting function for tooltips. Takes each node as an input and returns a formatted tooltip string</td>
+            <td>-</td>
+        </tr>
     </table>
     {% endblock usage %}
 {% block codesample %}

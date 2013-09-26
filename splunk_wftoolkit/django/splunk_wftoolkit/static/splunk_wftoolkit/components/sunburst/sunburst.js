@@ -20,20 +20,16 @@ define(function(require, exports, module) {
             // default values
             chartTitle: null,
             sizeField: null,
-            groupingFields: null
+            groupingFields: null,
+            formatName: _.identity,
+            formatTooltip: function(d) {
+                return (d.name || "Total") + ": " + d.value;
+            }
         },
 
         output_mode: "json_rows",
 
         initialize: function() {
-            _.extend(this.options, {
-                formatName: _.identity,
-                formatTitle: function(d) {
-                    return (d.source.name + ' -> ' + d.target.name +
-                            ': ' + d.value); 
-                }
-            });
-
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
             // TODO: enable push
@@ -104,6 +100,8 @@ define(function(require, exports, module) {
 
         updateView: function(viz, data) {
             var that = this;
+            var formatName = this.settings.get("formatName") || _.identity;
+            var formatTooltip = this.settings.get("formatTooltip") || function(d) { return d.name; };
             var containerHeight = this.$el.height();
             var containerWidth = this.$el.width(); 
 
@@ -153,6 +151,9 @@ define(function(require, exports, module) {
                 .attr("d", arc)
                 .style("fill", function(d) {return color((d.children ? d : d.parent).name); })
                 .on("click", click);
+                
+            path.append("title")
+                .text(formatTooltip);
 
             var text = g.append("text")
                 .attr("text-anchor", function(d) {
@@ -166,8 +167,11 @@ define(function(require, exports, module) {
                 })
                 .attr("dy", ".2em")
                 .attr("x", 0)
-                .text(function(d) { return d.name; })
+                .text(function(d) { return formatName(d.name); })
                 .on("click", click);
+                
+            text.append("title")
+                .text(formatTooltip);
 
             function click(d) {
             // fade out all text elements
