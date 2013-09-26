@@ -52,27 +52,6 @@
                             {% table id="bar-table" managerid="example-bar-search" pageSize="5" %}
                         </div>
 
-                        <ul class="nav nav-tabs">
-                            
-                            <li class="active">
-                                <a href="#js" data-toggle="tab">JavaScript</a>
-                            </li>
-                            <li>
-                                <a href="#django" data-toggle="tab">Django</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content code-sample">
-                        <div class="tab-pane django" id="django">
-                            <pre class="prettyprint linenums lang-js">
-&#123;% block content %&#125;
-    &#123;% searchbar id="example-search-bar" managerid="example-bar-search" %&#125;
-    &#123;% table id="bar-table" managerid="example-bar-search" pageSize="5" %&#125;
-&#123;% endblock content %&#125; 
-&#123;% block managers %&#125; 
-    &#123;% searchmanager id="example-bar-search" search="index=_internal | head 100 | timechart count by sourcetype span=100s" %&#125;   
-&#123;% endblock managers %&#125;
-                            </pre>
-                        </div>
                         <div class="tab-pane active js" id="js">
                             <pre class="prettyprint linenums lang-js">
 var SearchBarView = require("splunkjs/mvc/searchbarview");
@@ -152,29 +131,6 @@ timerange.on("change", function() {
                             {% timeline id="example-timeline" managerid="example-timeline-search" %}
                             {% table id="timeline-table" managerid="example-timeline-search" pageSize="5" %}
                         </div>
-
-                        <ul class="nav nav-tabs">
-                            
-                            <li class="active">
-                                <a href="#js2" data-toggle="tab">JavaScript</a>
-                            </li>
-                            <li>
-                                <a href="#django2" data-toggle="tab">Django</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content code-sample">
-                            <div class="tab-pane django" id="django2">
-                                <pre class="prettyprint linenums lang-js">
-&#123;% block content %&#125;
-    &#123;% timerange id="example-timerange" preset="today" managerid="example-timeline-search" %&#125;
-    &#123;% timeline id="example-timeline" managerid="example-timeline-search" %&#125;
-    &#123;% table id="example-table" managerid="example-timeline-search" pageSize="5" %&#125;
-&#123;% endblock content %&#125; 
-&#123;% block managers %&#125; 
-    &#123;% searchmanager id="example-timeline-search" search="index=_internal" preview=True status_buckets=300 %&#125;
-&#123;% endblock managers %&#125;
-                                </pre>
-                            </div>
                             <div class="tab-pane active js" id="js2">
                                 <pre class="prettyprint linenums lang-js">
 var TimeRangeView = require("splunkjs/mvc/timerangeview");
@@ -245,27 +201,6 @@ timeline.on("change", function() {
                             {% timerange id="example-timerange" preset="Last 24 hours" managerid="timerange-search" %}
                             {% single id="timerange-single" managerid="timerange-search" afterLabel="events" %}
                         </div>
-
-                        <ul class="nav nav-tabs">     
-                            <li class="active">
-                                <a href="#js3" data-toggle="tab">JavaScript</a>
-                            </li>
-                            <li>
-                                <a href="#django3" data-toggle="tab">Django</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content code-sample">
-                            <div class="tab-pane django" id="django3">
-                                <pre class="prettyprint linenums lang-js">
-&#123;% block content %&#125;
-    &#123;% timerange id="example-timerange" preset="today" managerid="timerange-search" %&#125;
-    &#123;% single id="timerange-single" managerid="timerange-search" afterLabel="events" %&#125;
-&#123;% endblock content %&#125; 
-&#123;% block managers %&#125; 
-    &#123;% searchmanager id="timerange-search" search="index=_internal | stats count" %&#125;   
-&#123;% endblock managers %&#125;    
-                                </pre>
-                            </div>
                             <div class="tab-pane active js" id="js3">
                                 <pre class="prettyprint linenums lang-js">
 var TimeRangeView = require("splunkjs/mvc/timerangeview");
