@@ -197,7 +197,7 @@ define(function(require, exports, module) {
                     incomingLinks: linksToNodes(e.targetLinks, "source"),
                     outgoingLinks: linksToNodes(e.sourceLinks, "target"),
                 };
-                this.trigger('click:node', clickEvent);
+                that.trigger('click:node', clickEvent);
             });
         },
 
