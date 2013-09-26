@@ -1,10 +1,8 @@
 .splunk-toolkit-force-directed {
-    overflow-y: auto;
+    overflow: hidden;
     font-family: arial;
-    position: relative;
-    height: 95%;
-    width: 95%;
 }
+
 .splunk-toolkit-force-directed circle.node {
     stroke: #fff;
     stroke-width: 1.5px;
