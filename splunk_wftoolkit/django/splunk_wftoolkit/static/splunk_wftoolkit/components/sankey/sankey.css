@@ -15,7 +15,7 @@
     stroke-opacity: 0.2;
 }
 
-.splunk-toolkit-sankey .link:hover {
+.splunk-toolkit-sankey .link:hover, .splunk-toolkit-sankey .link.hovering {
     stroke-opacity: 0.5;
 }
 

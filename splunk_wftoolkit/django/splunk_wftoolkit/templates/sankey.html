@@ -22,11 +22,11 @@
     {% endblock example %}
 
     {% block usage %}
-    <p>The Sankey Chart is good for visualizing the magnitude of flow between nodes. Sources nodes are positioned on the left of the graph and sync nodes on the right. Intermediate nodes are placed in the positioned in between. 
+    <p>The Sankey Chart is good for visualizing the magnitude of flow between nodes. Sources nodes are positioned on the left of the graph and sink nodes on the right. Intermediate nodes are placed in the positioned in between. 
     </p>
         <ul>
             <li>require path: <code>wftoolkit/sankeychart</code></li>
-            <li>The Sankey chart works best for data that includes a source and a sync. Splunk searches that include <code>stats count by &ltsource&gt &ltsync&gt</code> work well.</li>
+            <li>The Sankey chart works best for data that includes a source and a sink. Splunk searches that include <code>stats count by &ltsource&gt &ltsink&gt</code> work well.</li>
         </ul>
         <h4>Example Searches:</h4>
         <div class="well"><ul>
@@ -53,9 +53,16 @@
             <tr>
                 <td><code>formatName</code></td>
                 <td><b>function</b></td>
-                <td><b>undefined</b></td>
+                <td><b>_.identity</b></td>
                 <td>A custom formatting function for node names. Returns takes each node name as an input and returns a formatted name</td>
-                <td>-</td>
+                <td>{% dropdown id="format-name" default="phone" %}</td>
+            </tr>
+            <tr>
+                <td><code>formatTooltip</code></td>
+                <td><b>function</b></td>
+                <td><b>"{source} -> {target}: {value}"</b></td>
+                <td>A custom formatting function for path tooltips. Returns takes each node as an input and returns a formatted tooltip string</td>
+                <td>{% dropdown id="format-tooltip" default="default" %}</td>
             </tr>
         </table>
     {% endblock usage %}
@@ -91,16 +98,59 @@
         // function.  That function takes a name from the search and
         // returns a formatted name.  In this case, replace access_log
         // strings for mobile clients with more readable names.
-        mvc.Components.getInstance('sankey1').settings.set({
-            'formatName': function(name) { 
+        var sankey = mvc.Components.getInstance('sankey1');
+        var formatNameDropdown = mvc.Components.getInstance("format-name");
+        var formatTooltipDropdown = mvc.Components.getInstance("format-tooltip");
+        
+        var NAME_FORMATTERS = {
+            "default": _.identity,
+            "phone": function(name) { 
                 return {
                     'ua-mobile-android': 'Android',
                     'ua-mobile-ipad': 'iPad',
                     'ua-mobile-blackberry': 'Blackberry',
                     'ua-mobile-iphone': 'iPhone',
                     'ua-mobile-ipod': 'iPod'
-                }[name] || name;
+                }[name] || name
+            },
+            "caps": function(name) {
+                return name.toUpperCase();
             }
+        };
+        
+        var TOOLTIP_FORMATTERS = {
+            "default": function(d) {
+                return (d.source.name + ' -> ' + d.target.name +
+                        ': ' + d.value); 
+            },
+            "custom": function(d) { 
+                return _.template("From <%= source.name %> to <%= target.name %>: <%= value %>", d);
+            }
+        };
+        
+        sankey.settings.set({
+            'formatName': NAME_FORMATTERS['phone']
+        });
+        
+        formatNameDropdown.settings.set({
+            "choices": [
+                {label: "Default", value: "default" },  
+                {label: "Phone Names", value: "phone" },  
+                {label: "All Caps", value: "caps" }
+            ]
+        });
+        formatNameDropdown.on("change", function(val) {
+            sankey.settings.set("formatName", NAME_FORMATTERS[val]); 
+        });
+        
+        formatTooltipDropdown.settings.set({
+            "choices": [
+                {label: "Default", value: "default" },  
+                {label: "Custom", value: "custom" }
+            ]
+        });
+        formatTooltipDropdown.on("change", function(val) {
+            sankey.settings.set("formatTooltip", TOOLTIP_FORMATTERS[val]); 
         });
     });
 </script>

@@ -24,7 +24,7 @@ define(function(require, exports, module) {
             managerid: null,   
             data: "preview", 
             formatName: _.identity,
-            formatTitle: function(d) {
+            formatTooltip: function(d) {
                 return (d.source.name + ' -> ' + d.target.name +
                         ': ' + d.value); 
             }
@@ -36,7 +36,7 @@ define(function(require, exports, module) {
         initialize: function() {
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
             
-            this.settings.on("change:formatName change:formatTitle", this.render, this);
+            this.settings.on("change:formatName change:formatTooltip", this.render, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event
@@ -95,7 +95,7 @@ define(function(require, exports, module) {
                 .attr("transform", "translate(" + viz.margin.left + "," + viz.margin.top + ")");
 
             var formatName = this.settings.get('formatName');
-            var formatTitle = this.settings.get('formatTitle');
+            var formatTooltip = this.settings.get('formatTooltip');
 
             var sankey = d3.sankey()
                 .nodeWidth(15)
@@ -118,7 +118,7 @@ define(function(require, exports, module) {
 
             link.append("title")
                   .text(function(d) { 
-                      return formatTitle(d); });
+                      return formatTooltip(d); });
 
             var node = graph.append("g").selectAll(".node")
                   .data(data.nodes)
@@ -133,23 +133,35 @@ define(function(require, exports, module) {
             // correspond to a given node, and then decorate the chart
             // with the names for each node.
             node.append("rect")
-                  .attr("height", function(d) { return d.dy; })
-                  .attr("width", sankey.nodeWidth())
-                  .style("fill", function(d) { d.color = color(d.name.replace(/ .*/, "")); return d.color; })
-                  .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
-                  .append("title")
-                  .text(function(d) { return formatName(d.name) + "\n" + d.value; });
+                .attr("height", function(d) { return d.dy; })
+                .attr("width", sankey.nodeWidth())
+                .style("fill", function(d) { d.color = color(d.name.replace(/ .*/, "")); return d.color; })
+                .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
+                .on("mouseover", function(node) {
+                    var linksToHighlight = link.filter(function(d) {
+                        return d.source.name === node.name || d.target.name === node.name;
+                    });
+                    linksToHighlight.classed('hovering', true);
+                })
+                .on("mouseout", function(node) {
+                    var linksToHighlight = link.filter(function(d) {
+                        return d.source.name === node.name || d.target.name === node.name;
+                    });
+                    linksToHighlight.classed('hovering', false);
+                })
+                .append("title")
+                .text(function(d) { return formatName(d.name) + "\n" + d.value; })
 
             node.append("text")
-                  .attr("x", -6)
-                  .attr("y", function(d) { return d.dy / 2; })
-                  .attr("dy", ".35em")
-                  .attr("text-anchor", "end")
-                  .attr("transform", null)
-                  .text(function(d) { return formatName(d.name); })
-                  .filter(function(d) { return d.x < graphWidth / 2; })
-                  .attr("x", 6 + sankey.nodeWidth())
-                  .attr("text-anchor", "start");
+                .attr("x", -6)
+                .attr("y", function(d) { return d.dy / 2; })
+                .attr("dy", ".35em")
+                .attr("text-anchor", "end")
+                .attr("transform", null)
+                .text(function(d) { return formatName(d.name); })
+                .filter(function(d) { return d.x < graphWidth / 2; })
+                .attr("x", 6 + sankey.nodeWidth())
+                .attr("text-anchor", "start");
 
             // This view publishes the 'click:link' event that
             // other Splunk views can then use to drill down
@@ -167,6 +179,25 @@ define(function(require, exports, module) {
             
             link.on('click', function(e) { 
                 that.trigger('click:link', format_event_data(e)); 
+            });
+            
+            node.on('click', function(e) {
+                var linksToNodes = function(links, type) {
+                    return _.map(links, function(link) {
+                        return {
+                            name: link[type].name,
+                            value: link[type].value
+                        };
+                    });
+                };
+                
+                var clickEvent = {
+                    name: e.name,
+                    value: e.value,
+                    incomingLinks: linksToNodes(e.targetLinks, "source"),
+                    outgoingLinks: linksToNodes(e.sourceLinks, "target"),
+                };
+                this.trigger('click:node', clickEvent);
             });
         },
 
