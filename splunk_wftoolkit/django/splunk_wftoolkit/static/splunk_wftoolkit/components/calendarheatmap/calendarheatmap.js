@@ -162,8 +162,8 @@
                 var $el = $("<div class='heatmap-container'/>").appendTo(that.el);
                 var $title = $("<h4 class='heatmap-series-title'>Heatmap for: " + series.name + "</h4>").appendTo($el);
                 var $buttons = $("<div class='heatmap-buttons'/>").appendTo($el);
-                var $prev = $("<a class='heatmap-prev icon-arrow-left'></a>").appendTo($buttons);
-                var $next = $("<a class='heatmap-next icon-arrow-right'></a>").appendTo($buttons);
+                var $prev = $("<a class='heatmap-prev btn-pill icon-triangle-left'></a>").appendTo($buttons);
+                var $next = $("<a class='heatmap-next btn-pill icon-triangle-right'></a>").appendTo($buttons);
                 var options = _.extend({
                     itemSelector: $el[0],
                     previousSelector: $prev[0],
