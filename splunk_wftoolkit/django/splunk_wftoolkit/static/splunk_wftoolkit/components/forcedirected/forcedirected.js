@@ -149,16 +149,18 @@ define(function(require, exports, module) {
 
             var nodes = {};
             var links = [];
-            data.forEach(function(link) {
+            data.forEach(function(link) {                
                 var sourceName = link[0];
                 var targetName = link[1];
                 var groupName = link[2];
                 var newLink = {};
                 newLink.source = nodes[sourceName] || 
-                    (nodes[sourceName] = {name: sourceName, group: groupName});
+                    (nodes[sourceName] = {name: sourceName, group: groupName, value: 0});
                 newLink.target = nodes[targetName] || 
-                    (nodes[targetName] = {name: targetName, group: groupName});
-                newLink.value = +link.count;
+                    (nodes[targetName] = {name: targetName, group: groupName, value: 0});
+                newLink.value = +link[3];
+                newLink.source.value += newLink.value;
+                newLink.target.value += newLink.value;
                 links.push(newLink);
             });
 
@@ -225,26 +227,39 @@ define(function(require, exports, module) {
               .enter().append("svg:marker")
                 .attr("id", String)
                 .attr("viewBox", "0 -5 10 10")
-                .attr("refX", 15)
-                .attr("refY", -1.5)
+                .attr("refX", 0)
+                .attr("refY", 0)
                 .attr("markerWidth", 6)
                 .attr("markerHeight", 6)
+                .attr("markerUnits","userSpaceOnUse")
                 .attr("orient", "auto")
               .append("svg:path")
             .attr("d", "M0,-5L10,0L0,5");
 
             var link = graph.selectAll("line.link")
-                    .data(data.links)
-                    .enter().append('path')
-                        .attr("class", "link")
-                        .attr("marker-end", function(d) {
-                            if(that.isDirectional){
-                                return "url(#" + "arrowEnd" + ")";
-                            }
-                        })
-                        .style("stroke-width", function(d) { return Math.max(Math.round(Math.log(d.value)), 1); });
+                .data(data.links)
+                .enter().append('path')
+                    .attr("class", "link")
+                    .attr("marker-end", function(d) {
+                        if(that.isDirectional){
+                            return "url(#" + "arrowEnd" + ")";
+                        }
+                    })
+                    .style("stroke-width", function(d) { 
+                        return Math.max(Math.round(Math.log(d.value)), 1); 
+                    });
 
-            link.on('mouseover', function(d) {
+            link
+                .on('click', function(d) {
+                    that.trigger('click:link', {
+                        source: d.source.name,
+                        sourceGroup: d.source.group,
+                        target: d.target.name,
+                        targetGroup: d.target.group,
+                        value: d.value 
+                    });
+                })
+                .on('mouseover', function(d) {
                     d3.select(this).classed('linkHighlight', true);
                     openLinkTooltip(d, this); 
                 }) 
@@ -256,17 +271,24 @@ define(function(require, exports, module) {
             var node = graph.selectAll("circle.node")
                     .data(data.nodes)
                     .enter().append("svg:circle")
-                        .attr("class", "node")
-                        .attr("r", r - 1)
-                        .style("fill", function(d) {
-                            return that.color(d.group); 
-                        })
-                        .call(force.drag);
+                       .attr("class", "node")
+                       .attr("r", r - 1)
+                       .style("fill", function(d) {
+                           return that.color(d.group); 
+                       })
+                       .call(force.drag);
 
             node.append("title")
                 .text(function(d) { return d.name; });
 
-            node.on('click', function(d) { that.onNodeClick(d); })
+            node
+                .on('click', function(d) { 
+                    that.trigger('click:node', {
+                        name: d.name,
+                        group: d.group,
+                        value: d.value 
+                    });
+                })
                 .on('mouseover', function(d) {                    
                     d3.select(this).classed('nodeHighlight', true);
                     openNodeTooltip(d, this); 
@@ -280,13 +302,21 @@ define(function(require, exports, module) {
                 .links(data.links)
                     .on("tick", function() {
                         link.attr("d", function(d) {
-                            var dx = d.target.x - d.source.x,
-                                dy = d.target.y - d.source.y,
-                                dr = 0;
-                            if(that.swoop){
-                                dr = Math.sqrt(dx * dx + dy * dy);
+                            var diffX = d.target.x - d.source.x;
+                            var diffY = d.target.y - d.source.y;
+                            
+                            // Length of path from center of source node to center of target node
+                            var pathLength = Math.sqrt((diffX * diffX) + (diffY * diffY));
+                            
+                            // x and y distances from center to outside edge of target node
+                            var offsetX = (diffX * (r * 2)) / pathLength;
+                            var offsetY = (diffY * (r * 2)) / pathLength;
+                            
+                            if (!that.swoop) {
+                                pathLength = 0;
                             }
-                            return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+                            
+                            return "M" + d.source.x + "," + d.source.y + "A" + pathLength + "," + pathLength + " 0 0,1 " + (d.target.x - offsetX) + "," + (d.target.y - offsetY);
                         });
 
                         node.attr("cx", function(d) { 
@@ -385,17 +415,6 @@ define(function(require, exports, module) {
                     retVal = name; 
                 }
                 return retVal;
-            }
-
-            function onNodeClick(d) {
-                var context = this.getContext(),
-                    form = context.get('form') || {};
-                form[this.fields.field1] = d.name;
-                form[this.fields.field2] = d.group;
-
-                context.set('form', form);
-                context.set('click', this.moduleId);
-                this.passContextToParent(context);
             }
 
             function highlightNodes(val) {
