@@ -155,15 +155,17 @@ define(function(require, exports, module) {
                 .on("click", click);
 
             var text = g.append("text")
-                .attr("transform", function(d) {
-                    var rot =  computeTextRotation(d);
-                    var scale = '1';
-                    //if(rot>90 && rot< 270) scale='-1';
-                    return "rotate(" + computeTextRotation(d) + ") scale("+scale+" 1)"; 
+                .attr("text-anchor", function(d) {
+                 return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
                 })
-                .attr("x", function(d) { return y(d.y); })
-                .attr("dx", "6") // margin
-                .attr("dy", ".35em") // vertical-align
+                .attr("transform", function(d) {
+                    var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90;
+                    var rotate = angle;
+                    var padding = 5;
+                    return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+                })
+                .attr("dy", ".2em")
+                .attr("x", 0)
                 .text(function(d) { return d.name; })
                 .on("click", click);
 
@@ -181,9 +183,15 @@ define(function(require, exports, module) {
                         var arcText = d3.select(this.parentNode).select("text");
                         // fade in the text element and recalculate positions
                         arcText.transition().duration(750)
-                          .attr("opacity", 1)
-                          .attr("transform", function() { return "rotate(" + computeTextRotation(e) + ")" })
-                          .attr("x", function(d) { return y(d.y); });
+                            .attr("opacity", 1)
+                            .attr("transform", function(d) {
+                                var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90;
+                                var rotate = angle;
+                                var padding = 5;
+                                return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+                            })
+                            .attr("dy", ".2em")
+                            .attr("x", 0)
                       }
                   });
             }
