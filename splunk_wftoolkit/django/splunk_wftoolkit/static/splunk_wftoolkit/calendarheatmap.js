@@ -192,7 +192,8 @@ require.config({
                         $next.attr("disabled", hit ? "disabled" : false);
                     },
                     onClick: function(date, value) { 
-                        console.log("BOO", date, value);
+                        that.trigger('click', { date: date, value: value });
+                        that.settings.set('value', date.valueOf());
                     },
                 }, userOptions);
                 
