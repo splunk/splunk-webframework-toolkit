@@ -69,7 +69,8 @@
 
 {% endblock managers %}
 
-{% block js %}
+{% block _js %}
+{{block.super}}
 <script type="text/javascript">
 require.config({
     shim: {
@@ -85,4 +86,4 @@ require(["splunk_wftoolkit/contrib/prettify"], function(prettyPrint) {
 });    
 </script>
 
-{% endblock js %}
+{% endblock _js %}
