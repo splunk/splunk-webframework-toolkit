@@ -115,6 +115,11 @@
             tensiondd.settings.set("choices", tensionChoices);
             tensiondd.on("change", function(){
                 sets.settings.set("tension", tensiondd.val());
+            });
+
+            sets.on("sort:categories", function(e){
+                console.log("Sort Event");               
+                console.log(e);
             });   
         });
 </script>        

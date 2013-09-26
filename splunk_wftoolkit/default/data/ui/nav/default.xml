@@ -16,7 +16,7 @@
     <collection label="Toolkit Components">
         <a href="/dj/redirector/splunk_wftoolkit/sankey">Sankey chart</a>
         <a href="/dj/redirector/splunk_wftoolkit/bubble_chart">Bubble chart</a>
-        <a href="/dj/redirector/splunk_wftoolkit/forcedirected">Force directed</a>
+        <a href="/dj/redirector/splunk_wftoolkit/forcedirected">Force directed graph</a>
         <a href="/dj/redirector/splunk_wftoolkit/calendarheatmap">Calendar heatmap</a>
         <a href="/dj/redirector/splunk_wftoolkit/parallelcoords">Parallel coordinates</a>
         <a href="/dj/redirector/splunk_wftoolkit/parallelsets">Parallel sets</a>

@@ -37,7 +37,7 @@
             <li>| inputlookup faa.demo.csv | stats count by OriginCityName OriginState cancellation</li>
         </ul>
         </div>
-        <h4>Options:</h4>
+        <h4>Options</h4>
         <table class="table table-striped table-bordered">
             <tr>
                 <td>Option</td>
@@ -75,7 +75,7 @@
                 <td>{% dropdown id="group-dropdown" default="OriginState" %}</td>
             </tr>
         </table>
-        <h4>Events:</h4>
+        <h4>Events</h4>
         <table class="table table-striped table-bordered">
             <tr>
                 <td>Event</td>
@@ -169,6 +169,11 @@
             namedd.settings.set("choices", nameChoices);
             namedd.on("change", function(){
                 bubbles.settings.set("nameField", namedd.val());
+            });
+
+            bubbles.on("click", function(e){
+                console.log("Click Event");
+                console.log(e);
             });
         });
 </script>     

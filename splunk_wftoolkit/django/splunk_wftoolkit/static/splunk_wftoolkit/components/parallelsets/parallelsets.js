@@ -110,13 +110,16 @@ define(function(require, exports, module) {
             this.parset = d3p()
                 .dimensions(fields)
                 .width(graphWidth)
-                .height(graphHeight);
+                .height(graphHeight)
+                .on("sortCategories", function(){
+                    that.trigger("sort:categories", "No data with this event");
+                });
 
             graph.datum(data.results).call(this.parset);
 
             t = graph.transition().duration(500);
             t.call(this.parset.tension(tension));
-        }
+        },
     });
 
     return ParallelSets;
