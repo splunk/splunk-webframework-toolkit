@@ -40,9 +40,7 @@
         <a href="/dj/redirector/splunk_wftoolkit/maps">Maps</a>
     </collection>
     <collection label="Extended Examples">
-        <a href="/dj/redirector/splunk_wftoolkit/airline_drilldown">Airlines</a>
         <a href="/dj/redirector/splunk_wftoolkit/d3_chart">NVD3 Charts</a>
-        <a href="/dj/redirector/splunk_wftoolkit/bubble_chart_examples">Bubble Chart Examples</a>
         <a href="/dj/redirector/splunk_wftoolkit/json_viewer">Splunk JSON Results Viewer</a>
         <a href="/dj/redirector/splunk_wftoolkit/setup">Setup View (Basic)</a>
     </collection>
