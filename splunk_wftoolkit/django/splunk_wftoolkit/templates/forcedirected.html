@@ -203,7 +203,15 @@
                 else{
                     tb.val("Enter a number")
                 }
-            }        
+            }       
+            
+            force.on("click:link", function(e) {
+                console.log("LINK CLICK", e);
+            });   
+            
+            force.on("click:node", function(e) {
+                console.log("NODE CLICK", e);
+            });
         });
 </script>     
 
