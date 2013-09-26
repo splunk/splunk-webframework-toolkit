@@ -1,16 +1,3 @@
-require.config({
-    shim: {
-        "splunkjs/mvc/d3chart/d3/d3.v2": {
-            deps: [],
-            exports: "d3"
-        },
-        "splunk_wftoolkit/contrib/d3.parcoords": {
-            deps: ["splunkjs/mvc/d3chart/d3/d3.v2"],
-            exports: "d3.parcoords"
-        }
-    }
-});
-
 // parallel coords!
 // a visualisation technique for multidimensional categorical data
 // you can drag the vertical axis for each section to filter things (try it out for yourself)
@@ -25,11 +12,9 @@ require.config({
 define(function(require, exports, module) {
 
     var _ = require('underscore');
-    var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
-    var d3parcoords = require("splunk_wftoolkit/contrib/d3.parcoords");
+    var d3 = require("../d3/d3");
+    var parcoords = require("./contrib/d3-parcoords");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
-
-    require("css!splunk_wftoolkit/contrib/d3.parcoords.css");
 
     var ParCoords = SimpleSplunkView.extend({
 

@@ -1,3 +1,9 @@
+define(function(require, exports, module) {
+
+var d3 = require("../../d3/d3");
+
+/// BEGIN LIBRARY CODE
+
 // Parallel Sets by Jason Davies, http://www.jasondavies.com/
 // Functionality based on http://eagereyes.org/parallel-sets
 (function() {
@@ -669,3 +675,9 @@
 
   function identity(d) { return d; }
 })();
+
+/// END LIBRARY CODE
+
+  return d3.parsets;
+
+});

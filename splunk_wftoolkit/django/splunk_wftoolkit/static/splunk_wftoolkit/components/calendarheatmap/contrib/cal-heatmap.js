@@ -1,3 +1,10 @@
+define(function(require, exports, module) {
+
+var d3 = require("../../d3/d3");
+require("css!./cal-heatmap.css");
+
+/// BEGIN LIBRARY CODE
+
 /*! cal-heatmap v3.2.1 (Tue Sep 17 2013 18:46:03)
  *  ---------------------------------------------
  *  Cal-Heatmap is a javascript module to create calendar heatmap to visualize time series data, a la github contribution graph
@@ -255,7 +262,7 @@ var CalHeatMap = function() {
 				y : function(d) { return d.getMinutes() % self._domainType.min.row(d);}
 			},
 			format: {
-				date: "%H:%M, %A %B %e, %Y",
+				date: "%H:%M, %A %B %-e, %Y",
 				legend: "",
 				connector: "at"
 			},
@@ -287,7 +294,7 @@ var CalHeatMap = function() {
 				y : function(d) { return d.getHours() % self._domainType.hour.row(d);}
 			},
 			format: {
-				date: "%Hh, %A %B %e, %Y",
+				date: "%Hh, %A %B %-e, %Y",
 				legend: "%H:00",
 				connector: "at"
 			},
@@ -324,7 +331,7 @@ var CalHeatMap = function() {
 				y : function(d) { return self.getWeekDay(d);}
 			},
 			format: {
-				date: "%A %B %e, %Y",
+				date: "%A %B %-e, %Y",
 				legend: "%e %b",
 				connector: "on"
 			},
@@ -2166,3 +2173,9 @@ function mergeRecursive(obj1, obj2) {
 
 	return obj1;
 }
+
+/// END LIBRARY CODE
+
+return CalHeatMap;
+
+});

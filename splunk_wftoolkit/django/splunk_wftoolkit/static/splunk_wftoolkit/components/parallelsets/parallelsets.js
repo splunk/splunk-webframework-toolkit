@@ -1,16 +1,3 @@
-require.config({
-    shim: {
-        "splunkjs/mvc/d3chart/d3/d3.v2": {
-            deps: [],
-            exports: "d3"
-        },
-        "splunk_wftoolkit/contrib/d3.parsets": {
-            deps: ["splunkjs/mvc/d3chart/d3/d3.v2"],
-            exports: "d3.parsets"
-        },
-    }
-});
-
 // parallel sets!
 // a visualisation technique for multidimensional categorical data
 // you can drag the vertical or horizontal axis independently and 
@@ -26,13 +13,13 @@ require.config({
 define(function(require, exports, module) {
 
     var _ = require('underscore');
-    var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
+    var d3 = require('../d3/d3');
+    var d3p = require('./contrib/d3-parsets');
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
-    var d3p = require('splunk_wftoolkit/contrib/d3.parsets');
 
-    require("css!splunk_wftoolkit/parallelsets.css");
+    require("css!./parallelsets.css");
 
-    var parallelSets = SimpleSplunkView.extend({
+    var ParallelSets = SimpleSplunkView.extend({
 
         className: "splunk-toolkit-parellel-sets",
 
@@ -131,5 +118,6 @@ define(function(require, exports, module) {
             t.call(this.parset.tension(tension));
         }
     });
-    return parallelSets;
+
+    return ParallelSets;
 });

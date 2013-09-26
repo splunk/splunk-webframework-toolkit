@@ -1,17 +1,6 @@
-require.config({
-    shim: {
-       "splunk_wftoolkit/contrib/d3chart/d3/d3.v2": {
-            deps: [],
-            exports: "d3"
-        },
-        "splunk_wftoolkit/contrib/cal-heatmap/cal-heatmap": {
-           deps: ["splunk_wftoolkit/contrib/d3chart/d3/d3.v2"],
-            exports: "cal"
-        }
-    }
-});
 
-     // calheat!
+
+// calheat!
 // shows a cool looking heatmap based on different time signatures
 // requires a timechart search. it dynamically guesses how to set up the
 // way to show the time, but you can define any settings you want in the html
@@ -23,7 +12,6 @@ require.config({
 // subdomain: (min, x_min, hour, x_hour, day, x_day, week, x_week, month, x_month)
 //       -- x_ variants are used to rotate the reading order to left to right, then top to bottom.
 // start: set to 'current' for current time or 'earliest' for your earliest data point
-//       to define where you want the heatmap to show initially
 
 // TODO:
 // add a setting for each option at http://kamisama.github.io/cal-heatmap/#options
@@ -73,14 +61,13 @@ require.config({
  define(function(require, exports, module) {
  
     var _ = require('underscore');
-    var d3 = require("splunk_wftoolkit/contrib/d3chart/d3/d3.v2");
-    var cal = require("splunk_wftoolkit/contrib/cal-heatmap/cal-heatmap");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
+    var d3 = require("../d3/d3");
+    var CalHeatMap = require("./contrib/cal-heatmap");
 
-    require("css!splunk_wftoolkit/contrib/cal-heatmap/cal-heatmap.css");
     require("css!./calendarheatmap.css");
 
-    var calHeat = SimpleSplunkView.extend({
+    var CalendarHeatMap = SimpleSplunkView.extend({
 
         className: "splunk-toolkit-cal-heatmap",
 
@@ -126,11 +113,10 @@ require.config({
             var objects = _.map(data, function(row) {
                 return _.object(rawFields, row);
             });
-            console.log(objects);
 
             var series = [];
             for(var i = 0; i < filteredFields.length; i++) {
-                series.push({ name: filteredFields[i], timestamps: {} });
+                series.push({ name: filteredFields[i], timestamps: {}, min: Number.POSITIVE_INFINITY, max: Number.NEGATIVE_INFINITY });
             }
             
             _.each(objects, function(object) {
@@ -139,10 +125,16 @@ require.config({
                 var timeValue = time.valueOf() / 1000;
                 
                 // For each actual value, store it in the timestamp object
-                for(var i = 0; i < filteredFields.length; i++) {
-                    var value = object[filteredFields[i]];
-                    series[i].timestamps[timeValue] = parseInt(value, 10);
-                }
+                _.each(filteredFields, function(field, i) {
+                    var value = object[field];
+                    series[i].timestamps[timeValue] = parseInt(value, 10) || 0;
+                    series[i].min = Math.min(series[i].min, value);
+                    series[i].max = Math.max(series[i].max, value);
+                });
+            });
+                
+            _.each(series, function(serie) {
+            
             });
             
             return {
@@ -162,6 +154,11 @@ require.config({
             
             var that = this;
             _.each(data.series, function(series, idx) {
+                var scale = d3.scale.quantile()
+                    .domain([series.min, series.max])
+                    .range([0,1,2,3,4]);
+                var legend = _.map(scale.quantiles(), function(x) { return Math.round(x); });
+                
                 var $el = $("<div class='heatmap-container'/>").appendTo(that.el);
                 var $title = $("<h4 class='heatmap-series-title'>Heatmap for: " + series.name + "</h4>").appendTo($el);
                 var $buttons = $("<div class='heatmap-buttons'/>").appendTo($el);
@@ -180,6 +177,7 @@ require.config({
                     cellPadding: 3,
                     domainGutter: 10,
                     highlight: ['now', new Date()],
+                    legend: legend,
                     legendMargin: [0, 0, 20, 0],
                     legendCellSize: 14,
                     minDate: data.min,
@@ -205,5 +203,6 @@ require.config({
             });
         }
     });
-    return calHeat;
+
+    return CalendarHeatMap;
 });

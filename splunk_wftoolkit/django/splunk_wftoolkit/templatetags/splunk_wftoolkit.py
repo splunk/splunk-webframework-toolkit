@@ -7,98 +7,86 @@ register = template.Library()
 def sankey(context, id, *args, **kwargs):
     return component_context(
         context, 
-        "splunk-toolkit-sankey",        # Splunk registry name
+        "splunk-toolkit-sankey",
         id, 
         "view",
-        "splunk_wftoolkit/sankeychart", # Path to javascript library
+        "splunk_wftoolkit/components/sankey/sankey",
         kwargs
     )
 
 @register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def calendarheatmap(context, id, *args, **kwargs):       # The template tag
+def calendarheatmap(context, id, *args, **kwargs):
     return component_context(
         context,
-        "calendarheatmap",                           # The custom view's CSS class name
+        "calendarheatmap",
         id,
         "view",
-        "splunk_wftoolkit/calendarheatmap",             # Path to the JavaScript class/file for the view
+        "splunk_wftoolkit/components/calendarheatmap/calendarheatmap",
         kwargs
     )
 
 @register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def bubblechart(context, id, *args, **kwargs):       # The template tag
+def bubblechart(context, id, *args, **kwargs):
     return component_context(
         context,
-        "splunk-toolkit-bubble-chart",                           # The custom view's CSS class name
+        "splunk-toolkit-bubble-chart",
         id,
         "view",
-        "splunk_wftoolkit/bubblechart",             # Path to the JavaScript class/file for the view
+        "splunk_wftoolkit/components/bubblechart/bubblechart",
         kwargs
     )
 
 @register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def forcedirected(context, id, *args, **kwargs):       # The template tag
+def forcedirected(context, id, *args, **kwargs):
     return component_context(
         context,
-        "forcedirected",                           # The custom view's CSS class name
+        "forcedirected",
         id,
         "view",
-        "splunk_wftoolkit/forcedirected",             # Path to the JavaScript class/file for the view
+        "splunk_wftoolkit/components/forcedirected/forcedirected",
         kwargs
     )
 
 @register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def parallelsets(context, id, *args, **kwargs):       # The template tag
+def parallelsets(context, id, *args, **kwargs):
     return component_context(
         context,
-        "parallelsets",                           # The custom view's CSS class name
+        "parallelsets",
         id,
         "view",
-        "splunk_wftoolkit/parallelsets",             # Path to the JavaScript class/file for the view
+        "splunk_wftoolkit/components/parallelsets/parallelsets",
         kwargs
     )
 
 @register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def sunburst(context, id, *args, **kwargs):       # The template tag
+def sunburst(context, id, *args, **kwargs):
     return component_context(
         context,
-        "sunburst",                           # The custom view's CSS class name
+        "sunburst",
         id,
         "view",
-        "splunk_wftoolkit/sunburst",             # Path to the JavaScript class/file for the view
+        "splunk_wftoolkit/components/sunburst/sunburst",
         kwargs
     )
 
 @register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def resultsview(context, id, *args, **kwargs):       # The template tag
+def resultsview(context, id, *args, **kwargs):
     return component_context(
         context,
-        "splunk-toolkit-results-viewer",                           # The custom view's CSS class name
+        "splunk-toolkit-results-viewer",
         id,
         "view",
-        "splunk_wftoolkit/resultsview",             # Path to the JavaScript class/file for the view
+        "splunk_wftoolkit/components/resultsview/resultsview",
         kwargs
     )
 
 @register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def parallelcoords(context, id, *args, **kwargs):       # The template tag
+def parallelcoords(context, id, *args, **kwargs):
     return component_context(
         context,
-        "parallelcoords",                           # The custom view's CSS class name
+        "parallelcoords",
         id,
         "view",
-        "splunk_wftoolkit/parallelcoords",             # Path to the JavaScript class/file for the view
+        "splunk_wftoolkit/components/parallelcoords/parallelcoords",
         kwargs
     )
-
-@register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
-def fd2(context, id, *args, **kwargs):       # The template tag
-    return component_context(
-        context,
-        "fd2",                           # The custom view's CSS class name
-        id,
-        "view",
-        "splunk_wftoolkit/fd2",             # Path to the JavaScript class/file for the view
-        kwargs
-    )
-

@@ -1,3 +1,10 @@
+define(function(require, exports, module) {
+
+var d3 = require("../../d3/d3");
+require("css!./d3-parcoords.css");
+
+/// BEGIN LIBRARY CODE
+
 d3.parcoords = function(config) {
   var __ = {
     data: [],
@@ -578,4 +585,11 @@ d3.renderQueue = (function(func) {
   rq.invalidate = function() {};
 
   return rq;
+});
+
+
+/// END LIBRARY CODE
+
+return d3.parcoords;
+
 });

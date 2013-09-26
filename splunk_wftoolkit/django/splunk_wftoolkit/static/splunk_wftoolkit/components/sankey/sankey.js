@@ -7,28 +7,15 @@
 // illustrated, although the most common is 
 // "stats count by field1, field2"
 
-require.config({
-    shim: {
-        "splunkjs/mvc/d3chart/d3/d3.v2": {
-            deps: [],
-            exports: "d3"
-        },
-        "splunk_wftoolkit/contrib/sankey": {
-            deps: ["splunkjs/mvc/d3chart/d3/d3.v2"],
-            exports: "sankey"
-        }
-    }
-});
-
 define(function(require, exports, module) {
 
-    var _ = require('underscore');
-    var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
-    var sankey = require("splunk_wftoolkit/contrib/sankey");
+    var _ = require("underscore");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
+    var d3 = require("../d3/d3");
+    var sankey = require("./contrib/d3-sankey");
 
     // Import CSS for the sankey chart.
-    require("css!splunk_wftoolkit/sankey.css");
+    require("css!./sankey.css");
 
     var SankeyChart = SimpleSplunkView.extend({
         className: "splunk-toolkit-sankey",
@@ -36,23 +23,20 @@ define(function(require, exports, module) {
         options: {
             managerid: null,   
             data: "preview", 
+            formatName: _.identity,
+            formatTitle: function(d) {
+                return (d.source.name + ' -> ' + d.target.name +
+                        ': ' + d.value); 
+            }
         },
         
         // This is how we extend the SimpleSplunkView's options value for
         // this object, so that these values are available when
         // SimpleSplunkView initializes.
         initialize: function() {
-            _.extend(this.options, {
-                formatName: _.identity,
-                formatTitle: function(d) {
-                    return (d.source.name + ' -> ' + d.target.name +
-                            ': ' + d.value); 
-                }
-            });
-            
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
             
-            this.settings.on("change:formatName", this.render, this);
+            this.settings.on("change:formatName change:formatTitle", this.render, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event

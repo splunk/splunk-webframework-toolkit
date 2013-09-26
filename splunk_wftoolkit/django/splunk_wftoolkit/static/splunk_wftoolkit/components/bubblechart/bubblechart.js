@@ -1,12 +1,3 @@
-require.config({
-    shim: {
-        "splunkjs/mvc/d3chart/d3/d3.v2": {
-            deps: [],
-            exports: "d3"
-        },
-    }
-});
-
 // Bubble Chart
 // this displays information as different 'bubbles,' their unique values represented with
 // the size of the bubble.
@@ -23,10 +14,10 @@ require.config({
 define(function(require, exports, module) {
 
     var _ = require('underscore');
-    var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
+    var d3 = require("../d3/d3");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
-    require("css!splunk_wftoolkit/bubble_chart.css");
+    require("css!./bubblechart.css");
 
     var BubbleChart = SimpleSplunkView.extend({
 

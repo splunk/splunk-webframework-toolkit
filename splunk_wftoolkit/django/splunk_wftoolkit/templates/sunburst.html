@@ -107,7 +107,6 @@
         "splunkjs/mvc/utils",
         "underscore",
         "jquery",
-        "splunk_wftoolkit/sunburst",
         "splunkjs/mvc/dropdownview",
         ], 
         function(
@@ -115,7 +114,6 @@
             utils,
             _, 
             $,
-            Sunburst,
             DropdownView
         ){
             var sunburst = mvc.Components.getInstance("example-sunburst");
@@ -123,20 +121,20 @@
             var sizedd = mvc.Components.getInstance("size-dropdown");
 
             var groupChoices = [
-                                {label: "cancellation", value: "cancellation"},
-                                {label: "AirlineDescription", value: 'AirlineDescription'},
+                                {label: "Origin State", value: "OriginState"},
+                                {label: "Origin City Name", value: 'OriginCityName'},
                             ];
 
             groupdd.settings.set("choices", groupChoices);
-            groupdd.val(['cancellation', 'AirlineDescription']);
+            groupdd.val(['OriginState', 'OriginCityName']);
             groupdd.on("change", function(){
                 sunburst.settings.set("groupingFields", groupdd.val().join(" "));
             });
 
             var sizeChoices = [
-                                {label: "count", value: "count"},
-                                {label: "None", value: 'None'}
-                            ];
+                {label: "count", value: "count"},
+                {label: "None", value: 'None'}
+            ];
             sizedd.settings.set("choices", sizeChoices);
             sizedd.on("change", function(){
                 if(sizedd.val()==='None'){

@@ -1,20 +1,11 @@
-require.config({
-    shim: {
-        "splunkjs/mvc/d3chart/d3/d3.v2": {
-            deps: [],
-            exports: "d3"
-        },
-    }
-});
-
 define(function(require, exports, module) {
 
     var _ = require('underscore');
-    var nester = require("splunk_wftoolkit/contrib/underscore-nest/underscore.nest");
-    var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");  
+    var nester = require("../underscore-nest/underscore-nest");
+    var d3 = require("../d3/d3");
 
-    require("css!splunk_wftoolkit/sunburst.css");
+    require("css!./sunburst.css");
 
     window.nester = nester;
 
@@ -173,7 +164,8 @@ define(function(require, exports, module) {
                 .attr("x", function(d) { return y(d.y); })
                 .attr("dx", "6") // margin
                 .attr("dy", ".35em") // vertical-align
-                .text(function(d) { return d.name; });
+                .text(function(d) { return d.name; })
+                .on("click", click);
 
             function click(d) {
             // fade out all text elements

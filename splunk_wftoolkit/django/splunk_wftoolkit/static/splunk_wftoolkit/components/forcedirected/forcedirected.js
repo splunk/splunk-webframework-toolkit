@@ -1,12 +1,3 @@
-require.config({
-    shim: {
-        "splunkjs/mvc/d3chart/d3/d3.v2": {
-            deps: [],
-            exports: "d3"
-        },
-    }
-});
-
 // Force Directed Graphs!
 // these require an input of (at least) 3 fields in the format
 // 'stats count by field1 field2 field3'
@@ -88,10 +79,10 @@ require.config({
 define(function(require, exports, module) {
 
     var _ = require('underscore');
-    var d3 = require("splunkjs/mvc/d3chart/d3/d3.v2");
+    var d3 = require("../d3/d3");
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
-    require("css!splunk_wftoolkit/forcedirected.css");
+    require("css!./forcedirected.css");
 
     var ForceDirected = SimpleSplunkView.extend({
 

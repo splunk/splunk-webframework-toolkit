@@ -1,3 +1,9 @@
+define(function(require, exports, module) {
+
+var d3 = require('../../d3/d3');
+
+/// BEGIN LIBRARY CODE
+
 // A modified d3 sankey plugin
 // This is taken verbatim from:
 // https://github.com/kunalb/d3-plugins/blob/sankey/sankey/sankey.js
@@ -571,3 +577,9 @@ d3.sankey = function() {
 
   return sankey;
 };
+
+/// END LIBRARY CODE
+
+return d3.sankey;
+
+});

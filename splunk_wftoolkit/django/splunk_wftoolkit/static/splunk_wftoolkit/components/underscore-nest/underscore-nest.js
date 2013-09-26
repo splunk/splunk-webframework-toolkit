@@ -1,6 +1,8 @@
 define(function(require, exports, module) {
 
-  var _ = require('underscore');
+var _ = require('underscore');
+  
+/// BEGIN LIBRARY CODE
 
 /**
 * underscore.nest - v0.1.1 - 7/13/2012
@@ -106,6 +108,8 @@ define(function(require, exports, module) {
 
 }(this, _));
 
-  return _.nest;
+/// END LIBRARY CODE
+
+return _.nest;
 
 });
