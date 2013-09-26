@@ -5,7 +5,7 @@
 {% block title %}{{app_name}} Search Managers{% endblock title %}
 
 {% block css %}
-<link rel="stylesheet" href="{{STATIC_URL}}splunk_wftoolkit/prettify.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}splunk_wftoolkit/contrib/prettify.css"/>
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
 <link rel="stylesheet" href="{{STATIC_URL}}splunk_wftoolkit/custom.css"/>
 {% endblock css %}
@@ -209,14 +209,14 @@ new SavedSearchManager({
 
 require.config({
     shim: {
-        "splunk_wftoolkit/prettify": {
+        "splunk_wftoolkit/contrib/prettify": {
             deps: [],
             exports: "prettyPrint"
         } 
     }
 });
 
-require(["splunk_wftoolkit/prettify", "bootstrap.tab"], function(prettyPrint) {
+require(["splunk_wftoolkit/contrib/prettify", "bootstrap.tab"], function(prettyPrint) {
     //pp formats code samples
     prettyPrint();
 });
