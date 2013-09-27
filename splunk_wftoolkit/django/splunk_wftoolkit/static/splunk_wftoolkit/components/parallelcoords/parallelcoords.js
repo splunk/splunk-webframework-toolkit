@@ -108,7 +108,7 @@ define(function(require, exports, module) {
 
             pc_progressive.svg.selectAll("text")
                 .style("font", "10px sans-serif");
-                    }
+            }
     });
     return ParCoords;
 });
