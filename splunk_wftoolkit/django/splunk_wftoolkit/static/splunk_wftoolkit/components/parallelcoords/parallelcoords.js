@@ -75,6 +75,8 @@ define(function(require, exports, module) {
         },
 
         updateView: function(viz, data) {
+            var that = this;
+            
             this.$el.html('');
             var fields = data.fields;
             // viz = $("<div style='width:800px;height:400px' id='"+this.id+"_parallelcoords' class='parcoords'>").appendTo(this.el);
@@ -99,7 +101,10 @@ define(function(require, exports, module) {
                 .mode("queue")
                 .render()
                 .brushable()  // enable brushing
-                .interactive();  // command line mode
+                .interactive()  // command line mode
+                .on("brush", function(selected) {
+                    that.trigger("select", selected);
+                });
 
             pc_progressive.svg.selectAll("text")
                 .style("font", "10px sans-serif");

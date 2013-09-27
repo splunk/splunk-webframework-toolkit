@@ -81,5 +81,25 @@
 
 {% block js %}    
 {{block.super}}
-
+<script type="text/javascript">
+    require([
+        "splunkjs/ready!", 
+        "splunkjs/mvc/utils",
+        "underscore",
+        "jquery"
+        ], 
+        function(
+            mvc, 
+            utils,
+            _, 
+            $
+        ){
+            var coords = mvc.Components.getInstance("example");
+            coords.on("select", function(selected) {
+                _.each(selected, function(path) {
+                    console.log(_.values(path).join(' -> '));
+                });
+            });
+        });
+</script>
 {% endblock js %}
