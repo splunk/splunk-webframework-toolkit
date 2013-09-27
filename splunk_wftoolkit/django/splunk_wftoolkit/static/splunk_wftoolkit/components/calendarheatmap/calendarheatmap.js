@@ -9,7 +9,7 @@
 // ---settings---
 
 // domain: (hour, day, week, month, year)
-// subdomain: (min, x_min, hour, x_hour, day, x_day, week, x_week, month, x_month)
+// subDomain: (min, x_min, hour, x_hour, day, x_day, week, x_week, month, x_month)
 //       -- x_ variants are used to rotate the reading order to left to right, then top to bottom.
 // start: set to 'current' for current time or 'earliest' for your earliest data point
 
@@ -55,7 +55,7 @@
 
 //    "start":"2013-09-03T16:25:00.000Z",
 //    "domain":"hour",
-//    "subdomain":"min"
+//    "subDomain":"min"
 // }
 
  define(function(require, exports, module) {
@@ -75,7 +75,7 @@
             managerid: "search1",   // your MANAGER ID
             data: "preview",  // Results type
             domain: 'hour', // the largest unit it will differentiate by in squares
-            subdomain: 'min', // the smaller unit the calheat goes off of
+            subDomain: 'min', // the smaller unit the calheat goes off of
 
             options: {} // the default for custom heatmap options.
         },
@@ -90,11 +90,36 @@
 
             this.settings.enablePush("value");
 
-            // whenever domain or subdomain are changed, we will re-render.
-            this.settings.on("change:domain", this._onDataChanged, this);
-            this.settings.on("change:subdomain", this._onDataChanged, this);
+            // whenever domain or subDomain are changed, we will re-render.
+            this.settings.on("change:domain", this.onDomainChange, this);
+            this.settings.on("change:subDomain", this.onDomainChange, this);
             var uniqueID=Math.floor(Math.random()*1000001);
             this.settings.set("uID", uniqueID);
+        },
+
+        onDomainChange: function() {
+
+            var dom = this.settings.get('domain');
+            var sd = this.settings.get('subDomain');
+
+            // Knock off the prefix cause it doesnt matter here
+            var sdShort = sd.replace("x_", "");
+
+            var validDomains = {
+                'min' : ['hour'],
+                'hour' : ['day', 'week'],
+                'day' : ['week', 'month', 'year'],
+                'week' : ['month', 'year'],
+                'month' : ['year']
+            };
+
+            // If the current domain is valid for this subdomain 
+            if (_.contains(validDomains[sdShort], dom)){
+                this._onDataChanged();
+            }
+            else{
+                console.log(sd + " is and invalid subDomain for " + dom);
+            }
         },
 
         createView: function() { 
@@ -107,7 +132,7 @@
         formatData: function(data) {              
             var rawFields = this.resultsModel.data().fields;
             var domain = this.settings.get('domain');
-            var subdomain = this.settings.get('subdomain');
+            var subDomain = this.settings.get('subDomain');
             
             var filteredFields = _.filter(rawFields, function(d){return d[0] !== "_" });
             var objects = _.map(data, function(row) {
@@ -140,7 +165,7 @@
             return {
                 series: series,
                 domain: domain,
-                subdomain: subdomain,
+                subDomain: subDomain,
                 start: new Date(objects[0]['_time']),
                 min: new Date(objects[0]['_time']),
                 max: new Date(objects[objects.length - 1]['_time']),
@@ -170,7 +195,7 @@
                     nextSelector: $next[0],
                     data: series.timestamps,
                     domain: data.domain,
-                    subDomain: data.subdomain,
+                    subDomain: data.subDomain,
                     start: data.start,
                     range: 4,
                     cellSize: 12,

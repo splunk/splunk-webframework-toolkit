@@ -16,7 +16,7 @@
                 id="myheat"
                 managerid="search1"
                 domain="hour"
-                subdomain="min"
+                subDomain="min"
         %}
     {% endblock example %}
     {% block usage%}
@@ -56,11 +56,11 @@
                 <td>{% dropdown id="domain-dropdown" default="hour" %}</td>
             </tr>
             <tr>
-                <td><code>subdomain</code></td>
+                <td><code>subDomain</code></td>
                 <td><b>string</b></td>
                 <td><b>'min'</b></td>
-                <td>The smaller unit the heatmap differentiates by<b>min, x_min, hour, x_hour, day, x_day, week, x_week, month, x_month</b>(x_ variants are used to rotate the reading order to left to right, then top to bottom)</td>
-                <td>{% dropdown id="subdomain-dropdown" default="min" %}</td>
+                <td>The smaller unit the heatmap differentiates by (represented as squares). Note that not all values are allowed depending on the domain. Possible values are: <b>min, x_min, hour, x_hour, day, x_day, week, x_week, month, x_month</b>(x_ variants are used to rotate the reading order to left to right, then top to bottom)</td>
+                <td>{% dropdown id="subDomain-dropdown" default="min" %}</td>
             </tr>
             <tr>
                 <td><code>options</code></td>
@@ -129,7 +129,7 @@
                 CalHeat) {
         var heat = mvc.Components.getInstance("myheat");
         var domaindd = mvc.Components.getInstance("domain-dropdown");
-        var subdomaindd = mvc.Components.getInstance("subdomain-dropdown");
+        var subDomaindd = mvc.Components.getInstance("subDomain-dropdown");
         heat.settings.set("options", {
             // Define options here. Options defined in this
             // 'options' dictionary are passed to the wrapped
@@ -150,7 +150,7 @@
             heat.settings.set("domain", domaindd.val());
         });
 
-        subdomainChoices = [
+        subDomainChoices = [
                         {label: "min", value: "min"},
                         {label: "hour", value: "hour"},
                         {label: "day", value: "day"},
@@ -163,9 +163,9 @@
                         {label: "x_month", value: "x_month"}
                         
                         ];
-        subdomaindd.settings.set("choices", subdomainChoices);
-        subdomaindd.on("change", function(){
-            heat.settings.set("subdomain", subdomaindd.val());
+        subDomaindd.settings.set("choices", subDomainChoices);
+        subDomaindd.on("change", function(){
+            heat.settings.set("subDomain", subDomaindd.val());
         });
         heat.on("click", function(e){console.log("Event:");console.log(e);})
 
