@@ -4,7 +4,7 @@ var d3 = require("../../d3/d3");
 require("css!./d3-parcoords.css");
 
 /// BEGIN LIBRARY CODE
-
+//
 d3.parcoords = function(config) {
   var __ = {
     data: [],
@@ -366,6 +366,9 @@ pc.brushable = function() {
         d3.select(this).call(
           yscale[d].brush = d3.svg.brush()
             .y(yscale[d])
+            .on("brushstart", function() {
+              d3.event.sourceEvent.stopPropagation();
+            })
             .on("brush", pc.brush)
         );
       })
@@ -430,14 +433,16 @@ pc.ctx = ctx;
 pc.canvas = canvas;
 pc.g = function() { return g; };
 
-// TODO
 pc.brushReset = function(dimension) {
-  yscale[dimension].brush.clear()(
-    pc.g()
-      .filter(function(p) {
-        return dimension == p;
+  if (g) {
+    g.selectAll('.brush')
+      .each(function(d) {
+        d3.select(this).call(
+          yscale[d].brush.clear()
+        );
       })
-  )
+    pc.brush();
+  }
   return this;
 };
 
@@ -545,15 +550,14 @@ d3.renderQueue = (function(func) {
     rq.invalidate = function() { valid = false; };
 
     function doFrame() {
-      if (!valid) return false;
-      if (_i > _queue.length) return false;
+      if (!valid) return true;
+      if (_i > _queue.length) return true;
       var chunk = _queue.slice(_i,_i+_rate);
       _i += _rate;
       chunk.map(func);
-      d3.timer(doFrame);
     }
 
-    doFrame();
+    d3.timer(doFrame);
   };
 
   rq.data = function(data) {
@@ -586,7 +590,6 @@ d3.renderQueue = (function(func) {
 
   return rq;
 });
-
 
 /// END LIBRARY CODE
 
