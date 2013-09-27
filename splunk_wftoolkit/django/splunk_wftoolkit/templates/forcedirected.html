@@ -28,15 +28,15 @@
     <p>The Force Directed Graph displays information about connectivity and clustering between nodes in a network. It displays nodes and their connections to other nodes and lays them out based on a physical simulation. Note that since the layout is based on a simulation, the final result is not guaranteed to be the same every time. 
     </p>
         <ul>
-            <li>require path: <code>splunk_wftoolkit/forcedirected</code></li>
+            <li>require path: <code>splunk_wftoolkit/components/forcedirected/forcedirected</code></li>
             <li>The Force Directed Graph is best for visualizing interconnected data where clustering is interesting.</li>
         </ul>
-        <h4>Example Searches:</h4>
+        <h4>Example Searches</h4>
         <div><ul>
             <li>| inputlookup faa.demo.csv | head 200 | stats count by OriginCityName, DestCityName, DestStateName | sort count</li>
         </ul>
         </div>
-        <h4>Options:</h4>
+        <h4>Options</h4>
         <table class="table table-striped table-bordered">
             <tr>
                 <td>Option</td>
