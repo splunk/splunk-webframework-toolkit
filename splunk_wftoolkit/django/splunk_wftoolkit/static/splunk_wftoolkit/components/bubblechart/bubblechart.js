@@ -6,7 +6,7 @@
 // available settings:
 // - nameField: the field to use as the label on each bubble
 // - valueField: the field to use as the value of each bubble (also dictates size)
-// - groupingField: the field to use for grouping similar data (usually the same field as nameField)
+// - categoryField: the field to use for grouping similar data (usually the same field as nameField)
 
 // ---expected data format---
 // a splunk search like this: source=foo | stats count by artist_name, track_name
@@ -28,7 +28,7 @@ define(function(require, exports, module) {
             data: "preview", 
             nameField: null,
             valueField: 'count',
-            groupingField: null
+            categoryField: null
         },
 
         output_mode: "json",
@@ -50,7 +50,7 @@ define(function(require, exports, module) {
             // you'd like dynamic updating on
             this.settings.on("change:valueField", this._onDataChanged, this);
             this.settings.on("change:nameField", this._onDataChanged, this);
-            this.settings.on("change:groupingField", this._onDataChanged, this);
+            this.settings.on("change:categoryField", this._onDataChanged, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event
@@ -88,7 +88,7 @@ define(function(require, exports, module) {
             // getting settings
             var nameField = this.settings.get('nameField');
             var valueField = this.settings.get('valueField');
-            var groupingField = this.settings.get('groupingField');
+            var categoryField = this.settings.get('categoryField');
             var collection = data;
             var bubblechart = { 'name': nameField+"s", 'children': [ ] }; // how we want it to look
 
@@ -96,12 +96,12 @@ define(function(require, exports, module) {
             for (var i=0; i < collection.length; i++) {
                 var Idx = -1;
                 $.each(bubblechart.children, function(idx, el) {
-                    if (el.name == collection[i][groupingField]) {
+                    if (el.name == collection[i][categoryField]) {
                         Idx = idx;
                     }
                 });
                 if (Idx == -1) {
-                    bubblechart.children.push({ 'name': collection[i][groupingField], children: [ ] });
+                    bubblechart.children.push({ 'name': collection[i][categoryField], children: [ ] });
                     Idx = bubblechart.children.length - 1;
                 }
 
@@ -223,7 +223,7 @@ define(function(require, exports, module) {
             node.on('click', function(e) { 
                 var clickEvent = {
                     name: e.className,
-                    grouping: e.packageName,
+                    category: e.packageName,
                     value: e.value
                 };
                 that.settings.set("value", e.className);

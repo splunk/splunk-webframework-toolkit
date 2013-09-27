@@ -21,7 +21,7 @@
             managerid="search1"
             valueField="count"
             nameField="OriginCityName"
-            groupingField="OriginState"
+            categoryField="OriginState"
         %}
     {% endblock example %}
     {% block usage%}
@@ -68,11 +68,11 @@
                 <td>{% dropdown id="name-dropdown" default="OriginCityName" %}</td>
             </tr>
             <tr>
-                <td><code>groupingField</code></td>
+                <td><code>categoryField</code></td>
                 <td><b>string</b></td>
                 <td><b>null</b></td>
                 <td>The field used for grouping data</td>
-                <td>{% dropdown id="group-dropdown" default="OriginState" %}</td>
+                <td>{% dropdown id="category-dropdown" default="OriginState" %}</td>
             </tr>
         </table>
         <h4>Events</h4>
@@ -89,7 +89,7 @@
                             <code>name</code>: the name of the clicked bubble
                         </li>
                         <li>
-                            <code>grouping</code>: the group name of the clicked bubble
+                            <code>category</code>: the category name of the clicked bubble
                         </li>
                         <li>
                             <code>value</code>: the size value of the clicked bubble
@@ -142,7 +142,7 @@
         ){
             var bubbles = mvc.Components.getInstance("bubble1");
             var valuedd = mvc.Components.getInstance("value-dropdown");
-            var groupdd = mvc.Components.getInstance("group-dropdown");
+            var categorydd = mvc.Components.getInstance("category-dropdown");
             var namedd = mvc.Components.getInstance("name-dropdown");
 
             var valueChoices = [
@@ -154,18 +154,18 @@
                 bubbles.settings.set("valueField", valuedd.val());
             });
 
-            var groupChoices = [
+            var categoryChoices = [
                                 {label: "Origin City", value: "OriginCityName"},
                                 {label: "Origin State", value: "OriginState"},
                                 {label: "Cancellation Cause", value: "cancellation"}
                             ];
 
-            groupdd.settings.set("choices", groupChoices);
-            groupdd.on("change", function(){
-                bubbles.settings.set("groupingField", groupdd.val());
+            categorydd.settings.set("choices", categoryChoices);
+            categorydd.on("change", function(){
+                bubbles.settings.set("categoryField", categorydd.val());
             });
 
-            var nameChoices = groupChoices;
+            var nameChoices = categoryChoices;
             namedd.settings.set("choices", nameChoices);
             namedd.on("change", function(){
                 bubbles.settings.set("nameField", namedd.val());
