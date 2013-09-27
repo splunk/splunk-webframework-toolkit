@@ -188,6 +188,9 @@ define(function(require, exports, module) {
                         // fade in the text element and recalculate positions
                         arcText.transition().duration(750)
                             .attr("opacity", 1)
+                            .attr("text-anchor", function(d) {
+                             return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
+                            })
                             .attr("transform", function(d) {
                                 var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90;
                                 var rotate = angle;
