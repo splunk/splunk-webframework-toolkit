@@ -173,7 +173,8 @@ define(function(require, exports, module) {
             var format_event_data = function(e) {
                 return { 
                     source: e.source.name, 
-                    target: e.target.name 
+                    target: e.target.name,
+                    value: e.value
                 };
             };
             
