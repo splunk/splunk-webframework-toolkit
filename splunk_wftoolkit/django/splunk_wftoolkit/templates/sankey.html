@@ -55,7 +55,7 @@
                 <td><b>function</b></td>
                 <td><b>_.identity</b></td>
                 <td>A custom formatting function for node names. Takes each node name as an input and returns a formatted name</td>
-                <td>{% dropdown id="format-name" default="phone" %}</td>
+                <td>{% dropdown id="format-name" default="default" %}</td>
             </tr>
             <tr>
                 <td><code>formatTooltip</code></td>
@@ -123,7 +123,7 @@
 
 {% block managers %}
 
-    {% searchmanager id="search" search='| inputlookup musicdata.csv | stats count by artist_name, eventtype | where (eventtype="ua-mobile-android" OR eventtype="ua-mobile-ipad" OR eventtype="ua-mobile-blackberry" OR eventtype="ua-mobile-iphone" OR eventtype="ua-mobile-ipod")' cache=True %}
+    {% searchmanager id="search" search='| inputlookup faa.demo.csv | search DestCityName=* OriginCityName=* AND DestCityName!="" AND OriginCityName!="" | head 100 | stats count by OriginCityName DestCityName' cache=True %}
 
 {% endblock managers %}
 
@@ -143,14 +143,8 @@
         
         var NAME_FORMATTERS = {
             "default": _.identity,
-            "phone": function(name) { 
-                return {
-                    'ua-mobile-android': 'Android',
-                    'ua-mobile-ipad': 'iPad',
-                    'ua-mobile-blackberry': 'Blackberry',
-                    'ua-mobile-iphone': 'iPhone',
-                    'ua-mobile-ipod': 'iPod'
-                }[name] || name
+            "state": function(name) { 
+                return name.split(", ")[1];
             },
             "caps": function(name) {
                 return name.toUpperCase();
@@ -168,13 +162,13 @@
         };
         
         sankey.settings.set({
-            'formatName': NAME_FORMATTERS['phone']
+            'formatName': NAME_FORMATTERS['default']
         });
         
         formatNameDropdown.settings.set({
             "choices": [
                 {label: "Default", value: "default" },  
-                {label: "Phone Names", value: "phone" },  
+                {label: "States", value: "state" },  
                 {label: "All Caps", value: "caps" }
             ]
         });
