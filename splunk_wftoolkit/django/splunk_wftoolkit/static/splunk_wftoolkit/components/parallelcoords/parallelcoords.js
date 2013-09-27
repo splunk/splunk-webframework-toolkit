@@ -79,7 +79,6 @@ define(function(require, exports, module) {
             
             this.$el.html('');
             var fields = data.fields;
-            // viz = $("<div style='width:800px;height:400px' id='"+this.id+"_parallelcoords' class='parcoords'>").appendTo(this.el);
             viz = $("<div id='"+this.id+"_parallelcoords' class='parcoords'>").appendTo(this.el)
                 .css("height", this.$el.height())
             var colorgen = d3.scale.category20();
