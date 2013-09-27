@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Search Control Views - Web Framework Toolkit{% endblock title %}
+{% block title %}Search Manager Controls - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
 <link rel="stylesheet" href="{{STATIC_URL}}splunk_wftoolkit/contrib/prettify.css"/>
@@ -24,7 +24,7 @@
 <div class="dashboard-body container-fluid main-section-body component-page" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Search Control Views</h2>
+            <h2>Search Manager Controls</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -32,8 +32,11 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-body html allow-overflow">
+                        <p>Several views allow you to control search managers, including the <b>SearchBar</b>, <b>SearchControls</b>, <b>Timeline</b>, and <b>TimeRange</b> views. Rather than taking results from the search managers, these views modify the search managers by setting the search query and search properties (such as the earliest and latest times to search).</p>
+                        <p>For all but the <b>SearchControls</b> view, in order to update the search manager when the view changes, you'll need to either use tokens or create a <code>change</code> event handler.</p>
+
                         <h3>Search bar</h3>
-                        <p>The <b>SearchBar</b> view represents a search input that can be bound to a search manager. However, unlike most other views, <b>SearchBar</b> provides a query <i>to</i> the search manager and modifies it rather than taking results <i>from</i> the search manager.</p>
+                        <p>The <b>SearchBar</b> view represents a search input that is bound to a search manager. Because the <b>SearchBar</b> view modifies the search manager, you must update the search manager when the view changes by using tokens or listening for <code>change</code> events.</p>
 
                         <p>Use the <code>&#123;% searchbar %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
 
@@ -44,7 +47,7 @@
                         </ul>
                     
                         <h4>Example</h4>
-                        <p>The following example shows a <b>SearchBar</b> view with a <b>TimeRange</b> and a <b>Table</b> view, all bound to the same search manager. A default search is used, but if a new one is entered, the table is updated.</p>                
+                        <p>The following example shows a <b>SearchBar</b> view with a <b>TimeRange</b> and a <b>Table</b> view, all bound to the same search manager. A default search query is used, but if a new one is entered, the table is updated.</p>                
                     
                         <div class="bs-docs-example">
                             {% searchbar id="example-search-bar" managerid="example-bar-search" %}
@@ -94,7 +97,7 @@ timerange.on("change", function() {
                     <!-- SEARCH CONTROLS -->
                     <div class="section" id="searchcontrols">
                         <h3>Search Controls</h3>
-                        <p>The <code>searchcontrols</code> view allows users to control a search is various ways such as pausing, continuing, or cancelling a search.</p>
+                        <p>The <b>SearchControls</b> view allows users to control a search is various ways such as pausing, continuing, or cancelling a search.</p>
 
                         <p>Use the <code>&#123;% searchcontrols %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
 
@@ -113,7 +116,7 @@ timerange.on("change", function() {
                     <div class="section" id="timeline">
                             
                         <h3>Timeline</h3>
-                        <p>The <b>Timeline</b> view displays an event timeline of a given search and allows interactive modification of the search time range. This view modifies and is modified by its search manager.</p>
+                        <p>The <b>Timeline</b> view displays an event timeline of a given search and allows interactive modification of the search time range. Because the <b>Timeline</b> view modifies the search manager, you must update the search manager when the view changes by using tokens or listening for <code>change</code> events.</p>
 
                         <p>Use the <code>&#123;% timeline %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
 
@@ -183,8 +186,8 @@ timeline.on("change", function() {
 
 <!-- TIME RANGE INPUT -->
                     <div class="section" id="time-range">
-                        <h3>Time range</h3>
-                        <p>A <b>TimeRange</b> view can be used by itself to modify the time range for a search manager. This view can be used with a <b>SearchBar</b> view to modify the time range for the search bar's search.</p>
+                        <h3>Time Range</h3>
+                        <p>A <b>TimeRange</b> view can be used by itself to modify the time range for a search manager. This view can be used with a <b>SearchBar</b> view to modify the time range for the search bar's search. Because the <b>TimeRange</b> view modifies the search manager, you must update the search manager when the view changes by using tokens or listening for <code>change</code> events.</p>
                         <p>Use the <code>&#123;% timerange %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
 
                         <h4>Options</h4>
