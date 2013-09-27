@@ -65,7 +65,7 @@
                 <td>
                     <ul>
                         <li>
-                            <code>selected</code>: and array of objects containing the paths of selected data from dimension node to dimension node
+                            <code>selected</code>: an array of objects containing the paths of selected data from dimension node to dimension node
                         </li>
                     </ul>
                 </td>
@@ -112,9 +112,9 @@
             $
         ){
             var coords = mvc.Components.getInstance("example");
-            coords.on("select", function(selected) {
-                console.log("Select event");
-                _.each(selected, function(path) {
+            coords.on("select", function(e) {
+                console.log("SELECT EVENT");
+                _.each(e.selected, function(path) {
                     console.log(_.values(path).join(' -> '));
                 });
             });

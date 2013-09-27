@@ -103,7 +103,7 @@ define(function(require, exports, module) {
                 .brushable()  // enable brushing
                 .interactive()  // command line mode
                 .on("brush", function(selected) {
-                    that.trigger("select", selected);
+                    that.trigger("select", {selected: selected});
                 });
 
             pc_progressive.svg.selectAll("text")
