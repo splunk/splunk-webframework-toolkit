@@ -22,7 +22,7 @@
             id="example-sunburst"
             managerid="search1"
             sizeField="count"
-            groupingFields="OriginState OriginCityName"
+            groupingFields="OriginState OriginCityName AirlineDescription"
         %}
     {% endblock example %}
     {% block usage %}
@@ -108,7 +108,7 @@
 {% block managers %}
 
     {% searchmanager id="search1"
-        search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=15'
+        search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState AirlineDescription| sort - count limit=15'
         cache=True
     %}
 
@@ -137,10 +137,11 @@
             var groupChoices = [
                                 {label: "Origin State", value: "OriginState"},
                                 {label: "Origin City Name", value: 'OriginCityName'},
+                                {label: "AirlineDescription", value: 'AirlineDescription'},
                             ];
 
             groupdd.settings.set("choices", groupChoices);
-            groupdd.val(['OriginState', 'OriginCityName']);
+            groupdd.val(['AirlineDescription','OriginState', 'OriginCityName']);
             groupdd.on("change", function(){
                 sunburst.settings.set("groupingFields", groupdd.val().join(" "));
             });

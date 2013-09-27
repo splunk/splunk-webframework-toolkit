@@ -1,7 +1,7 @@
 <nav color="#0C8F98">
     <view name="default" default="true"/>
     <a href="/dj/redirector/splunk_wftoolkit/home">Home</a>
-    <a href="/dj/redirector/splunk_wftoolkit/basics">Getting Started</a>
+    <a href="/dj/redirector/splunk_wftoolkit/overview">Web Framework Overview</a>
 
     <collection label="Web Framework Components">
         <a name="managers" href="/dj/redirector/splunk_wftoolkit/managers">Search managers</a>

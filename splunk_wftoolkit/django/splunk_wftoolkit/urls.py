@@ -3,7 +3,7 @@ from splunkdj.utility.views import render_template as render
 
 urlpatterns = patterns('',
     url(r'^home/$', render('splunk_wftoolkit:home.html'), name='home'),
-    url(r'^basics/$', render('splunk_wftoolkit:basics.html'), name='basics'),
+    url(r'^overview/$', render('splunk_wftoolkit:overview.html'), name='overview'),
     # Components
     url(r'^managers/$', render('splunk_wftoolkit:managers.html'), name='managers'),
     url(r'^charts/$', render('splunk_wftoolkit:charts.html'), name='charts'),
