@@ -116,10 +116,22 @@ define(function(require, exports, module) {
                 });
 
             graph.datum(data.results).call(this.parset);
+            
+            graph.selectAll("g.ribbon-mouse path")
+                .on("click", function(e) {
+                    that.trigger('click', {
+                        source: e.source.node.name,
+                        sourceDimension: e.source.node.dimension.name,
+                        target: e.target.node.name,
+                        targetDimension: e.target.node.dimension.name,
+                        dimension: e.dimension,
+                        value: e.count
+                    });
+                })
 
             t = graph.transition().duration(500);
             t.call(this.parset.tension(tension));
-        },
+        }
     });
 
     return ParallelSets;
