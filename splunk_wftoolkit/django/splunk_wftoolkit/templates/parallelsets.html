@@ -10,7 +10,7 @@
 <style type="text/css">
 .splunk-toolkit-parellel-sets{
     height: 500px;
-    width: 750px;  
+    width: 700px;  
 }
 </style>
 {% endblock css %}
@@ -30,12 +30,12 @@
         <ul>
             <li>require path: <code>splunk_wftoolkit/parallelsets</code></li>
         </ul>
-        <h4>Example Searches:</h4>
+        <h4>Example Searches</h4>
         <div class="well"><ul>
             <li>| inputlookup faa.demo.csv | search OriginCityName="*, CA" DestState=* | head 40 | table AirlineDescription, OriginCityName, DestCityName</li>
         </ul>
         </div>
-        <h4>Options:</h4>
+        <h4>Options</h4>
         <table class="table table-striped table-bordered">
             <tr>
                 <td>Option</td>
@@ -58,6 +58,41 @@
                 <td>Tension of chart links. Should be between 0 and 1.</td>
                 <td>
                     {% dropdown id="tension-dropdown" default=0.5 %}
+                </td>
+            </tr>
+        </table>
+        <h4>Events</h4>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <td>Event</td>
+                <td>Properties</td>
+            </tr>
+            <tr>
+                <td><code>click</code></td>
+                <td>
+                    <ul>
+                        <li>
+                            <code>source</code>: source name
+                        </li>
+                        <li>
+                            <code>sourceDimension</code>: tource dimension name
+                        </li>
+                        <li>
+                            <code>target</code>: target name
+                        </li>
+                        <li>
+                            <code>targetDimension</code>: target dimension name
+                        </li>
+                        <li>
+                            <code>value</code>: the value
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><code>sort:categories</code></td>
+                <td>
+                    No data. Here for convenience
                 </td>
             </tr>
         </table>
