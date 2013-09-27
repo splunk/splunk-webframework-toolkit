@@ -75,13 +75,16 @@
                             <code>source</code>: source name
                         </li>
                         <li>
-                            <code>sourceDimension</code>: tource dimension name
+                            <code>sourceDimension</code>: source dimension name
                         </li>
                         <li>
                             <code>target</code>: target name
                         </li>
                         <li>
                             <code>targetDimension</code>: target dimension name
+                        </li>
+                        <li>
+                            <code>dimension</code>: path dimension name
                         </li>
                         <li>
                             <code>value</code>: the value
@@ -92,7 +95,7 @@
             <tr>
                 <td><code>sort:categories</code></td>
                 <td>
-                    No data. Here for convenience
+                    -
                 </td>
             </tr>
         </table>
@@ -153,8 +156,7 @@
             });
 
             sets.on("sort:categories", function(e){
-                console.log("Sort Event");               
-                console.log(e);
+                console.log("SORT");               
             });   
             
             sets.on("click", function(e) { 

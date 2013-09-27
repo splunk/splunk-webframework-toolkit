@@ -112,7 +112,7 @@ define(function(require, exports, module) {
                 .width(graphWidth)
                 .height(graphHeight)
                 .on("sortCategories", function(){
-                    that.trigger("sort:categories", "No data with this event");
+                    that.trigger("sort:categories");
                 });
 
             graph.datum(data.results).call(this.parset);
