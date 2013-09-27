@@ -127,7 +127,7 @@ define(function(require, exports, module) {
                         dimension: e.dimension,
                         value: e.count
                     });
-                })
+                });
 
             t = graph.transition().duration(500);
             t.call(this.parset.tension(tension));
