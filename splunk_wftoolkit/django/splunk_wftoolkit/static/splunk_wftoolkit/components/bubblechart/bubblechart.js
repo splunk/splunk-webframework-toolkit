@@ -77,10 +77,13 @@ define(function(require, exports, module) {
                 .append("svg")
                 .attr("width", availableWidth)
                 .attr("height", availableHeight)
-                .attr("pointer-events", "all")
+                .attr("pointer-events", "all");
+                
+            var tooltip = d3.select(this.el).append("div")
+                .attr("class", "bubble-chart-tooltip");
 
             // The returned object gets passed to updateView as viz
-            return { container: this.$el, svg: svg, margin: margin};
+            return { container: this.$el, svg: svg, margin: margin, tooltip: tooltip};
         },
 
         // making the data look how we want it to for updateView to do its job
@@ -116,6 +119,8 @@ define(function(require, exports, module) {
             // Clear svg
             var svg = $(viz.svg[0]);
             svg.empty();
+            
+            var tooltip = viz.tooltip;
 
             // Add the graph group as a child of the main svg
             var graph = viz.svg
@@ -149,10 +154,6 @@ define(function(require, exports, module) {
             svg.height(height);
             svg.width(width);
 
-            // Create tooltip
-            var tooltip = d3.select(this.el).append("div")
-                .attr("class", "bubble-chart-tooltip");
-
             var node = graph.selectAll(".node")
                 .data(bubble.nodes(classes(data))
                 .filter(function(d) { return !d.children; }))
@@ -173,7 +174,7 @@ define(function(require, exports, module) {
                 .attr("dy", ".3em")
                 .style("text-anchor", "middle")
                 // ensure the text is truncated if the bubble is tiny
-                .text(function(d) { return d.className.substring(0, d.r / 3) + " " + format(d.value); });
+                .text(function(d) { return (d.className + " " + format(d.value)).substring(0, d.r / 3); });
 
             // Re-flatten the child array
             function classes(data) {
