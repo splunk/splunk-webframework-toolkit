@@ -116,6 +116,51 @@
                 </td>
             </tr>
         </table>
+        <h4>Events</h4>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <td>Event</td>
+                <td>Properties</td>
+            </tr>
+            <tr>
+                <td><code>click:link</code></td>
+                <td>
+                    <ul>
+                        <li>
+                            <code>source</code>: source node name
+                        </li>
+                        <li>
+                            <code>sourceGroup</code>: source node's group
+                        </li>
+                        <li>
+                            <code>target</code>: target node name
+                        </li>
+                        <li>
+                            <code>targetGroup</code>: target node's group
+                        </li>
+                        <li>
+                            <code>value</code>: link value
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><code>click:node</code></td>
+                <td>
+                    <ul>
+                        <li>
+                            <code>name</code>: node name
+                        </li>
+                        <li>
+                            <code>value</code>: node value
+                        </li>
+                        <li>
+                            <code>group</code>: node group
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
     {% endblock usage %}
 
 {% block codesample %}
