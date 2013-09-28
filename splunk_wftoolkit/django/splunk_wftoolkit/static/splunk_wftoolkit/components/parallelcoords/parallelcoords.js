@@ -28,16 +28,9 @@ define(function(require, exports, module) {
         output_mode: "json_rows",
 
         initialize: function() {
-            _.extend(this.options, {
-                formatName: _.identity,
-            });
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
             this.settings.enablePush("value");
-
-            // whenever domain or subdomain are changed, we will re-render.
-            this.settings.on("change:domain", this._onDataChanged, this);
-            this.settings.on("change:subdomain", this._onDataChanged, this);
         
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event

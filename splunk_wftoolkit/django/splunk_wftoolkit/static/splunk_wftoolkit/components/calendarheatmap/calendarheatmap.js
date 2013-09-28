@@ -115,7 +115,7 @@
 
             // If the current domain is valid for this subdomain 
             if (_.contains(validDomains[sdShort], dom)){
-                this._onDataChanged();
+                this.render();
             }
             else{
                 console.log(sd + " is and invalid subDomain for " + dom);

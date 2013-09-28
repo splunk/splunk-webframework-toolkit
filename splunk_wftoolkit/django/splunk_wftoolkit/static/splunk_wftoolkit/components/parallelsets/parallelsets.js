@@ -32,14 +32,11 @@ define(function(require, exports, module) {
         output_mode: "json_rows",
 
         initialize: function() {
-            _.extend(this.options, {
-                formatName: _.identity,
-            });
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
             this.settings.enablePush("value");
 
-            this.settings.on("change:tension", this._onDataChanged, this);
+            this.settings.on("change:tension", this.render, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event

@@ -104,21 +104,17 @@ define(function(require, exports, module) {
         output_mode: "json_rows",
 
         initialize: function() {
-            _.extend(this.options, {
-                formatName: _.identity,
-            });
-            
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
             // in the case that any options are changed, it will dynamically update
             // without having to refresh.
-            this.settings.on("change:charges", this._onDataChanged, this);
-            this.settings.on("change:gravity", this._onDataChanged, this);
-            this.settings.on("change:linkDistance", this._onDataChanged, this);
-            this.settings.on("change:directional", this._onDataChanged, this);
-            this.settings.on("change:zoom", this._onDataChanged, this);
-            this.settings.on("change:swoop", this._onDataChanged, this);
-            this.settings.on("change:isStatic", this._onDataChanged, this);
+            this.settings.on("change:charges", this.render, this);
+            this.settings.on("change:gravity", this.render, this);
+            this.settings.on("change:linkDistance", this.render, this);
+            this.settings.on("change:directional", this.render, this);
+            this.settings.on("change:zoom", this.render, this);
+            this.settings.on("change:swoop", this.render, this);
+            this.settings.on("change:isStatic", this.render, this);
         },
 
         createView: function() {

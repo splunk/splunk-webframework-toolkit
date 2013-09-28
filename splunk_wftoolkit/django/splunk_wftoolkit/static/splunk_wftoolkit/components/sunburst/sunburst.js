@@ -35,8 +35,8 @@ define(function(require, exports, module) {
             // TODO: enable push
             // TODO: wire up changes
 
-            this.settings.on("change:sizeField", this._onDataChanged, this);
-            this.settings.on("change:groupingFields", this._onDataChanged, this);
+            this.settings.on("change:sizeField", this.render, this);
+            this.settings.on("change:groupingFields", this.render, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event

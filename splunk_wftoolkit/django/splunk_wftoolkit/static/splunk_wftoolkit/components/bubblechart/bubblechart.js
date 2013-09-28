@@ -48,9 +48,9 @@ define(function(require, exports, module) {
             // in the case that any options are changed, it will dynamically update
             // without having to refresh. copy the following line for whichever field
             // you'd like dynamic updating on
-            this.settings.on("change:valueField", this._onDataChanged, this);
-            this.settings.on("change:nameField", this._onDataChanged, this);
-            this.settings.on("change:categoryField", this._onDataChanged, this);
+            this.settings.on("change:valueField", this.render, this);
+            this.settings.on("change:nameField", this.render, this);
+            this.settings.on("change:categoryField", this.render, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event
