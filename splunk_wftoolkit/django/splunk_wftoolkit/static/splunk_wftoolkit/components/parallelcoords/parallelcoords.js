@@ -63,7 +63,17 @@ define(function(require, exports, module) {
             // TODO: this should be specifialbe
             var fields = _.filter(this.resultsModel.data().fields, function(d){return d[0] !== "_" });
             var objects = _.map(data, function(row) {
-                return _.object(fields, row);
+                var obj = {};
+                _.each(fields, function(field, idx) {
+                    if (row[idx] !== null) {
+                        obj[field] = row[idx];
+                    } 
+                    else {
+                        obj[field] = "";
+                    }
+                });
+                
+                return obj;
             });
 
             data = {
@@ -76,11 +86,12 @@ define(function(require, exports, module) {
 
         updateView: function(viz, data) {
             var that = this;
+            var availableHeight = parseInt(this.settings.get("height") || this.$el.height());
             
             this.$el.html('');
             var fields = data.fields;
             viz = $("<div id='"+this.id+"_parallelcoords' class='parcoords'>").appendTo(this.el)
-                .css("height", this.$el.height())
+                .css("height", availableHeight)
             var colorgen = d3.scale.category20();
             var colors = {};
             _(data.results).chain()
