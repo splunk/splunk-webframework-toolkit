@@ -57,7 +57,7 @@
                 <td><b>0.5</b></td>
                 <td>Tension of chart links. Should be between 0 and 1.</td>
                 <td>
-                    {% dropdown id="tension-dropdown" default=0.5 %}
+                    {% dropdown id="tension-dropdown" default="0.5" %}
                 </td>
             </tr>
         </table>
@@ -144,11 +144,11 @@
             var sets = mvc.Components.getInstance("example-sets");
             var tensiondd = mvc.Components.getInstance("tension-dropdown");
             var tensionChoices = [
-                                {label: "0", value: 0},
-                                {label: ".25", value: 0.25},
-                                {label: ".5", value: 0.5},
-                                {label: ".75", value: 0.75},
-                                {label: "1", value: 1},
+                                {label: "0", value: "0"},
+                                {label: ".25", value: "0.25"},
+                                {label: ".5", value: "0.5"},
+                                {label: ".75", value: "0.75"},
+                                {label: "1", value: "1"},
                             ];
             tensiondd.settings.set("choices", tensionChoices);
             tensiondd.on("change", function(){
