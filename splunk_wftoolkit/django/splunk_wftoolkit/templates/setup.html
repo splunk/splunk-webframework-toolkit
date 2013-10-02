@@ -58,7 +58,7 @@
         
         <h3>Form Class (forms.py)</h3>
         <p>
-            <a href="https://docs.djangoproject.com/en/dev/topics/forms/">
+            <a href="https://docs.djangoproject.com/en/dev/topics/forms/" target="_blank">
             Django's form system</a> is used to render form fields and
             perform validation on user input. This involves declaring a
             form class in <code>forms.py</code>, usually called <code>SetupForm</code>.
@@ -81,7 +81,7 @@ class SetupForm(forms.Form):
 </pre>
         <p>
             Setup form fields work very similarly to
-            <a href="https://docs.djangoproject.com/en/1.5/topics/forms/">
+            <a href="https://docs.djangoproject.com/en/1.5/topics/forms/" target="_blank">
             Django form fields</a>. In particular validation is performed by
             the field type (ex: <code>EmailField</code>) and alternate visual
             widgets (ex: <code>PasswordInput</code>) are available.
@@ -99,9 +99,9 @@ class SetupForm(forms.Form):
             specified for each field:
         </p>
         <ul>
-            <li><code>endpoint, entity, field</code> — Loads/saves the field value from the <a href="http://docs.splunk.com/Documentation/Splunk/latest/RESTAPI/RESTcontents">Splunk REST API</a>.</li>
+            <li><code>endpoint, entity, field</code> — Loads/saves the field value from the <a href="http://docs.splunk.com/Documentation/Splunk/latest/RESTAPI/RESTcontents" target="_blank">Splunk REST API</a>.</li>
             <ol>
-                <li><code>endpoint</code> - URL to a collection endpoint in the <a href="http://docs.splunk.com/Documentation/Splunk/latest/RESTAPI/RESTcontents">Splunk REST API</a>.</li>
+                <li><code>endpoint</code> - URL to a collection endpoint in the <a href="http://docs.splunk.com/Documentation/Splunk/latest/RESTAPI/RESTcontents"> target="_blank"Splunk REST API</a>.</li>
                 <li><code>entity</code> - Name of an entity to access. This name is not URL encoded.</li>
                 <li><code>field</code> - Name of a field on the entity to access. This name is not URL encoded.</li>
             </ol>

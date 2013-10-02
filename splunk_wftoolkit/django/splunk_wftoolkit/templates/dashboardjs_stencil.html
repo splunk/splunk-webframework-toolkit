@@ -34,8 +34,12 @@
                         <h3>Cell 1</h3>
                     </div>
                     <div class="panel-body">
-                        <p>
-                        This is an example of a basic dashboard. To edit this page edit <strong>splunk_wftoolkit/django/splunk_wftoolkit/templates/dashboardjs.html</strong>
+                        <p>This example shows the layout for a basic dashboard using JavaScript.</p>
+
+                        <p>Source file: <b>$SPLUNK_HOME/etc/apps/splunk_wftoolkit/django/splunk_wftoolkit/templates/dashboardjs_stencil.html</b></p>
+
+                        <p>You can use this code template as a starting point for your own app&mdash;copy and paste the source code from this template into your own template, and then edit it.</p>
+                        <p>To learn how to use the template, see the comments in the source file.</p>
                         </p>
                     </div>
                 </div>
@@ -50,15 +54,14 @@
                         <h3>Cell 2</h3>
                     </div>
                     <div class="panel-body">
-                        <p>Add content to this cell. See the template comments for more.</p>
+                        <p>Add content to this cell.</p>
                         
                         <!-- 
-                        When creating views with javascript, we don't need any Django tags.
-                        views can be attached anywhere in the html DOM deemed necessary,
-                        but it is convenient to have hooks to hang them on. In this page 
-                        we are using hooks with ids (like the following) in every cell that 
-                        we will attach views to in script later. 
+                        When creating views with JavaScript, views can be placed anywhere in the 
+                        HTML DOM. On this page, we use hooks with IDs in every cell. The IDs 
+                        correspond to views that we'll define later in the <script> tag.
                         -->
+
                         <div id="cell2-hook"></div>
                     </div>
                 </div>
@@ -71,10 +74,10 @@
                         <h3>Cell 3</h3>
                     </div>
                     <div class="panel-body">
-                        <p>Add content to this cell. See the template comments for more.</p>
+                        <p>Add content to this cell.</p>
 
                         <!-- 
-                        Here is another hook to add things to cell 3. See the javascript section for more.
+                        Here is a hook for cell 3, defined later in the <script> tag.
                         -->
                         <div id="cell3-hook"></div>
                     </div>
@@ -90,11 +93,12 @@
                         <h3>Cell 4</h3>
                     </div>
                     <div class="panel-body">
-                        <p>Add content to this cell. See the template comments for more.</p>
+                        <p>Add content to this cell.</p>
 
                         <!-- 
-                        Here is another hook to add things to cell 4. See the javascript section for more.
+                        Here is a hook for cell 4, defined later in the <script> tag.
                         -->
+
                         <div id="cell4-hook"></div>
                     </div>  
                 </div>
@@ -103,7 +107,7 @@
     </div>
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Adding a Searchbar</h2>
+            <h2>Add a SearchBar view</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -115,11 +119,11 @@
                     </div>
                     <div class="panel-body">
                         <p>
-                        Here we will insert a searchbar that affects a search. In this case the searchbar is created in javascript and attached here. See the comments in source for more.
+                        Add a SearchBar view here to control a search manager. Any other views that are bound to the same search manager will be updated when the search is run.
                         </p>
 
                         <!-- 
-                        Here is another hook to add things to cell 5. See the javascript section for more.
+                        Here is a hook for cell 5, defined later in the <script> tag.
                         -->
                         <div id="cell5-hook"></div>
                     </div>
@@ -136,12 +140,13 @@
                     </div>
                     <div class="panel-body">
                         <p>
-                        Add a view here with the same manager as the searchbar. Again, create it in javascript and attach it here.
+                        Add a view here that is bound to the same search manager as the SearchBar view.
                         </p>
 
                         <!-- 
-                        Here is another hook to add things to cell 5. See the javascript section for more.
+                        Here is a hook for cell 6, defined later in the <script> tag.
                         -->
+
                         <div id="cell6-hook"></div>
                     </div>
                 </div>
@@ -154,51 +159,39 @@
 
 {% block js %}    
     <script>
-    // When working with splunk components in javascript, we want to make sure that
-    // the necessary libraries are loaded before we use them. We use requirejs to 
-    // load the splunk mvc controler and other libraries. Inside of the callback,
-    // the dependencies we need will be defined. Here we require the necessary 
-    // components for this sample, and assign them to variable in the callback
-    // function signature. NOTE: dependencies must be required and assigned to 
-    // variables in the SAME ORDER. 
+    // When working with components in JavaScript, we use RequireJS to load the 
+    // Splunk MVC controller and necessary libraries, and then define
+    // the dependencies inside the callback. 
+    //
+    // NOTE: Dependencies must be required and assigned to variables in the SAME ORDER. 
+    //
+    // Here we require the necessary libraries for this example and assign them to 
+    // variables in the callback function signature. 
  
     require(
         ["splunkjs/ready!", 
         "underscore",
         "splunkjs/mvc/chartview",
         "splunkjs/mvc/tableview",
-        "splunkjs/mvc/searchmanager",
-        "splunkjs/mvc/singleview" ], 
+        "splunkjs/mvc/singleview",
+        "splunkjs/mvc/searchbarview",
+        "splunkjs/mvc/searchmanager"
+        ], 
         function(
                 mvc, 
                 _,
                 ChartView,
                 TableView,
-                SearchManager,
-                SingleView
+                SingleView,
+                SearchBarView,
+                SearchManager
     ) {
         
-        // Here, the required libraries are ready. 
-
-        // TODO: add code to create elements in javascript. For each view 
-        // we need to create the view, tell it what search manager to use (which
-        // we will create later), and tell it which $el in the DOM to hang on. 
-        // For example, to create a chart in cell 2 (on cell2-hook):
+        // TODO: Create search managers in JavaScript. 
+        // For each manager, provide an 'id', along with a 'search' property 
+        // for the query and any other search properties.
         //
-        // new ChartView({
-        //     id: "chart1",
-        //     managerid: "example-search1",
-        //     el: $("#cell2-hook")
-        // }).render();
-
-        // TODO: create more views in the various cells
-
-
-        // TODO: create managers for views to get data from. Views need
-        // search managers to get data. We create them in a very similar
-        // way to creating views. They should have an id which views can
-        // refer to, but they do not need to be put into the DOM. For example,
-        // to creat a manager with a simple search:
+        // For example, to create a simple search manager: 
         //
         // new SearchManager({
         //     id: "example-search1",
@@ -207,11 +200,33 @@
         //     search: "index=_internal | stats count by sourcetype" 
         // });
 
-        // TODO: try adding a searchbar to cell 5 (remember, you must require
-        // the necessary library) and a search for it to bind to. Also, add
-        // a control (such as a table) to display the data. In order for the 
-        // search bar to modify the search, you must also hook into its change
-        // event and update the manager. For example:
+
+        // TODO: Create views in JavaScript. 
+        // For each view, provide an 'id', and then a 'managerid' that
+        // contains the id of the search manager to bind it to. Each view also 
+        // needs an 'el' property that corresponds to the DOM hooks above.
+        //
+        // For example, to create a chart in cell 2:
+        //
+        // new ChartView({
+        //     id: "chart1",
+        //     managerid: "example-search1",
+        //     el: $("#cell2-hook")
+        // }).render();
+
+
+        // TODO: Create more views for cells 3 and 4.
+
+
+        // TODO: Add a search bar (for cell 5) and a search manager that are bound together
+        // using the same token value, then add a view for cell 6, such as a table, to display the data.
+        //
+        // Like other views, the SearchBar view listens to the search manager to keep its
+        // properties in sync. However, the search bar can also modify the search 
+        // manager by setting the query and search properties when the search bar value changes.
+        // To do this, you'll need to either use tokens or create a change event handler. 
+        //
+        // This example shows an event handler:
         //
         // searchbar.on("change", function() {
         //    manager.set("search", searchbar.val()); 

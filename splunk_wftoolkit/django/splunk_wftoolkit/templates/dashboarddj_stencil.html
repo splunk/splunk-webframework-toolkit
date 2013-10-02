@@ -34,9 +34,12 @@
                         <h3>Cell 1</h3>
                     </div>
                     <div class="panel-body">
-                        <p>
-                        This is an example of a basic dashboard. To edit this page edit <b>splunk_wftoolkit/django/splunk_wftoolkit/templates/dashboarddj_stencil.html</b>
-                        </p>
+                        <p>This example shows the layout for a basic dashboard using Django template tags.</p>
+
+                        <p>Source file: <b>$SPLUNK_HOME/etc/apps/splunk_wftoolkit/django/splunk_wftoolkit/templates/dashboarddj_stencil.html</b></p>
+
+                        <p>You can use this code template as a starting point for your own app&mdash;copy and paste the source code from this template into your own template, and then edit it.</p>
+                        <p>To learn how to use the template, see the comments in the source file.</p>
                     </div>
                 </div>
             </div>
@@ -50,15 +53,18 @@
                         <h3>Cell 2</h3>
                     </div>
                     <div class="panel-body">
-                        <p>Add content to this cell. See the template comments for more.</p>
+                        <p>Add content to this cell.</p>
 
                         <!-- 
-                        TODO: Add a Django template here to include a view in this cell.
-                        The view should get an id, as well as the id of a search manager
-                        that you would like it to get its data from. For example, to add
-                        a table called 'sample-table' with search manager 'sample-manager':
+                        TODO: Add a Django template tag to place a view in this cell.
 
-                        {% resulttable id="sample-table" managerid="sample-manager" %}
+                        You'll need to provide an 'id' for the view and a 'managerid' for the 
+                        search manager from which to display data. 
+
+                        For example, this tag adds a table called 'sample-table' bound to a
+                        search manager called 'sample-manager':
+
+                        {% table id="sample-table" managerid="sample-manager" %}
                         -->  
 
                     </div>
@@ -72,12 +78,14 @@
                         <h3>Cell 3</h3>
                     </div>
                     <div class="panel-body">
-                        <p>Add content to this cell. See the template comments for more.</p>
+                        <p>Add content to this cell.</p>
 
                         <!-- 
-                        TODO: Add another Django template here. many controls can take options
-                        in-line. For example, charts have a 'type' setting that can be set
-                        to get different chart types. To create a pie chart:
+                        TODO: Add another Django template tag. 
+
+                        Many views take inline options. For example, charts have a 'type' property
+                        so you can specify the type of chart to display. For example, 
+                        this tag displays a pie chart:
 
                         {% chart id="sample-chart" type="pie" managerid="sample-manager" %}
                         -->
@@ -95,10 +103,10 @@
                         <h3>Cell 4</h3>
                     </div>
                     <div class="panel-body">
-                        <p>Add content to this cell. See the template comments for more.</p> 
+                        <p>Add content to this cell.</p> 
                         
                         <!-- 
-                        TODO: Add another Django template here. 
+                        TODO: Add another Django template tag. 
                         --> 
 
                     </div>
@@ -108,7 +116,7 @@
     </div>
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Adding a Searchbar</h2>
+            <h2>Add a SearchBar view</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -120,15 +128,20 @@
                     </div>
                     <div class="panel-body">
                         <p>
-                        Here we will add a searchbar that affects a search. Views tied to the search will be updated when the search is run. See comments in the source for more.
+                        Add a SearchBar view here to control a search manager. Any other views that are bound to the same search manager will be updated when the search is run.
                         </p>
 
                         <!-- 
-                        TODO: Add a searchbar here. Searchbar is a special type of control in that we would like it 
-                        to not only listen to its search manager (to keep settings in sync), but also *update* its
-                        search manager when search properties (such as the query) change. To this end we set the default 
-                        search query, then use token binding to bind the value of the searchbar to a token that the search
-                        manager will also bind to. For example, 
+                        TODO: Add a search bar. 
+
+                        The SearchBar view is bound to a search manager. 
+                        Like other views, the SearchBar view listens to the search manager to keep its
+                        properties in sync. However, the SearchBar view can also modify the search 
+                        manager by setting the query and search properties when the search bar value changes.
+                        To do this, you'll need to either use tokens or create a change event handler.
+
+                        This example shows to use a token for the search bar's value. The search manager uses 
+                        the same token to bind the values together:
 
                         {% searchbar    
                             id="sample-searchbar"
@@ -150,13 +163,13 @@
                     </div>
                     <div class="panel-body">
                         <p>
-                        Add a view here with the same manager as the searchbar.
+                        Add a view here that is bound to the same search manager as the SearchBar view.
                         </p>
 
                         <!-- 
-                        TODO: Add a view here that will be listen to the same search as
-                        the searchbar is bound to. When the searchbar search is updated,
-                        this view will be as well.
+                        TODO: Add a view here that is bound to the same search manager as the 
+                        search bar. When the search query in the search bar changes,
+                        this view will also be updated.
                         -->
                     </div>
                 </div>
@@ -170,23 +183,21 @@
 {% block managers %}
 
     <!-- 
-    TODO: Add a search manager for the non-searchbar views. A search manager defines the 
-    context of a search to be run and manages that search by communicating with the Splunk server. 
-    Views listen to search managers are get data from the resulting search job. A search manager 
-    should have an 'id' and, to get data, a 'search'. Like views, search managers can also take 
-    options declared here, such as earliest_time and latest_time. To create a basic search manager:
+    TODO: Add a search manager that is bound to the searchbar. Because the search bar
+    provides the search query using the $query$ token, you don't need to provide
+    a search query in the search manager. For example:
 
-    {% searchmanager id="sample-manager" search="search index=_internal | head 100 | stats count by sourcetype" %}
-
-    This search will fetch data and any views setting it as their managerid will be populated 
-    with the data. 
+    {% searchmanager id="sample-bound-manager" search="$query$"|token_safe %}
     -->
 
     <!-- 
-    TODO: Add the search manager that is bound to the searchbar here. No need to set it's search as
-    it will get it from the $query$ token. For example:
+    TODO: Add another search manager for the other views. 
 
-    {% searchmanager id="sample-bound-manager" search="$query$"|token_safe %}
+    You'll need to provide an 'id' for the search manager and a 'search' for the query. 
+    Like views, you can provide inline properties, such as 'earliest_time' and 'latest_time'. 
+    Here's an example of a basic search manager:
+
+    {% searchmanager id="sample-manager" search="index=_internal | head 100 | stats count by sourcetype" %}
     -->
 
 {% endblock managers %}

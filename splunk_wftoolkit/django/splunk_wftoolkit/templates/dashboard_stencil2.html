@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Simple Dashboard{% endblock title %}
+{% block title %}Multi-Panel Dashboard{% endblock title %}
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
@@ -17,7 +17,7 @@
     
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Simple Dashboard</h2>
+            <h2>Multi-Panel Dashboard</h2>
         </div>
     </div>
 
@@ -30,13 +30,15 @@
 
                 <div class="panel-body">
 
-                    <!-- Panel contents here -->
+                    <!-- Panel contents -->
                     <p>
-                    This is an example of a very simple dashboard. To edit this page edit <b>splunk_wftoolkit/django/splunk_wftoolkit/templates/dashboard_stencil2.html</b>
-                    </p>
-                    <p>
-                    This is a single cell row.
-                    </p>
+                    This example shows a dashboard with multiple rows, each containing a different number of cells. This row contains a single cell.</p>
+
+                    <p>Source file: <b>$SPLUNK_HOME/etc/apps/splunk_wftoolkit/django/splunk_wftoolkit/templates/dashboard_stencil2.html</b></p>
+
+                    <p>You can use this code template as a starting point for your own app&mdash;copy and paste the source code from this template into your own template, and then edit it.</p>
+                    <p>To learn how to use the template, see the comments in the source file.</p>
+
                 </div>
             </div>
         </div>
@@ -50,9 +52,9 @@
 
                 <div class="panel-body">
 
-                    <!-- Panel contents here -->
+                    <!-- Panel contents -->
                     <p>
-                    A double cell row.
+                    A row with two cells
                     </p>
                 </div>
             </div>
@@ -65,9 +67,9 @@
 
                 <div class="panel-body">
 
-                    <!-- Panel contents here -->
+                    <!-- Panel contents -->
                     <p>
-                    A double cell row.
+                    A row with two cells
                     </p>
                 </div>
             </div>
@@ -82,9 +84,9 @@
 
                 <div class="panel-body">
 
-                    <!-- Panel contents here -->
+                    <!-- Panel contents -->
                     <p>
-                    A triple cell row.
+                    A row with three cells
                     </p>
                 </div>
             </div>
@@ -97,9 +99,9 @@
 
                 <div class="panel-body">
 
-                    <!-- Panel contents here -->
+                    <!-- Panel contents -->
                     <p>
-                    A triple cell row.
+                    A row with three cells
                     </p>
                 </div>
             </div>
@@ -112,9 +114,9 @@
 
                 <div class="panel-body">
 
-                    <!-- Panel contents here -->
+                    <!-- Panel contents -->
                     <p>
-                    A triple cell row.
+                    A row with three cells
                     </p>
                 </div>
             </div>
@@ -129,9 +131,9 @@
 
                 <div class="panel-body">
 
-                    <!-- Panel contents here -->
+                    <!-- Panel contents -->
                     <p>
-                    A four cell row.
+                    A row with four cells
                     </p>
                 </div>
             </div>
@@ -144,9 +146,9 @@
 
                 <div class="panel-body">
 
-                    <!-- Panel contents here -->
+                    <!-- Panel contents -->
                     <p>
-                    A four cell row.
+                    A row with four cells
                     </p>
                 </div>
             </div>
@@ -159,9 +161,9 @@
 
                 <div class="panel-body">
 
-                    <!-- Panel contents here -->
+                    <!-- Panel contents -->
                     <p>
-                    A four cell row.
+                    A row with four cells
                     </p>
                 </div>
             </div>
@@ -174,9 +176,9 @@
 
                 <div class="panel-body">
 
-                    <!-- Panel contents here -->
+                    <!-- Panel contents -->
                     <p>
-                    A four cell row.
+                    A row with four cells
                     </p>
                 </div>
             </div>
@@ -187,7 +189,7 @@
 
 {% block managers %}
 
-    <!-- Add any Django-declared search managers here -->
+  <!-- Add any Django template tags for search managers here -->
 
 {% endblock managers %}
 
@@ -195,7 +197,7 @@
 <script>    
 require(["splunkjs/ready!", "underscore"], function(mvc, _) {
 
-    // JavaScript goes here
+    // Put JavaScript here
 
 });
 

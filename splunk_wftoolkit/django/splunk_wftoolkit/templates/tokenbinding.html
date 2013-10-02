@@ -22,7 +22,7 @@
 
     <div class="dashboard-body container-fluid main-section-body">
         <div class="dashboard-row some-padding">
-            Index: {% textbox id="textbox1" default="_internal" value="$index$"|token_safe %} <span class="tip">Tip: hit enter</span>
+            Index: {% textinput id="textinput1" default="_internal" value="$index$"|token_safe %} <span class="tip">Tip: hit enter</span>
         </div>
         
         <div class="dashboard-row">
@@ -33,7 +33,7 @@
                             <h3>All events from _internal</h3>
                         </div>
                         <div class="panel-body">
-                            {% resulttable id="resulttable1" managerid="search1" %}
+                            {% table id="table1" managerid="search1" %}
                         </div>
                     </div>
                 </div>
@@ -42,8 +42,8 @@
 
         <div class="dashboard-row some-padding">
             {# NB: two-way data binding implement via assigning 
-               the "value" attribute to the same token as the other textbox #}
-            {% textbox id="textbox2" value="$index$"|token_safe %}
+               the "value" attribute to the same token as the other textinput #}
+            {% textinput id="textinput2" value="$index$"|token_safe %}
         </div>
 
 
