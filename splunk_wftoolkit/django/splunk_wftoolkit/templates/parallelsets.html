@@ -25,37 +25,37 @@
         %}
     {% endblock example %}
     {% block usage%}
-        <p>The Parallel Sets Graph is good for displaying multidimensional categorical data. Each dimension is shown horizontally with a bar for each of the possible categories in that dimension. The size of the bar indicates the number of items in that category in that dimension.</p>
+        <p>The Parallel Sets graph is good for displaying multidimensional categorical data. Each dimension is shown horizontally with a bar for each of the possible categories in that dimension. The size of the bar indicates the number of items in that category in that dimension.</p>
 
         <ul>
-            <li>require path: <code>splunk_wftoolkit/components/parallelsets/parallelsets</code></li>
+            <li>Require path: <code>splunk_wftoolkit/components/parallelsets/parallelsets</code></li>
         </ul>
-        <h4>Example Searches</h4>
+        <h4>Example searches</h4>
         <div class="well"><ul>
             <li>| inputlookup faa.demo.csv | search OriginCityName="*, CA" DestState=* | head 40 | table AirlineDescription, OriginCityName, DestCityName</li>
         </ul>
         </div>
-        <h4>Options</h4>
+        <h4>Properties</h4>
         <table class="table table-striped table-bordered">
             <tr>
-                <td>Option</td>
-                <td>Type</td>
-                <td>Default</td>
-                <td>Explanation</td>
-                <td>Try it</td>
+                <td><b>Name</b></td>
+                <td><b>Type</b></td>
+                <td><b>Default</b></td>
+                <td><b>Description</b></td>
+                <td><b>Try it</b></td>
             </tr>
             <tr>
                 <td><code>managerid</code></td>
                 <td><b>string</b></td>
                 <td><b>null</b></td>
-                <td>The search manager of the chart</td>
+                <td>The search manager bound to the chart.</td>
                 <td>-</td>
             </tr>
             <tr>
                 <td><code>tension</code></td>
                 <td><b>number</b></td>
                 <td><b>0.5</b></td>
-                <td>Tension of chart links. Should be between 0 and 1.</td>
+                <td>Tension of chart links. This value should be between 0 and 1.</td>
                 <td>
                     {% dropdown id="tension-dropdown" default="0.5" %}
                 </td>
@@ -64,30 +64,30 @@
         <h4>Events</h4>
         <table class="table table-striped table-bordered">
             <tr>
-                <td>Event</td>
-                <td>Properties</td>
+                <td><b>Name</b></td>
+                <td><b>Properties</b></td>
             </tr>
             <tr>
                 <td><code>click</code></td>
                 <td>
                     <ul>
                         <li>
-                            <code>source</code>: source name
+                            <code>source</code>: The source name.
                         </li>
                         <li>
-                            <code>sourceDimension</code>: source dimension name
+                            <code>sourceDimension</code>: The source dimension name.
                         </li>
                         <li>
-                            <code>target</code>: target name
+                            <code>target</code>: The target name.
                         </li>
                         <li>
-                            <code>targetDimension</code>: target dimension name
+                            <code>targetDimension</code>: The target dimension name.
                         </li>
                         <li>
-                            <code>dimension</code>: path dimension name
+                            <code>dimension</code>: The path dimension name.
                         </li>
                         <li>
-                            <code>value</code>: the value
+                            <code>value</code>: The value.
                         </li>
                     </ul>
                 </td>

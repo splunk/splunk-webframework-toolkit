@@ -18,45 +18,45 @@
 {% endblock css %}
 
     {% block heading %}Force-Directed Graph{% endblock heading %}
-    {% block explanation %}Force-directed graph.{% endblock explanation %}
+    {% block explanation %}Force-Directed Graph.{% endblock explanation %}
 
     {% block example %}
         {% forcedirected id="force-directed" managerid="search1" %}
     {% endblock example %}
 
     {% block usage %}
-    <p>The Force Directed Graph displays information about connectivity and clustering between nodes in a network. It displays nodes and their connections to other nodes and lays them out based on a physical simulation. Note that since the layout is based on a simulation, the final result is not guaranteed to be the same every time. 
+    <p>The Force-Directed Graph displays information about connectivity and clustering between nodes in a network. This view displays nodes and their connections to other nodes and lays them out based on a physical simulation. Note that because the layout is based on a simulation, the final result is not guaranteed to be the same every time. 
     </p>
         <ul>
-            <li>require path: <code>splunk_wftoolkit/components/forcedirected/forcedirected</code></li>
-            <li>The Force Directed Graph is best for visualizing interconnected data where clustering is interesting.</li>
+            <li>Require path: <code>splunk_wftoolkit/components/forcedirected/forcedirected</code></li>
+            <li>The Force-Directed Graph is best for visualizing interconnected data where clustering is interesting.</li>
         </ul>
-        <h4>Example Searches</h4>
+        <h4>Example searches</h4>
         <div><ul>
             <li>| inputlookup faa.demo.csv | head 200 | stats count by OriginCityName, DestCityName, DestStateName | sort count</li>
         </ul>
         </div>
-        <h4>Options</h4>
+        <h4>Properties</h4>
         <table class="table table-striped table-bordered">
             <tr>
-                <td>Option</td>
-                <td>Type</td>
-                <td>Default</td>
-                <td>Explanation</td>
-                <td>Try it</td>
+                <td><b>Name</b></td>
+                <td><b>Type</b></td>
+                <td><b>Default</b></td>
+                <td><b>Description</b></td>
+                <td><b>Try it</b></td>
             </tr>
             <tr>
                 <td><code>managerid</code></td>
                 <td><b>string</b></td>
                 <td><b>null</b></td>
-                <td>The search manager of the chart</td>
+                <td>The search manager bound to the chart.</td>
                 <td>-</td>
             </tr>
             <tr>
                 <td><code>zoom</code></td>
                 <td><b>bool</b></td>
                 <td><b>true</b></td>
-                <td>Sets the graph layout to be zoomable or not. When false, the user may not zoom</td>
+                <td>Indicates whether the graph layout is zoomable.</td>
                 <td>
                 {% checkbox id="zoom-cb" default=True %}
                 </td>
@@ -65,7 +65,7 @@
                 <td><code>directional</code></td>
                 <td><b>bool</b></td>
                 <td><b>true</b></td>
-                <td>Sets whether the graph has directionality (arrows)</td>
+                <td>Indicates whether the graph has directionality (arrows).</td>
                 <td>
                     {% checkbox id="directional-cb" default=True %}
                 </td>
@@ -83,7 +83,7 @@
                 <td><code>gravity</code></td>
                 <td><b>number</b></td>
                 <td><b>0.2</b></td>
-                <td>Sets the gravity for the physics simulation. A larger number will cause graph nodes to cluster closer together.</td>
+                <td>Sets the gravity for the physics simulation. A larger number causes graph nodes to cluster closer together.</td>
                 <td>
                     {% textinput id="gravity-tb" default="0.2" %}
                 </td>
@@ -92,7 +92,7 @@
                 <td><code>linkDistance</code></td>
                 <td><b>number</b></td>
                 <td><b>15</b></td>
-                <td>Sets the initial link distance for the physics simulation. A larger number will push the nodes farther apart.</td>
+                <td>Sets the initial link distance for the physics simulation. A larger number pushes the nodes farther apart.</td>
                 <td>
                     {% textinput id="link-tb" default="15" %}
                 </td>
@@ -101,7 +101,7 @@
                 <td><code>swoop</code></td>
                 <td><b>bool</b></td>
                 <td><b>false</b></td>
-                <td>Indicates whether to display links as straight or curved lines. When false, graph links will be straight lines</td>
+                <td>Indicates whether to display links as straight or curved lines. When false, graph links are straight lines.</td>
                 <td>
                     {% checkbox id="swoop-cb" default=False %}
                 </td>
@@ -110,7 +110,7 @@
                 <td><code>isStatic</code></td>
                 <td><b>bool</b></td>
                 <td><b>true</b></td>
-                <td>Indicates whether the initial rendering is static or dynamic. When true, the graph will initially render in a still state. When false, the graph will animate in</td>
+                <td>Indicates whether the initial rendering is static or dynamic. When true, the graph initially renders in a still state. When false, the graph is dynamic.</td>
                 <td>
                     {% checkbox id="isStatic-cb" default=True %}
                 </td>
@@ -119,27 +119,27 @@
         <h4>Events</h4>
         <table class="table table-striped table-bordered">
             <tr>
-                <td>Event</td>
-                <td>Properties</td>
+                <td><b>Name</b></td>
+                <td><b>Properties</b></td>
             </tr>
             <tr>
                 <td><code>click:link</code></td>
                 <td>
                     <ul>
                         <li>
-                            <code>source</code>: source node name
+                            <code>source</code>: The source node name.
                         </li>
                         <li>
-                            <code>sourceGroup</code>: source node's group
+                            <code>sourceGroup</code>: The source node's group.
                         </li>
                         <li>
-                            <code>target</code>: target node name
+                            <code>target</code>: The target node name.
                         </li>
                         <li>
-                            <code>targetGroup</code>: target node's group
+                            <code>targetGroup</code>: The target node's group.
                         </li>
                         <li>
-                            <code>value</code>: link value
+                            <code>value</code>: The link value.
                         </li>
                     </ul>
                 </td>
@@ -149,13 +149,13 @@
                 <td>
                     <ul>
                         <li>
-                            <code>name</code>: node name
+                            <code>name</code>: The node name.
                         </li>
                         <li>
-                            <code>value</code>: node value
+                            <code>value</code>: The node value.
                         </li>
                         <li>
-                            <code>group</code>: node group
+                            <code>group</code>: The node group.
                         </li>
                     </ul>
                 </td>
