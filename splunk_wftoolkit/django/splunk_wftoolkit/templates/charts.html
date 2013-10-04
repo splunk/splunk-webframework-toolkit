@@ -22,7 +22,7 @@
 <div class="dashboard-body container-fluid main-section-body component-page" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Chart views</h2>
+            <h2>Charts</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -33,8 +33,9 @@
                     </div>
                     <div class="panel-body html">
 
-            <p>The <b>Chart</b> view displays a series of data to plot in various configurable chart types.</p>
-            <p>Use the <code>&#123;% chart %&#125;</code> tag with the <code>type</code> property to specify the type of chart to display.</p>
+            <p>The Chart view displays a series of data to plot in various configurable chart types.</p>
+            <p>When using Django, use the <code>&#123;% chart %&#125;</code> template tag with the <code>type</code> property to specify the type of chart to display.</p>
+            <p>This example shows how to create a chart:</p>
             
 <ul class="nav nav-tabs">
                 
@@ -62,7 +63,7 @@ new ChartView({
                 </div>
             </div>
 
-            <h3>Chart types</h3>
+            <h2>Chart types</h2>
             <p>You can use the following types of charts:</p>
             <ul>
                 <li>Area</li>
@@ -150,8 +151,8 @@ new ChartView({
             {% chart id="example-chart-scatter" managerid="scatter-search" type="scatter" %}
         </div>
 
-        <h4>Chart Options</h4>
-        <p>Charts support the same options as the Splunk JSChart library. For a complete list of Splunk JSChart properties, see <a href="http://docs.splunk.com/Documentation/Splunk/5.0.2/Viz/CustomChartingConfig-ChartLegend" target="_blank">Chart and legend properties</a>.</p>
+        <h2>Options</h2>
+        <p>For a complete list of chart options, see the <a href="http://docs.splunk.com/Documentation/Splunk/latest/Viz/ChartConfigurationReference" target="_blank">Chart Configuration Reference</a>.</p>
         <p>These properties must be set in JavaScript, for example:</p>
 
 <pre class="prettyprint linenums lang-js">
@@ -162,7 +163,7 @@ splunkjs.mvc.Components.getInstance("example-chart").settings.set({
 });
 </pre>
 
-    <p>In addition to the charting library properties, you can set the following properties using templates tags or JavaScript:</p>
+    <p>In addition to the charting library options, you can set the following properties using templates tags or JavaScript:</p>
     <ul>
         <p><code>managerid</code>: The search manager of the chart.</p>
 
@@ -170,17 +171,17 @@ splunkjs.mvc.Components.getInstance("example-chart").settings.set({
 
         <p><code>data</code>: The name of the results model to use.</p>
 
-        <p><code>drilldownRedirect</code>: whether or not to redirect on click.</p>
+        <p><code>drilldownRedirect</code>: Whether to redirect when clicked.</p>
     </ul>
 
-    <h4>Events</h4>
+    <h2>Events</h2>
     <p>The following events are fired by charts:</p>
     <ul>
-        <p><code>click:chart</code>: Fired when the chart is click.</p>
-        <p><code>click:legend</code>: Fired when the legend is click.</p>
+        <p><code>click:chart</code>: Fired when the chart is clicked.</p>
+        <p><code>click:legend</code>: Fired when the legend is clicked.</p>
     </ul>
-    <p>Note that the chart will automatically drilldown to the clicked data. You can prevent 
-        this by either passing in <code>drilldownRedirect:false</code> or running 
+    <p>By default, the chart automatically drills down to the clicked data. You can prevent 
+        this action by setting <code>drilldownRedirect</code> to <code>false</code>, or running 
         <code>e.preventDefault()</code> in the <code>click</code> handler.</p>
 </div>
                 </div>

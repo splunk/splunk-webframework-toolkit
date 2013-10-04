@@ -16,7 +16,7 @@
 <div class="dashboard-body container-fluid main-section-body component-page" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Table views</h2>
+            <h2>Tables</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -26,9 +26,11 @@
                     <div class="panel-head">
                     </div>
                     <div class="panel-body html">
-    <h2>Table</h2>
-    <p>The <b>Table</b> view is a fully-featured Splunk-style results table that supports pagination. Given a search manager, the <b>Table</b> displays the processed results from that search.</p>
-    <p>Use the <code>&#123;% table %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
+    <p>The table-style views include the Table view and the EventsViewer view.</p>
+
+    <h2>Table view</h2>
+    <p>The Table view is a fully-featured Splunk-style results table that supports pagination. The Table view is bound to a search manager and displays the processed results from that search.</p>
+    <p>When using Django Bindings, use the <code>&#123;% table %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
 
     <div class="bs-docs-example">
         {% table id="example-table" managerid="example-search" pageSize="5" %} 
@@ -69,9 +71,9 @@ new TableView({
 
         <p><code>pageSize</code>: The number of results per page.</p>
 
-        <p><code>fields</code>: The fields to include in the table. In JavaScript this takes a list of strings. In Django it is a space-separated list.</p>
+        <p><code>fields</code>: The fields to include in the table. In JavaScript, provide a list of strings. In Django, provide a space-separated list.</p>
 
-        <p><code>drilldownRedirect</code>: Indicates whether to redirect on click.</p>
+        <p><code>drilldownRedirect</code>: Indicates whether to redirect when clicked.</p>
     </ul>
 
 <ul class="nav nav-tabs">
@@ -94,22 +96,22 @@ table.settings.set("fields", ["_time", "splunkd"]);</pre>
                 </div>
             </div>
 
-    <h3>Events</h3>
-    <p>The table fires the following events:</p>
+    <h4>Events</h4>
+    <p>The Table view fires the following events:</p>
     <ul>
-        <p><code>click:cell</code>: Fired when a cell is click.</p>
-        <p><code>click:row</code>: Fired when a row is click.</p>
+        <p><code>click:cell</code>: Fired when a cell is clicked.</p>
+        <p><code>click:row</code>: Fired when a row is clicked.</p>
     </ul>
-    <p>Note that the table will automatically drilldown to the clicked data. You can prevent 
-        this by either passing in <code>drilldownRedirect:false</code> or running 
+    <p>By default, the table automatically drills down to the clicked data. You can prevent 
+        this action by setting <code>drilldownRedirect</code> to <code>false</code>, or running 
         <code>e.preventDefault()</code> in the <code>click</code> handler.</p>
 
 <!-- EVENT TABLE -->
     <div class="page-header"></div>
 
-    <h2>Event table</h2>
-    <p>The <b>EventsViewer</b> view is a fully-featured Splunk-style events viewer that supports pagination and variable formatting. Given a search manager, the <b>EventsViewer</b> displays the events corresponding to that search.</p>
-    <p>Use the <code>&#123;% eventsviewer %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
+    <h2>EventsViewer view</h2>
+    <p>The EventsViewer view is a fully-featured Splunk-style events viewer that supports pagination and variable formatting. The EventsViewer view is bound to a search manager and displays the events from that search.</p>
+    <p>When using Django Bindings, use the <code>&#123;% eventsviewer %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
 
     <div class="bs-docs-example">
         {% eventsviewer id="example-eventsviewer" managerid="example-event-search"%}
