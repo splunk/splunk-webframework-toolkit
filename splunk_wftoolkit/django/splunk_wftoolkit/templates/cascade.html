@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Cascading Inputs - Web Framework Toolkit{% endblock title %}
+{% block title %}Cascading Form Inputs - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
@@ -14,7 +14,7 @@
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Cascading Forms</h2>
+            <h2>Cascading form inputs</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -25,18 +25,19 @@
                     </div>
                     <div class="panel-body">
                     <p>
-                    In this case, we have two form <code>dropdown</code> views, and the choice of
-                    one cascades into the other. When you select an index, we run 
-                    a search to find which sourcetypes are available
-                    on that index. Finally, when you click the <b>Search</b> button, we
-                    use both selections to run the final search.
+                    This example shows two form inputs (Dropdown views), and the 
+                    choice of one cascades into the other. Selecting an index from the first 
+                    dropdown list runs a search that finds the available sourcetypes in that 
+                    index and populates the second dropdown list. Then, when you select a 
+                    sourcetype and click the <b>Search</b> button, the values from both  
+                    dropdown lists are used to run the final search.
                     </p>
                     
                     <p>
-                    Note how we are using the same approach as when we had form
-                    inputs feeding into searches directly: there is no difference
-                    between a search that populates a form and a search that
-                    populates a view.
+                    The approach in this example is the same as the 
+                    <a href="/dj/redirector/splunk_wftoolkit/form">Form inputs with tokens</a>
+                    example. There is no difference between a search that populates a form 
+                    and a search that populates a view.
                     </p>
                     </div>
                 </div>
@@ -48,7 +49,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Input</h3>
+                        <h3>Cascading dropdown lists</h3>
                     </div>
                     <div class="panel-body">
                         <p>Which index should we find sourcetypes for?</p>

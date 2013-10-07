@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}{{app_name}}Maps{% endblock title %}
+{% block title %}Maps - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
@@ -25,7 +25,11 @@
                     </div>
                     <div class="panel-body ">
                         <p>
-                        This example shows Splunk's map view. This view can plot clustered data that have fields for <code>lat</code> and <code>lon</code>. Splunk's map view is designed to work with the new <b>geostats</b> command which can calculate aggregate spatial statistics to be displayed on the map.
+                        This example shows how to display data from the sample earthquake dataset
+                        using the SplunkMap view. This view can plot clustered data that contains fields
+                        for <code>lat</code> and <code>lon</code>. SplunkMap view is designed 
+                        to work with the new <b>geostats</b> command, which can calculate aggregate 
+                        spatial statistics for display on the map.
                         </p>
                     </div>
                 </div>
@@ -37,7 +41,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Map of Earthquakes Clustered by Count (Splunk Tiles)</h3>
+                        <h3>Map of earthquakes clustered by count (using Splunk tiles)</h3>
                     </div>
                     <div class="panel-body">
                         {% splunkmap id="example-map" managerid="map-search" %}
@@ -49,7 +53,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Map of Earthquakes Clustered by Count (Open Street Map)</h3>
+                        <h3>Map of earthquakes clustered by count (using Open Street Map tiles)</h3>
                     </div>
                     <div class="panel-body">
                         {% splunkmap id="example-map2" managerid="map-search" tileSource="openStreetMap" %}
@@ -65,7 +69,7 @@
                     </div>
                         
                     <div class="panel-body ">
-                        <p>Table of clusters produced by <b>geostats.</b></p>
+                        <p>Table of clusters produced by <b>geostats</b></p>
 
                         {% table id="example-table" managerid="geosearch" pageSize="6" %}
                     </div>

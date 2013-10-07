@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Chart Click - Web Framework Toolkit{% endblock title %}
+{% block title %}Chart Clicks - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
@@ -15,7 +15,7 @@
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Chart Clicks</h2>
+            <h2>Chart clicks</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -26,20 +26,21 @@
                     </div>
                     <div class="panel-body">
                         <p>
-                        Many pages display information using charts, whether
-                        they are pie charts, bar charts, or other types. These
-                        charts can be very useful for displaying summary information,
-                        and we want to allow users to drill down and
-                        get more fine-grained detail.
+                        Many pages display information using charts, such as pie charts, 
+                        bar charts, and other types. These charts can be very useful for 
+                        displaying summary information, so we want to allow users to 
+                        drill down and get more fine-tuned detail.
                         </p>
                         
                         <p>
-                        This example shows how one can allow in-page detail
-                        drilldown on a chart. When we click on one wedge of the
-                        pie chart, we see the single-value view on its right get
-                        populated with this information. In this case
-                        we are simply powering another search, but any action
-                        can be taken inside the click handler for the chart.
+                        This example shows how to customize the drilldown action on a chart.
+                        By default, the drilldown action redirects to the search page. 
+                        Here, a custom action has been created using a <code>"click:chart"</code>
+                        event handler so that when you click on a wedge of the
+                        pie chart, the single-value view on the same page is populated 
+                        with this information. In this example, the drilldown action simply
+                        powers another search, but you can customize the click handler for
+                        the chart any way you like.
                         </p>
                     </div>
                 </div>
@@ -63,7 +64,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Event Count</h3>
+                        <h3>Event count</h3>
                     </div>
                     <div class="panel-body">
                         {% single id="detail-single" managerid="detailsearch" field="totalCount" afterLabel="events"%}

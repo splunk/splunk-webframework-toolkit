@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Multi-choice Dropdowns - Web Framework Toolkit{% endblock title %}
+{% block title %}Multidropdown Lists - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
@@ -24,7 +24,7 @@
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Multidropdown</h2>
+            <h2>Multidropdown lists</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -32,10 +32,12 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-body">
-                        <p>The <code>multidropdown</code> control provides a dropdown selection menu similar to the <code>dropdown</code> control but makes it possible to select multiple items from the list. </p>
+                        <p>The MultiDropdown view is similar to the 
+                            Dropdown view, but allows multiple selections.</p>
                         <div class="panel-head">
                             <h3>Example</h3>
-                            <p>This multidropdown is populated by a Splunk search. It's change event is hooked up to update the list of selected values.</p>
+                            <p>This multidropdown list is populated by a Splunk search. Each time you make
+                            a selection, a change event handler is used to update the display of selected values.</p>
                         </div>
                         <div class="span3">
                             {% multidropdown id="multidropdown1" managerid="sourceTypeSearch" valueField="sourcetype" %}
@@ -53,12 +55,12 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Multidropdown with table</h3>
+                        <h3>Multidropdown with a table</h3>
                     </div>
                     <div class="panel-body">
-                        <p>This example shows a multidropdown that updates the visible columns in a table.</p>
+                        <p>This example shows a multidropdown list that updates the visible columns in a table.</p>
 
-                        <h5>Select columns to add:</h5>
+                        <h5>Select the columns to add:</h5>
                         {% multidropdown id="multidropdown2" managerid="fieldsSearch" valueField="field" %}
                         
                         {% table id="rt1" managerid="rt-search" fields="_time sourcetype" %}
@@ -73,7 +75,8 @@
                         <h3>Multidropdown with token binding</h3>
                     </div>
                     <div class="panel-body">
-                        <p>This example shows a multidropdown which, on change, converts its values to a token used in a search.</p>
+                        <p>This example shows a multidropdown that uses a change event handler to take
+                            the selected values and set them into a token that is used by a search.</p>
                         <h5>Select sourcetypes:</h5>
                         {% multidropdown id="multidropdown3" managerid="sourceTypeSearch" valueField="sourcetype" %}
                         
