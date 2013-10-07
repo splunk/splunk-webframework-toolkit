@@ -20,7 +20,7 @@
             id="bubble1" 
             managerid="search1"
             valueField="count"
-            nameField="OriginCityName"
+            labelField="OriginCityName"
             categoryField="OriginState"
         %}
     {% endblock example %}
@@ -56,15 +56,15 @@
             <tr>
                 <td><code>valueField</code></td>
                 <td><b>string</b></td>
-                <td><b>null</b>(defaults to all)</td>
+                <td><b>null</b> (defaults to all)</td>
                 <td>The magnitude field in the data. Circles will be sized based on this field. If the field does not exist, circles will be uniform size</td>
                 <td>{% dropdown id="value-dropdown" default="count" %}</td>
             </tr>
             <tr>
-                <td><code>nameField</code></td>
+                <td><code>labelField</code></td>
                 <td><b>string</b></td>
                 <td><b>null</b></td>
-                <td>The field used for naming circles</td>
+                <td>The field used for labeling circles</td>
                 <td>{% dropdown id="name-dropdown" default="OriginCityName" %}</td>
             </tr>
             <tr>
@@ -168,7 +168,7 @@
             var nameChoices = categoryChoices;
             namedd.settings.set("choices", nameChoices);
             namedd.on("change", function(){
-                bubbles.settings.set("nameField", namedd.val());
+                bubbles.settings.set("labelField", namedd.val());
             });
 
             bubbles.on("click", function(e){

@@ -53,10 +53,10 @@
                 <td>-</td>
             </tr>
             <tr>
-                <td><code>zoom</code></td>
+                <td><code>panAndZoom</code></td>
                 <td><b>bool</b></td>
                 <td><b>true</b></td>
-                <td>Sets the graph layout to be zoomable or not. When false, the user may not zoom</td>
+                <td>Sets the graph layout to be moveable and zoomable or not. When false, the user may not pan or zoom; instead nodes can be dragged.</td>
                 <td>
                 {% checkbox id="zoom-cb" default=True %}
                 </td>
@@ -218,7 +218,7 @@
                 force.settings.set("directional", directionalcb.val());
             });
             zoomcb.on("change", function(){
-                force.settings.set("zoom", zoomcb.val());
+                force.settings.set("panAndZoom", zoomcb.val());
             });
             swoopcb.on("change", function(){
                 force.settings.set("swoop", swoopcb.val());

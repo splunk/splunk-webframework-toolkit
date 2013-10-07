@@ -21,8 +21,8 @@
         {% sunburst 
             id="example-sunburst"
             managerid="search1"
-            sizeField="count"
-            groupingFields="OriginState OriginCityName"
+            valueField="count"
+            categoryFields="OriginState OriginCityName"
         %}
     {% endblock example %}
     {% block usage %}
@@ -61,21 +61,21 @@
             <td>-</td>
         </tr>
         <tr>
-            <td><code>groupingFields</code></td>
+            <td><code>categoryFields</code></td>
             <td><b>string</b><p>(can be a space-separated list)</p></td>
             <td><b>null</b></br>(defaults to all)</td>
             <td>This is a list of fields to group children of the root node by. Each field essintially indicates the group of the next level in the tree.</td>
             <td>{% multidropdown id="group-dropdown" %}</td>
         </tr>
         <tr>
-            <td><code>sizeField</code></td>
+            <td><code>valueField</code></td>
             <td><b>string</b></td>
             <td><b>null</b></td>
             <td>Indicates the field used to determine the size of the radial groups. The default null value results in sizing based on number of chldren.</td>
             <td>{% dropdown id="size-dropdown" default="count" %}</td>
         </tr>
         <tr>
-            <td><code>formatName</code></td>
+            <td><code>formatLabel</code></td>
             <td><b>function</b></td>
             <td><b>_.identity</b></td>
             <td>A custom formatting function for node names. Takes each node name as an input and returns a formatted name</td>
@@ -142,7 +142,7 @@
             groupdd.settings.set("choices", groupChoices);
             groupdd.val(['OriginState', 'OriginCityName']);
             groupdd.on("change", function(){
-                sunburst.settings.set("groupingFields", groupdd.val().join(" "));
+                sunburst.settings.set("categoryFields", groupdd.val().join(" "));
             });
 
             var sizeChoices = [
@@ -152,10 +152,10 @@
             sizedd.settings.set("choices", sizeChoices);
             sizedd.on("change", function(){
                 if(sizedd.val()==='None'){
-                   sunburst.settings.set("sizeField", null);
+                   sunburst.settings.set("valueField", null);
                 }
                 else{
-                   sunburst.settings.set("sizeField", sizedd.val());
+                   sunburst.settings.set("valueField", sizedd.val());
                 }
             });
         });

@@ -17,6 +17,7 @@ define(function(require, exports, module) {
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
 
     var ParCoords = SimpleSplunkView.extend({
+        moduleId: module.id,
 
         className: "splunk-toolkit-parcoords",
 

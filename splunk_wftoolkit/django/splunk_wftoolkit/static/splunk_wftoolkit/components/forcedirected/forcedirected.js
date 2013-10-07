@@ -4,9 +4,9 @@
 
 // ---- settings ----
 // height, width
-// zoom: the ability to zoom (true, false)
+// panAndZoom: the ability to zoom (true, false)
 // directional: true, false
-// count: what field to count by
+// valueField: what field to count by
 // charges, gravity: change the look of the graph, play around with these!
 // linkDistance: the distance between each node
 
@@ -85,15 +85,16 @@ define(function(require, exports, module) {
     require("css!./forcedirected.css");
 
     var ForceDirected = SimpleSplunkView.extend({
+        moduleId: module.id,
 
         className: "splunk-toolkit-force-directed",
 
         options: {
-            managerid: null,   // your MANAGER ID
-            data: "preview",  // Results type
-            zoom: true,
+            managerid: null,   
+            data: 'preview',  
+            panAndZoom: true,
             directional: true,
-            count: 'count',
+            valueField: 'count',
             charges: -500,
             gravity: 0.2,
             linkDistance: 15,
@@ -112,7 +113,7 @@ define(function(require, exports, module) {
             this.settings.on("change:gravity", this.render, this);
             this.settings.on("change:linkDistance", this.render, this);
             this.settings.on("change:directional", this.render, this);
-            this.settings.on("change:zoom", this.render, this);
+            this.settings.on("change:panAndZoom", this.render, this);
             this.settings.on("change:swoop", this.render, this);
             this.settings.on("change:isStatic", this.render, this);
         },
@@ -187,7 +188,7 @@ define(function(require, exports, module) {
             this.charge = this.settings.get('charges');
             this.gravity = this.settings.get('gravity');
             this.linkDistance = this.settings.get('linkDistance');
-            this.zoomable = this.settings.get('zoom');
+            this.zoomable = this.settings.get('panAndZoom');
             this.swoop = this.settings.get('swoop');
             this.isStatic = this.settings.get('isStatic');
             this.isDirectional = this.settings.get('directional');
@@ -210,7 +211,7 @@ define(function(require, exports, module) {
             this.tooltips = new Tooltips(graph);
 
             if(this.zoomable){
-                initPanZoom(viz.svg);
+                initPanZoom.call(this, viz.svg);   
             }
 
             graph.style("opacity", 1e-6)
@@ -339,10 +340,10 @@ define(function(require, exports, module) {
 
             // draggin'
             function initPanZoom(svg){
-                var self = this;
-
+                var that = this;
                 svg.on('mousedown.drag', function(){
-                    svg.classed('panCursor', true);
+                    if(that.zoomable)
+                        svg.classed('panCursor', true);
                     // console.log('drag start');
                 });
 

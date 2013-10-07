@@ -4,9 +4,9 @@
 // supports drilldown clicks
 
 // available settings:
-// - nameField: the field to use as the label on each bubble
+// - labelField: the field to use as the label on each bubble
 // - valueField: the field to use as the value of each bubble (also dictates size)
-// - categoryField: the field to use for grouping similar data (usually the same field as nameField)
+// - categoryField: the field to use for grouping similar data (usually the same field as labelField)
 
 // ---expected data format---
 // a splunk search like this: source=foo | stats count by artist_name, track_name
@@ -20,27 +20,23 @@ define(function(require, exports, module) {
     require("css!./bubblechart.css");
 
     var BubbleChart = SimpleSplunkView.extend({
+        moduleId: module.id,
 
         className: "splunk-toolkit-bubble-chart",
 
         options: {
             managerid: null,   
             data: "preview", 
-            nameField: null,
+            labelField: null,
+            labelField: null,
             valueField: 'count',
-            categoryField: null
+            categoryField: null,
         },
 
         output_mode: "json",
 
         initialize: function() {
-            _.extend(this.options, {
-                formatName: _.identity,
-                formatTitle: function(d) {
-                    return (d.source.name + ' -> ' + d.target.name +
-                            ': ' + d.value); 
-                }
-            });
+           
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
             this.settings.enablePush("value");
@@ -49,8 +45,14 @@ define(function(require, exports, module) {
             // without having to refresh. copy the following line for whichever field
             // you'd like dynamic updating on
             this.settings.on("change:valueField", this.render, this);
-            this.settings.on("change:nameField", this.render, this);
+            this.settings.on("change:labelField", this.render, this);
             this.settings.on("change:categoryField", this.render, this);
+
+            // NOTE: nameField is depricated. Use labelField
+            if (this.settings.get("nameField")) {
+                this.settings.set("labelField", this.settings.get("nameField"));
+            }
+            this.settings.on("change:nameField", this._onNameFieldChange, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event
@@ -62,6 +64,12 @@ define(function(require, exports, module) {
             // e.data is the this pointer passed to the callback.
             // here it refers to this object and we call render()
             e.data.render();
+        },
+
+        // This is for compatibility. nameField is depricated and labelField should be used
+        _onNameFieldChange: function(e){
+            this.settings.set("labelField", this.settings.get("nameField"));
+            this.render();
         },
 
         createView: function() {
@@ -89,11 +97,11 @@ define(function(require, exports, module) {
         // making the data look how we want it to for updateView to do its job
         formatData: function(data) {
             // getting settings
-            var nameField = this.settings.get('nameField');
+            var labelField = this.settings.get('labelField');
             var valueField = this.settings.get('valueField');
             var categoryField = this.settings.get('categoryField');
             var collection = data;
-            var bubblechart = { 'name': nameField+"s", 'children': [ ] }; // how we want it to look
+            var bubblechart = { 'name': labelField+"s", 'children': [ ] }; // how we want it to look
 
             // making the children formatted array
             for (var i=0; i < collection.length; i++) {
@@ -108,7 +116,7 @@ define(function(require, exports, module) {
                     Idx = bubblechart.children.length - 1;
                 }
 
-                bubblechart.children[Idx].children.push({ 'name': collection[i][nameField], 'size': collection[i][valueField] || 1 });
+                bubblechart.children[Idx].children.push({ 'name': collection[i][labelField], 'size': collection[i][valueField] || 1 });
             }
             return bubblechart; // this is passed into updateView as 'data'
         },

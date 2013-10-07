@@ -10,18 +10,17 @@ define(function(require, exports, module) {
     window.nester = nester;
 
     var Sunburst = SimpleSplunkView.extend({
+        moduleId: module.id,
 
         className: "splunk-toolkit-sunburst", 
 
         options: {
             managerid: null,  
-            data: "preview", 
-
-            // default values
+            data: 'preview', 
             chartTitle: null,
-            sizeField: null,
-            groupingFields: null,
-            formatName: _.identity,
+            valueField: null,
+            categoryFields: null,
+            formatLabel: _.identity,
             formatTooltip: function(d) {
                 return (d.name || "Total") + ": " + d.value;
             }
@@ -35,8 +34,8 @@ define(function(require, exports, module) {
             // TODO: enable push
             // TODO: wire up changes
 
-            this.settings.on("change:sizeField", this.render, this);
-            this.settings.on("change:groupingFields", this.render, this);
+            this.settings.on("change:valueField", this.render, this);
+            this.settings.on("change:categoryFields", this.render, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event
@@ -70,9 +69,9 @@ define(function(require, exports, module) {
 
         // making the data look how we want it to for updateView to do its job
         formatData: function(data) {
-            var valueField = this.settings.get('sizeField');
+            var valueField = this.settings.get('valueField');
             var rawFields = this.resultsModel.data().fields;
-            var fieldList = this.settings.get("groupingFields");
+            var fieldList = this.settings.get("categoryFields");
             if(fieldList){
                 fieldList = fieldList.split(/[ ,]+/);
             }
@@ -100,7 +99,7 @@ define(function(require, exports, module) {
 
         updateView: function(viz, data) {
             var that = this;
-            var formatName = this.settings.get("formatName") || _.identity;
+            var formatLabel = this.settings.get("formatLabel") || _.identity;
             var formatTooltip = this.settings.get("formatTooltip") || function(d) { return d.name; };
             var containerHeight = this.$el.height();
             var containerWidth = this.$el.width(); 
@@ -167,7 +166,7 @@ define(function(require, exports, module) {
                 })
                 .attr("dy", ".2em")
                 .attr("x", 0)
-                .text(function(d) { return formatName(d.name); })
+                .text(function(d) { return formatLabel(d.name); })
                 .on("click", click);
                 
             text.append("title")

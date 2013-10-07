@@ -68,6 +68,7 @@
     require("css!./calendarheatmap.css");
 
     var CalendarHeatMap = SimpleSplunkView.extend({
+        moduleId: module.id,
 
         className: "splunk-toolkit-cal-heatmap",
 
@@ -76,16 +77,15 @@
             data: "preview",  // Results type
             domain: 'hour', // the largest unit it will differentiate by in squares
             subDomain: 'min', // the smaller unit the calheat goes off of
-
+            formatLabel: _.identity,
+            uID: null,
             options: {} // the default for custom heatmap options.
         },
 
         output_mode: "json_rows",
 
         initialize: function() {
-            _.extend(this.options, {
-                formatName: _.identity,
-            });
+            
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
             this.settings.enablePush("value");

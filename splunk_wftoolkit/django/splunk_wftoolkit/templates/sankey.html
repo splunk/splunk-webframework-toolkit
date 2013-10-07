@@ -51,7 +51,7 @@
                 <td>-</td>
             </tr>
             <tr>
-                <td><code>formatName</code></td>
+                <td><code>formatLabel</code></td>
                 <td><b>function</b></td>
                 <td><b>_.identity</b></td>
                 <td>A custom formatting function for node names. Takes each node name as an input and returns a formatted name</td>
@@ -136,12 +136,12 @@
     require(["splunkjs/ready!", "underscore"], function(mvc, _) {
 
         // Customize the sankey component.  As described in
-        // sankeychart.js, the formatName is an option that expects a
+        // sankeychart.js, the formatLabel is an option that expects a
         // function.  That function takes a name from the search and
         // returns a formatted name.  In this case, replace access_log
         // strings for mobile clients with more readable names.
         var sankey = mvc.Components.getInstance('sankey1');
-        var formatNameDropdown = mvc.Components.getInstance("format-name");
+        var formatLabelDropdown = mvc.Components.getInstance("format-name");
         var formatTooltipDropdown = mvc.Components.getInstance("format-tooltip");
         
         var NAME_FORMATTERS = {
@@ -165,18 +165,18 @@
         };
         
         sankey.settings.set({
-            'formatName': NAME_FORMATTERS['default']
+            'formatLabel': NAME_FORMATTERS['default']
         });
         
-        formatNameDropdown.settings.set({
+        formatLabelDropdown.settings.set({
             "choices": [
                 {label: "Default", value: "default" },  
                 {label: "States", value: "state" },  
                 {label: "All Caps", value: "caps" }
             ]
         });
-        formatNameDropdown.on("change", function(val) {
-            sankey.settings.set("formatName", NAME_FORMATTERS[val]); 
+        formatLabelDropdown.on("change", function(val) {
+            sankey.settings.set("formatLabel", NAME_FORMATTERS[val]); 
         });
         
         formatTooltipDropdown.settings.set({

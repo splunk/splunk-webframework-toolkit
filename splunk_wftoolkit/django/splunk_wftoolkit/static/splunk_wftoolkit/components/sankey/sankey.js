@@ -18,12 +18,14 @@ define(function(require, exports, module) {
     require("css!./sankey.css");
 
     var SankeyChart = SimpleSplunkView.extend({
+        moduleId: module.id,
+
         className: "splunk-toolkit-sankey",
 
         options: {
             managerid: null,   
             data: "preview", 
-            formatName: _.identity,
+            formatLabel: _.identity,
             formatTooltip: function(d) {
                 return (d.source.name + ' -> ' + d.target.name +
                         ': ' + d.value); 
@@ -36,7 +38,7 @@ define(function(require, exports, module) {
         initialize: function() {
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
             
-            this.settings.on("change:formatName change:formatTooltip", this.render, this);
+            this.settings.on("change:formatLabel change:formatTooltip", this.render, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event
@@ -94,7 +96,7 @@ define(function(require, exports, module) {
                 .attr("height", graphHeight)
                 .attr("transform", "translate(" + viz.margin.left + "," + viz.margin.top + ")");
 
-            var formatName = this.settings.get('formatName');
+            var formatLabel = this.settings.get('formatLabel') || _.identity;
             var formatTooltip = this.settings.get('formatTooltip');
 
             var sankey = d3.sankey()
@@ -150,7 +152,7 @@ define(function(require, exports, module) {
                     linksToHighlight.classed('hovering', false);
                 })
                 .append("title")
-                .text(function(d) { return formatName(d.name) + "\n" + d.value; })
+                .text(function(d) { return formatLabel(d.name) + "\n" + d.value; })
 
             node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
                 .call(d3.behavior.drag()
@@ -164,7 +166,7 @@ define(function(require, exports, module) {
                 .attr("dy", ".35em")
                 .attr("text-anchor", "end")
                 .attr("transform", null)
-                .text(function(d) { return formatName(d.name); })
+                .text(function(d) { return formatLabel(d.name); })
                 .filter(function(d) { return d.x < graphWidth / 2; })
                 .attr("x", 6 + sankey.nodeWidth())
                 .attr("text-anchor", "start");

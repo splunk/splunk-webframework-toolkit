@@ -20,6 +20,7 @@ define(function(require, exports, module) {
     require("css!./parallelsets.css");
 
     var ParallelSets = SimpleSplunkView.extend({
+        moduleId: module.id,
 
         className: "splunk-toolkit-parellel-sets",
 
