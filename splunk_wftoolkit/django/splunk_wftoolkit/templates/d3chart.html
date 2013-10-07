@@ -64,33 +64,6 @@
         </div>
         
     </div>
-    <!-- <div class="dashboard-row"> -->
-        <!-- <div class="dashboard-cell" style="width: 50%;">
-            <div class="dashboard-panel">
-                <div class="dashboard-element">
-                    <div class="panel-head">
-                        <h3>Pie</h3>
-                    </div>
-                    <div class="panel-body">
-                            <div id="hook3" class="splunkdj-view chart-box"></div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- <div class="dashboard-cell" style="width: 50%;">
-            <div class="dashboard-panel">
-                <div class="dashboard-element">
-                    <div class="panel-head">
-                        <h3>Flights arriving by city</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div id="hook4" class="splunkdj-view chart-box"/></div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        
-    <!-- </div> -->
 </div>
 
 {% endblock content%}
@@ -104,54 +77,6 @@
         var _ = require("underscore");
         var SearchManager = require("splunkjs/mvc/searchmanager");
         var D3ChartView = require("splunkjs/mvc/d3chart/d3chartview");
-
-        // new SearchManager({
-        //      "id": "search1",
-        //      "latest_time": null,
-        //      "search": "index=faa ArrDelay=* earliest=\"1359590400\" latest=\"1359676799\" | timechart span=1h avg(DepDelayMinutes) AS AvgDepDelay avg(ArrDelayMinutes) AS AvgArrDelay | appendcols [search index=faa earliest=\"1359590400\" latest=\"1359676799\" | timechart span=1h count AS TotalFlights | rename _time as newtime, _span as newspan] | eval _time=ifnull(_time, newtime, _time) | eval _span=ifnull(_span, newspan, _span) | fields - newspan, newtime | table _time AvgDepDelay AvgArrDelay TotalFlights",
-        //      "auto_cancel": 90,
-        //      "status_buckets": 0,
-        //      "preview": true,
-        //      "timeFormat": "%s.%Q",
-        //      "wait": 0,
-        //      "app": "demo_bubbles",
-        //      "cache": true
-        //  });
-
-        //  var pareto_chart = new D3ChartView({
-        //      "id": "mychart",
-        //      "managerid": "search1",
-        //      "type": "linePlusBarChart",
-        //      "el": $('#hook1')
-        //  }).render();
-
-        //  pareto_chart.settings.set("setup", function(chart) {
-        //      chart.xAxis.tickFormat(function(d) {
-                
-        //          var format = d3.time.format("%X");
-        //          return format(new Date(d));
-        //      });
-            
-        //      chart.xAxis.rotateLabels(90);
-        //      chart.color(d3.scale.category10().range());
-        //      chart.margin({right: 100, left: 80});
-            
-            
-        //      chart.y1Axis.axisLabel("Avg. Delay");
-        //      chart.y2Axis.axisLabel("Total Flights");
-            
-        //      chart.y1Axis.tickFormat(function(tick) {
-        //          return tick.toFixed(2);
-        //      });
-            
-        //      var xScale = d3.time.scale.utc()
-        //          .domain([new Date(1359590400000), new Date(1359676799000)]);
-                
-        //      chart.xAxis.scale(xScale);
-        //      chart.xAxis.axisLabel("Time of Day");
-            
-        //      chart.xAxis.tickValues(xScale.ticks(d3.time.hours.utc, 1));
-        //  });
 
         new SearchManager({
             'id': "search2",
@@ -188,8 +113,6 @@
         donut_chart.settings.set("setup", function(chart){
             chart.color(d3.scale.category10().range());
             chart.donut(true);
-           // chart.staggerLabels(true);
-            //chart.showValues(true);
         });
 
              

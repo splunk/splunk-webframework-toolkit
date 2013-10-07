@@ -48,11 +48,13 @@
                     </div>
                     <div class="panel-body">
                        
-                        <div id="button-controls">
-                            <div class="btn" id="console-spill">Send to console</div>
-                            <!-- <div class="btn">Copy to clipboard</div> -->
+                            {% resultsview id="results-viewer" managerid="search1" number="10" %}
+                        <div class="row">
+                            <div id="button-controls">
+                                <div class="btn" id="console-spill">Send complete results to console</div>
+                                <!-- <div class="btn">Copy to clipboard</div> -->
+                            </div>
                         </div>
-                        {% resultsview id="results-viewer" managerid="search1" number="10" %}
                     </div>
                 </div>
             </div>
