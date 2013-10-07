@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Simple Form - Web Framework Toolkit{% endblock title %}
+{% block title %}Form Inputs with Tokens - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
@@ -15,7 +15,7 @@
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Forms</h2>
+            <h2>Form inputs with tokens</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -26,27 +26,26 @@
                     </div>
                     <div class="panel-body">
                     <p>
-                    Just like dashboards, we can build simple forms using Django
-                    template tags and JavaScript. In this case, we use a similar
-                    dashboard to what you saw previously, but we parameterize
-                    the query to have a dynamic <code>$count$</code> token. We 
-                    acquire this token from the dropdown (<code>dropdown</code>) 
-                    view.
+                    You can build simple dashboards with form views using JavaScript
+                    and Django template tags. This example shows how to parameterize
+                    a search query using two tokens, <code>$count$</code> and <code>$host$</code>, 
+                    and the values of these tokens are acquired from two form views:
+                    </p>
+
+                    <p>
+                    The <code>$count$</code> token is bound to the dropdown list (Dropdown view). 
+                    </p>
+                    
+                    <p>The <code>$host</code> is bound to the radio button group 
+                    (RadioButtonGroup view), which is populated with host values from the 
+                    results of a metadata search. 
                     </p>
                     
                     <p>
-                    We also show how to populate a form view, in this
-                    case a radio button group, from search results. In this case,
-                    we are controlling the <code>$host</code> token, whose values
-                    we get from a metadata search.
-                    </p>
-                    
-                    <p>
-                    Finally, notice that in JavaScript we set defaults
-                    for these tokens. However, we don't set any event handlers
-                    for the form views. Instead, these are updated using the
-                    token data-binding mechanisms that exist in the Application 
-                    Framework.
+                    The defaults for these tokens are set in JavaScript.
+                    Rather than using event handlers to update the searches with new
+                    values when the form inputs change, the values
+                    are updated using token data-binding mechanisms.
                     </p>
                     </div>
                 </div>
@@ -58,7 +57,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Form Input</h3>
+                        <h3>Dropdown list</h3>
                     </div>
                     <div class="panel-body">
                         <p>How many events would you like to see?</p>
@@ -73,10 +72,10 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Form Input from Search</h3>
+                        <h3>Radio button group</h3>
                     </div>
                     <div class="panel-body">
-                        <p>What host should we use?</p>
+                        <p>Which host should we use?</p>
                         {% radiogroup id="host-radio"
                             managerid="hostsearch"
                             valueField="host"

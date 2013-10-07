@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Search{% endblock title %}
+{% block title %}Search Timeline - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
@@ -31,7 +31,7 @@
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Recreating the Search Timeline UI</h2>
+            <h2>Search timeline</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -42,16 +42,8 @@
                     </div>
                     <div class="panel-body">
                         <p>
-                        This example shows how you can use the components of the Application
-                        Framework to recreate portions of the Splunk Search Timeline UI.
-                        Without any custom code, we can put the views and
-                        managers we want on the page.
-                        </p>
-                        
-                        <p>
-                        Another benefit is that this is still just an HTML/JS/CSS page:
-                        we can add custom HTML (such as this blurb), or even add custom
-                        interaction using JavaScript.
+                        This example shows how to create a UI that is similiar to Splunk Web
+                        by simply adding different views, such as the Timeline view. 
                         </p>
                     </div>
                 </div>

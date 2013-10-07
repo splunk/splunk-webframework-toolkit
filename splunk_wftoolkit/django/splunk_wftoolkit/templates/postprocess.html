@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Post Process - Web Framework Toolkit{% endblock title %}
+{% block title %}Post-process Searches - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
@@ -14,7 +14,7 @@
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Post Process</h2>
+            <h2>Post-process searches</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -24,10 +24,9 @@
                     <div class="panel-head">
                     </div>
                     <div class="panel-body">
-                    <p>This example shows how to create a single search, then how to generate
-                        multiple views on the search using post-processing. 
-                        We can create post-process managers using Django template tags and 
-                        directly in JavaScript.</p>
+                    <p>This example shows how to use post-process searches. First, a single main search powers one view.
+                        Then, two post-process searches based on the main search power additional views. 
+                        You can create PostProcessManagers using JavaScript and Django template tags.</p>
                     </div>
                 </div>
             </div>
@@ -50,7 +49,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Chart 2 (just splunk_web_access and splunk_web_service)</h3>
+                        <h3>Chart 2 (only splunk_web_access and splunk_web_service)</h3>
                     </div>
                     <div class="panel-body">
                         {% chart id="chart2" managerid="post2" type="bar" %}
@@ -64,7 +63,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Post Process Table (just splunk_web_access and splunkd)</h3>
+                        <h3>Post-process table (only splunk_web_access and splunkd)</h3>
                     </div>
                     <div class="panel-body">
                         {% table id="table1" managerid="post3" %}
@@ -78,7 +77,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Main Search Table (all)</h3>
+                        <h3>Main search table (all sourcetypes)</h3>
                     </div>
                     <div class="panel-body">
                         {% table id="table2" managerid="main-search" %}

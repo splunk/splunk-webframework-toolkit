@@ -8,18 +8,18 @@
         <a name="charts" href="/dj/redirector/splunk_wftoolkit/charts">Charts</a>
         <a name="tables" href="/dj/redirector/splunk_wftoolkit/tables">Tables</a>
         <a name="forms" href="/dj/redirector/splunk_wftoolkit/forms">Forms</a>
-        <a name="searchcontrols" href="/dj/redirector/splunk_wftoolkit/searchcontrols">Search controls</a>
+        <a name="searchcontrols" href="/dj/redirector/splunk_wftoolkit/searchcontrols">Search manager controls</a>
         <a name="map" href="/dj/redirector/splunk_wftoolkit/map">Map</a>
         <a name="dataview" href="/dj/redirector/splunk_wftoolkit/dataview">Data template</a>
     </collection>
 
     <collection label="Toolkit Components">
-        <a href="/dj/redirector/splunk_wftoolkit/sankey">Sankey chart</a>
-        <a href="/dj/redirector/splunk_wftoolkit/bubble_chart">Bubble chart</a>
-        <a href="/dj/redirector/splunk_wftoolkit/forcedirected">Force directed graph</a>
-        <a href="/dj/redirector/splunk_wftoolkit/calendarheatmap">Calendar heatmap</a>
-        <a href="/dj/redirector/splunk_wftoolkit/parallelcoords">Parallel coordinates</a>
-        <a href="/dj/redirector/splunk_wftoolkit/parallelsets">Parallel sets</a>
+        <a href="/dj/redirector/splunk_wftoolkit/sankey">Sankey Chart</a>
+        <a href="/dj/redirector/splunk_wftoolkit/bubble_chart">Bubble Chart</a>
+        <a href="/dj/redirector/splunk_wftoolkit/forcedirected">Force-Directed Graph</a>
+        <a href="/dj/redirector/splunk_wftoolkit/calendarheatmap">Calendar Heatmap</a>
+        <a href="/dj/redirector/splunk_wftoolkit/parallelcoords">Parallel Coordinates</a>
+        <a href="/dj/redirector/splunk_wftoolkit/parallelsets">Parallel Sets</a>
         <a href="/dj/redirector/splunk_wftoolkit/sunburst">Sunburst</a>
     </collection>
 
@@ -32,19 +32,19 @@
         <a href="/dj/redirector/splunk_wftoolkit/properties">Search properties</a>
         <a href="/dj/redirector/splunk_wftoolkit/cache">Cached searches</a>
 
-        <a href="/dj/redirector/splunk_wftoolkit/databindingjs">Databinding with tokens</a>
+        <a href="/dj/redirector/splunk_wftoolkit/databindingjs">Data binding with tokens</a>
 
         <a href="/dj/redirector/splunk_wftoolkit/form">Form inputs with tokens</a>
         <a href="/dj/redirector/splunk_wftoolkit/cascade">Cascading form inputs</a>
         <a href="/dj/redirector/splunk_wftoolkit/multidropdown">Multidropdown lists</a>
 
         <a href="/dj/redirector/splunk_wftoolkit/search">Search timeline</a>
-        <a href="/dj/redirector/splunk_wftoolkit/timerange">Time range inputs</a>
-        <a href="/dj/redirector/splunk_wftoolkit/timerange_group">Grouped time range input</a>
+        <a href="/dj/redirector/splunk_wftoolkit/timerange">Time ranges</a>
+        <a href="/dj/redirector/splunk_wftoolkit/timerange_group">Grouped time range</a>
 
         <a href="/dj/redirector/splunk_wftoolkit/interactive">Interactive views</a>
         <a href="/dj/redirector/splunk_wftoolkit/chartclick">Chart clicks</a>
-        <a href="/dj/redirector/splunk_wftoolkit/custom_table_cells">Custom tables</a>
+        <a href="/dj/redirector/splunk_wftoolkit/custom_table_cells">Custom table cells</a>
         <a href="/dj/redirector/splunk_wftoolkit/maps">Maps</a>
 
         <a href="/dj/redirector/splunk_wftoolkit/d3_chart">NVD3 charts</a>
@@ -53,8 +53,8 @@
     </collection>
 
     <collection label="Layout Templates">
-        <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Basic dashboard for Django</a>
-        <a href="/dj/redirector/splunk_wftoolkit/dashboardjs_stencil/">Basic dashboard for JavaScript</a>
+        <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Basic dashboard using Django</a>
+        <a href="/dj/redirector/splunk_wftoolkit/dashboardjs_stencil/">Basic dashboard using JavaScript</a>
         <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil1/">Single-panel dashboard</a>
         <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil2/">Multi-panel dashboard</a>
     </collection>

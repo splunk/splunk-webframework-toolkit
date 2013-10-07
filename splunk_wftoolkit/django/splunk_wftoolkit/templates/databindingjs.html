@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Data Binding - Web Framework Toolkit{% endblock title %}
+{% block title %}Data Binding with Tokens - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
@@ -15,7 +15,7 @@
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Data Binding</h2>
+            <h2>Data binding with tokens</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -26,13 +26,11 @@
                     </div>
                     <div class="panel-body">
                     <p>
-                        This example demonstrates how to create components directly
-                        in JavaScript and setup data binding between their properties.
+                        This example demonstrates how to set up data binding using tokens.
                     </p>
                     <p>
-                        The text inputs on the left and right sides will keep their
-                        values in sync automatically since they are bound to
-                        the same token (<code>$fullName$</code>).
+                        The values of both text inputs are automatically kept in sync
+                        because they are bound to the same token (<code>$fullName$</code>).
                     </p>
                     </div>
                 </div>
@@ -44,7 +42,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Left Side</h3>
+                        <h3>Left side</h3>
                     </div>
                     <div class="panel-body">
                         <p>Who are you?</p>
@@ -57,7 +55,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Right Side</h3>
+                        <h3>Right side</h3>
                     </div>
                     <div class="panel-body">
                         <p>Your name is:</p>

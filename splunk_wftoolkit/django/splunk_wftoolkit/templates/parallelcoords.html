@@ -27,45 +27,45 @@
     {% endblock example %}
 
     {% block usage%}
-        <p>Parallel Coordinate Graphs are good for visualizing multidimensional data dynamically. They are especially good for data with many dimensions and categories since they allow a user to interactively examine a large dataset.</p>
+        <p>The Parallel Coordinates graph is good for visualizing multidimensional data dynamically. This graph is especially good for data with many dimensions and categories because it allows a user to interactively examine a large dataset.</p>
         <ul>
-            <li>require path: <code>splunk_wftoolkit/components/parallelcoords/parallelcoords</code></li>
+            <li>Require path: <code>splunk_wftoolkit/components/parallelcoords/parallelcoords</code></li>
         </ul>
-        <h4>Example Searches</h4>
+        <h4>Example searches</h4>
         <div class="well"><ul>
             <li>index=_internal | head 10000 | stats count by sourcetype clientip</li>
             <li>| inputlookup faa.demo.csv | head 10000 | fields AirlineDescription OriginCityName DestCityName</li>
         </ul>
         </div>
-        <h4>Options</h4>
+        <h4>Properties</h4>
         <table class="table table-striped table-bordered">
                 <tr>
-                        <td>Option</td>
-                        <td>Type</td>
-                        <td>Default</td>
-                        <td>Explanation</td>
-                        <td>Try it</td>
+                        <td><b>Name</b></td>
+                        <td><b>Type</b></td>
+                        <td><b>Default</b></td>
+                        <td><b>Description</b></td>
+                        <td><b>Try it</b></td>
                 </tr>
                 <tr>
                         <td><code>managerid</code></td>
                         <td><b>string</b></td>
                         <td><b>null</b></td>
-                        <td>The search manager of the chart</td>
+                        <td>The search manager bound to the chart.</td>
                         <td>-</td>
                 </tr>
         </table>
         <h4>Events</h4>
         <table class="table table-striped table-bordered">
             <tr>
-                <td>Event</td>
-                <td>Properties</td>
+                <td><b>Name</b></td>
+                <td><b>Properties</b></td>
             </tr>
             <tr>
                 <td><code>select</code></td>
                 <td>
                     <ul>
                         <li>
-                            <code>selected</code>: an array of objects containing the paths of selected data from dimension node to dimension node
+                            <code>selected</code>: An array of objects containing the paths of selected data from dimension node to dimension node.
                         </li>
                     </ul>
                 </td>

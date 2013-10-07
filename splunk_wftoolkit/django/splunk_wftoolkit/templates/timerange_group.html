@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Time Range Picker Groups - Web Framework Toolkit{% endblock title %}
+{% block title %}Grouped Time Range - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
@@ -24,7 +24,7 @@
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Time Range Inputs</h2>
+            <h2>Grouped time range</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -35,10 +35,10 @@
                     </div>
                     <div class="panel-body">
                         <p>
-                        Another common activity is to use one time range input for
-                        multiple searches. In this example, we have the same time range input
-                        set the timebounds for two separate searches that drive
-                        the single-value views.
+                        You might want to use one time range for
+                        multiple searches. In this example, the same TimeRange view
+                        sets the timebounds for two separate searches that drive
+                        the two Single views.
                         </p>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     <div class="panel-head">
-                        <h3>Grouped Time Range Input</h3>
+                        <h3>Grouped time range</h3>
                     </div>
                     <div class="panel-body">
                         {% timerange id="timerange" %}

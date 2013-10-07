@@ -26,11 +26,17 @@
                     </div>
                     <div class="panel-body html">  
             
-            <p>Search is a core feature of the Splunk Application Framework. All of the framework views can be bound to a search in various ways. Some views are populated by searches, some modify the searches they are bound to, and some do both.</p>
-            <p>Each search is represented by a <i>manager</i> that manages the query, properties, operation, and lifetime of an individual search job. You can create managers using Django template tags or JavaScript. Managers can correspond to a saved search, or a search job you create on the fly in code or dynamically with views.</p>
+            <p>Search is a core feature of the Splunk Web Framework. Most of the framework views can be bound to a search in various ways. Some views are populated by searches, some modify the searches they are bound to, and some do both.</p>
+            <p>Each search is represented by a <i>manager</i> that manages the query, properties, operation, and lifetime of an individual search job. You can create search managers using Django template tags or JavaScript. The types of search managers corresond to the types of search:</p>
+            <ul>
+            <li><b>SearchManager</b> corresponds to a search job.</li>
+            <li><b>SavedSearchManager</b> corresponds to a saved report.</li>
+            <li><b>PostProcessManager</b> corresponds to a post-process search.</li>
+            </ul> 
+
             <div class="page-header"></div>
-            <h2>Search manager</h2>
-            <p>A search manager (declared with the <code>&#123;% searchmanager %&#125;</code> tag) represents a search manager, which can be generated dynamically or hard coded. The <code>search</code> property corresponds to the search query. Here is an example of declaring a search manager for a search that counts the events in the internal index:</p>
+            <h2>SearchManager</h2>
+            <p>A SearchManager (declared with the <code>&#123;% searchmanager %&#125;</code> Django template tag) represents a search manager for a search job, which can be generated dynamically or hard coded. The <code>search</code> property corresponds to the search query. Here is an example of declaring a SearchManager for a search that counts the events in the internal index:</p>
 
             <ul class="nav nav-tabs">
                 <li class="active">
@@ -121,22 +127,22 @@ new SearchManager({
                 </div>
             </div>
 
-            <p>For a complete list of search job options, see the <a href="http://docs.splunk.com/Documentation/AppFramework" target="_blank">SearchManager</a> reference documentation.</p>
+            <p>For a complete list of search job options, see the <a href="http://docs.splunk.com/Documentation/WebFramework" target="_blank">SearchManager in the Component Reference</a>.</p>
 
             <h3>Events</h3>
-            <p>The following events are fired by this component:</p>
+            <p>The following events are fired by this search manager:</p>
             <ul>
                 <p><code>search:error</code>: Fired when an error occurs.</p>
                 <p><code>search:fail</code>: Fired when the search job fails.</p>
                 <p><code>search:progress</code>: Fired to indicate search progress.</p>
                 <p><code>search:cancelled</code>: Fired when the search is cancelled.</p>
                 <p><code>search:start</code>: Fired when the search is started.</p>
-                <p><code>search:done</code>: Fired when the search is completed and will return no more results. Note that for a real-time search this event will never fire.</p>
+                <p><code>search:done</code>: Fired when the search is completed and will return no more results. This event is never fired for real-time searches.</p>
             </ul>
 
             <div class="page-header"></div>
-            <h2>Saved search manager</h2>
-            <p>A saved search manager (declared with the <code>&#123;% savedsearchmanager %&#125;</code> tag) corresponds to a saved search (by providing its ID) on a Splunk instance. Bind the saved search manager to a view the same way you'd bind a search manager. For example, to bind a table to a saved search called <b>example-saved-search</b> through a <code>savedsearchmanager</code>:</p>
+            <h2>SavedSearchManager</h2>
+            <p>A SavedSearchManager (declared with the <code>&#123;% savedsearchmanager %&#125;</code> Django template tag) corresponds to a saved report (by providing its ID) on a Splunk instance. Bind views to a SavedSearchManager the same way you'd bind to a SearchManager. For example, to bind a chart to a saved report called "example-saved-search":</p>
 
             <ul class="nav nav-tabs">
                 <li class="active">
@@ -173,20 +179,20 @@ new SavedSearchManager({
             <p>You can set the following properties using templates tags or JavaScript:</p>
             <ul>
                 <p><code>app</code>: Sets the namespace (the app context) to run in.</p>
-                <p><code>autostart</code>: When <code>true</code>, the saved search manager automatically starts a new job when its properties have changed and when the page first loads (and the <code>component_loader</code> is called). When <code>false</code>, application code must call <code>startSearch</code> manually to start a search.</p>
-                <p><code>cache</code>: When <code>true</code> the saved search manager always uses the results from a preexisting search job when possible. When <code>false</code>, it never uses results from preexisting search jobs. When <code><i>n</i></code>, only search jobs that are newer than <i>n</i> seconds are used.</p>
-                <p><code>searchname</code>: The name of the saved search on the Splunk server.</p>
+                <p><code>autostart</code>: When <code>true</code>, the search manager automatically starts a new job when its properties have changed and when the page first loads (and the <code>component_loader</code> is called). When <code>false</code>, application code must call <code>startSearch</code> manually to start a search.</p>
+                <p><code>cache</code>: When <code>true</code> the search manager always uses the results from a preexisting search job when possible. When <code>false</code>, it never uses results from preexisting search jobs. When <code><i>n</i></code>, only search jobs that are newer than <i>n</i> seconds are used.</p>
+                <p><code>searchname</code>: The name of the saved report on the Splunk server.</p>
             </ul>
 
         <h3>Events</h3>
-        <p>The following events are fired by this component:</p>
+        <p>The following events are fired by this search manager:</p>
         <ul>
             <p><code>search:error</code>: Fired when an error occurs.</p>
             <p><code>search:fail</code>: Fired when the search job fails.</p>
             <p><code>search:progress</code>: Fired to indicate search progress.</p>
             <p><code>search:cancelled</code>: Fired when the search is cancelled.</p>
             <p><code>search:start</code>: Fired when the search is started.</p>
-            <p><code>search:done</code>: Fired when the search is completed and will return no more results. Note that for a real-time search this event will never fire.</p>
+                <p><code>search:done</code>: Fired when the search is completed and will return no more results. This event is never fired for real-time searches.</p>
         </ul>
          </div>
                 </div>
