@@ -1,0 +1,44 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Toolkit Components Overview {% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunk_wftoolkit/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-body container-fluid main-section-body">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Using Toolkit Components</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                    </div>
+                    <div class="panel-body html">
+                        <p>The Splunk Web Framework Tookit includes a number or new, reusable components based on open-source samples. These new components are meant to serve as examples for users who want to build their own custom components as well as supported add-ons that can be included in apps. The code for these components can be found in <b>/splunk_wftoolkit/static/splunk_wftoolkit/components/</b>.</p> 
+
+                        <p>There are two ways to include toolkit components in a Splunk app:</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            
+{% endblock content%}
+
+{% block js %}    
+    <script>
+        
+    </script>
+{% endblock js %}
