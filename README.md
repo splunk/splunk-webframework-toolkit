@@ -15,7 +15,7 @@ Here are the Web Framework Toolkit requirements for this release:
 * The Splunk Web Framework: The Web Framework is built into Splunk 6 and is available for Splunk 5 from [dev.splunk.com](http://dev.splunk.com/view/web-framework/SP-CAAAER6).
 
 #### Installing the Web Framework Toolkit 
-The Web Framework Toolkit is build as a Splunk App, enabling interactive examples running within a Splunk 5 or 6 instance. 
+The Web Framework Toolkit is built as a Splunk App, enabling interactive examples running within a Splunk 5 or 6 instance. 
 
 ##### Installing from SPL
 If you have downloaded the Web Framework Toolkit from [apps.splunk.com](TDB) you can install toolkit using the Splunk App Management UI experience. 
