@@ -9,7 +9,7 @@ Web Framework. You will find documentation and reference information, along with
 code templates and additional components that you can use within your own Splunk
 Apps.
 
-### Getting Starteds
+### Getting Started
 This section provides information about installing and using the Web Framework Toolkit. 
 
 #### Requirements
