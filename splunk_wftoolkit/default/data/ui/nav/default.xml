@@ -14,7 +14,7 @@
     </collection>
 
     <collection label="Toolkit Components">
-        <a href="/dj/redirector/splunk_wftoolkit/toolkitcomponents">Toolkit Component Usage</a>
+        <a href="/dj/redirector/splunk_wftoolkit/toolkitcomponents">Using the Web Framework Tookit Components</a>
         <a href="/dj/redirector/splunk_wftoolkit/sankey">Sankey Chart</a>
         <a href="/dj/redirector/splunk_wftoolkit/bubblechart">Bubble Chart</a>
         <a href="/dj/redirector/splunk_wftoolkit/forcedirected">Force-Directed Graph</a>
