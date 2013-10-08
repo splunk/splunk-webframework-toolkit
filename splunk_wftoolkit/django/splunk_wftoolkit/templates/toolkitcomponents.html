@@ -41,14 +41,14 @@
                         <p>When the Web Framework Toolkit is not installed on the same Splunk instance as your app, you must include the toolkit component library in your app by doing the following:</p>
 
                         <ul>
-                            <li>Copy the <b>$SPLUNK_HOME/etc/apps/splunk_wftoolkit/django/splunk_wftoolkit/static/splunk_wftoolkit/components</b> directory to your app's <b>$SPLUNK_HOME/etc/apps/<i>your_app_name</i>/django/<i>your_app_name</i>/static/<i>your_app_name</i></b> directory.</li>
+                            <li>Copy the <b>/components</b> directory from <b>$SPLUNK_HOME/etc/apps/splunk_wftoolkit/django/splunk_wftoolkit/static/splunk_wftoolkit/</b> to your app's <b>$SPLUNK_HOME/etc/apps/<i>your_app_name</i>/django/<i>your_app_name</i>/static/<i>your_app_name</i></b> directory.</li>
                             <li>Require the component library using the relative path <code>"<i>your_app_name/components/component_name/component_name</i>"</code>.</li>
                             <li>And remember: each time you update the toolkit, be sure to also update these component directory in your app so you have the latest and greatest version of the code.</li>
                         </ul>
 
                         <p>For example, to include a Sunburst view in an app called "myapp":</p>
                         <ul>
-                            <li>Copy <b>$SPLUNK_HOME/etc/apps/splunk_wftoolkit/django/splunk_wftoolkit/static/splunk_wftoolkit/components</b> to <b>$SPLUNK_HOME/etc/apps/myapp/django/myapp/static/myapp/</b>.</li>
+                            <li>Copy the <b>/components</b> directory from <b>$SPLUNK_HOME/etc/apps/splunk_wftoolkit/django/splunk_wftoolkit/static/splunk_wftoolkit/</b> to <b>$SPLUNK_HOME/etc/apps/myapp/django/myapp/static/myapp/</b>.</li>
                             <li>Require <code>"myapp/components/sunburst/sunburst"</code> and use it as follows:</li>
 <pre class="prettyprint linenums lang-js">
 &lt;div id="sunburst"&gt;&lt;/div&gt;
