@@ -5,8 +5,14 @@
 {% block title %}Toolkit Components Overview {% endblock title %}
 
 {% block css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}splunk_wftoolkit/contrib/prettify.css"/>
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunk_wftoolkit/custom.css" />
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+    <style type="text/css">
+        .dashboard-panel{
+            max-width: 900px;
+        }
+    </style>
 {% endblock css %}
 
 {% block content %}
@@ -27,7 +33,77 @@
                         <p>The Splunk Web Framework Tookit includes a number or new, reusable components based on open-source samples. These new components are meant to serve as examples for users who want to build their own custom components as well as supported add-ons that can be included in apps. The code for these components can be found in <b>/splunk_wftoolkit/static/splunk_wftoolkit/components/</b>.</p> 
 
                         <p>There are two ways to include toolkit components in a Splunk app:</p>
+                        <ul>
+                            
+                                <h3>1. Reference components from the toolkit</h3>
+                                <p>If the toolkit is installed on the same Splunk instance as an app using the toolkit components, the app can reference the toolkit components directly. This can be done from Javascript or Django by loading the appropriate toolkit libraries. In JavaScript this means that an app referencing toolkit components must simply require them from the toolkit components directory by name: <b>/splunk_wftoolkit/components/&lt;component name&gt;/&lt;component name&gt;</b>. Toolkit components can then be used in JavaScript like any other framework component.
 
+                                For example, to use a bubble chart from the toolkit in <b>JavaScript</b>:</p>
+                            
+<pre class="prettyprint linenums lang-js">
+&lt;div id="bubble"&gt;&lt;/div&gt;
+&lt;script&gt;    
+    require([
+        "splunkjs/ready!", 
+        "underscore", 
+        "jquery", 
+        "splunk_wftoolkit/components/bubblechart/bubblechart"
+        ], 
+        function(mvc, _, $, Bubble) {
+
+        var bubble = new Bubble({
+            'id' : 'example-bubble',
+            'managerid' : 'example-search',
+            'el': $('#bubble')
+        }).render   
+    });
+&lt;/script&gt;
+</pre>
+                            <p>To reference toolkit components using Django, the component teplate tags must be included on the page using the <code>&#123;% load splunk_wftoolkit %&#125;</code> template tag. For example, to use a bubble chart from the toolkit with <b>Django</b>:</p>
+<pre class="prettyprint linenums lang-js">
+&#123;% load splunk_wftoolkit %&#125;
+
+&#123;% bubblechart id="bubble" managerid="example-search" %&#125;
+</pre>
+                            <h3>2. Include components in your app</h3>
+                            <p>
+                            Any app that can not rely on the toolkit being installed alongside itself on a Splunk instance must include the toolkit components itself. To do this an app must:
+                            <ul>
+                                <li>include the <b>d3</b> directory from <b>/splunk_wftoolkit/components/</b> in its own static directory</li>
+                                <li>include the desired component's directory from <b>/splunk_wftoolkit/components/</b> in its own static directory</li>
+                                <li>require the local copy of the desired component with the pattern <b>&lt;app name&gt;/&lt;component name&gt;/&lt;component name&gt;</b></li>
+                                <li>for example, to include a sunburst control in an app called myapp:
+                                    <ul>
+                                        <li>copy <b>/static/splunk_wftoolkit/components/d3</b> to <b>/myapp/django/myapp/static/myapp</b></li>
+                                        <li>copy <b>/static/splunk_wftoolkit/components/sunburst</b> to <b>/myapp/django/myapp/static/myapp</b></li>
+                                        <li>require <b>myapp/sunburst/sunburst</b> and use it:
+<pre class="prettyprint linenums lang-js">
+&lt;div id="sunburst"&gt;&lt;/div&gt;
+&lt;script&gt;    
+    require([
+        "splunkjs/ready!", 
+        "underscore", 
+        "jquery", 
+        "myapp/sunburst/sunburst"
+        ], 
+        function(mvc, _, $, Bubble) {
+
+        var sunburst = new Bubble({
+            'id' : 'example-sunburst',
+            'managerid' : 'example-search',
+            'el': $('#sunburst')
+        }).render   
+    });
+&lt;/script&gt;
+</pre>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            </p>    
+
+
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -39,6 +115,18 @@
 
 {% block js %}    
     <script>
-        
+    require.config({
+        shim: {
+            "splunk_wftoolkit/contrib/prettify": {
+                deps: [],
+                exports: "prettyPrint"
+            } 
+        }
+    });
+
+    require(["splunk_wftoolkit/contrib/prettify", "bootstrap.tab"], function(prettyPrint) {
+        //pp formats code samples
+        prettyPrint();
+    });   
     </script>
 {% endblock js %}
