@@ -10,3 +10,4 @@ The Splunk Web Framework Toolkit contains some libraries that were written by ot
 | parallel-sets | | [jasondavies/d3-parsets](https://github.com/jasondavies/d3-parsets) | [New BSD](splunk_wftoolkit/django/splunk_wftoolkit/static/splunk_wftoolkit/components/parallelsets/contrib/LICENSE) |
 | sankey | Patched from https://github.com/d3/d3-plugins/pull/39 | [d3-plugins/sankey at master · d3/d3-plugins](https://github.com/d3/d3-plugins/tree/master/sankey) | [New BSD](splunk_wftoolkit/django/splunk_wftoolkit/static/splunk_wftoolkit/components/sankey/contrib/LICENSE)
 | underscore-nest | v0.1.1 | [iros/underscore.nest](https://github.com/iros/underscore.nest/) | [MIT](splunk_wftoolkit/django/splunk_wftoolkit/static/splunk_wftoolkit/components/underscore-nest/LICENSE) |
+| google-code-prettify | March 2013 | [google-code-prettify](https://code.google.com/p/google-code-prettify/) | [Apache 2.0](https://code.google.com/p/google-code-prettify/) |
