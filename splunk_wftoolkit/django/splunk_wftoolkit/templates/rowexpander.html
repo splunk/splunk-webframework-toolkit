@@ -1,0 +1,346 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+ 
+{% load splunkmvc %}
+ 
+{% block title %}Custom Table Row Expander - Web Framework Toolkit{% endblock title %}
+ 
+{% block css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}splunk_wftoolkit/contrib/prettify.css"/>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+{% endblock css %}
+ 
+{% block content %}
+ 
+<div class="dashboard-body container-fluid main-section-body" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Custom table row expander</h2>
+        </div>
+    </div>
+
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                    </div>
+                    <div class="panel-body">
+                    <p>
+                    Add a custom row expander to your tables to show additional 
+                    details about a particular row. To expand a row, click the arrow in
+                    the <b><i>i</i></b> column. 
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>A master-detail view using a template</h3>
+                    </div>
+                    <div class="panel-body html">
+                        <p>
+                            This example shows how to add custom row expander to a
+                            Table view by defining a <code>SearchBasedRowExpansionRenderer</code>
+                            class that displays row details using an Underscore template.
+                        </p>
+ 
+<pre class="prettyprint linenums lang-js">
+var tableView1 = mvc.Components.getInstance("example1");
+var table1RowExpansionRenderer = new SearchBasedRowExpansionRenderer({
+    templateSelector: '#row-expansion-template',
+    queryBuilder: function(rowData) {
+        return 'index=_internal earliest=-5d latest=now ' +
+            'sourcetype="' + rowData.values[0] + '" ' +
+            'source="' + rowData.values[1] + '" ' + 
+            'host="' + rowData.values[2] + '" ' + 
+            '| timechart span=1d count | sort _time desc';
+    }
+});
+tableView1.addRowExpansionRenderer(table1RowExpansionRenderer);
+tableView1.render();
+</pre>
+ 
+                        <p>
+                            Here is the template that is used for the detailed view:
+                        </p>
+ 
+<pre class="prettyprint linenums lang-html">
+&lt;script type="text/template" id="row-expansion-template"&gt;
+    &lt;div&gt;
+        &lt;strong&gt;Statistics for the last 5 days&lt;/strong&gt;
+        &lt;ul class="unstyled"&gt;
+            &lt;% _.each(obj, function(stat) { %&gt; &lt;li&gt;&lt;%= (new Date(stat._time)).toLocaleDateString() %&gt; - &lt;%= stat.count %&gt;&lt;/li&gt; &lt;% }); %&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/script&gt;
+</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-body">
+                        {% table id="example1" managerid="simplesearch1" drilldown="none" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>A master-detail view using a chart</h3>
+                    </div>
+                    <div class="panel-body html">
+                        <p>
+                            This example shows how to add custom row expander to a
+                            Table view by defining a <code>GraphBasedRowExpansionRenderer</code>
+                            class that displays row details using a chart.
+                        </p>
+ 
+<pre class="prettyprint linenums lang-js">
+var tableView2 = mvc.Components.getInstance("example2");
+tableView2.addRowExpansionRenderer(new GraphBasedRowExpansionRenderer({
+    queryBuilder: function(rowData) {
+        return 'index=_internal earliest=-5d latest=now ' +
+            'sourcetype="' + rowData.values[0] + '" ' +
+            'source="' + rowData.values[1] + '" ' + 
+            'host="' + rowData.values[2] + '" ' + 
+            '| timechart span=1d count | sort _time desc';
+    }
+}));
+tableView2.render();
+</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-body">
+                        {% table id="example2" managerid="simplesearch1" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="chart">
+    </div>
+    <script type="text/template" id="row-expansion-template">
+        <div>
+            <strong>Statistics for the last 5 days</strong>
+            <ul class="unstyled">
+                <% _.each(obj, function(stat) { %> <li><%= (new Date(stat._time)).toLocaleDateString() %> - <%= stat.count %></li> <% }); %>
+            </ul>
+        </div>
+    </script>
+</div>
+ 
+{% endblock content%}
+ 
+{% block managers %}
+    {% searchmanager id="simplesearch1" search="index=_internal earliest=-5d latest=now | stats count by sourcetype,source,host | rangemap field=count low=0-100 elevated=101-1000 default=severe" 
+        preview=True cache=True autostart=True %}
+{% endblock managers %}
+ 
+{% block js %}
+ 
+<script>
+    require(
+    [
+        "splunkjs/ready!", 
+        "underscore", 
+        "splunkjs/mvc/chartview",
+        "splunkjs/mvc/tableview",
+        "splunkjs/mvc/searchmanager"
+    ], 
+    function(mvc, _) { "use strict";
+        var _ = require('underscore');
+        var Chart = require('splunkjs/mvc/chartview');
+        var TableView = require('splunkjs/mvc/tableview');
+        var SearchManager = require('splunkjs/mvc/searchmanager');
+ 
+        /*
+        * Build query for master-detail views.
+        */
+        var buildQuery = function(rowData) {
+            return 'index=_internal earliest=-5d latest=now ' +
+                'sourcetype="' + rowData.values[0] + '" ' +
+                'source="' + rowData.values[1] + '" ' + 
+                'host="' + rowData.values[2] + '" ' + 
+                '| timechart span=1d count | sort _time desc';
+        }
+ 
+        /*
+        * Example 1
+        */
+ 
+        /*
+        * SearchBasedRowExpansionRenderer implementation.
+        */
+        var SearchBasedRowExpansionRenderer = TableView.BaseRowExpansionRenderer.extend({
+            initialize: function(args) {
+                if (!args.templateSelector) {
+                    throw new Error('templateSelector should be set.');
+                }
+ 
+                if (!args.queryBuilder) {
+                    throw new Error('queryBuilder should be set.');
+                }
+ 
+                var that = this;
+ 
+                that._templateSelector = args.templateSelector;
+                that._queryBuilder = args.queryBuilder;
+ 
+                // Because only one row can be expanded at a time we can
+                // reuse SearchManager and deferred object for all rows.
+                that._deferred = null;
+ 
+                that._searchManager = new SearchManager({
+                    id: 'example1-details-search-manager',
+                    preview: false 
+                });
+                that._searchManager.data('results', {count: 0, output_mode: 'json'})
+                    .on('data', function(results) {
+                        if (that._deferred) {
+                            var results = results.hasData() ? results.data().results : null;
+                            that._deferred.resolve(results);
+                        }
+                    });
+            },
+ 
+            canRender: function(rowDate) {
+                return true;
+            },
+ 
+            render: function($container, rowData) {
+                var that = this;
+ 
+                $container.append('<div class="text-center">Waiting for data...</div>');
+ 
+                that._deferred = new $.Deferred();
+ 
+                that._deferred.done(function(result) {
+                    $container.html(_.template($(that._templateSelector).html(), result));
+                    that._deferred = null;
+                });
+ 
+                that._deferred.fail(function(error) {
+                    // If deferred object is null - this means that job was canceled.
+                    if (that._deferred) {
+                        $container.text(JSON.stringify(error));
+                        that._deferred = null;
+                    }
+                });
+ 
+                that._searchManager.set({ search: that._queryBuilder(rowData) });
+            },
+ 
+            teardown: function($container, rowData) {
+                var deferred = this._deferred;
+                if (deferred) {
+                    // Let's set deferred to null - this flag means that job canceled.
+                    this._deferred = null;
+                    // If deferred object is not done yet - let's reject it.
+                    if (deferred.state() === 'pending') {
+                        deferred.reject();
+                        this._searchManager.cancel();
+                    }
+                }
+            }
+        });
+ 
+        // Add SearchBasedRowExpansionRenderer to example1.
+        var tableView1 = mvc.Components.getInstance("example1");
+        var table1RowExpansionRenderer = new SearchBasedRowExpansionRenderer({
+            templateSelector: '#row-expansion-template',
+            queryBuilder: buildQuery
+        });
+        tableView1.addRowExpansionRenderer(table1RowExpansionRenderer);
+        tableView1.render();
+ 
+        /*
+        * Example 2
+        */
+ 
+        /*
+        * GraphBasedRowExpansionRenderer implementation.
+        */
+        var GraphBasedRowExpansionRenderer = TableView.BaseRowExpansionRenderer.extend({
+            initialize: function(args) {
+                if (!args.queryBuilder) {
+                    throw new Error('queryBuilder should be set.');
+                }
+ 
+                this._queryBuilder = args.queryBuilder;
+ 
+                this._searchManager = new SearchManager({
+                    id: 'example2-details-search-manager'
+                });
+ 
+                this._el = $('<div />');
+                this._chart = new Chart({
+                    id: 'example2-details-chart',
+                    managerid: 'example2-details-search-manager',
+                    type: 'line',
+                    el: this._el
+                }).render();
+            },
+ 
+            canRender: function(rowData) {
+                return true;
+            },
+ 
+            render: function($container, rowData) {
+                this._el.appendTo($container);
+                this._searchManager.set({ search: this._queryBuilder(rowData) });
+            },
+ 
+            teardown: function($container, rowData, loadedData) {
+                this._el.detach();
+                this._searchManager.cancel();
+            }
+        });
+ 
+        var tableView2 = mvc.Components.getInstance("example2");
+        tableView2.addRowExpansionRenderer(new GraphBasedRowExpansionRenderer({
+            queryBuilder: buildQuery
+        }));
+        tableView2.render();
+    });
+</script>
+ 
+<script type="text/javascript">
+ 
+require.config({
+    shim: {
+        "splunk_wftoolkit/contrib/prettify": {
+            deps: [],
+            exports: "prettyPrint"
+        } 
+    }
+});
+ 
+require(["splunk_wftoolkit/contrib/prettify"], function(prettyPrint) {
+    //pp formats code samples
+    prettyPrint();
+});
+ 
+</script>
+{% endblock js %}

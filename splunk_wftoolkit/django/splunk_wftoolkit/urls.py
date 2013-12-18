@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     url(r'^interactive/$', render('splunk_wftoolkit:interactive.html'), name='interactive'),
     url(r'^chartclick/$', render('splunk_wftoolkit:chartclick.html'), name='chartclick'),
     url(r'^customtablecells/$', render('splunk_wftoolkit:customtablecells.html'), name='customtablecells'),
+    url(r'^rowexpander/$', render('splunk_wftoolkit:rowexpander.html'), name='rowexpander'),
     url(r'^databindingjs/$', render('splunk_wftoolkit:databindingjs.html'), name='databindingjs'),
     url(r'^maps/$', render('splunk_wftoolkit:maps.html'), name='maps'),
 
