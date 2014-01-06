@@ -1,0 +1,253 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Row Expansion - Async example{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-body container-fluid main-section-body" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Custom Row Expansion Renderer</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            This example shows you how you can implement master-detail
+                            view with default table and custom row expansion renderer.
+                            Using the <code>BaseRowExpansionRenderer</code> class, you can
+                            implement your own row expansion renderers that can be reused
+                            and shared. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Example of master-detail view using AsyncBaseRowExpansionRenderer with template.</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% table id="table1" managerid="simplesearch1" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Example of master-detail view using AsyncBaseRowExpansionRenderer with implemented renderData method.</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% table id="table2" managerid="simplesearch1" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/template" id="row-expansion-template">
+        <div>
+            <strong>Last 5 days statistic</strong>
+            <ul class="unstyled">
+                <% _.each(stat, function(stat) { %> <li><%= (new Date(stat._time)).toLocaleDateString() %> - <%= stat.count %></li> <% }); %>
+            </ul>
+        </div>
+    </script>
+</div>
+
+{% endblock content%}
+
+{% block managers %}
+    {% searchmanager id="simplesearch1" search="index=_internal earliest=-5d latest=now | stats count by sourcetype,source,host | rangemap field=count low=0-100 elevated=101-1000 default=severe" 
+        preview=True cache=True autostart=True %}
+{% endblock managers %}
+
+{% block js %}    
+    <script>
+        require(
+        [
+            "splunkjs/ready!", 
+            "underscore", 
+            "splunkjs/mvc/tableview",
+            "splunkjs/mvc/searchmanager"
+        ], 
+        function(mvc, _) { "use strict";
+            var TableView = require("splunkjs/mvc/tableview");
+            var SearchManager = require("splunkjs/mvc/searchmanager");
+
+            /*
+            * AsyncBaseRowExpansionRenderer implementation.
+            * This class implements required 
+            */
+            var AsyncBaseRowExpansionRenderer = (function() {
+
+                function linkDeferred($container, deferred) {
+                    $.data($container, '_arer_deferred', deferred);
+                }
+
+                function unlinkDeferred($container) {
+                    linkDeferred($container, null);
+                }
+
+                function getDeferred($container) {
+                    return $.data($container, '_arer_deferred');
+                }
+
+                return TableView.BaseRowExpansionRenderer.extend({
+
+                    initialize: function(args) {
+                        if (args) {
+                            this.templateSelector = args.templateSelector;
+                        }
+                    },
+                    
+                    render: function($container, rowData) {
+                        var that = this;
+
+                        $container.append('<div class="text-center">Loading...</div>');
+
+                        var deferred = new $.Deferred();
+
+                        linkDeferred($container, deferred);
+
+                        deferred.done(function(result) {
+                            $container.empty();
+
+                            if (that.templateSelector) {
+                                $container.html(_.template($(that.templateSelector).html(), result));
+                            } else {
+                                that.renderData($container, rowData, result);
+                            }
+                            
+                            unlinkDeferred($container);
+                        });
+
+                        deferred.fail(function(error) {
+                            // If deferred object is null - this means that job was canceled.
+                            if (getDeferred($container)) {
+                                $container.empty();
+                                $container.append(JSON.stringify(error));
+                            }
+                        });
+
+                        that.loadAsync(rowData, deferred);
+                    },
+
+                    teardown: function($container, rowData) {
+                        var deferred = getDeferred($container);
+                        if (deferred) {
+                            // Let's set deferred to null - this flag means that job canceled.
+                            unlinkDeferred($container);
+                            // If deferred object is not done yet - let's reject it.
+                            if (deferred.state() === 'pending') {
+                                deferred.reject();
+                            }
+                        }
+                    },
+
+                    loadAsync: function(rowData, deferred) {
+                        throw new Error('Must implement method loadAsync');
+                    },
+
+                    renderData: function($container, rowData, loadedData) {
+                        throw new Error('Must implement method renderData');
+                    }
+                });
+
+
+            })();
+
+            function getStatistic(rowData, callback) {
+                var searchStr = 'index=_internal earliest=-5d latest=now ' +
+                    'sourcetype="' + rowData.values[0] + '" ' +
+                    'source="' + rowData.values[1] + '" ' + 
+                    'host="' + rowData.values[2] + '" ' + 
+                    '| timechart span=1d count | sort _time desc';
+
+                var searchManager = new SearchManager({
+                  preview: false,
+                  search: searchStr
+                });
+
+                var data = searchManager.data('results', {count: 0, output_mode: 'json'});
+                data.on('data', function(results) {
+                    if (results.hasData()) {
+                        callback(results.data().results);
+                    } else {
+                        callback();
+                    }
+                });
+
+                return searchManager;
+            }
+
+            /* Table 1 */
+
+            var RendererForTable1 = AsyncBaseRowExpansionRenderer.extend({
+                canRender: function(rowData) {
+                    return true;
+                },
+
+                loadAsync: function(rowData, deferred) {
+                    var searchManager = getStatistic(rowData, function(results) {
+                        deferred.resolve({title: rowData[0], stat: results});
+                    });
+                    
+
+                    deferred.fail(function() {
+                        searchManager.cancel();
+                    });
+                }
+            });
+
+            var tableView1 = mvc.Components.getInstance("table1");
+            tableView1.table.addRowExpansionRenderer(new RendererForTable1({templateSelector: '#row-expansion-template'}));
+            tableView1.table.render();
+
+            /* Table 2 */
+
+            var RendererForTable2 = AsyncBaseRowExpansionRenderer.extend({
+                canRender: function(rowData) {
+                    return true;
+                },
+
+                loadAsync: function(rowData, deferred) {
+                    var searchManager = getStatistic(rowData, function(results) {
+                        deferred.resolve(results);
+                    });
+
+                    deferred.fail(function() {
+                        searchManager.cancel();
+                    });
+                },
+
+                renderData: function($container, rowData, loadedData) {
+                    $container.html(JSON.stringify(loadedData, null, 4).replace(/\n/g, '<br/>').replace(/ /g, '&nbsp;'));
+                }
+            });
+
+            var tableView2 = mvc.Components.getInstance("table2");
+            tableView2.table.addRowExpansionRenderer(new RendererForTable2());
+            tableView2.table.render();
+        });
+    </script>
+{% endblock js %}
