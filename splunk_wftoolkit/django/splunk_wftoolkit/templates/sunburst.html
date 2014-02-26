@@ -58,7 +58,8 @@
             <td><b>string</b></td>
             <td><b>null</b></td>
             <td>The name of the root node (displayed at graph center).</td>
-            <td>-</td>
+            <!-- JIRA: Bring back with (DVPL-1721) -->
+            <!-- <td>{% textbox id="chartTitle" %}</td> -->
         </tr>
         <tr>
             <td><code>categoryFields</code></td>
@@ -79,14 +80,14 @@
             <td><b>function</b></td>
             <td><b>_.identity</b></td>
             <td>A custom formatting function for node names. Takes each node name as an input and returns a formatted name.</td>
-            <td>-</td>
+            <td>{% dropdown id="label-dropdown" default="default" %}</td>
         </tr>
         <tr>
             <td><code>formatTooltip</code></td>
             <td><b>function</b></td>
             <td><b>"{name}: {value}"</b></td>
             <td>A custom formatting function for tooltips. Takes each node as an input and returns a formatted tooltip string.</td>
-            <td>-</td>
+            <td>{% dropdown id="tooltip-dropdown" default="default" %}</td>
         </tr>
     </table>
     {% endblock usage %}
@@ -131,9 +132,19 @@
             DropdownView
         ){
             var sunburst = mvc.Components.getInstance("example-sunburst");
+            var titleBox = mvc.Components.getInstance("chartTitle");
             var groupdd = mvc.Components.getInstance("group-dropdown");
             var sizedd = mvc.Components.getInstance("size-dropdown");
+            var labeldd = mvc.Components.getInstance("label-dropdown");
+            var tooltipdd = mvc.Components.getInstance("tooltip-dropdown");
 
+            // Title logic
+            // JIRA: Bring this back when title rotation is fixed (DVPL-1721)
+            // titleBox.on('change', function(){
+            //     sunburst.settings.set('chartTitle', titleBox.val())
+            // });
+
+            // Groups
             var groupChoices = [
                                 {label: "Origin State", value: "OriginState"},
                                 {label: "Origin City Name", value: 'OriginCityName'},
@@ -145,6 +156,7 @@
                 sunburst.settings.set("categoryFields", groupdd.val().join(" "));
             });
 
+            // Value
             var sizeChoices = [
                 {label: "count", value: "count"},
                 {label: "None", value: 'None'}
@@ -158,6 +170,54 @@
                    sunburst.settings.set("valueField", sizedd.val());
                 }
             });
+
+            // Format label dropdown logic
+            var LABEL_FORMATTERS = {
+                "default": _.identity,
+                "truncate": function(name){
+                    if (name.length > 4 ) {
+                        name = name.substring(0, 4) + "...";
+                    }
+                    return name;
+                },
+                "caps": function(name) {
+                    return name.toUpperCase();
+                },
+                "none": function(name) {
+                    return '';
+                },
+            };
+            labeldd.settings.set({
+            "choices": [
+                {label: "Default", value: "default" },  
+                {label: "Truncate", value: "truncate" },  
+                {label: "All Caps", value: "caps" },
+                {label: "None", value: "none" }
+            ]
+            });
+            labeldd.on("change", function(val) {
+                sunburst.settings.set("formatLabel", LABEL_FORMATTERS[val]); 
+            });
+
+            // Format tooltip dropdown logic
+            var TOOLTIP_FORMATTERS = {
+                "default": function(d) {
+                    return (d.name || "Total") + ": " + d.value;
+                },
+                "custom": function(d) { 
+                    return _.template("<%= name %> has value <%= value %>", d);
+                }
+            };
+            tooltipdd.settings.set({
+            "choices": [
+                {label: "Default", value: "default" },  
+                {label: "Custom", value: "custom" }
+            ]
+            });
+            tooltipdd.on("change", function(val) {
+                sunburst.settings.set("formatTooltip", TOOLTIP_FORMATTERS[val]); 
+            });
+
         });
 </script>   
 {% endblock js %}

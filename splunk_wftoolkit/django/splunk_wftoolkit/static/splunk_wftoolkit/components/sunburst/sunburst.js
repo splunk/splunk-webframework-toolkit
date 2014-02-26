@@ -31,11 +31,9 @@ define(function(require, exports, module) {
         initialize: function() {
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
-            // TODO: enable push
-            // TODO: wire up changes
-
             this.settings.on("change:valueField", this.render, this);
             this.settings.on("change:categoryFields", this.render, this);
+            this.settings.on("change:formatLabel change:formatTooltip change:chartTitle", this.render, this);
 
             // Set up resize callback. The first argument is a this
             // pointer which gets passed into the callback event
@@ -156,7 +154,7 @@ define(function(require, exports, module) {
 
             var text = g.append("text")
                 .attr("text-anchor", function(d) {
-                 return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
+                    return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
                 })
                 .attr("transform", function(d) {
                     var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90;

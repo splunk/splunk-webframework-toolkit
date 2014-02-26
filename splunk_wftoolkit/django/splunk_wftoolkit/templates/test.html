@@ -3,19 +3,13 @@
 {% load splunkmvc %}
 {% load splunk_wftoolkit %}
 
-{% block title %}JSON Results Viewer - Web Framework Toolkit{% endblock title %}
+{% block title %}Tests - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
     <style type="text/css">
-    .splunk-toolkit-results-viewer{
-        margin: 20px;
-    }
-    #button-controls{
-        float: right;
-        margin: 20px;
-    }
+   
     </style>
 {% endblock css %}
 
@@ -24,38 +18,23 @@
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>JSON results viewer</h2>
+            <h2>Tests</h2>
         </div>
     </div>
     <div class="dashboard-row">
-        <div class="dashboard-cell" style="width: 100%;">
+        <div class="dashboard-cell" style="width: 50%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
-                    <div class="panel-head">
-                        <h3>Enter a search to view JSON data</h3>
-                    </div>
-                    <div id="element3"></div>
+                    {% forcedirected id="force-directed" managerid="search1" height=500 %}
+                    <div id="cell1"></div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="dashboard-row">
-        <div class="dashboard-cell" style="width: 100%;">
+        <div class="dashboard-cell" style="width: 50%;">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
-                    <div class="panel-head">
-                        <h3>Returned JSON</h3>
-                    </div>
-                    <div class="panel-body">
-                       
-                            {% resultsview id="results-viewer" managerid="search1" number="10" %}
-                        <div class="row">
-                            <div id="button-controls">
-                                <div class="btn" id="console-spill">Send complete results to console</div>
-                                <!-- <div class="btn">Copy to clipboard</div> -->
-                            </div>
-                        </div>
-                    </div>
+                    {% sunburst id="sunburst" managerid="search2" height=500 %}
+                    <div id="cell1"></div>
                 </div>
             </div>
         </div>
@@ -65,8 +44,14 @@
 {% endblock content%}
 
 {% block managers %}
-    {% searchmanager id="search1" search="index=_internal | head 10" %}
-    {% searchmanager id="search2" search="index=_internal | head 100 | stats count" %}
+    {%  searchmanager id="search1"
+        search='| inputlookup faa.demo.csv | search OriginCityName=* DestCityName=* DestStateName=* AND NOT OriginCityName="" AND NOT DestCityName="" AND NOT DestStateName="" | head 200 | stats count by OriginCityName, DestCityName, DestStateName | sort count'
+        cache=True
+    %}
+    {% searchmanager id="search2"
+        search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=15'
+        cache=True
+    %}
 {% endblock managers %}
 
 {% block js %}
@@ -75,22 +60,40 @@
 
     require(["jquery", "underscore", "splunkjs/mvc/singleview", "splunkjs/ready!"], function($,_, single,  mvc) {
         var search = mvc.Components.getInstance('search1');
-        var viewer = mvc.Components.getInstance('results-viewer');
-        var searchbar = mvc.Components.getInstance('searchbar');
+        var force = mvc.Components.getInstance("force-directed");
+        var burst = mvc.Components.getInstance("sunburst");
+
+         var NAME_FORMATTERS = {
+            "default": _.identity,
+            "state": function(name) { 
+                return name.split(", ")[1];
+            },
+            "caps": function(name) {
+                return name.toUpperCase();
+            },
+            "None": function(name) {
+                return '';
+            },
+            "truncate": function(name){
+                if (name.length > 4 ) {
+                    name = name.substring(0, 4) + "...";
+                }
+                return name;
+            }
+        };
         
+        var TOOLTIP_FORMATTERS = {
+            "default": function(d) {
+                return (d.source.name + ' -> ' + d.target.name +
+                        ': ' + d.value); 
+            },
+            "custom": function(d) { 
+                return _.template("From <%= source.name %> to <%= target.name %>: <%= value %>", d);
+            }
+        };
 
-        var sing = new single({
-            "id": "element3",
-            "additionalClass": "msExchClientLanding",
-            "afterLabel": "Microsoft ActiveSync is a web-based synchronization protocol for most mobile devices, including iPhones and Android phones.  Blackberry devices do not currently support ActiveSync.",
-            "field": "process",
-            "classField": "light",
-            "managerid": "search2",
-            "el": $('#element3')
-            
-        }).render();
+        burst.settings.set('formatLabel', NAME_FORMATTERS['truncate']);
 
-        console.log($(".msExchClientLanding").length);
     });
 </script>
 
