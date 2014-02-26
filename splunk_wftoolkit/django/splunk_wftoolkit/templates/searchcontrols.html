@@ -34,7 +34,7 @@
                     <div class="panel-body html allow-overflow">
                         <p>The SearchBar, SearchControls, Timeline, and TimeRange views allow you to control search managers. Rather than only taking results from search managers, these views modify the search managers by setting the search query and search properties (such as the earliest and latest times to search).</p>
 
-                        <p>For all but the SearchControls view, you'll need to either use tokens or create a <code>change</code> event handler to update the search manager when the view value changes.</p>
+                        <p>For all but the SearchControls view, you'll need to create a <code>change</code> event handler to update the search manager when the view value changes. For the TimeRange and SearchBar views, you can also use tokens to keep the controls in sync.</p>
 
                         <h2>SearchBar view</h2>
                         <p>The SearchBar view represents a search input that is bound to a search manager. Because the SearchBar view modifies a search manager, you must use tokens or listen for <code>change</code> events to update the search manager when the SearchBar view's value changes.</p>
@@ -118,7 +118,7 @@ timerange.on("change", function() {
                     <div class="section" id="timeline">
                             
                         <h2>Timeline view</h2>
-                        <p>The Timeline view displays an event timeline of a given search and allows interactive modification of the search time range. Because the Timeline view modifies the search manager, you must use tokens or listen for <code>change</code> events to update the search manager when the Timeline view's value changes</p>
+                        <p>The Timeline view displays an event timeline of a given search and allows interactive modification of the search time range. Because the Timeline view modifies the search manager, you must listen for <code>change</code> events to update the search manager when the Timeline view's value changes</p>
 
                         <p>When using Django Bindings, use the <code>&#123;% timeline %&#125;</code> template tag with the <code>managerid</code> property to specify the search manager.</p>
 
