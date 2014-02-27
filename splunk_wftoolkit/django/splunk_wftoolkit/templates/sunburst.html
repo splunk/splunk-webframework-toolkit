@@ -53,13 +53,14 @@
             <td>The search manager bound to the chart.</td>
             <td>-</td>
         </tr>
+
         <tr>
             <td><code>chartTitle</code></td>
             <td><b>string</b></td>
             <td><b>null</b></td>
             <td>The name of the root node (displayed at graph center).</td>
             <!-- JIRA: Bring back with (DVPL-1721) -->
-            <!-- <td>{% textbox id="chartTitle" %}</td> -->
+            <td>-<!-- {% textbox id="chartTitle" %} --></td>
         </tr>
         <tr>
             <td><code>categoryFields</code></td>
@@ -132,7 +133,6 @@
             DropdownView
         ){
             var sunburst = mvc.Components.getInstance("example-sunburst");
-            var titleBox = mvc.Components.getInstance("chartTitle");
             var groupdd = mvc.Components.getInstance("group-dropdown");
             var sizedd = mvc.Components.getInstance("size-dropdown");
             var labeldd = mvc.Components.getInstance("label-dropdown");
@@ -140,6 +140,7 @@
 
             // Title logic
             // JIRA: Bring this back when title rotation is fixed (DVPL-1721)
+            // var titleBox = mvc.Components.getInstance("chartTitle");
             // titleBox.on('change', function(){
             //     sunburst.settings.set('chartTitle', titleBox.val())
             // });

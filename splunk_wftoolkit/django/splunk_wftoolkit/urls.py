@@ -39,6 +39,7 @@ urlpatterns = patterns('',
     url(r'^customtablecells/$', render('splunk_wftoolkit:customtablecells.html'), name='customtablecells'),
     url(r'^databindingjs/$', render('splunk_wftoolkit:databindingjs.html'), name='databindingjs'),
     url(r'^maps/$', render('splunk_wftoolkit:maps.html'), name='maps'),
+    url(r'^airlinedashboard/$', render('splunk_wftoolkit:airlinedashboard.html'), name='airlinedashboard'),
 
     #Extended examples
     url(r'^d3chart/$', render('splunk_wftoolkit:d3chart.html'), name='d3chart'),

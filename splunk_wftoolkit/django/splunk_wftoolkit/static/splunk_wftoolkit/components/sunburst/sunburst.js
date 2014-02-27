@@ -20,6 +20,7 @@ define(function(require, exports, module) {
             chartTitle: null,
             valueField: null,
             categoryFields: null,
+            truncateValue: 0,
             formatLabel: _.identity,
             formatTooltip: function(d) {
                 return (d.name || "Total") + ": " + d.value;
@@ -99,6 +100,7 @@ define(function(require, exports, module) {
             var that = this;
             var formatLabel = this.settings.get("formatLabel") || _.identity;
             var formatTooltip = this.settings.get("formatTooltip") || function(d) { return d.name; };
+            var truncateValue = this.settings.get("truncateValue");
             var containerHeight = this.$el.height();
             var containerWidth = this.$el.width(); 
 
@@ -164,7 +166,13 @@ define(function(require, exports, module) {
                 })
                 .attr("dy", ".2em")
                 .attr("x", 0)
-                .text(function(d) { return formatLabel(d.name); })
+                .text(function(d) {
+                    var sliceWidth = Math.abs(Math.max(0, y(d.y)) - Math.max(0, y(d.y + d.dy)));
+                    var formatted = formatLabel(d.name);
+
+                    // Trunctate the title
+                    return formatted.substring(0, sliceWidth / truncateValue); 
+                })
                 .on("click", click);
                 
             text.append("title")
