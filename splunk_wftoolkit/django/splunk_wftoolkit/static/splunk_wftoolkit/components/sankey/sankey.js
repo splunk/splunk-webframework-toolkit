@@ -196,7 +196,7 @@ define(function(require, exports, module) {
                 that.trigger('click:link', format_event_data(e)); 
             });
             
-            node.on('click', function(e) {
+            node.on('mousedown', function(e) {
                 var linksToNodes = function(links, type) {
                     return _.map(links, function(link) {
                         return {
