@@ -34,7 +34,28 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element">
                     {% sunburst id="sunburst" managerid="search2" height=500 %}
-                    <div id="cell1"></div>
+                    <div id="cell2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Tests</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div id="cell3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div id="cell4"></div>
                 </div>
             </div>
         </div>
@@ -58,12 +79,22 @@
 <script>
     
 
-    require(["jquery", "underscore", "splunkjs/mvc/singleview", "splunkjs/ready!"], function($,_, single,  mvc) {
+    require(["jquery", 
+        "underscore",
+        "splunkjs/mvc/singleview",
+        "splunkjs/mvc/searchinfoview",
+        "splunkjs/ready!"], 
+        function(
+            $,
+            _,
+            single,
+            SearchInfoView,
+            mvc) {
         var search = mvc.Components.getInstance('search1');
         var force = mvc.Components.getInstance("force-directed");
         var burst = mvc.Components.getInstance("sunburst");
 
-         var NAME_FORMATTERS = {
+        var NAME_FORMATTERS = {
             "default": _.identity,
             "state": function(name) { 
                 return name.split(", ")[1];
@@ -93,6 +124,13 @@
         };
 
         burst.settings.set('formatLabel', NAME_FORMATTERS['truncate']);
+
+        new SearchInfoView({
+            id: "siv",
+            "link.openSearch.visible": false,
+            managerid: "search1",
+            el: $("#cell3").append('<div></div>')
+        }).render();
 
     });
 </script>
