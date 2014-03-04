@@ -1,0 +1,263 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Splunk Dev Command-Line Tools{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}splunk_wftoolkit/contrib/prettify.css"/>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunk_wftoolkit/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+    <style type="text/css">
+        .dashboard-panel{
+            max-width: 900px;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-body container-fluid main-section-body">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Splunk Dev Command-Line Tools</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head"></div>
+                    <div class="panel-body html">
+
+<h2>Command line interface for Splunk applications development.</h2>
+
+<p>Install this globally and you'll have access to the grunt command anywhere on your system.</p>
+
+<pre><code>npm install -g splunkdev
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>To get started</p>
+
+<h3>splunkdev --help</h3>
+
+<pre><code>
+  Usage: splunkdev [options] [command]
+
+  Commands:
+
+    apps [options] [filter] - show / maintain applications
+    create [name]          - create new application
+    service [options] &lt;action&gt; - perform action (start|stop|restart) on splunk services
+    watch [options]        - watch for changes
+    reload                 - reload application configurations
+    config [options]       - configure cli for current splunk instance
+
+  Options:
+
+    -h, --help               output usage information
+    -V, --version            output the version number
+    -H, --splunkHome &lt;path&gt;  specify Splunk home folder
+    -v, --verbose            verbose output
+</code></pre>
+
+<h3>splunkdev apps --help</h3>
+
+<blockquote><p>show / maintain applications</p></blockquote>
+
+<pre><code>
+  Usage: apps [options] [filter]
+
+  Options:
+
+    -h, --help           output usage information
+    -s, --system         include system applications
+    -d, --disabled       include disabled applications
+    -s, --state &lt;state&gt;  change application state (enabled|disabled)
+    -R, --remove         remove application from splunk instance
+</code></pre>
+
+<h4>Examples</h4>
+
+<p>Show installed applications:</p>
+
+<pre><code>splunkdev apps
+</code></pre>
+
+<p>Show all installed applications (included disabled and system applications):</p>
+
+<pre><code>splunkdev apps --disabled --system
+</code></pre>
+
+<p>Show applications with name which starts with "test"</p>
+
+<pre><code>splunkdev apps "test*"
+</code></pre>
+
+<p>Remove application "my_application"</p>
+
+<pre><code>splunkdev apps my_application --remove
+</code></pre>
+
+<p>Remove applications with name which starts with "test"</p>
+
+<pre><code>splunkdev apps "test*" --remove
+</code></pre>
+
+<p>Change state for application "my_application" to disabled</p>
+
+<pre><code>splunkdev apps my_application --state disabled
+</code></pre>
+
+<p>Change state for application "my_application" to enabled</p>
+
+<pre><code>splunkdev apps my_application --state enabled
+</code></pre>
+
+<h3>splunkdev create --help</h3>
+
+<blockquote><p>create new application</p></blockquote>
+
+<pre><code>
+  Usage: create [options] [name]
+
+  Options:
+
+    -h, --help  output usage information
+</code></pre>
+
+<h3>splunkdev service --help</h3>
+
+<blockquote><p>perform action (start|stop|restart) on splunk services</p></blockquote>
+
+<pre><code>
+  Usage: service [options] &lt;action&gt;
+
+  Options:
+
+    -h, --help            output usage information
+    -s, --service &lt;name&gt;  service name (splunkd|splunkweb|*) [*]
+</code></pre>
+
+<h4>Examples</h4>
+
+<p>Start all Splunk services</p>
+
+<pre><code>splunkdev service start
+</code></pre>
+
+<p>Restart all Splunk services</p>
+
+<pre><code>splunkdev service restart
+</code></pre>
+
+<p>Stop all Splunk services</p>
+
+<pre><code>splunkdev service stop
+</code></pre>
+
+<p>Start splunkd service</p>
+
+<pre><code>splunkdev service stop --service splunkd
+</code></pre>
+
+<p>Restart splunkweb service</p>
+
+<pre><code>splunkdev service restart --service splunkweb
+</code></pre>
+
+<h3>splunkdev watch --help</h3>
+
+<blockquote><p>watch for changes</p></blockquote>
+
+<pre><code>
+  Usage: watch [options]
+
+  Options:
+
+    -h, --help        output usage information
+    -a, --app [name]  watch for application changes
+    -s, --splunk      watch for splunk changes
+</code></pre>
+
+<h4>Examples</h4>
+
+<p>Watch for changes in application "my_application". If something will be changed and this will require to restart/reload any of the services/configurations in Splunk - this will happened automatically.</p>
+
+<pre><code>splunkdev watch --app my_application
+</code></pre>
+
+<h3>splunkdev reload --help</h3>
+
+<blockquote><p>reload application configurations</p></blockquote>
+
+<pre><code>
+  Usage: reload [options]
+
+  Options:
+
+    -h, --help  output usage information
+</code></pre>
+
+<h3>splunkdev config --help</h3>
+
+<blockquote><p>configure cli for current splunk instance</p></blockquote>
+
+<pre><code>
+  Usage: config [options]
+
+  Options:
+
+    -h, --help    output usage information
+    -R, --remove  remove configuration for current splunk instance
+</code></pre>
+
+<h3>splunkdev settings --help</h3>
+
+<blockquote><p>change configuration settings for Splunk</p></blockquote>
+
+<pre><code>
+  Usage: settings [options]
+
+  Options:
+
+    -h, --help              output usage information
+    -m, --minified &lt;value&gt;  use minified files (true|false)
+</code></pre>
+
+<h4>Examples</h4>
+
+<p>If you want to see all unminified (css and js) files in web environment use next command</p>
+
+<pre><code>splunkdev settings -m false
+</code></pre>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}
+
+{% block js %}    
+    <script>
+    require.config({
+        shim: {
+            "splunk_wftoolkit/contrib/prettify": {
+                deps: [],
+                exports: "prettyPrint"
+            } 
+        }
+    });
+
+    require(["splunk_wftoolkit/contrib/prettify", "bootstrap.tab"], function(prettyPrint) {
+        //pp formats code samples
+        prettyPrint();
+    });   
+    </script>
+{% endblock js %}

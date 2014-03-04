@@ -51,5 +51,7 @@ urlpatterns = patterns('',
     url(r'^dashboard_stencil1/$', render('splunk_wftoolkit:dashboard_stencil1.html'), name='dashboard_stencil1'),
     url(r'^dashboard_stencil2/$', render('splunk_wftoolkit:dashboard_stencil2.html'), name='dashboard_stencil2'),
 
+    url(r'^splunkdevcli/$', render('splunk_wftoolkit:splunkdevcli.html'), name='splunkdevcli'),
+
     url(r'^test/$', render('splunk_wftoolkit:test.html'), name='test'),
 )
