@@ -39,6 +39,8 @@
         <a href="/dj/redirector/splunk_wftoolkit/cascade">Cascading form inputs</a>
         <a href="/dj/redirector/splunk_wftoolkit/multidropdown">Multidropdown lists</a>
 
+        <a href="/dj/redirector/splunk_wftoolkit/twosearchbars">Compare Searchbars</a>
+
         <a href="/dj/redirector/splunk_wftoolkit/search">Search timeline</a>
         <a href="/dj/redirector/splunk_wftoolkit/timerange">Time ranges</a>
         <a href="/dj/redirector/splunk_wftoolkit/timerangegroup">Grouped time range</a>
