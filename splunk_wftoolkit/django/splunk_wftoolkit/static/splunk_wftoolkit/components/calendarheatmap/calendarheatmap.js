@@ -76,7 +76,8 @@ define(function(require, exports, module) {
             'domainLabelFormat',
             'subDomainTextFormat',
             'subDomainDateFormat',
-            'subDomainLabelFormat'
+            'subDomainLabelFormat',
+            'range'
         ],
        
         options: {
@@ -85,6 +86,7 @@ define(function(require, exports, module) {
             domain: 'hour', // the largest unit it will differentiate by in squares
             subDomain: 'min', // the smaller unit the calheat goes off of
             uID: null,
+            range: 4,
             domainLabelFormat: null,
             subDomainTextFormat: null,
             subDomainDateFormat: null,
