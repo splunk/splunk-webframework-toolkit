@@ -73,12 +73,14 @@ define(function(require, exports, module) {
         className: "splunk-toolkit-cal-heatmap",
 
         heatmapOptionNames: [
-            'domainLabelFormat',
-            'subDomainTextFormat',
-            'subDomainDateFormat',
-            'subDomainLabelFormat',
-            'range'
-        ],
+            'cellRadius', 'domainMargin', 'maxDate', 'dataType', 
+            'considerMissingDataAsZero', 'verticalOrientation', 
+            'domainDynamicDimension', 'label', 'legendCellSize', 
+            'legendCellPadding', 'legendMargin', 'legendVerticalPosition', 
+            'legendHorizontalPosition', 'domainLabelFormat', 
+            'subDomainDateFormat', 'subDomainTextFormat', 'nextSelector', 
+            'previousSelector', 'itemNamespace', 'onMaxDomainReached', 
+            'onMinDomainReached', 'width', 'height'],
        
         options: {
             managerid: "search1",   // your MANAGER ID
@@ -195,8 +197,14 @@ define(function(require, exports, module) {
             // are set to null (use default).  Some controls hand back
             // empty strings, which result in nothing being shown.
             // Not what is wanted.
-            var vizOptions = _.object(_.map(this.settings.pick(this.heatmapOptionNames),
-                                             function(v, k) { return _.isEmpty(v) ? [k, null] : [k, v]; }));
+
+            var vizOptions = _.chain(this.settings.toJSON())
+                    .pairs()
+                    .filter(function(kv) { return _.contains(that.heatmapOptionNames, kv[0]); })
+                    .filter(function(kv) { return ! (_.isNull(kv[1]) || _.isUndefined(kv[1])); })
+                    .object()
+                    .value();
+
             this.$el.html('');
             _.each(data.series, function(series, idx) {
                 var scale = d3.scale.quantile()
