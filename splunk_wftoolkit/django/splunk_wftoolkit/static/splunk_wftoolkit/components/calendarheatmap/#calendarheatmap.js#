@@ -88,7 +88,11 @@ define(function(require, exports, module) {
             domain: 'hour', // the largest unit it will differentiate by in squares
             subDomain: 'min', // the smaller unit the calheat goes off of
             uID: null,
-            range: 4
+            range: 4,
+            domainLabelFormat: null,
+            subDomainTextFormat: null,
+            subDomainDateFormat: null,
+            subDomainLabelFormat: null
         },
 
         validDomains: {
@@ -108,7 +112,7 @@ define(function(require, exports, module) {
             // whenever domain or subDomain are changed, we will re-render.
             this.settings.on("change:domain", this.onDomainChange, this);
             this.settings.on("change:subDomain", this.onDomainChange, this);
-            this.settings.on("change", this._onSettingsChange, this);
+            this.settings.on("change", this.onSettingsChange, this);
             var uniqueID=Math.floor(Math.random()*1000001);
             this.settings.set("uID", uniqueID);
         },
@@ -129,7 +133,7 @@ define(function(require, exports, module) {
             }
         },
 
-        _onSettingsChange: function(changed) {
+        onSettingsChange: function(changed) {
             // Route heatmap visualization changes to the renderer
             if ((_.intersection(_.keys(changed.changed), this.heatmapOptionNames)).length > 0) {
                 this.render();
@@ -195,11 +199,11 @@ define(function(require, exports, module) {
             // Not what is wanted.
 
             var vizOptions = _.chain(this.settings.toJSON())
-                .pairs()
-                .filter(function(kv) { return _.contains(that.heatmapOptionNames, kv[0]); })
-                .filter(function(kv) { return ! (_.isNull(kv[1]) || _.isUndefined(kv[1]))  || (kv[1] !== ""); })
-                .object()
-                .value();
+                    .pairs()
+                    .filter(function(kv) { return _.contains(that.heatmapOptionNames, kv[0]); })
+                    .filter(function(kv) { return ! (_.isNull(kv[1]) || _.isUndefined(kv[1])); })
+                    .object()
+                    .value();
 
             this.$el.html('');
             _.each(data.series, function(series, idx) {
