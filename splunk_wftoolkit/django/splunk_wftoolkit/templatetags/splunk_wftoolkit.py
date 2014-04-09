@@ -90,3 +90,14 @@ def parallelcoords(context, id, *args, **kwargs):
         "splunk_wftoolkit/components/parallelcoords/parallelcoords",
         kwargs
     )
+
+@register.inclusion_tag('splunkdj:components/component.html', takes_context=True)
+def punchcard(context, id, *args, **kwargs):
+    return component_context(
+        context,
+        "punchcard",
+        id,
+        "view",
+        "splunk_wftoolkit/components/punchcard/punchcard",
+        kwargs
+    )
