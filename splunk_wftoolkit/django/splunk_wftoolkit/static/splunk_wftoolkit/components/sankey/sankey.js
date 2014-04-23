@@ -40,16 +40,13 @@ define(function(require, exports, module) {
             
             this.settings.on("change:formatLabel change:formatTooltip", this.render, this);
 
-            // Set up resize callback. The first argument is a this
-            // pointer which gets passed into the callback event
-            $(window).resize(this, _.debounce(this._handleResize, 20));
+            
+            // Set up resize callback. 
+            $(window).resize(_.debounce(_.bind(this._handleResize, this), 20));
         },
 
-        _handleResize: function(e){
-            
-            // e.data is the this pointer passed to the callback.
-            // here it refers to this object and we call render()
-            e.data.render();
+        _handleResize: function() {
+            this.render();
         },
 
         // The object this method returns will be passed to the
