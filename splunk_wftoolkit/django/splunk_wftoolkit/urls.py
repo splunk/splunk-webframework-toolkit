@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^calendarheatmap/$', render('splunk_wftoolkit:calendarheatmap.html'), name='calendarheatmap'),
     url(r'^parcoords/$', render('splunk_wftoolkit:parallelcoords.html'), name='parallelcoords'),
     url(r'^parallelsets/$', render('splunk_wftoolkit:parallelsets.html'), name='parallelsets'),
+    url(r'^punchcard/$', render('splunk_wftoolkit:punchcard.html'), name='punchcard'),
     url(r'^sunburst/$', render('splunk_wftoolkit:sunburst.html'), name='sunburst'),
     # Examples
     url(r'^dashboarddj/$', render('splunk_wftoolkit:dashboarddj.html'), name='dashboarddj'),

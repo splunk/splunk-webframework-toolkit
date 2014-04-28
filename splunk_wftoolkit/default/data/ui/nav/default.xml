@@ -21,6 +21,7 @@
         <a href="/dj/redirector/splunk_wftoolkit/calendarheatmap">Calendar Heatmap</a>
         <a href="/dj/redirector/splunk_wftoolkit/parallelcoords">Parallel Coordinates</a>
         <a href="/dj/redirector/splunk_wftoolkit/parallelsets">Parallel Sets</a>
+        <a href="/dj/redirector/splunk_wftoolkit/punchcard">Punchcard</a>
         <a href="/dj/redirector/splunk_wftoolkit/sunburst">Sunburst</a>
     </collection>
 
