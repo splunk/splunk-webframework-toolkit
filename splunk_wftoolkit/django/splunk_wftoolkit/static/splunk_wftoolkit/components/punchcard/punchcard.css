@@ -1,5 +1,7 @@
 .splunk-toolkit-punchcard .axis path,.axis line {
-  fill: none;stroke:#b6b6b6;shape-rendering: crispEdges;
+  fill: none;
+  stroke:#b6b6b6;
+  shape-rendering: crispEdges;
 }
 .splunk-toolkit-punchcard .tick text {
   fill:#999;
@@ -8,10 +10,11 @@
   cursor:pointer;
 }
 .splunk-toolkit-punchcard text.label {
-  font-size:12px;font-weight:bold;cursor:pointer;
+  font-size:12px;
+  cursor:pointer;
 }
 .splunk-toolkit-punchcard text.value {
-  font-size:12px;font-weight:bold;
+  font-size:11px;
 }
 .splunk-toolkit-punchcard svg {
   margin: 0px auto;

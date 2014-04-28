@@ -48,6 +48,15 @@ define(function(require, exports, module) {
         return str;
     }
 
+    // Rounds to thousands and adds a 'K'
+    var roundToThousands = function(d){ 
+        var value = d[1]; 
+        if (value > 1000 >= 1) {
+            value = Math.round((value / 1000)) + 'K';
+        }
+        return value;
+    }
+
     var Punchcard = SimpleSplunkView.extend({
         moduleId: module.id,
 
@@ -57,7 +66,8 @@ define(function(require, exports, module) {
             managerid: null,  
             data: 'preview',
             formatXAxisLabel: _.identity,
-            formatYAxisLabel: truncate
+            formatYAxisLabel: truncate,
+            formatCount: roundToThousands
         },
 
         output_mode: 'json',
@@ -66,7 +76,7 @@ define(function(require, exports, module) {
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
             // Listen to changes
-            this.settings.on('change:formatXAxisLabel change:formatYAxisLabel', this.render, this);
+            this.settings.on('change:formatXAxisLabel change:formatYAxisLabel change:formatCount', this.render, this);
 
             // Set up resize callback. 
             $(window).resize(_.debounce(_.bind(this._handleResize, this), 20));
@@ -135,6 +145,7 @@ define(function(require, exports, module) {
             var that = this;
             var formatXAxisLabel = this.settings.get('formatXAxisLabel');
             var formatYAxisLabel = this.settings.get('formatYAxisLabel');
+            var formatCount = this.settings.get('formatCount');
 
             var containerHeight = this.$el.height();
             var containerWidth = this.$el.width(); 
@@ -227,24 +238,19 @@ define(function(require, exports, module) {
                     .append('svg:title')
                         .text(function(d) { return d[1]; });
 
-                // Position and color the text
+                // Position and color the numbers 
                 text
                     .attr('y', j * ROW_HEIGHT + ROW_HEIGHT + 5)
                     .attr('x',function(d, i) { return xScale(d[0])-5; })
                     .attr('class','value')
                     .on('mouseover', mouseover)
                     .on('mouseout', mouseout)
-                    .text(function(d){ 
-                      var value = d[1]; 
-                      if (value > 1000 >= 1) {
-                        value = Math.round((value / 1000)) + 'K';
-                      }
-                      return value;
-                    })
+                    .text(formatCount)
                     .attr('title', function(d) { return d[1]; })
                     .style('fill', function(d) { return colorScale(row.category); })
                     .style('display','none');
 
+                // Position and color the labels
                 g.append('text')
                     .attr('y', j * ROW_HEIGHT + ROW_HEIGHT + 5)
                     .attr('x',graphWidth - LABEL_WIDTH + 20)
@@ -252,16 +258,23 @@ define(function(require, exports, module) {
                     .text(formatYAxisLabel(row['name']))
                     .style('fill', function(d) { return colorScale(row.category); })
                     .on('mouseover', mouseover)
-                    .on('mouseout', mouseout);
+                    .on('mouseout', mouseout)
             };
             function mouseover(p) {
                 var g = d3.select(this).node().parentNode;
+                var element = d3.select(this);
+                element.attr('storedFill', element.style('fill'));
+                element.style('fill', 'black');
+                element.style('font-weight', 'bold');
                 d3.select(g).selectAll('circle').style('display','none');
                 d3.select(g).selectAll('text.value').style('display','block');
             }
      
             function mouseout(p) {
                 var g = d3.select(this).node().parentNode;
+                var element = d3.select(this);
+                element.style('fill', element.attr('storedFill'));
+                element.style('font-weight', 'normal');
                 d3.select(g).selectAll('circle').style('display','block');
                 d3.select(g).selectAll('text.value').style('display','none');
             }
