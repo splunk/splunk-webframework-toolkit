@@ -6,7 +6,7 @@ define(function(require, exports, module) {
     require('css!./punchcard.css');
 
     // These ranges are hardcoded as they are the builtin
-    // splunk time units. Any otehr range is calculated from 
+    // splunk time units. Any other range is calculated from 
     // the range of the data
     // NOTE: _.range excludes the final value, so they are all 1 over
     var TIME_RANGES = {
@@ -29,19 +29,14 @@ define(function(require, exports, module) {
 
     // Returns true if all elements of a list are numbers
     var isNumericList = function (list) {
-        for (var i = 0; i < list.length; i++) {
-            if (!_.isNumber(list[i])){
-                return false;
-            }
-        };
-        return true;
+        return _.every(list, function(i) { return _.isNumber(i); });;
     };
 
-    // Truncate a string to a length, optionally adding a suffix
+    // Truncates a string to a length, optionally adding a suffix
     var truncate = function(str, maxLength, suffix) {
         maxLength = maxLength || 25;
         suffix = suffix || '...';
-        if(str.length > maxLength) {
+        if (str.length > maxLength) {
             str = str.substring(0, maxLength + 1); 
             str = str + suffix;
         }
@@ -49,15 +44,15 @@ define(function(require, exports, module) {
     }
 
     // Rounds to thousands and adds a 'K'
-    var roundToThousands = function(d){ 
+    var roundToThousands = function(d) { 
         var value = d[1]; 
-        if (value > 1000 >= 1) {
+        if (value > 1000) {
             value = Math.round((value / 1000)) + 'K';
         }
         return value;
     }
 
-    var Punchcard = SimpleSplunkView.extend({
+    var PunchcardView = SimpleSplunkView.extend({
         moduleId: module.id,
 
         className: 'splunk-toolkit-punchcard', 
@@ -87,10 +82,10 @@ define(function(require, exports, module) {
         },
 
         createView: function() {
-            // Here we wet up the initial view layout
+            // Here we set up the initial view layout
             var margin = {top: 30, right: 30, bottom: 30, left: 30};
-            var availableWidth = parseInt(this.settings.get('width') || this.$el.width());
-            var availableHeight = parseInt(this.settings.get('height') || this.$el.height());
+            var availableWidth = parseInt(this.settings.get('width') || this.$el.width(), 10);
+            var availableHeight = parseInt(this.settings.get('height') || this.$el.height(), 10);
 
             this.$el.html("");
 
@@ -107,7 +102,7 @@ define(function(require, exports, module) {
         formatData: function(data) {
             var rows = data;
 
-            // Get demension names from a sample object
+            // Get dimension names from a sample object
             var sampleKeys = _.keys(data[0]);
             var xDimension = sampleKeys[0];
             var yDimension = sampleKeys[1];
@@ -120,7 +115,7 @@ define(function(require, exports, module) {
             var xValues = [];
 
             var countData = {};
-            _.each(rows, function(row){
+            _.each(rows, function(row) {
                 var name = row[yDimension];
                 var category = currentCategory++;
                 var count = parseInt(row.count, 10);
@@ -128,7 +123,7 @@ define(function(require, exports, module) {
                 var xValue = row[xDimension];
                 xValues.push(xValue);
 
-                countData[name] = countData[name] || {total: 0, name: name, counts: [], category: category};
+                countData[name] = countData[name] || { total: 0, name: name, counts: [], category: category };
                 countData[name]['total'] += count;
                 countData[name]['counts'].push([xValue, count])
             });
@@ -138,7 +133,7 @@ define(function(require, exports, module) {
 
             var metadata = { xDimension: xDimension, yDimension: yDimension, xValues: xValues };        
 
-            return { metadata: metadata, countData: _.values(countData)};
+            return { metadata: metadata, countData: _.values(countData) };
         },
 
         updateView: function(viz, data) {
@@ -193,13 +188,12 @@ define(function(require, exports, module) {
             // Set up the axis markers
             var xAxis = d3.svg.axis()
                 .scale(xScale)
-                .ticks(xValues.length +1)
+                .ticks(xValues.length + 1)
                 .tickFormat(formatXAxisLabel)  
                 .orient('top');
 
             graph.append('g')
                 .attr('class', 'x axis')
-                .attr('transform', 'translate(0,' + 0 + ')')
                 .call(xAxis);
 
             for (var j = 0; j < data.countData.length; j++) {
@@ -207,7 +201,7 @@ define(function(require, exports, module) {
 
                 // Append a category class
                 var g = graph.append('g')
-                    .attr('class','dimension') // TODO: this is wrong
+                    .attr('class','dimension') 
                     .attr('data-category', row.category);
 
                 // Add circles
@@ -253,13 +247,17 @@ define(function(require, exports, module) {
                 // Position and color the labels
                 g.append('text')
                     .attr('y', j * ROW_HEIGHT + ROW_HEIGHT + 5)
-                    .attr('x',graphWidth - LABEL_WIDTH + 20)
+                    .attr('x', graphWidth - LABEL_WIDTH + 25)
                     .attr('class','label')
                     .text(formatYAxisLabel(row['name']))
                     .style('fill', function(d) { return colorScale(row.category); })
                     .on('mouseover', mouseover)
                     .on('mouseout', mouseout)
             };
+
+            // On mouseover circles in the row are hidden
+            // and replaced with number values. The number being moused 
+            // over is also turned black
             function mouseover(p) {
                 var g = d3.select(this).node().parentNode;
                 var element = d3.select(this);
@@ -280,5 +278,5 @@ define(function(require, exports, module) {
             }
         }
     });
-    return Punchcard;
+    return PunchcardView;
 });

@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
     <style type="text/css">
         #hook{
-            height: 400px;
+            height: 250px;
         }
     </style>
 {% endblock css %}
@@ -25,17 +25,16 @@
             <div class="dashboard-row">
                 <div class="dashboard-cell" style="width: 100%;">
                     <div class="dashboard-panel">
-                        {% searchbar id="searchbar1" value="$search$"|token_safe default="index=_internal | head 100000 | stats count by date_hour sourcetype" %}
+                        {% searchbar id="searchbar1" value="$search$"|token_safe default="index=_internal | head 300000 | stats count by date_hour sourcetype" %}
                     </div>
                 </div>
-                
             </div>
 
             <div class="dashboard-row">
                 <div class="dashboard-cell" style="width: 100%;">
                     <div class="dashboard-panel">
                         <div class="panel-head">
-                            <h3>Earthquakes</h3>
+                            <h3>Punchcard</h3>
                         </div>
                         <div class="dashboard-element">
                             <div id="viz-wrapper">
@@ -58,9 +57,9 @@
 {% block js %}
     <script>
         require(['jquery', 
-        'underscore',
-        'splunk_wftoolkit/components/punchcard/punchcard',
-        'splunkjs/ready!'
+            'underscore',
+            'splunk_wftoolkit/components/punchcard/punchcard',
+            'splunkjs/ready!'
         ], 
         function(
             $,
@@ -68,14 +67,13 @@
             Punchcard,
             mvc) 
         {
-
             var formatHours = function(x) {
                 var parsed = parseInt(x, 10);
                 if (x < 12) { 
-                  return (x === 0 ? 12 : x) + "AM";
+                    return (x === 0 ? 12 : x) + "AM";
                 }
                 else {
-                  return (x === 12 ? 12 : x-12) + "PM";
+                    return (x === 12 ? 12 : x-12) + "PM";
                 }
             };
 
@@ -84,9 +82,10 @@
             var pc = new Punchcard({
                 id: 'pc1',
                 managerid: 'search1',
+                formatXAxisLabel: formatHours,
+                height: 300,
                 el: $('#hook')
-            }).render();
-            
+            }).render();  
         });
     </script>
 {% endblock js %}
