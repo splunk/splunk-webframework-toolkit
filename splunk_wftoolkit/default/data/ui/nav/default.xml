@@ -49,6 +49,7 @@
         <a href="/dj/redirector/splunk_wftoolkit/interactive">Interactive views</a>
         <a href="/dj/redirector/splunk_wftoolkit/chartclick">Chart clicks</a>
         <a href="/dj/redirector/splunk_wftoolkit/customtablecells">Custom table cells</a>
+        <a href="/dj/redirector/splunk_wftoolkit/rowexpander">Custom table row expander</a>
         <a href="/dj/redirector/splunk_wftoolkit/maps">Maps</a>
 
         <a href="/dj/redirector/splunk_wftoolkit/airlinedashboard">Extended dashboard example</a>
