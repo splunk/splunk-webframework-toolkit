@@ -1,0 +1,20 @@
+[
+    {
+        "id": "managers",
+        "title": "Search managers",
+        "description": "Search managers handle getting data from Splunk and making it available to Web Framework components",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "charts",
+        "title": "Charts",
+        "description": "Various chart types to be used to plot Splunk data",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "bubblechart",
+        "title": "Bubble Chart",
+        "description": "The Bubble Chart visualizes the magnitude of data values as circular areas.",
+        "section": "toolkitvisualizations"
+    }
+]
