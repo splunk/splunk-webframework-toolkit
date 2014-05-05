@@ -67,9 +67,13 @@ display: inline;
 }
 
 img.item-thumb {
-	float:left;
-	padding-right: 15px;
+	float: left;
+	margin-right: 15px;
 	margin-bottom: 30px;
+	height: 175px;
+	width: 175px;
+	border: 1px solid #ddd;
+}
 
 }
 
