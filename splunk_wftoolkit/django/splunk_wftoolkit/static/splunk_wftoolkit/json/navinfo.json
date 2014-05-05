@@ -118,5 +118,29 @@
         "title": "Saved reports",
         "description": "This example shows how to use a SavedSearchManager to power multiple views",
         "section": "examples"
+    },
+    {
+        "id": "postprocess",
+        "title": "Post-process searches",
+        "description": "This example shows how to use post-process searches",
+        "section": "examples"
+    },
+    {
+        "id": "properties",
+        "title": "Search properties",
+        "description": "An example of programatically setting search properties",
+        "section": "examples"
+    },
+    {
+        "id": "cache",
+        "title": "Cached searches",
+        "description": "An example of using pre-existing jobs to power searches",
+        "section": "examples"
+    },
+    {
+        "id": "databingingjs",
+        "title": "Data binding with tokens",
+        "description": "This example demonstrates how to set up data binding using tokens",
+        "section": "examples"
     }
 ]
