@@ -1,0 +1,59 @@
+.main-section-body.dashboard-body {
+	background: none;
+}
+
+.main-section-body.dashboard-body p {
+font: 15px/22px roboto;
+}
+
+.dashboard-header h2 {
+margin-top: 5px;
+}
+
+span[class|="icon"] {
+	padding-right: 5px;
+}
+
+.section-nav ul.nav-buttons li {
+display: inline;
+}
+
+.section-nav ul.nav-buttons li a {
+    display: inline-block;
+    border: 1px solid #BDD0F0;
+    margin: 15px -2px;
+    padding: 10px;
+    width: 17%;
+    background-color: #EFF4FC;
+    line-height: 26px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.section-nav ul.nav-buttons li a:hover {
+	text-decoration: none;
+	background-color: #D3E0F5;
+	transition: background-color 200ms ;
+
+}
+
+.section-nav ul.nav-buttons li:hover a,
+.section-nav ul.nav-buttons li:hover a span {
+	text-decoration: none;
+}
+
+
+.section-nav ul.nav-buttons li a span {
+    display: block;
+    font-size: 45px;
+    line-height: 45px;
+    text-align: center;
+}
+
+.toolkit-item {
+
+}
+
+img.item-thumb {
+
+}
