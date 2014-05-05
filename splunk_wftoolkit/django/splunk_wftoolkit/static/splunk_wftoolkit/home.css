@@ -10,8 +10,18 @@ font: 15px/22px roboto;
 margin-top: 5px;
 }
 
+.dashboard-body h3 {
+	clear:both;
+	padding-top: 15px;
+	font-size: 24px;
+	font-weight: 200;
+}
 span[class|="icon"] {
 	padding-right: 5px;
+}
+
+.toolkit-item-list {
+	margin-top:20px;
 }
 
 .section-nav ul.nav-buttons li {
@@ -33,7 +43,7 @@ display: inline;
 .section-nav ul.nav-buttons li a:hover {
 	text-decoration: none;
 	background-color: #D3E0F5;
-	transition: background-color 200ms ;
+	transition: all 200ms ;
 
 }
 
@@ -51,9 +61,22 @@ display: inline;
 }
 
 .toolkit-item {
+	clear:both;
+	margin-bottom: 30px; 
 
 }
 
 img.item-thumb {
+	float:left;
+	padding-right: 15px;
+	margin-bottom: 30px;
 
+}
+
+h4 {
+font-size: 17px;
+}
+
+.toolkit-item a:hover div p {
+	text-decoration: none;
 }
