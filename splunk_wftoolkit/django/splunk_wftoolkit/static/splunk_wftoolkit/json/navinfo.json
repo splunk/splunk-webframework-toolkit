@@ -1,5 +1,11 @@
 [
     {
+        "id": "overview",
+        "title": "Web Framework Overview",
+        "description": "A brief overview of the basic concepts of the Web Framework with links to more docs",
+        "section": "reference"
+    },
+    {
         "id": "managers",
         "title": "Search managers",
         "description": "Search managers handle getting data from Splunk and making it available to Web Framework components",
@@ -12,9 +18,105 @@
         "section": "basiccomponents"
     },
     {
+        "id": "tables",
+        "title": "Tables",
+        "description": "Table views for Splunk data",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "forms",
+        "title": "Form Controls",
+        "description": "Splunk Web Framework form controls",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "searchcontrols",
+        "title": "Search manager controls",
+        "description": "Views that can be used to interact with and control search managers",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "map",
+        "title": "Map",
+        "description": "A map controls for displaying geographic Splunk data",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "dataview",
+        "title": "Data template",
+        "description": "A client-side component for templated rendering of Splunk data",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "toolkitcomponents",
+        "title": "Using Toolkit Visualizations",
+        "description": "Learn how to include visualizations from this toolkit in your app",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "sankey",
+        "title": "Sankey Chart",
+        "description": "The Sankey chart visualizes data flow between nodes",
+        "section": "toolkitvisualizations"
+    },
+    {
         "id": "bubblechart",
         "title": "Bubble Chart",
-        "description": "The Bubble Chart visualizes the magnitude of data values as circular areas.",
+        "description": "The Bubble Chart visualizes the magnitude of data values as circular areas",
         "section": "toolkitvisualizations"
+    },
+    {
+        "id": "forcedirected",
+        "title": "Force-directed Graph",
+        "description": "The Force-Directed Graph displays information about connectivity and clustering between nodes in a network",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "calendarheatmap",
+        "title": "Calendar Heatmap",
+        "description": "The Calendar Heatmap displays time-series data on a timeline as a heatmap",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "parallelsets",
+        "title": "Parallel Sets",
+        "description": "The Parallel Sets graph is good for displaying multidimensional categorical data",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "parcoords",
+        "title": "Parallel Coordinates",
+        "description": "The Parallel Coordinates graph is good for visualizing multidimensional data dynamically",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "punchcard",
+        "title": "Punchcard",
+        "description": "Punchcard shows a count relationship between two data dimensions",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "sunburst",
+        "title": "Sunburst",
+        "description": "The Sunburst shows hierarchically grouped data. This view is similar to a tree except that it uses a radial layout with the root at the center and the leaf nodes around the edges.",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "dashboarddj",
+        "title": "Dashboard in Django",
+        "description": "This example shows how to create a simple dashboard using Django template tags for creating views and managers",
+        "section": "examples"
+    },
+    {
+        "id": "dashboardjs",
+        "title": "Dashboard in JavaScript",
+        "description": "This example shows how to create a simple dashboard using JavaScript to create and connect the views and managers",
+        "section": "examples"
+    },
+    {
+        "id": "savedsearch",
+        "title": "Saved reports",
+        "description": "This example shows how to use a SavedSearchManager to power multiple views",
+        "section": "examples"
     }
 ]

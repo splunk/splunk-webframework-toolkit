@@ -100,13 +100,15 @@
 
 {% block js %}   
     <script id="item-template" type="text/template">
-        <a class="sample-item" href="../<%= id %>">
-            <img src="<%= staticUrl %>splunk_wftoolkit/img/demo.png">
-            <div class="sample-item-content">
-                <h4><%= title %></h4>
-                <p><%= description %></p>
-            </div>
-        </a>
+        <div class="sample-item">
+            <a class="sample-link" href="../<%= id %>">
+                <img src="<%= staticUrl %>splunk_wftoolkit/img/demo<% var min = 0; var max = 4; print(Math.floor(Math.random() * (max - min + 1)) + min) %>.png">
+                <div class="sample-item-content">
+                    <h4><%= title %></h4>
+                    <p><%= description %></p>
+                </div>
+            </a>
+        </div>
     </script> 
     <script>
 
@@ -126,7 +128,7 @@
                 $.getJSON(staticUrl + 'splunk_wftoolkit/json/navinfo.json', function(navdata){
                      var template = _.template( $('#item-template').html() ); 
                     _.each(navdata, function(item){
-                        var $sectionList = $('#' + item['section'] + '-list');
+                        var $sectionList = $('#' + (item['section'] || 'learnmore' ) + '-list');
                         $sectionList.append( template(_.extend(item,{staticUrl: staticUrl})));
                     });
                 })
