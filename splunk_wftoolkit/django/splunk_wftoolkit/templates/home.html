@@ -102,7 +102,7 @@
     <script id="item-template" type="text/template">
         <div class="toolkit-item">
             <a class="sample-link" href="../<%= id %>">
-                <img class="item-thumb" src="<%= staticUrl %>splunk_wftoolkit/img/demo<% var min = 0; var max = 4; print(Math.floor(Math.random() * (max - min + 1)) + min) %>.png">
+                <img class="item-thumb" src="<%= staticUrl %>splunk_wftoolkit/img/<%= id %>.png">
                 <div class="sample-item-content">
                     <h4><%= title %></h4>
                     <p><%= description %></p>
