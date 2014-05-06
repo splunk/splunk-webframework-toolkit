@@ -16,12 +16,24 @@ margin-top: 5px;
 	font-size: 24px;
 	font-weight: 200;
 }
+
+h3+p {
+	
+	font-style: italic !important;
+	font: italic 17px/24px roboto !important;
+}
+
 span[class|="icon"] {
 	padding-right: 5px;
 }
 
 .toolkit-item-list {
 	margin-top:20px;
+}
+
+.nav-buttons {
+	margin:0;
+	margin-left:3px;
 }
 
 .section-nav ul.nav-buttons li {
@@ -33,7 +45,7 @@ display: inline;
     border: 1px solid #BDD0F0;
     margin: 15px -2px;
     padding: 10px;
-    width: 17%;
+    width: 170px;
     background-color: #EFF4FC;
     line-height: 26px;
     text-align: center;
@@ -69,6 +81,7 @@ display: inline;
 img.item-thumb {
 	float: left;
 	margin-right: 15px;
+	margin-left: 35px;
 	margin-bottom: 30px;
 	height: 175px;
 	width: 175px;
