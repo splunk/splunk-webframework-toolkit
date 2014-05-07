@@ -3,7 +3,7 @@
 }
 
 .main-section-body.dashboard-body p {
-font: 15px/22px roboto;
+font: 14px/21px roboto;
 }
 
 .dashboard-header h2 {
@@ -21,6 +21,10 @@ h3+p {
 	
 	font-style: italic !important;
 	font: italic 17px/24px roboto !important;
+}
+
+.toolkit-item {
+	
 }
 
 span[class|="icon"] {
@@ -73,9 +77,11 @@ display: inline;
 }
 
 .toolkit-item {
-	clear:both;
+	/*clear:both;*/
 	margin-bottom: 30px; 
-
+	width:470px;
+	display: block;
+	float: left;
 }
 
 
@@ -90,9 +96,13 @@ a.item-link:hover {
 }
 
 
-a.item-link div.item-content h4,
-a.item-link div.item-content p.item-description {
+a.item-link div.item-content h4 {
 	color: #333;
+}
+
+a.item-link div.item-content p.item-description {
+
+color: #333;margin-bottom: 15px;
 }
 
 a.item-link div.item-content h4:hover {
@@ -119,26 +129,43 @@ a.item-link div.item-content p.view-button:hover {
 	/*color:#32496a;*/
 		
 	background-color: #D3E0F5;
+	background-color: #DCE6F7;
 	transition: all 200ms;
 	
 }
 
 img.item-thumb {
-	opacity: .7;
+	opacity: .75;
 	float: left;
-	margin: 2px 17px 32px 37px;
+	margin: 0px 15px 30px 35px;
 	height: 175px;
 	width: 175px;
 	border: 1px solid #ddd;
+	transition: all 200ms;
 }
 
 
 a.item-link img.item-thumb:hover {
 	opacity: 1.0;
-	margin: 0px 15px 30px 35px;
-	border: 3px solid #BDD0F0;
+	/*margin: 0px 15px 30px 35px;
+	border: 3px solid #BDD0F0;*/
+	border: 1px solid #bbb;
+	transition: all 200ms;
 }
 
 a.item-link:hover img.item-thumb {
 	opacity: 1.0;
+}
+
+
+div#learnmore {
+	margin-bottom: 50px;
+}
+
+div#learnmore a.external {
+	font: 15px/22px roboto;
+}
+
+div#learnmore div#learnmore-list {
+	margin-left: 35px;
 }
