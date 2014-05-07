@@ -84,7 +84,7 @@
         "section": "toolkitvisualizations"
     },
     {
-        "id": "parcoords",
+        "id": "parallelcoords",
         "title": "Parallel Coordinates",
         "description": "The Parallel Coordinates graph is good for visualizing multidimensional data dynamically",
         "section": "toolkitvisualizations"
