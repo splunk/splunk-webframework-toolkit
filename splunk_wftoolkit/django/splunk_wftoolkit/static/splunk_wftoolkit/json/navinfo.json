@@ -138,7 +138,7 @@
         "section": "examples"
     },
     {
-        "id": "databingingjs",
+        "id": "databindingjs",
         "title": "Data binding with tokens",
         "description": "This example demonstrates how to set up data binding using tokens",
         "section": "examples"
