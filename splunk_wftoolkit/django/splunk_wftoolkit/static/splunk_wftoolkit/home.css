@@ -78,22 +78,67 @@ display: inline;
 
 }
 
+
+
+a.item-link div.item-content h4 {
+font-size: 18px;
+}
+
+
+a.item-link:hover {
+	text-decoration: none;
+}
+
+
+a.item-link div.item-content h4,
+a.item-link div.item-content p.item-description {
+	color: #333;
+}
+
+a.item-link div.item-content h4:hover {
+color: #5379af;
+}
+
+
+a.item-link div.item-content p.view-button {
+/*
+	font-size: 13px;
+	color: #5379af;
+	*/
+	display: inline;
+	font-size: 13px;
+	border: 1px solid #BDD0F0;
+    padding: 5px 15px;
+    background-color: #EFF4FC;
+    background-color: rgba(239, 244, 252, .5);
+    border-color: rgba(189, 208, 240, .5);
+    
+}
+
+a.item-link div.item-content p.view-button:hover {
+	/*color:#32496a;*/
+		
+	background-color: #D3E0F5;
+	transition: all 200ms;
+	
+}
+
 img.item-thumb {
+	opacity: .7;
 	float: left;
-	margin-right: 15px;
-	margin-left: 35px;
-	margin-bottom: 30px;
+	margin: 2px 17px 32px 37px;
 	height: 175px;
 	width: 175px;
 	border: 1px solid #ddd;
 }
 
+
+a.item-link img.item-thumb:hover {
+	opacity: 1.0;
+	margin: 0px 15px 30px 35px;
+	border: 3px solid #BDD0F0;
 }
 
-h4 {
-font-size: 17px;
-}
-
-.toolkit-item a:hover div p {
-	text-decoration: none;
+a.item-link:hover img.item-thumb {
+	opacity: 1.0;
 }
