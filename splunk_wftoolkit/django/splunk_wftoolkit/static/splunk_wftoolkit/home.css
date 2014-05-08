@@ -53,7 +53,7 @@ display: inline;
     background-color: #EFF4FC;
     line-height: 26px;
     text-align: center;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .section-nav ul.nav-buttons li a:hover {
@@ -87,17 +87,15 @@ display: inline;
 
 
 a.item-link div.item-content h4 {
+color: #666;
 font-size: 18px;
+line-height: 23px;
+margin-top: 0px;
 }
 
 
 a.item-link:hover {
 	text-decoration: none;
-}
-
-
-a.item-link div.item-content h4 {
-	color: #333;
 }
 
 a.item-link div.item-content p.item-description {

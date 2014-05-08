@@ -7,49 +7,49 @@
     },
     {
         "id": "managers",
-        "title": "Search managers",
+        "title": "Splunk Search managers",
         "description": "Search managers handle getting data from Splunk and making it available to Web Framework components",
         "section": "basiccomponents"
     },
     {
         "id": "charts",
-        "title": "Charts",
+        "title": "Splunk Charts",
         "description": "Various chart types to be used to plot Splunk data",
         "section": "basiccomponents"
     },
     {
         "id": "tables",
-        "title": "Tables",
+        "title": "Splunk Tables",
         "description": "Table views for Splunk data",
         "section": "basiccomponents"
     },
     {
         "id": "forms",
-        "title": "Form Controls",
+        "title": "Splunk Form Controls",
         "description": "Splunk Web Framework form controls",
         "section": "basiccomponents"
     },
     {
         "id": "searchcontrols",
-        "title": "Search manager controls",
+        "title": "Splunk Search Manager Controls",
         "description": "Views that can be used to interact with and control search managers",
         "section": "basiccomponents"
     },
     {
         "id": "map",
-        "title": "Map",
+        "title": "Splunk Map",
         "description": "A map controls for displaying geographic Splunk data",
         "section": "basiccomponents"
     },
     {
         "id": "dataview",
-        "title": "Data template",
+        "title": "Splunk Data template",
         "description": "A client-side component for templated rendering of Splunk data",
         "section": "basiccomponents"
     },
     {
         "id": "toolkitcomponents",
-        "title": "Using Toolkit Visualizations",
+        "title": "HOW TO: Using Toolkit Visualizations",
         "description": "Learn how to include visualizations from this toolkit in your app",
         "section": "toolkitvisualizations"
     },
@@ -103,157 +103,157 @@
     },
     {
         "id": "dashboarddj",
-        "title": "Dashboard in Django",
+        "title": "Example: Dashboard in Django",
         "description": "This example shows how to create a simple dashboard using Django template tags for creating views and managers",
         "section": "examples"
     },
     {
         "id": "dashboardjs",
-        "title": "Dashboard in JavaScript",
+        "title": "Example: Dashboard in JavaScript",
         "description": "This example shows how to create a simple dashboard using JavaScript to create and connect the views and managers",
         "section": "examples"
     },
     {
         "id": "savedsearch",
-        "title": "Saved reports",
+        "title": "Example: Saved reports",
         "description": "This example shows how to use a SavedSearchManager to power multiple views",
         "section": "examples"
     },
     {
         "id": "postprocess",
-        "title": "Post-process searches",
+        "title": "Example: Post-process searches",
         "description": "This example shows how to use post-process searches",
         "section": "examples"
     },
     {
         "id": "properties",
-        "title": "Search properties",
+        "title": "Example: Search properties",
         "description": "An example of programatically setting search properties",
         "section": "examples"
     },
     {
         "id": "cache",
-        "title": "Cached searches",
+        "title": "Example: Cached searches",
         "description": "An example of using pre-existing jobs to power searches",
         "section": "examples"
     },
     {
         "id": "databindingjs",
-        "title": "Data binding with tokens",
+        "title": "Example: Data binding with tokens",
         "description": "This example demonstrates how to set up data binding using tokens",
         "section": "examples"
     },
     {
         "id": "form",
-        "title": "Form imputs with tokens",
+        "title": "Example Form inputs with tokens",
         "description": "This example shows how to parameterize a search query using two tokens linked to form inputs",
         "section": "examples"
     },
     {
         "id": "cascade",
-        "title": "Cascading form inputs",
+        "title": "Example: Cascading form inputs",
         "description": "This example shows how to set up multiple form inputs, with the choice from one cascading into the others",
         "section": "examples"
     },
     {
         "id": "multidropdown",
-        "title": "Multidropdown lists",
+        "title": "Example: Multidropdown lists",
         "description": "Samples of using the multidropdown form input",
         "section": "examples"
     },
     {
         "id": "twosearchbars",
-        "title": "Compare Searchbars",
+        "title": "Example: Compare Searchbars",
         "description": "This page shows two different ways to make search bars that update search managers--using JavaScript events and token binding",
         "section": "examples"
     },
     {
         "id": "search",
-        "title": "Search with timeline",
+        "title": "Example: Search with timeline",
         "description": "This example shows how to create a UI that is similiar to Splunk Web by simply adding different views, such as the Timeline view",
         "section": "examples"
     },
     {
         "id": "timerange",
-        "title": "Time ranges",
+        "title": "Example: Time ranges",
         "description": "This example shows you can can easily set up a TimeRange view using simple Django template tags—no need for custom code",
         "section": "examples"
     },
     {
         "id": "timerangegroup",
-        "title": "Grouped time ranges",
+        "title": "Example: Grouped time ranges",
         "description": "In this example, a TimeRange view sets the timebounds for two separate searches that drive the two Single views",
         "section": "examples"
     },
     {
         "id": "interactive",
-        "title": "Interactive views",
+        "title": "Example: Interactive views",
         "description": "This example shows how to use click event to update searches and views on a page",
         "section": "examples"
     },
     {
         "id": "chartclick",
-        "title": "Chart click events",
+        "title": "Example: Chart click events",
         "description": "This example shows how to customize the drilldown action on a chart",
         "section": "examples"
     },
     {
         "id": "customtablecells",
-        "title": "Custom table cells",
+        "title": "Example: Custom table cells",
         "description": "This example shows how to set up a custom table cell renderer that shows an icon based on the severity value in each row",
         "section": "examples"
     },
     {
         "id": "rowexpander",
-        "title": "Custom table row expansion",
+        "title": "Example: Custom table row expansion",
         "description": "This example shows how to add custom row expander to a Table",
         "section": "examples"
     },
     {
         "id": "airlinedashboard",
-        "title": "Complex dashboard with drilldown",
+        "title": "Example: Complex dashboard with drilldown",
         "description": "This is an example of a complex dashboard using many controls, token binding, events and in-page drilldown",
         "section": "examples"
     },
     {
         "id": "d3chart",
-        "title": "NVD3 charts",
+        "title": "Example: NVD3 charts",
         "description": "This example shows how to use the NVD3 charts to display data in different ways",
         "section": "examples"
     },
     {
         "id": "jsonviewer",
-        "title": "JSON results viewer",
+        "title": "Example: JSON results viewer",
         "description": "This example shows how to write a custom view control that simply displays Splunk data as JSON",
         "section": "examples"
     },
     {
         "id": "dashboarddj_stencil",
-        "title": "Basic Django dashboard layout template",
+        "title": "Example: Basic Django dashboard layout template",
         "description": "An example and reusable template for dashboard layout using only Django",
         "section": "example"
     },
     {
         "id": "dashboarddj_stencil",
-        "title": "Basic Django dashboard layout template",
+        "title": "Example: Basic Django dashboard layout template",
         "description": "An example and reusable template for dashboard layout using only Django",
         "section": "example"
     },
     {
         "id": "dashboardjs_stencil",
-        "title": "Basic JavaScript dashboard layout template",
+        "title": "Example: Basic JavaScript dashboard layout template",
         "description": "An example and reusable template for dashboard layout using JavaScript",
         "section": "example"
     },
     {
         "id": "dashboard_stencil1",
-        "title": "Simple panel dashboard",
+        "title": "Example: Simple panel dashboard",
         "description": "A single panel dashboard template",
         "section": "example"
     },
     {
         "id": "dashboard_stencil2",
-        "title": "Multi panel dashboard",
+        "title": "Example: Multi panel dashboard",
         "description": "A dashboard template showing many-cell row layouts",
         "section": "example"
     },
