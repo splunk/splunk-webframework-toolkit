@@ -1,3 +1,11 @@
+
+body {
+background: #FCFBF8
+}
+
+.nav {
+	background: #424254;
+}
 .main-section-body.dashboard-body {
 	background: none;
 }
@@ -17,10 +25,9 @@ margin-top: 5px;
 	font-weight: 200;
 }
 
-h3+p {
+p.list-description {
 	
-	font-style: italic !important;
-	font: italic 17px/24px roboto !important;
+	font: italic 15px/18px roboto !important;
 }
 
 .toolkit-item {
@@ -32,7 +39,7 @@ span[class|="icon"] {
 }
 
 .toolkit-item-list {
-	margin-top:20px;
+	margin-top:15px;
 }
 
 .nav-buttons {
@@ -46,20 +53,27 @@ display: inline;
 
 .section-nav ul.nav-buttons li a {
     display: inline-block;
-    border: 1px solid #BDD0F0;
+    
     margin: 15px -2px;
-    padding: 10px;
+    padding: 8px 10px 10px 10px;
     width: 170px;
-    background-color: #EFF4FC;
+    
     line-height: 26px;
     text-align: center;
     font-size: 15px;
+    
+    border: 1px solid #cAd4d3;
+    background: #EAF4F3;
+	color: #525264;
+	transition: all 200ms;
+	
 }
 
 .section-nav ul.nav-buttons li a:hover {
 	text-decoration: none;
-	background-color: #D3E0F5;
-	transition: all 200ms ;
+	background-color: #84B0AA;
+	color: #FCFBF8;
+	transition: all 200ms;
 
 }
 
@@ -72,7 +86,7 @@ display: inline;
 .section-nav ul.nav-buttons li a span {
     display: block;
     font-size: 45px;
-    line-height: 45px;
+    line-height: 50px;
     text-align: center;
 }
 
@@ -91,6 +105,8 @@ color: #666;
 font-size: 18px;
 line-height: 23px;
 margin-top: 0px;
+margin-bottom: 2px;
+
 }
 
 
@@ -117,19 +133,24 @@ a.item-link div.item-content p.view-button {
 	font-size: 13px;
 	border: 1px solid #BDD0F0;
     padding: 5px 15px;
-    background-color: #EFF4FC;
-    background-color: rgba(239, 244, 252, .5);
-    border-color: rgba(189, 208, 240, .5);
+    background-color: #F4E7D6;    
+    border-color: #E4D7C6;
+    transition: all 200ms;
+    color: #947766;
+    -webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+			border-radius: 3px;
+
     
 }
 
 a.item-link div.item-content p.view-button:hover {
-	/*color:#32496a;*/
-		
-	background-color: #D3E0F5;
-	background-color: #DCE6F7;
+	background-color: #E9DCCB;
 	transition: all 200ms;
+	color: #777;
+	color: #997c6b;
 	
+		
 }
 
 img.item-thumb {
