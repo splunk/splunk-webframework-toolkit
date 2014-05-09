@@ -6,6 +6,12 @@ background: #FCFBF8
 .nav {
 	background: #424254;
 }
+
+ul.nav-buttons {
+	/*position: fixed;*/
+	top: -66px;
+	z-index: 9999;
+}
 .main-section-body.dashboard-body {
 	background: none;
 }
@@ -44,7 +50,12 @@ span[class|="icon"] {
 
 .nav-buttons {
 	margin:0;
-	margin-left:3px;
+	margin-left:2px;
+	
+	/* for sticky nav */
+	/* position: fixed;*/
+	top: -66px;
+	z-index: 9999;
 }
 
 .section-nav ul.nav-buttons li {
@@ -88,6 +99,11 @@ display: inline;
     font-size: 45px;
     line-height: 50px;
     text-align: center;
+}
+
+.toolkit-section {
+	/*margin-top: 45px;*/
+
 }
 
 .toolkit-item {
