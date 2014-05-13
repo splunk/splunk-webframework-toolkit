@@ -1,0 +1,87 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Treemap - Web Framework Toolkit{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
+<link rel="stylesheet" href="{{STATIC_URL}}splunk_wftoolkit/custom.css"/>
+<style type="text/css">
+    .splunk-toolkit-treemap{
+        width: 500px;
+        height: 500px;
+        margin: 20px;
+    }
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="dashboard-body container-fluid main-section-body component-page" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Treemap</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                {% searchbar id="searchbar1" managerid="search1" value="$search$"|token_safe default="|inputlookup jobs.csv" %}
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="panel-head">
+                    <h3>Jobs</h3>
+                </div>
+                <div class="dashboard-element">
+                    <div id="viz-wrapper">
+                        <div id="hook"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block managers %}
+    {%  searchmanager id="search1"
+        search="$search$"|token_safe  
+    %}
+{% endblock managers %}
+
+{% block js %}
+
+{{block.super}}
+<script>
+    require(
+        [
+        'jquery',
+        'underscore',
+        'splunkjs/mvc/searchmanager',
+        'splunkjs/mvc/tableview',
+        'splunk_wftoolkit/components/treemap/treemap',
+        'splunkjs/ready!',
+        ], 
+        function(
+                $, 
+                _,
+                SearchManager,
+                TableView,
+                Treemap,
+                mvc
+    ) {
+        var treemap = new Treemap({
+            id: 'tree1',
+            managerid: 'search1',
+            el: $('#hook')
+        });
+    });
+       
+    </script>
+{% endblock js %}

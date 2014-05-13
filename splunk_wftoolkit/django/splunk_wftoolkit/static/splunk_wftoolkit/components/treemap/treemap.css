@@ -1,0 +1,27 @@
+.chart {
+  display: block;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.cell rect:hover {
+    opacity: .8;
+}
+
+text {
+  font-size: 11px;
+}
+
+rect {
+  fill: none;
+}
+
+.treemap-tooltip {
+    position: absolute;
+    background-color: #424242;
+    border-radius: 3px 3px 3px 3px;
+    padding: 7px;
+    font-size: 1.0em;
+    color: white;
+    opacity:0;
+}
