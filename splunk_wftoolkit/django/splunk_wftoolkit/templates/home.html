@@ -7,15 +7,6 @@
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunk_wftoolkit/home.css" />
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
-    <style type="text/css">
-        .main-section-body{
-            width: 960px;
-            margin: 0 auto;
-        }
-        img{
-            height: 100px;
-        }
-    </style>
 {% endblock css %}
 
 {% block content %}
@@ -91,7 +82,13 @@
         <h3><span class="icon-info"></span>Learn more</h3>
         <p class="list-description">Where to learn more and get help</p>
         <div id="learnmore-list" class="toolkit-item-list">
-            <a class="external" href="http://dev.splunk.com">Splunk Developer Portal</a>
+            <ul>
+                <p><a class="external" href="http://dev.splunk.com">Splunk Developer Portal</a></p>
+                <p><a class="external" href="http://dev.splunk.com/view/web-framework/SP-CAAAER6">Web Framework Documentation</a></p>
+                <p><a class="external" href="http://docs.splunk.com/Documentation/WebFramework">Web Framework Component Reference</a></p>
+                <p><a class="external" href="http://apps.splunk.com/">Splunk>Apps</a></p>
+                <p><a class="external" href="https://github.com/splunk">Splunk on Github</a></p>
+            </ul>
         </div>
     </div>
 </div>

@@ -3,8 +3,9 @@ body {
 background: #FCFBF8
 }
 
-.nav {
-	background: #424254;
+.main-section-body {
+    width: 960px;
+    margin: 0 auto;
 }
 
 ul.nav-buttons {
