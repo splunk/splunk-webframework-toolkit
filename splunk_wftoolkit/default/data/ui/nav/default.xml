@@ -2,13 +2,13 @@
     <view name="default" default="true"/>
     <a href="/dj/redirector/splunk_wftoolkit/home">Home</a>
     <a href="/dj/redirector/splunk_wftoolkit/overview">Web Framework Overview</a>
-    <a href="/dj/redirector/splunk_wftoolkit/home/#basiccomponents">Basic Components</a>
+    <!-- <a href="/dj/redirector/splunk_wftoolkit/home/#basiccomponents">Basic Components</a>
     <a href="/dj/redirector/splunk_wftoolkit/home/#toolkitvisualizations">Toolkit Visualizations</a>
     <a href="/dj/redirector/splunk_wftoolkit/home/#examples">Examples</a>
     <a href="/dj/redirector/splunk_wftoolkit/home/#reference">Reference</a>
-    <a href="/dj/redirector/splunk_wftoolkit/home/#learnmore">Learn More</a>
+    <a href="/dj/redirector/splunk_wftoolkit/home/#learnmore">Learn More</a> -->
 
-   <!--  <collection label="Web Framework Components">
+    <collection label="Basic Components">
         <a name="managers" href="/dj/redirector/splunk_wftoolkit/managers">Search managers</a>
         <a name="charts" href="/dj/redirector/splunk_wftoolkit/charts">Charts</a>
         <a name="tables" href="/dj/redirector/splunk_wftoolkit/tables">Tables</a>
@@ -18,7 +18,7 @@
         <a name="dataview" href="/dj/redirector/splunk_wftoolkit/dataview">Data template</a>
     </collection>
 
-    <collection label="Toolkit Components">
+    <collection label="Toolkit Visualizations">
         <a href="/dj/redirector/splunk_wftoolkit/toolkitcomponents">Using the Web Framework Tookit Components</a>
         <a href="/dj/redirector/splunk_wftoolkit/sankey">Sankey Chart</a>
         <a href="/dj/redirector/splunk_wftoolkit/bubblechart">Bubble Chart</a>
@@ -62,22 +62,23 @@
         <a href="/dj/redirector/splunk_wftoolkit/d3chart">NVD3 charts</a>
         <a href="/dj/redirector/splunk_wftoolkit/jsonviewer">JSON results viewer</a>
         <a href="/dj/redirector/splunk_wftoolkit/setup">Setup view for Django</a>
-    </collection>
-
-    <collection label="Layout Templates">
+   
         <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Basic dashboard using Django</a>
         <a href="/dj/redirector/splunk_wftoolkit/dashboardjs_stencil/">Basic dashboard using JavaScript</a>
         <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil1/">Single-panel dashboard</a>
         <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil2/">Multi-panel dashboard</a>
     </collection>
 
-    <a href="/dj/redirector/splunk_wftoolkit/splunkdevcli/">Command Line Tools</a>
+    <collection label="Reference">
+        <a href="/dj/redirector/splunk_wftoolkit/overview">Web Framework Overview</a>
+        
+    </collection>
 
-    <collection label="More Info">
+    <collection label="Learn More">
         <a href="http://dev.splunk.com">Splunk Developer Portal</a>
         <a href="http://dev.splunk.com/view/web-framework/SP-CAAAER6">Web Framework Documentation</a>
         <a href="http://docs.splunk.com/Documentation/WebFramework">Web Framework Component Reference</a>
         <a href="http://apps.splunk.com/">Splunk&gt;Apps</a>
         <a href="https://github.com/splunk">Splunk on GitHub</a>
-    </collection> -->
+    </collection>
 </nav>
