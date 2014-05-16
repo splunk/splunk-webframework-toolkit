@@ -4,6 +4,14 @@
     margin: 0 auto;
 }
 
+body {
+  background: #FCFBF8;
+}
+
+.dashboard-body {
+  background: none;
+}
+
 .main-area {
     border: 1px solid black;
 }

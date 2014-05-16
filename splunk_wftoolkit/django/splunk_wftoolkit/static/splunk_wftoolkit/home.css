@@ -49,6 +49,11 @@ span[class|="icon"] {
 	margin-top:15px;
 }
 
+.toolkit-item-list:after {
+margin-top: 23px;
+border-bottom: 1px solid #e5e5e5;
+}
+
 .nav-buttons {
 	margin:0;
 	margin-left:2px;
@@ -77,7 +82,7 @@ display: inline;
     border: 1px solid #cAd4d3;
     background: #EAF4F3;
 	color: #525264;
-	transition: all 200ms;
+	transition: background-color 200ms, color 200ms; 
 	
 }
 
@@ -89,7 +94,7 @@ padding: 8px 10px 5px 10px;
 	text-decoration: none;
 	background-color: #84B0AA;
 	color: #FCFBF8;
-	transition: all 200ms;
+	transition: background-color 200ms, color 200ms; 
 
 }
 
@@ -113,7 +118,7 @@ padding: 8px 10px 5px 10px;
 
 .toolkit-item {
 	/*clear:both;*/
-	margin-bottom: 30px; 
+	margin-bottom: 2	0px; 
 	width:470px;
 	display: block;
 	float: left;
@@ -177,7 +182,7 @@ a.item-link div.item-content p.view-button:hover {
 img.item-thumb {
 	opacity: .75;
 	float: left;
-	margin: 0px 15px 30px 35px;
+	margin: 0px 15px 15px 35px;
 	height: 175px;
 	width: 175px;
 	border: 1px solid #ddd;
