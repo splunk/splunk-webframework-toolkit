@@ -12,7 +12,7 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
     __slice = [].slice;
 
   (function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
+    if (false && typeof define === 'function' && define.amd) {
       return define('waypoints', ['jquery'], function($) {
         return factory($, root);
       });

@@ -205,3 +205,11 @@ div#learnmore a.external {
 div#learnmore div#learnmore-list {
 	margin-left: 35px;
 }
+
+/* Stickys */
+
+.stuck {
+    position:fixed;
+    top:-70px;
+    z-index: 9999;
+}

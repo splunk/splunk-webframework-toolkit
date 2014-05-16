@@ -15,7 +15,7 @@
     <div class="dashboard-header clearfix">
         <h2>Splunk Web Framework Toolkit </h2>
     </div>
-    <p>This app contains a collection of examples that show you how to use the components of the Web Framework. You'll find documentation and reference information, along with code templates to help you get started. You can view all of the examples in action in this app, but then be sure to look at the source code in <b>/splunk_wftoolkit/django/splunk_wftoolkit/</b> to see how it's done.</p>
+    <p>This app contains a collection of examples that show you how to use the components of the Web Framework. You'll find documentation and reference information, along with code templates to help you get started. You can view all of the examples in action in this app, but then be sure to look at the source code in <b>/splunk_wftoolkit/django/splunk_wftoolkit/</b> to see how it's done. If you are new to the framework, consider checking out the <a href="../overview">Getting Started</a> page for an overview of framework concepts.</p>
 
     <div class="section-nav">
         <ul class="nav-buttons">
@@ -96,7 +96,6 @@
 {% endblock content%}
 
 {% block js %}   
-    <script ...></script>
     
 
     <script id="item-template" type="text/template">
@@ -114,16 +113,22 @@
     <script>
 
         require.config({
-        shim: {
+            shim: {
                 "splunk_wftoolkit/contrib/waypoints": {
                     deps: ["jquery"],
                     exports: "waypoints"
-                } 
+                },
+                "splunk_wftoolkit/contrib/waypoints-sticky": {
+                    deps: ["jquery", "splunk_wftoolkit/contrib/waypoints"],
+                    exports: "waypointsSticky"
+                }
             }
         });
 
-        require(["waypoints"], function(waypoints) {
-            debugger;
+        require(["jquery", "splunk_wftoolkit/contrib/waypoints", "splunk_wftoolkit/contrib/waypoints-sticky"], function($, waypoint, waypointsSticky) {
+            $('.section-nav').waypoint('sticky', {
+                offset: -70
+            });
         }); 
 
         require(['jquery', 'underscore'], function($, _) {
@@ -133,7 +138,7 @@
                 // taken from: http://stackoverflow.com/questions/7717527/jquery-smooth-scrolling-when-clicking-an-anchor-link
                 $('a').click(function(){
                     $('html, body').animate({
-                        scrollTop: $( $.attr(this, 'href') ).offset().top
+                        scrollTop: $( $.attr(this, 'href') ).offset().top - 30
                     }, 500);
                     return false;
                 });
@@ -145,6 +150,7 @@
                         var $sectionList = $('#' + (item['section'] || 'learnmore' ) + '-list');
                         $sectionList.append( template(_.extend(item,{staticUrl: staticUrl})));
                     });
+                    $(document.body).animate({ 'scrollTop' : $(document.location.hash).offset().top -30 }, 0);
                 })
                 .fail(function(jqxhr, textStatus, error ) {
                     var err = textStatus + ", " + error;
