@@ -121,7 +121,8 @@ define(function(require, exports, module) {
 
             var x = d3.scale.linear().range([0, graphWidth]);
             var y = d3.scale.linear().range([0, graphHeight]);
-            var color = d3.scale.category20c();
+            //var color = d3.scale.category20c();
+            color = d3.scale.quantize().domain([0, 10000]).range(["#dadaeb","#bcbddc","#9e9ac8","#807dba","#6a51a3","#54278f","#3f007d"])
             var node = root = data;
 
             var treemap = d3.layout.treemap()
