@@ -96,6 +96,9 @@
 {% endblock content%}
 
 {% block js %}   
+    <script ...></script>
+    
+
     <script id="item-template" type="text/template">
         <div class="toolkit-item">
             <a class="item-link" href="../<%= id %>">
@@ -109,6 +112,19 @@
         </div>
     </script> 
     <script>
+
+        require.config({
+        shim: {
+                "splunk_wftoolkit/contrib/waypoints": {
+                    deps: ["jquery"],
+                    exports: "waypoints"
+                } 
+            }
+        });
+
+        require(["waypoints"], function(waypoints) {
+            debugger;
+        }); 
 
         require(['jquery', 'underscore'], function($, _) {
             $(function(){
