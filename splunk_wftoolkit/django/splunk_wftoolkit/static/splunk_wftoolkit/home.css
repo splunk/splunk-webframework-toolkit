@@ -81,6 +81,10 @@ display: inline;
 	
 }
 
+.section-nav.stuck ul.nav-buttons li a {
+padding: 8px 10px 5px 10px;
+}	
+
 .section-nav ul.nav-buttons li a:hover {
 	text-decoration: none;
 	background-color: #84B0AA;
