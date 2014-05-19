@@ -150,7 +150,6 @@
                         var $sectionList = $('#' + (item['section'] || 'learnmore' ) + '-list');
                         $sectionList.append( template(_.extend(item,{staticUrl: staticUrl})));
                     });
-                    $(document.body).animate({ 'scrollTop' : $(document.location.hash).offset().top -30 }, 0);
                 })
                 .fail(function(jqxhr, textStatus, error ) {
                     var err = textStatus + ", " + error;
