@@ -135,7 +135,8 @@ padding: 8px 10px 5px 10px;
 
 
 
-a.item-link div.item-content h4 {
+a.item-link div.item-content h4,
+h4.item-title {
 color: #666;
 font-size: 18px;
 line-height: 23px;
@@ -145,17 +146,13 @@ margin-bottom: 2px;
 }
 
 
-a.item-link:hover {
+a.item-link:hover  {
 	text-decoration: none;
 }
 
 a.item-link div.item-content p.item-description {
 
 color: #333;margin-bottom: 15px;
-}
-
-a.item-link div.item-content h4:hover {
-color: #5379af;
 }
 
 
