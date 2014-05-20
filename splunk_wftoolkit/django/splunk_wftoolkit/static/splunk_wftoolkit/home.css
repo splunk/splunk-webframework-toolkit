@@ -110,9 +110,14 @@ padding: 8px 10px 5px 10px;
 }
 
 .toolkit-section {
-	/*margin-top: 45px;*/
-
+	border-bottom: 1px solid #e5e5e5;
+	margin-bottom: 20px;
+	padding-bottom: 10px;
 }
+.toolkit-section:last-child {
+	border-bottom: none;
+}
+
 
 .toolkit-item {
 	/*clear:both;*/
@@ -214,7 +219,7 @@ div#learnmore a.external {
 }
 
 div#learnmore div#learnmore-list {
-	margin-left: 35px;
+	margin-left: -9px;
 }
 
 /* Stickys */
