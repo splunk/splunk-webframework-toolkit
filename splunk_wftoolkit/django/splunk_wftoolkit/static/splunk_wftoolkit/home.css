@@ -34,12 +34,10 @@ margin-top: 5px;
 
 p.list-description {
 	
-	font: italic 15px/18px roboto !important;
+	font: 15px/18px roboto !important;
 }
 
-.toolkit-item {
-	
-}
+
 
 span[class|="icon"] {
 	padding-right: 5px;
@@ -120,8 +118,19 @@ padding: 8px 10px 5px 10px;
 	/*clear:both;*/
 	margin-bottom: 2	0px; 
 	width:470px;
+	width: 448px;
 	display: block;
 	float: left;
+	padding:15px;
+	transition: all 250ms;
+	border: solid 1px rgba(255,255,255,0);
+
+}
+
+.toolkit-item:hover {
+	background: #f3f3f3;
+	border: solid 1px #e7e7e7;
+	transition: all 250ms;
 }
 
 
@@ -182,7 +191,7 @@ a.item-link div.item-content p.view-button:hover {
 img.item-thumb {
 	opacity: .75;
 	float: left;
-	margin: 0px 15px 30px 0px;
+	margin: 0px 15px 15px 0px;
 	height: 175px;
 	width: 175px;
 	border: 1px solid #ddd;
@@ -190,16 +199,12 @@ img.item-thumb {
 }
 
 
-a.item-link img.item-thumb:hover {
+.toolkit-item:hover img.item-thumb {
 	opacity: 1.0;
 	/*margin: 0px 15px 30px 35px;
 	border: 3px solid #BDD0F0;*/
 	border: 1px solid #ccc;
 	transition: all 200ms;
-}
-
-a.item-link:hover img.item-thumb {
-	opacity: 1.0;
 }
 
 
