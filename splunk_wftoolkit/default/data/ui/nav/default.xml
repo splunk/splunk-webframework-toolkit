@@ -64,11 +64,6 @@
         <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil2/">Multi-panel dashboard</a>
     </collection>
 
-    <collection label="Reference">
-        <a href="/dj/redirector/splunk_wftoolkit/overview">Web Framework Overview</a>
-        
-    </collection>
-
     <collection label="Learn More">
         <a href="http://dev.splunk.com">Splunk Developer Portal</a>
         <a href="http://dev.splunk.com/view/web-framework/SP-CAAAER6">Web Framework Documentation</a>
