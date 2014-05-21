@@ -2,7 +2,7 @@
 
 {% load splunkmvc %}
 
-{% block title %}Toolkit Overview {% endblock title %}
+{% block title %}Web Framework Toolkit Overview{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunk_wftoolkit/home.css" />
@@ -13,16 +13,17 @@
 
 <div class="dashboard-body container-fluid main-section-body">
     <div class="dashboard-header clearfix">
-        <h2>Splunk Web Framework Toolkit </h2>
+        <h2>Splunk Web Framework Toolkit</h2>
     </div>
-    <p>This app contains a collection of examples that show you how to use the components of the Web Framework. You'll find documentation and reference information, along with code templates to help you get started. You can view all of the examples in action in this app, but then be sure to look at the source code in <b>/splunk_wftoolkit/django/splunk_wftoolkit/</b> to see how it's done. If you are new to the framework, consider checking out the <a href="../overview">Getting Started</a> page for an overview of framework concepts.</p>
+    <p>Welcome to the Splunk Web Framework Toolkit! This app contains a collection of examples that show you how to use the components of the Web Framework. You'll find documentation and reference information, along with code templates to help you get started. View the examples in action in this app, then look at the source code in <b>/splunk_wftoolkit/django/splunk_wftoolkit/</b> to see how it's done.</p>
+    <p>If you are new to the Web Framework, read the <a href="../overview">Web Framework Overview</a> to get started.</p>
 
     <div class="section-nav">
         <ul class="nav-buttons">
             <li>
                 <a data-section="basiccomponents" href="#basiccomponents">
                     <span class="icon-distributed-environment"></span>
-                    Basic Components
+                    Splunk Components
                 </a>
             </li>
             <li>
@@ -40,7 +41,7 @@
             <li>
                 <a data-section="reference" href="#reference">
                     <span class="icon-bookmark"></span>
-                    Reference
+                    How To
                 </a>
             </li>
             <li>
@@ -52,30 +53,30 @@
         </ul>
     </div>
     <div id="basiccomponents" class="toolkit-section clearfix">
-        <h3><span class="icon-distributed-environment"></span>Basic Components</h3>
-        <p class="list-description">Using basic Splunk components in your app</p>
+        <h3><span class="icon-distributed-environment"></span>Splunk Components</h3>
+        <p class="list-description">Splunk Web Framework components that run searches and display visualizations</p>
         <div id="basiccomponents-list" class="toolkit-item-list clearfix">
         </div>
     </div>
     <div id="toolkitvisualizations" class="toolkit-section clearfix">
         <h3><span class="icon-bar-beside"></span>Toolkit Visualizations</h3>
-        <p class="list-description">Visualization components available in the Toolkit</p>
+        <p class="list-description">Visualizations available in the Toolkit for displaying data</p>
         <div id="toolkitvisualizations-list" class="toolkit-item-list clearfix">
             <!-- Tooklkit Visualizations pages here -->
         </div>
     </div>
     <div id="examples" class="toolkit-section clearfix">
         <h3><span class="icon-report"></span>Examples</h3>
-        <p class="list-description">Splunk Web Framework Examples</p>
+        <p class="list-description">Examples of using the Splunk Web Framework</p>
         <div id="examples-list" class="toolkit-item-list clearfix">
             <!-- Examples pages here -->
         </div>
     </div>
     <div id="reference" class="toolkit-section clearfix">
-        <h3><span class="icon-bookmark"></span>Reference</h3>
-        <p class="list-description">Information on using the Splunk Web Framework</p>
+        <h3><span class="icon-bookmark"></span>How To</h3>
+        <p class="list-description">How to use features of the Splunk Web Framework</p>
         <div id="reference-list" class="toolkit-item-list clearfix">
-            <!-- Reference pages here -->
+            <!-- How To pages here -->
         </div>
     </div>
     <div id="learnmore" class="toolkit-section clearfix">
@@ -84,15 +85,15 @@
         <div id="learnmore-list" class="toolkit-item-list clearfix">
             <ul>
                 <h4 class="item-title">Splunk Developer Portal</h4>
-                <p>Learn more developer tips and tricks at the <a class="external" href="http://dev.splunk.com">Splunk Developer Portal</a></p><br/>
-                    <h4 class="item-title">Web Framework Documentation</h4>
-                <p>Full documentation is available at <a class="external" href="http://dev.splunk.com/view/web-framework/SP-CAAAER6">Web Framework Documentation</a></p><br/>
+                <p>Learn more developer tips and tricks at the <a class="external" href="http://dev.splunk.com" target="_blank">Splunk Developer Portal</a></p><br/>
+                <h4 class="item-title">Web Framework Documentation</h4>
+                <p>Full documentation is available at <a class="external" href="http://dev.splunk.com/view/web-framework/SP-CAAAER6" target="_blank">Web Framework Documentation</a></p><br/>
                 <h4 class="item-title">Web Framework Component Reference</h4>
-                <p>Additional documentation and help is available at the <a class="external" href="http://docs.splunk.com/Documentation/WebFramework">Web Framework Component Reference</a></p><br/>
+                <p>Additional documentation and help is available at the <a class="external" href="http://docs.splunk.com/Documentation/WebFramework" target="_blank">Web Framework Component Reference</a></p><br/>
                 <h4 class="item-title">Splunk Apps</h4>
-                <p>Download and browse <a class="external" href="http://apps.splunk.com/">Splunk>Apps</a></p><br/>
-                <h4 class="item-title">Splunk on Github</h4>
-                <p>See other projects and available bits on <a class="external" href="https://github.com/splunk">Splunk's Github Page</a></p><br/>
+                <p>Download and browse <a class="external" href="http://apps.splunk.com/" target="_blank">Splunk>Apps</a></p><br/>
+                <h4 class="item-title">Splunk on GitHub</h4>
+                <p>See other projects and available bits on <a class="external" href="https://github.com/splunk" target="_blank">Splunk's GitHub page</a></p><br/>
             </ul>
         </div>
     </div>
