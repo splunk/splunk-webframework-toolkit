@@ -19,31 +19,31 @@
 
     <div class="section-nav">
         <ul class="nav-buttons">
-            <li>
+            <li id="basic-components-button">
                 <a data-section="basiccomponents" href="#basiccomponents">
                     <span class="icon-distributed-environment"></span>
                     Basic Components
                 </a>
             </li>
-            <li>
+            <li id="toolkit-visualizations-button">
                 <a data-section="toolkitvisualizations" href="#toolkitvisualizations">
                     <span class="icon-bar-beside"></span>
                     Toolkit Visualizations
                 </a>
             </li>
-            <li>
+            <li id="examples-button">
                 <a data-section="examples" href="#examples">
                     <span class="icon-report"></span>
                     Examples
                 </a>
             </li>
-            <li>
+            <li id="reference-button">
                 <a data-section="reference" href="#reference">
                     <span class="icon-bookmark"></span>
                     Reference
                 </a>
             </li>
-            <li>
+            <li id="learn-more-button">
                 <a data-section="learnmore" href="#learnmore">
                     <span class="icon-info"></span>
                     Learn More
@@ -139,6 +139,10 @@
         require(['jquery', 'underscore'], function($, _) {
             $(function(){
 
+                function clearActiveButtons(){
+                    $('.active').removeClass('active');
+                }
+
                 // Set up smooth scrolling
                 // taken from: http://stackoverflow.com/questions/7717527/jquery-smooth-scrolling-when-clicking-an-anchor-link
                 $('a').click(function(){
@@ -155,11 +159,34 @@
                         var $sectionList = $('#' + (item['section'] || 'learnmore' ) + '-list');
                         $sectionList.append( template(_.extend(item,{staticUrl: staticUrl})));
                     });
+                    $('#basiccomponents').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#basic-components-button').addClass('active');
+                    });
+                    $('#toolkitvisualizations').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#toolkit-visualizations-button').addClass('active');
+                    });
+                    $('#examples').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#examples-button').addClass('active');
+                    });
+                    $('#reference').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#reference-button').addClass('active');
+                    });
+                    $('#learnmore').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#learn-more-button').addClass('active');
+                    });
+
                 })
                 .fail(function(jqxhr, textStatus, error ) {
                     var err = textStatus + ", " + error;
                     console.log( "Request Failed: " + err );
                 })
+
+                
             });
         });
     </script>

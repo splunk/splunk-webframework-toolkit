@@ -96,6 +96,12 @@ padding: 8px 10px 5px 10px;
 
 }
 
+.section-nav ul.nav-buttons li.active a{
+    text-decoration: none;
+    background-color: #84B0AA;
+    color: #FCFBF8;
+}
+
 .section-nav ul.nav-buttons li:hover a,
 .section-nav ul.nav-buttons li:hover a span {
 	text-decoration: none;
