@@ -31,7 +31,7 @@
             <li>Require path: <code>splunk_wftoolkit/components/bubblechart/bubblechart</code></li>
             <li>The Bubble Chart works best with data that has magnitude and is grouped by category. For example, Splunk searches that include a <code>stats count by ...</code> tend to work well.</li>
         </ul>
-        <h4>Example Searches:</h4>
+        <h4>Example Searches</h4>
         <div class="well"><ul>
             <li>index=_internal | head 10000 | stats count by sourcetype clientip</li>
             <li>| inputlookup faa.demo.csv | stats count by OriginCityName OriginState cancellation</li>

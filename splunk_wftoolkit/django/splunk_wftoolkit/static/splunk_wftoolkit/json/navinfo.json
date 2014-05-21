@@ -2,61 +2,61 @@
     {
         "id": "overview",
         "title": "Web Framework Overview",
-        "description": "A brief overview of the basic concepts of the Web Framework with links to more docs",
+        "description": "A brief overview of the basic concepts of the Web Framework with links to in-depth documentation",
         "section": "reference"
     },
     {
         "id": "managers",
-        "title": "Splunk Search managers",
-        "description": "Search managers handle getting data from Splunk and making it available to Web Framework components",
+        "title": "Search managers",
+        "description": "Search managers get data from Splunk and make it available to Web Framework components",
         "section": "basiccomponents"
     },
     {
         "id": "charts",
-        "title": "Splunk Charts",
-        "description": "Various chart types to be used to plot Splunk data",
+        "title": "Charts",
+        "description": "Various chart types for plotting Splunk data",
         "section": "basiccomponents"
     },
     {
         "id": "tables",
-        "title": "Splunk Tables",
-        "description": "Table views for Splunk data",
+        "title": "Tables",
+        "description": "Table views for displaying Splunk data",
         "section": "basiccomponents"
     },
     {
         "id": "forms",
-        "title": "Splunk Form Controls",
-        "description": "Splunk Web Framework form controls",
+        "title": "Form",
+        "description": "Various types of form controls",
         "section": "basiccomponents"
     },
     {
         "id": "searchcontrols",
-        "title": "Splunk Search Manager Controls",
-        "description": "Views that can be used to interact with and control search managers",
+        "title": "Search manager controls",
+        "description": "Views that interact with and control search managers",
         "section": "basiccomponents"
     },
     {
         "id": "map",
-        "title": "Splunk Map",
-        "description": "A map controls for displaying geographic Splunk data",
+        "title": "Map",
+        "description": "A map for displaying geographic Splunk data",
         "section": "basiccomponents"
     },
     {
         "id": "dataview",
-        "title": "Splunk Data template",
-        "description": "A client-side component for templated rendering of Splunk data",
+        "title": "Data template",
+        "description": "A client-side component for rendering Splunk data in a template",
         "section": "basiccomponents"
     },
     {
         "id": "toolkitcomponents",
-        "title": "HOW TO: Using Toolkit Visualizations",
-        "description": "Learn how to include visualizations from this toolkit in your app",
-        "section": "toolkitvisualizations"
+        "title": "How to use the Tookit visualizations",
+        "description": "How to include the visualizations from this toolkit in your app",
+        "section": "reference"
     },
     {
         "id": "sankey",
         "title": "Sankey Chart",
-        "description": "The Sankey chart visualizes data flow between nodes",
+        "description": "The Sankey Chart visualizes data flow between nodes",
         "section": "toolkitvisualizations"
     },
     {
@@ -67,7 +67,7 @@
     },
     {
         "id": "forcedirected",
-        "title": "Force-directed Graph",
+        "title": "Force-Directed Graph",
         "description": "The Force-Directed Graph displays information about connectivity and clustering between nodes in a network",
         "section": "toolkitvisualizations"
     },
@@ -80,193 +80,187 @@
     {
         "id": "parallelsets",
         "title": "Parallel Sets",
-        "description": "The Parallel Sets graph is good for displaying multidimensional categorical data",
+        "description": "The Parallel Sets graph displays multidimensional categorical data",
         "section": "toolkitvisualizations"
     },
     {
         "id": "parallelcoords",
         "title": "Parallel Coordinates",
-        "description": "The Parallel Coordinates graph is good for visualizing multidimensional data dynamically",
+        "description": "The Parallel Coordinates graph visualizes multidimensional data dynamically",
         "section": "toolkitvisualizations"
     },
     {
         "id": "punchcard",
         "title": "Punchcard",
-        "description": "Punchcard shows a count relationship between two data dimensions",
+        "description": "The Punchcard shows a count relationship between two data dimensions",
         "section": "toolkitvisualizations"
     },
     {
         "id": "sunburst",
         "title": "Sunburst",
-        "description": "The Sunburst shows hierarchically grouped data. This view is similar to a tree except that it uses a radial layout with the root at the center and the leaf nodes around the edges.",
+        "description": "The Sunburst shows hierarchically-grouped data using a radial layout with the root at the center and the leaf nodes around the edges.",
         "section": "toolkitvisualizations"
     },
     {
         "id": "dashboarddj",
         "title": "Example: Dashboard in Django",
-        "description": "This example shows how to create a simple dashboard using Django template tags for creating views and managers",
+        "description": "An example showing a simple dashboard using Django template tags for creating views and managers",
         "section": "examples"
     },
     {
         "id": "dashboardjs",
         "title": "Example: Dashboard in JavaScript",
-        "description": "This example shows how to create a simple dashboard using JavaScript to create and connect the views and managers",
+        "description": "An example showing a simple dashboard using JavaScript to create and connect the views and managers",
         "section": "examples"
     },
     {
         "id": "savedsearch",
         "title": "Example: Saved reports",
-        "description": "This example shows how to use a SavedSearchManager to power multiple views",
+        "description": "An example showing a SavedSearchManager to power multiple views",
         "section": "examples"
     },
     {
         "id": "postprocess",
         "title": "Example: Post-process searches",
-        "description": "This example shows how to use post-process searches",
+        "description": "An example showing post-process searches",
         "section": "examples"
     },
     {
         "id": "properties",
         "title": "Example: Search properties",
-        "description": "An example of programatically setting search properties",
+        "description": "An example showing how to set search properties programatically",
         "section": "examples"
     },
     {
         "id": "cache",
         "title": "Example: Cached searches",
-        "description": "An example of using pre-existing jobs to power searches",
+        "description": "An example showing how to use pre-existing jobs to power searches",
         "section": "examples"
     },
     {
         "id": "databindingjs",
         "title": "Example: Data binding with tokens",
-        "description": "This example demonstrates how to set up data binding using tokens",
+        "description": "An example showing how to set up data binding using tokens",
         "section": "examples"
     },
     {
         "id": "form",
-        "title": "Example Form inputs with tokens",
-        "description": "This example shows how to parameterize a search query using two tokens linked to form inputs",
+        "title": "Example: Form inputs with tokens",
+        "description": "An example showing how to parameterize a search query using two tokens linked to form inputs",
         "section": "examples"
     },
     {
         "id": "cascade",
         "title": "Example: Cascading form inputs",
-        "description": "This example shows how to set up multiple form inputs, with the choice from one cascading into the others",
+        "description": "An example showing how to set up multiple form inputs, with the choice from one cascading into the others",
         "section": "examples"
     },
     {
         "id": "multidropdown",
         "title": "Example: Multidropdown lists",
-        "description": "Samples of using the multidropdown form input",
+        "description": "An example showing how to use the MultiDropdown form input",
         "section": "examples"
     },
     {
         "id": "twosearchbars",
         "title": "Example: Compare Searchbars",
-        "description": "This page shows two different ways to make search bars that update search managers--using JavaScript events and token binding",
+        "description": "An example showing two different ways to make search bars that update search managers, using JavaScript events and token binding",
         "section": "examples"
     },
     {
         "id": "search",
         "title": "Example: Search with timeline",
-        "description": "This example shows how to create a UI that is similiar to Splunk Web by simply adding different views, such as the Timeline view",
+        "description": "An example showing how to create a UI that is similiar to Splunk Web by adding different views, such as the Timeline view",
         "section": "examples"
     },
     {
         "id": "timerange",
         "title": "Example: Time ranges",
-        "description": "This example shows you can can easily set up a TimeRange view using simple Django template tags—no need for custom code",
+        "description": "An example showing how to set up a TimeRange view using simple Django template tags with no custom code",
         "section": "examples"
     },
     {
         "id": "timerangegroup",
         "title": "Example: Grouped time ranges",
-        "description": "In this example, a TimeRange view sets the timebounds for two separate searches that drive the two Single views",
+        "description": "An example showing a TimeRange view that sets the timebounds for two searches that drive two Single views",
         "section": "examples"
     },
     {
         "id": "interactive",
         "title": "Example: Interactive views",
-        "description": "This example shows how to use click event to update searches and views on a page",
+        "description": "An example showing how to use click events to update searches and views on a page",
         "section": "examples"
     },
     {
         "id": "chartclick",
         "title": "Example: Chart click events",
-        "description": "This example shows how to customize the drilldown action on a chart",
+        "description": "An example showing how to customize the drilldown action on a chart",
         "section": "examples"
     },
     {
         "id": "customtablecells",
         "title": "Example: Custom table cells",
-        "description": "This example shows how to set up a custom table cell renderer that shows an icon based on the severity value in each row",
+        "description": "An example showing how to set up a custom table cell renderer to display an icon based on the severity value in each row",
         "section": "examples"
     },
     {
         "id": "rowexpander",
-        "title": "Example: Custom table row expansion",
-        "description": "This example shows how to add custom row expander to a Table",
+        "title": "Example: Custom table row expander",
+        "description": "An example showing how to add custom row expander to a table",
         "section": "examples"
     },
     {
         "id": "airlinedashboard",
         "title": "Example: Complex dashboard with drilldown",
-        "description": "This is an example of a complex dashboard using many controls, token binding, events and in-page drilldown",
+        "description": "An example showing airlines data in a complex dashboard using multiple views, token binding, events, and in-page drilldown",
         "section": "examples"
     },
     {
         "id": "d3chart",
         "title": "Example: NVD3 charts",
-        "description": "This example shows how to use the NVD3 charts to display data in different ways",
+        "description": "An example showing how to use the NVD3 charts to display data in different ways",
         "section": "examples"
     },
     {
         "id": "jsonviewer",
         "title": "Example: JSON results viewer",
-        "description": "This example shows how to write a custom view control that simply displays Splunk data as JSON",
+        "description": "An example showing how to write a custom view that simply displays Splunk data in JSON format",
         "section": "examples"
     },
     {
         "id": "dashboarddj_stencil",
-        "title": "Example: Basic Django dashboard layout template",
+        "title": "Example: Basic layout template using Django",
         "description": "An example and reusable template for dashboard layout using only Django",
-        "section": "example"
-    },
-    {
-        "id": "dashboarddj_stencil",
-        "title": "Example: Basic Django dashboard layout template",
-        "description": "An example and reusable template for dashboard layout using only Django",
-        "section": "example"
+        "section": "examples"
     },
     {
         "id": "dashboardjs_stencil",
-        "title": "Example: Basic JavaScript dashboard layout template",
+        "title": "Example: Basic layout template using JavaScript",
         "description": "An example and reusable template for dashboard layout using JavaScript",
-        "section": "example"
+        "section": "examples"
     },
     {
         "id": "dashboard_stencil1",
-        "title": "Example: Simple panel dashboard",
-        "description": "A single panel dashboard template",
-        "section": "example"
+        "title": "Example: Single-panel dashboard",
+        "description": "An example showing a single panel dashboard template",
+        "section": "examples"
     },
     {
         "id": "dashboard_stencil2",
-        "title": "Example: Multi panel dashboard",
-        "description": "A dashboard template showing many-cell row layouts",
-        "section": "example"
+        "title": "Example: Multi-panel dashboard",
+        "description": "An example showing a dashboard template showing many-cell row layouts",
+        "section": "examples"
     },
     {
         "id": "setup",
-        "title": "Using setup views in Django",
-        "description": "A demo and explanation of using setup forms in Django",
+        "title": "How to use Django setup views",
+        "description": "A demo and explanation of using Django setup views",
         "section": "reference"
     },
     {
         "id": "splunkdevcli",
-        "title": "Using Splunk Developer Command Line Tools",
-        "description": "An explanation of getting and using the Splunk Developer Command Line Tools for app developers",
+        "title": "How to use the Splunk Dev CLI",
+        "description": "An explanation of how to set up and use the Splunk developer command line interface (CLI) tool",
         "section": "reference"
     }
 ]
