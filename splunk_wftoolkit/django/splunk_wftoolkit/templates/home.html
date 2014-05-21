@@ -38,18 +38,6 @@
                     Examples
                 </a>
             </li>
-            <li id="reference-button">
-                <a data-section="reference" href="#reference">
-                    <span class="icon-bookmark"></span>
-                    How To
-                </a>
-            </li>
-            <li id="learn-more-button">
-                <a data-section="learnmore" href="#learnmore">
-                    <span class="icon-info"></span>
-                    Learn More
-                </a>
-            </li>
         </ul>
     </div>
     <div id="basiccomponents" class="toolkit-section clearfix">
@@ -70,31 +58,6 @@
         <p class="list-description">Examples of using the Splunk Web Framework</p>
         <div id="examples-list" class="toolkit-item-list clearfix">
             <!-- Examples pages here -->
-        </div>
-    </div>
-    <div id="reference" class="toolkit-section clearfix">
-        <h3><span class="icon-bookmark"></span>How To</h3>
-        <p class="list-description">How to use features of the Splunk Web Framework</p>
-        <div id="reference-list" class="toolkit-item-list clearfix">
-            <!-- How To pages here -->
-        </div>
-    </div>
-    <div id="learnmore" class="toolkit-section clearfix">
-        <h3><span class="icon-info"></span>Learn more</h3>
-        <p class="list-description">Where to learn more and get help</p>
-        <div id="learnmore-list" class="toolkit-item-list clearfix">
-            <ul>
-                <h4 class="item-title">Splunk Developer Portal</h4>
-                <p>Learn more developer tips and tricks at the <a class="external" href="http://dev.splunk.com" target="_blank">Splunk Developer Portal</a></p><br/>
-                <h4 class="item-title">Web Framework Documentation</h4>
-                <p>Full documentation is available at <a class="external" href="http://dev.splunk.com/view/web-framework/SP-CAAAER6" target="_blank">Web Framework Documentation</a></p><br/>
-                <h4 class="item-title">Web Framework Component Reference</h4>
-                <p>Additional documentation and help is available at the <a class="external" href="http://docs.splunk.com/Documentation/WebFramework" target="_blank">Web Framework Component Reference</a></p><br/>
-                <h4 class="item-title">Splunk Apps</h4>
-                <p>Download and browse <a class="external" href="http://apps.splunk.com/" target="_blank">Splunk>Apps</a></p><br/>
-                <h4 class="item-title">Splunk on GitHub</h4>
-                <p>See other projects and available bits on <a class="external" href="https://github.com/splunk" target="_blank">Splunk's GitHub page</a></p><br/>
-            </ul>
         </div>
     </div>
 </div>
@@ -172,15 +135,6 @@
                         clearActiveButtons();
                         $('#examples-button').addClass('active');
                     });
-                    $('#reference').waypoint(function(dir){
-                        clearActiveButtons();
-                        $('#reference-button').addClass('active');
-                    });
-                    $('#learnmore').waypoint(function(dir){
-                        clearActiveButtons();
-                        $('#learn-more-button').addClass('active');
-                    });
-
                 })
                 .fail(function(jqxhr, textStatus, error ) {
                     var err = textStatus + ", " + error;
