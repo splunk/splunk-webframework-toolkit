@@ -45,6 +45,7 @@
         <p class="list-description">Splunk Web Framework components that run searches and display visualizations</p>
         <div id="basiccomponents-list" class="toolkit-item-list clearfix">
         </div>
+        <div id="basiccomponents-end"></div>
     </div>
     <div id="toolkitvisualizations" class="toolkit-section clearfix">
         <h3><span class="icon-bar-beside"></span>Toolkit Visualizations</h3>
@@ -52,6 +53,7 @@
         <div id="toolkitvisualizations-list" class="toolkit-item-list clearfix">
             <!-- Tooklkit Visualizations pages here -->
         </div>
+        <div id="toolkitvisualizations-end"></div>
     </div>
     <div id="examples" class="toolkit-section clearfix">
         <h3><span class="icon-report"></span>Examples</h3>
@@ -59,6 +61,7 @@
         <div id="examples-list" class="toolkit-item-list clearfix">
             <!-- Examples pages here -->
         </div>
+        <div id="examples-end"></div>
     </div>
 </div>
             
@@ -96,7 +99,7 @@
 
         require(["jquery", "splunk_wftoolkit/contrib/waypoints", "splunk_wftoolkit/contrib/waypoints-sticky"], function($, waypoint, waypointsSticky) {
             $('.section-nav').waypoint('sticky', {
-                offset: -70
+                offset: -15
             });
         }); 
 
@@ -125,15 +128,35 @@
                     });
                     $('#basiccomponents').waypoint(function(dir){
                         clearActiveButtons();
-                        $('#basic-components-button').addClass('active');
+                        if(dir === 'down') {
+                            $('#basic-components-button').addClass('active');
+                        }
+                    });
+                    $('#basiccomponents-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#basic-components-button').addClass('active');
+                        }
                     });
                     $('#toolkitvisualizations').waypoint(function(dir){
                         clearActiveButtons();
                         $('#toolkit-visualizations-button').addClass('active');
                     });
+                    $('#toolkitvisualizations-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#toolkit-visualizations-button').addClass('active');
+                        }
+                    });
                     $('#examples').waypoint(function(dir){
                         clearActiveButtons();
                         $('#examples-button').addClass('active');
+                    });
+                    $('#examples-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#examples-button').addClass('active');
+                        }
                     });
                 })
                 .fail(function(jqxhr, textStatus, error ) {
