@@ -44,6 +44,7 @@
         <a href="/dj/redirector/splunk_wftoolkit/search">Search timeline</a>
         <a href="/dj/redirector/splunk_wftoolkit/timerange">Time ranges</a>
         <a href="/dj/redirector/splunk_wftoolkit/timerangegroup">Grouped time range</a>
+        <a href="/dj/redirector/splunk_wftoolkit/punchcardsearch">Search and Punchcard</a>
 
         <a href="/dj/redirector/splunk_wftoolkit/interactive">Interactive views</a>
         <a href="/dj/redirector/splunk_wftoolkit/chartclick">Chart clicks</a>

@@ -186,6 +186,12 @@
         "section": "examples"
     },
     {
+        "id": "punchcardsearch",
+        "title": "Example: Punchcard with a searchbar",
+        "description": "An example showing a toolkit visualization attached to a searchbar",
+        "section": "examples"
+    },
+    {
         "id": "interactive",
         "title": "Example: Interactive views",
         "description": "An example showing how to use click events to update searches and views on a page",
