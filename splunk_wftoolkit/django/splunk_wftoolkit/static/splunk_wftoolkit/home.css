@@ -70,12 +70,13 @@ display: inline;
     display: inline-block;
     
     margin: 15px -2px;
-    padding: 8px 10px 10px 10px;
-    width: 170px;
+    padding: 8px 10px 10px 20px;
+    width: 285px;
+	text-align: center;	
     
     line-height: 26px;
-    text-align: center;
-    font-size: 15px;
+    text-align: left;
+    font-size: 19px;
     
     border: 1px solid #cAd4d3;
     background: #EAF4F3;
@@ -85,22 +86,20 @@ display: inline;
 }
 
 .section-nav.stuck ul.nav-buttons li a {
-padding: 8px 10px 5px 10px;
+padding: 8px 10px 5px 20px;
 }	
 
-.section-nav ul.nav-buttons li a:hover {
+.section-nav ul.nav-buttons li a:hover,
+.section-nav ul.nav-buttons li.active a {
 	text-decoration: none;
 	background-color: #84B0AA;
+	border-color: #74a09A;
 	color: #FCFBF8;
-	transition: background-color 200ms, color 200ms; 
+	transition: background-color 200ms, color 200ms;
+	
 
 }
 
-.section-nav ul.nav-buttons li.active a{
-    text-decoration: none;
-    background-color: #84B0AA;
-    color: #FCFBF8;
-}
 
 .section-nav ul.nav-buttons li:hover a,
 .section-nav ul.nav-buttons li:hover a span {
@@ -109,8 +108,8 @@ padding: 8px 10px 5px 10px;
 
 
 .section-nav ul.nav-buttons li a span {
-    display: block;
-    font-size: 45px;
+    display: inline;
+    font-size: 20px;
     line-height: 50px;
     text-align: center;
 }
@@ -230,8 +229,8 @@ div#learnmore div#learnmore-list {
 
 /* Stickys */
 
-.stuck {
+.section-nav.stuck {
     position:fixed;
-    top:-70px;
+    top:-16px;
     z-index: 9999;
 }
