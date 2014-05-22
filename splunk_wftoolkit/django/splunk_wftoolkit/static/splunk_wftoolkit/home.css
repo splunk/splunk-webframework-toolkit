@@ -38,7 +38,6 @@ p.list-description {
 }
 
 
-
 span[class|="icon"] {
 	padding-right: 5px;
 }
@@ -70,13 +69,13 @@ display: inline;
     display: inline-block;
     
     margin: 15px -2px;
-    padding: 8px 10px 10px 20px;
+    padding: 5px 10px 1px 20px;
     width: 285px;
 	text-align: center;	
     
     line-height: 26px;
     text-align: left;
-    font-size: 19px;
+    font-size: 18px;
     
     border: 1px solid #cAd4d3;
     background: #EAF4F3;
@@ -85,9 +84,6 @@ display: inline;
 	
 }
 
-.section-nav.stuck ul.nav-buttons li a {
-padding: 8px 10px 5px 20px;
-}	
 
 .section-nav ul.nav-buttons li a:hover,
 .section-nav ul.nav-buttons li.active a {
@@ -109,7 +105,7 @@ padding: 8px 10px 5px 20px;
 
 .section-nav ul.nav-buttons li a span {
     display: inline;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 50px;
     text-align: center;
 }
