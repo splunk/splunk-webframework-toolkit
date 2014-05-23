@@ -20,8 +20,9 @@ define(function(require, exports, module) {
 
         formatData: function(data){
             var number = this.settings.get("number");
-            if (data.length > number)
-                data = _.first(data, number);
+            if (data.length > number) {
+                data = _.first(data, parseInt(number));
+            }
 
             return data;
         },

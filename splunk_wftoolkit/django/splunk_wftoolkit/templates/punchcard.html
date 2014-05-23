@@ -25,7 +25,7 @@
     <p>Punchcard shows a count relationship between two data dimensions.</p>
         <ul>
             <li>Require path: <code>splunk_wftoolkit/components/punchcard/punchcard</code></li>
-            <li>The Punchcard displays a data dimension counted by another data dimension. For example, some event type by minute or hour. Or events by host. The Punchcard works especially well with things counted by time</li>
+            <li>The Punchcard displays a data dimension counted by another data dimension, such as some event type by minute or hour, or events by host. The Punchcard works especially well with things counted by time.</li>
         </ul>
         <h4>Example searches</h4>
         <div class="well"><ul>
@@ -52,21 +52,21 @@
                 <td><code>formatXAxisLabel</code></td>
                 <td><b>function</b></td>
                 <td><b>_.identity</b></td>
-                <td>A custom formatting function for x-axis value names</td>
+                <td>A custom formatting function for x-axis value names.</td>
                 <td>{% dropdown id="format-x-axis" default="default" %}</td>
             </tr>
             <tr>
                 <td><code>formatYAxisLabel</code></td>
                 <td><b>function</b></td>
                 <td><b>truncates label</b></td>
-                <td>A custom formatting function for y-axis value names</td>
+                <td>A custom formatting function for y-axis value names.</td>
                 <td>{% dropdown id="format-y-axis" default="default" %}</td>
             </tr>
             <tr>
                 <td><code>formatCount</code></td>
                 <td><b>function</b></td>
                 <td><b>rounds to thousands</b></td>
-                <td>A custom formatting function for count numbers</td>
+                <td>A custom formatting function for count numbers.</td>
                 <td>{% dropdown id="format-counts" default="default" %}</td>
             </tr>
         </table>

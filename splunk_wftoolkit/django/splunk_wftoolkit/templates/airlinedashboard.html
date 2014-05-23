@@ -3,7 +3,7 @@
 {% load splunkmvc %}
 {% load splunk_wftoolkit %}
 
-{% block title %}{{app_name}} Airlines Dashboard {% endblock title %}
+{% block title %}Complex Dashboard with Drilldown - Web Framework Toolkit{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
@@ -28,7 +28,8 @@
 
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2>Airline Dashboard with Drilldown</h2>
+            <h2>Complex dashboard with drilldown</h2>
+            <p><br>This dashboard displays airline data for a selected city, and demonstrates drilldown actions, events, and token binding. When you select a different city, all the searches on this page are updated to display data for it.</p>
         </div>
     </div>
     <div class="dashboard-row">
@@ -36,11 +37,10 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element toppanes" >
                     <div class="panel-head">
-                        <h3>Choose a city</h3>
+                        <h3>Select a city from the list</h3>
                     </div>
                     <div style="margin: 20px;">
-                    <p>This page lets you choose a city and updates all searches to correspond to that city.</p>
-                    {% dropdown id="citySelectDropdown" default="Seattle, WA" valueField="DestCityName" managerid="city-select-search" value="$cityName$"|token_safe %}
+                        {% dropdown id="citySelectDropdown" default="Seattle, WA" valueField="DestCityName" managerid="city-select-search" value="$cityName$"|token_safe %}
                 </div>
                 </div>
             </div>
@@ -49,16 +49,16 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element toppanes" >
                     <div class="panel-head">
-                        <h3>Arrival Volume in <span class="city-heading">Seattle</span></h3>
+                        <h3>Arrival volume in <span class="city-heading">Seattle</span></h3>
                     </div>
-                    {% single id="single1" managerid="single-search1" beforeLabel="Total Arrivals" %}
+                    {% single id="single1" managerid="single-search1" beforeLabel="Total arrivals" %}
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2><span class="city-heading">Seattle</span> Air Traffic Origin Cities</h2>
+            <h2>Origin cities for <span class="city-heading">Seattle</span> air traffic</h2>
         </div>
     </div>
     <div class="dashboard-row">
@@ -66,9 +66,9 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element" style="height: 440px;" >
                     <div class="panel-head">
-                        <h3>Origin city volume. Click to select city.</h3>
-                    </div>                    
-                    <div>
+                        <h3>Click a bubble to select a city</h3>
+                    </div>
+                    <div style="margin: 20px;">
                     {% bubblechart id="bubblechart" managerid="bubble-search" labelField="OriginCityName" categoryField="OriginState" height=400 %}
                     </div>
                 </div>
@@ -78,7 +78,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element" >
                     <div class="panel-head">
-                        <h3>Origin City Location</h3>
+                        <h3>Origin city location</h3>
                     </div>
                     <div id="map-div"></div>
                         
@@ -88,7 +88,7 @@
     </div>
     <div class="row">
         <div class="span12 dashboard-header clearfix">
-            <h2><span class="carrier-heading">Carrier</span> Details</h2>
+            <h2>Details by carrier</h2>
         </div>
     </div>
     <div class="dashboard-row" style="margin-top: 0px;">
@@ -96,7 +96,10 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element datapanes2" >
                    <div class="panel-head">
-                        <h3>Volume by Carrier in <span class="city-heading">Seattle</span></h3>
+                        <h3>Volume by carrier in <span class="city-heading">Seattle</span></h3>
+                    </div>
+                    <div style="margin: 20px;">
+                        <p>Select a carrier to view details:</p>
                     </div>
                     <div class="panel-body">
                         <div class="panel-body">
@@ -112,7 +115,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element datapanes2" >
                     <div class="panel-head">
-                        <h3><span class="carrier-heading">Delta Air Lines Inc</span>Cities Served</h3>
+                        <h3>Cities served by <span class="carrier-heading">Delta Air Lines, Inc.</span></h3>
                     </div>
                     {% chart id="carrier-cities" managerid="carrier-city-search" %}
                 </div>
@@ -122,7 +125,7 @@
             <div class="dashboard-panel">
                 <div class="dashboard-element datapanes2" >
                     <div class="panel-head">
-                        <h3><span id="carrier-heading">Delta Air Lines Inc</span> Cities Served</h3>
+                        <h3>Cities served by <span class="carrier-heading">Delta Air Lines, Inc.</span></h3>
                     </div>
                     {% table id="carrier-citiesrt" managerid="carrier-city-search" pageSize="6" %}
                 </div>
@@ -153,6 +156,7 @@ require([
     "underscore",
     "jquery",
     "splunkjs/mvc/simplexml",
+    "splunkjs/mvc/splunkmapview",
     "splunk.config",
     "splunkjs/ready!"], 
     function(mvc, utils, _, $) {

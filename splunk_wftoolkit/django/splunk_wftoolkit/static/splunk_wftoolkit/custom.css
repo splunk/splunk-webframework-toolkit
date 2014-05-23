@@ -1,3 +1,29 @@
+
+.centered {
+    width: 960px;
+    margin: 0 auto;
+}
+
+/* to match homepage */
+body {
+  background: #FCFBF8;
+}
+
+.splunkdj-setup-form h1,
+.splunkdj-setup-form h2 {
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+  font-weight: 200;
+  padding-left: 0;
+  margin-bottom: 10px;
+  padding-top: 10px;    
+}
+
+.dashboard-body {
+  background: none;
+}
+
 .main-area {
     border: 1px solid black;
 }
@@ -9,6 +35,13 @@
 .panel-body p { 
     margin: 5px;
 }
+
+/* fix some rendering issues with tabs in the toolkit */
+.main-section-body .nav-tabs {
+margin-bottom: 15px;
+margin-left: -10px;
+}
+
 
 /* Bootstrap code examples
 -------------------------------------------------- */
