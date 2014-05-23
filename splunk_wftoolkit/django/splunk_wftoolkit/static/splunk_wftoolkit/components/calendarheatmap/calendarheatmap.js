@@ -58,7 +58,7 @@
 //    "subDomain":"min"
 // }
 
- define(function(require, exports, module) {
+define(function(require, exports, module) {
  
     var _ = require('underscore');
     var SimpleSplunkView = require("splunkjs/mvc/simplesplunkview");
@@ -72,53 +72,67 @@
 
         className: "splunk-toolkit-cal-heatmap",
 
+        heatmapOptionNames: [
+            'cellRadius', 'domainMargin', 'maxDate', 'dataType', 
+            'considerMissingDataAsZero', 'verticalOrientation', 
+            'domainDynamicDimension', 'label', 'legendCellSize', 
+            'legendCellPadding', 'legendMargin', 'legendVerticalPosition', 
+            'legendHorizontalPosition', 'domainLabelFormat', 
+            'subDomainDateFormat', 'subDomainTextFormat', 'nextSelector', 
+            'previousSelector', 'itemNamespace', 'onMaxDomainReached', 
+            'onMinDomainReached', 'width', 'height'],
+       
         options: {
             managerid: "search1",   // your MANAGER ID
             data: "preview",  // Results type
             domain: 'hour', // the largest unit it will differentiate by in squares
             subDomain: 'min', // the smaller unit the calheat goes off of
-            formatLabel: _.identity,
             uID: null,
-            options: {} // the default for custom heatmap options.
+            range: 4
+        },
+
+        validDomains: {
+            'min': ['hour'],
+            'hour': ['day', 'week'],
+            'day': ['week', 'month', 'year'],
+            'week': ['month', 'year'],
+            'month': ['year']
         },
 
         output_mode: "json_rows",
 
         initialize: function() {
-            
+            var that = this;
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
-
             this.settings.enablePush("value");
-
             // whenever domain or subDomain are changed, we will re-render.
             this.settings.on("change:domain", this.onDomainChange, this);
             this.settings.on("change:subDomain", this.onDomainChange, this);
+            this.settings.on("change", this._onSettingsChange, this);
             var uniqueID=Math.floor(Math.random()*1000001);
             this.settings.set("uID", uniqueID);
         },
 
         onDomainChange: function() {
-
             var dom = this.settings.get('domain');
             var sd = this.settings.get('subDomain');
 
             // Knock off the prefix cause it doesnt matter here
             var sdShort = sd.replace("x_", "");
 
-            var validDomains = {
-                'min' : ['hour'],
-                'hour' : ['day', 'week'],
-                'day' : ['week', 'month', 'year'],
-                'week' : ['month', 'year'],
-                'month' : ['year']
-            };
-
             // If the current domain is valid for this subdomain 
-            if (_.contains(validDomains[sdShort], dom)){
+            if (_.contains(this.validDomains[sdShort], dom)){
                 this.render();
             }
             else{
                 console.log(sd + " is and invalid subDomain for " + dom);
+            }
+        },
+
+        _onSettingsChange: function(changed) {
+            // Route heatmap visualization changes to the renderer
+            if ((_.intersection(_.keys(changed.changed), this.heatmapOptionNames)).length > 0) {
+                this.render();
             }
         },
 
@@ -134,7 +148,7 @@
             var domain = this.settings.get('domain');
             var subDomain = this.settings.get('subDomain');
             
-            var filteredFields = _.filter(rawFields, function(d){return d[0] !== "_" });
+            var filteredFields = _.filter(rawFields, function(d){ return d[0] !== "_"; });
             var objects = _.map(data, function(row) {
                 return _.object(rawFields, row);
             });
@@ -168,16 +182,26 @@
                 subDomain: subDomain,
                 start: new Date(objects[0]['_time']),
                 min: new Date(objects[0]['_time']),
-                max: new Date(objects[objects.length - 1]['_time']),
+                max: new Date(objects[objects.length - 1]['_time'])
             };
         },
 
         updateView: function(viz, data) {     
-            userOptions = this.settings.get('options')
-            
-            this.$el.html('');
-            
             var that = this;
+            // Options that can be set externally after instantiation
+            // that affect the display. Ensure that any "empty" values
+            // are set to null (use default).  Some controls hand back
+            // empty strings, which result in nothing being shown.
+            // Not what is wanted.
+
+            var vizOptions = _.chain(this.settings.toJSON())
+                .pairs()
+                .filter(function(kv) { return _.contains(that.heatmapOptionNames, kv[0]); })
+                .filter(function(kv) { return ! (_.isNull(kv[1]) || _.isUndefined(kv[1]))  || (kv[1] !== ""); })
+                .object()
+                .value();
+
+            this.$el.html('');
             _.each(data.series, function(series, idx) {
                 var scale = d3.scale.quantile()
                     .domain([series.min, series.max])
@@ -216,8 +240,8 @@
                     onClick: function(date, value) { 
                         that.trigger('click', { date: date, value: value });
                         that.settings.set('value', date.valueOf());
-                    },
-                }, userOptions);
+                    }
+                }, vizOptions);
                 
                 var cal = new CalHeatMap();
                 cal.init(options); // create the calendar using either default or user defined options */

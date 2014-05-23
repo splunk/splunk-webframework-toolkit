@@ -1,9 +1,9 @@
-<nav color="#0C8F98">
+<nav color="#424254">
     <view name="default" default="true"/>
     <a href="/dj/redirector/splunk_wftoolkit/home">Home</a>
     <a href="/dj/redirector/splunk_wftoolkit/overview">Web Framework Overview</a>
-
-    <collection label="Web Framework Components">
+    
+    <collection label="Splunk Components">
         <a name="managers" href="/dj/redirector/splunk_wftoolkit/managers">Search managers</a>
         <a name="charts" href="/dj/redirector/splunk_wftoolkit/charts">Charts</a>
         <a name="tables" href="/dj/redirector/splunk_wftoolkit/tables">Tables</a>
@@ -13,14 +13,14 @@
         <a name="dataview" href="/dj/redirector/splunk_wftoolkit/dataview">Data template</a>
     </collection>
 
-    <collection label="Toolkit Components">
-        <a href="/dj/redirector/splunk_wftoolkit/toolkitcomponents">Using the Web Framework Tookit Components</a>
+    <collection label="Toolkit Visualizations">
         <a href="/dj/redirector/splunk_wftoolkit/sankey">Sankey Chart</a>
         <a href="/dj/redirector/splunk_wftoolkit/bubblechart">Bubble Chart</a>
         <a href="/dj/redirector/splunk_wftoolkit/forcedirected">Force-Directed Graph</a>
         <a href="/dj/redirector/splunk_wftoolkit/calendarheatmap">Calendar Heatmap</a>
         <a href="/dj/redirector/splunk_wftoolkit/parallelcoords">Parallel Coordinates</a>
         <a href="/dj/redirector/splunk_wftoolkit/parallelsets">Parallel Sets</a>
+        <a href="/dj/redirector/splunk_wftoolkit/punchcard">Punchcard</a>
         <a href="/dj/redirector/splunk_wftoolkit/sunburst">Sunburst</a>
     </collection>
 
@@ -39,28 +39,37 @@
         <a href="/dj/redirector/splunk_wftoolkit/cascade">Cascading form inputs</a>
         <a href="/dj/redirector/splunk_wftoolkit/multidropdown">Multidropdown lists</a>
 
+        <a href="/dj/redirector/splunk_wftoolkit/twosearchbars">Compare Searchbars</a>
+
         <a href="/dj/redirector/splunk_wftoolkit/search">Search timeline</a>
         <a href="/dj/redirector/splunk_wftoolkit/timerange">Time ranges</a>
         <a href="/dj/redirector/splunk_wftoolkit/timerangegroup">Grouped time range</a>
+        <a href="/dj/redirector/splunk_wftoolkit/punchcardsearch">Search and Punchcard</a>
 
         <a href="/dj/redirector/splunk_wftoolkit/interactive">Interactive views</a>
         <a href="/dj/redirector/splunk_wftoolkit/chartclick">Chart clicks</a>
         <a href="/dj/redirector/splunk_wftoolkit/customtablecells">Custom table cells</a>
+        <a href="/dj/redirector/splunk_wftoolkit/rowexpander">Custom table row expander</a>
         <a href="/dj/redirector/splunk_wftoolkit/maps">Maps</a>
+
+        <a href="/dj/redirector/splunk_wftoolkit/airlinedashboard">Complex dashboard with drilldown</a>
 
         <a href="/dj/redirector/splunk_wftoolkit/d3chart">NVD3 charts</a>
         <a href="/dj/redirector/splunk_wftoolkit/jsonviewer">JSON results viewer</a>
-        <a href="/dj/redirector/splunk_wftoolkit/setup">Setup view for Django</a>
-    </collection>
-
-    <collection label="Layout Templates">
-        <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Basic dashboard using Django</a>
-        <a href="/dj/redirector/splunk_wftoolkit/dashboardjs_stencil/">Basic dashboard using JavaScript</a>
+   
+        <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Basic layout template using Django</a>
+        <a href="/dj/redirector/splunk_wftoolkit/dashboardjs_stencil/">Basic layout template using JavaScript</a>
         <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil1/">Single-panel dashboard</a>
         <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil2/">Multi-panel dashboard</a>
     </collection>
 
-    <collection label="More Info">
+    <collection label="How To">
+        <a href="/dj/redirector/splunk_wftoolkit/toolkitcomponents">How to use the Tookit visualizations</a>
+        <a href="/dj/redirector/splunk_wftoolkit/splunkdevcli">How to use the Splunk Dev CLI</a>
+        <a href="/dj/redirector/splunk_wftoolkit/setup">How to use Django setup views</a>
+    </collection>
+
+    <collection label="Learn More">
         <a href="http://dev.splunk.com">Splunk Developer Portal</a>
         <a href="http://dev.splunk.com/view/web-framework/SP-CAAAER6">Web Framework Documentation</a>
         <a href="http://docs.splunk.com/Documentation/WebFramework">Web Framework Component Reference</a>

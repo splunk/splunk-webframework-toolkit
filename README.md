@@ -1,6 +1,6 @@
 # The Splunk Web Framework Toolkit
 
-#### Version 1.0
+#### Version 1.1
 
 The Splunk Web Framework Toolkit is a resource to help developers learn how to
 build rich applications using the [Splunk Web Framework](http://dev.splunk.com/view/web-framework/SP-CAAAER6). 

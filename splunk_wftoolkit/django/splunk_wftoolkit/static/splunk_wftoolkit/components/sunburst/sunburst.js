@@ -8,6 +8,7 @@ define(function(require, exports, module) {
     require("css!./sunburst.css");
 
     window.nester = nester;
+    var ANIMATION_DURATION = 750;  // milliseconds
 
     var Sunburst = SimpleSplunkView.extend({
         moduleId: module.id,
@@ -20,6 +21,7 @@ define(function(require, exports, module) {
             chartTitle: null,
             valueField: null,
             categoryFields: null,
+            truncateValue: 0,
             formatLabel: _.identity,
             formatTooltip: function(d) {
                 return (d.name || "Total") + ": " + d.value;
@@ -31,22 +33,16 @@ define(function(require, exports, module) {
         initialize: function() {
             SimpleSplunkView.prototype.initialize.apply(this, arguments);
 
-            // TODO: enable push
-            // TODO: wire up changes
-
             this.settings.on("change:valueField", this.render, this);
             this.settings.on("change:categoryFields", this.render, this);
-
-            // Set up resize callback. The first argument is a this
-            // pointer which gets passed into the callback event
-            $(window).resize(this, _.debounce(this._handleResize, 20));
+            this.settings.on("change:formatLabel change:formatTooltip change:chartTitle", this.render, this);
+            
+            // Set up resize callback. 
+            $(window).resize(_.debounce(_.bind(this._handleResize, this), 20));
         },
 
-        _handleResize: function(e){
-            
-            // e.data is the this pointer passed to the callback.
-            // here it refers to this object and we call render()
-            e.data.render();
+        _handleResize: function() {
+            this.render();
         },
 
         createView: function() {
@@ -86,14 +82,14 @@ define(function(require, exports, module) {
                 _.each(children, function(child){
                     var size = child[valueField] || 1;
                     total += size;
-                })
+                });
                 return total;
             });
             dataResults['name'] = this.settings.get("chartTitle") || "";
             data = {
                 'results': dataResults,
                 'fields': fieldList
-            }
+            };
             return data;
         },
 
@@ -101,6 +97,7 @@ define(function(require, exports, module) {
             var that = this;
             var formatLabel = this.settings.get("formatLabel") || _.identity;
             var formatTooltip = this.settings.get("formatTooltip") || function(d) { return d.name; };
+            var truncateValue = this.settings.get("truncateValue");
             var containerHeight = this.$el.height();
             var containerWidth = this.$el.width(); 
 
@@ -111,7 +108,7 @@ define(function(require, exports, module) {
             svg.width(containerWidth);
 
             // Add the graph group as a child of the main svg
-            var graphWidth = containerWidth - viz.margin.left - viz.margin.right
+            var graphWidth = containerWidth - viz.margin.left - viz.margin.right;
             var graphHeight = containerHeight - viz.margin.top - viz.margin.bottom;
             var graph = viz.svg
                 .append("g")
@@ -154,50 +151,64 @@ define(function(require, exports, module) {
             path.append("title")
                 .text(formatTooltip);
 
-            var text = g.append("text")
-                .attr("text-anchor", function(d) {
-                 return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
-                })
-                .attr("transform", function(d) {
-                    var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90;
+            var textAnchorPos = function(depthMarker) {
+                return function(d) {
+                    return (d.depth === depthMarker) ? 'middle' : ((x(d.x + d.dx / 2) > Math.PI) ? "end" : "start");
+                };
+            };
+
+            var textTransform = function(depthMarker) { 
+                return function(d) {
+                    // Objects at the origin don't need to be rotated
+                    var angle = x(d.x + d.dx / 2) * 180 / Math.PI + (d.depth === depthMarker ? 0 : -90);
+                    // Objects at the origin don't need to be moved.
+                    // "5" pads the text off the drawn circle.
+                    var translation = d.depth === depthMarker ? 0 : (y(d.y) + 5);
                     var rotate = angle;
-                    var padding = 5;
-                    return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
-                })
+                    return "rotate(" + rotate + ")translate(" + (translation) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
+                };
+            };
+                                         
+            var text = g.append("text")
+                .attr("text-anchor", textAnchorPos(0))
+                .attr("transform", textTransform(0))
                 .attr("dy", ".2em")
                 .attr("x", 0)
-                .text(function(d) { return formatLabel(d.name); })
+                .text(function(d) {
+                    var sliceWidth = Math.abs(Math.max(0, y(d.y)) - Math.max(0, y(d.y + d.dy)));
+                    var formatted = formatLabel(d.name);
+
+                    // Trunctate the title
+                    return formatted.substring(0, sliceWidth / truncateValue); 
+                })
                 .on("click", click);
                 
             text.append("title")
                 .text(formatTooltip);
 
             function click(d) {
-            // fade out all text elements
+                // The "at depth" object is treated differently;
+                // centered and not rotated.
+                var depthMarker = d.depth;
+                // fade out all text elements
                 text.transition().attr("opacity", 0);
-
                 path.transition()
-                  .duration(750)
+                  .duration(ANIMATION_DURATION)
                   .attrTween("d", arcTween(d))
                   .each("end", function(e, i) {
-                      // check if the animated element's data e lies within the visible angle span given in d
-                      if (e.x >= d.x && e.x < (d.x + d.dx)) {
+                      // check if the animated element's data e lies
+                      // within the visible angle span given in d and
+                      // the element is d or a possible child of d
+                      if ((e.x >= d.x && e.x < (d.x + d.dx)) && (e.depth >= d.depth)) { 
                         // get a selection of the associated text element
                         var arcText = d3.select(this.parentNode).select("text");
                         // fade in the text element and recalculate positions
-                        arcText.transition().duration(750)
+                        arcText.transition().duration(ANIMATION_DURATION)
                             .attr("opacity", 1)
-                            .attr("text-anchor", function(d) {
-                             return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
-                            })
-                            .attr("transform", function(d) {
-                                var angle = x(d.x + d.dx / 2) * 180 / Math.PI - 90;
-                                var rotate = angle;
-                                var padding = 5;
-                                return "rotate(" + rotate + ")translate(" + (y(d.y) + padding) + ")rotate(" + (angle > 90 ? -180 : 0) + ")";
-                            })
+                            .attr("text-anchor", textAnchorPos(depthMarker))
+                            .attr("transform", textTransform(depthMarker))
                             .attr("dy", ".2em")
-                            .attr("x", 0)
+                            .attr("x", 0);
                       }
                   });
             }
@@ -213,11 +224,6 @@ define(function(require, exports, module) {
                     : function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); return arc(d); };
               };
             }
-
-            function computeTextRotation(d) {
-              return (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
-            }
-                    
         }
     });
     return Sunburst;

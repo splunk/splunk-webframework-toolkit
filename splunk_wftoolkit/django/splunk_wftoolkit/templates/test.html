@@ -1,0 +1,138 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+{% load splunk_wftoolkit %}
+
+{% block title %}Tests - Web Framework Toolkit{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <style type="text/css">
+   
+    </style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-body container-fluid main-section-body" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Tests</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    {% forcedirected id="force-directed" managerid="search1" height=500 %}
+                    <div id="cell1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    {% sunburst id="sunburst" managerid="search2" height=500 %}
+                    <div id="cell2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Tests</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div id="cell3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div id="cell4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}
+
+{% block managers %}
+    {%  searchmanager id="search1"
+        search='| inputlookup faa.demo.csv | search OriginCityName=* DestCityName=* DestStateName=* AND NOT OriginCityName="" AND NOT DestCityName="" AND NOT DestStateName="" | head 200 | stats count by OriginCityName, DestCityName, DestStateName | sort count'
+        cache=True
+    %}
+    {% searchmanager id="search2"
+        search='| inputlookup faa.demo.csv | stats count by OriginCityName OriginState | sort - count limit=15'
+        cache=True
+    %}
+{% endblock managers %}
+
+{% block js %}
+<script>
+    
+
+    require(["jquery", 
+        "underscore",
+        "splunkjs/mvc/singleview",
+        "splunkjs/mvc/searchinfoview",
+        "splunkjs/ready!"], 
+        function(
+            $,
+            _,
+            single,
+            SearchInfoView,
+            mvc) {
+        var search = mvc.Components.getInstance('search1');
+        var force = mvc.Components.getInstance("force-directed");
+        var burst = mvc.Components.getInstance("sunburst");
+
+        var NAME_FORMATTERS = {
+            "default": _.identity,
+            "state": function(name) { 
+                return name.split(", ")[1];
+            },
+            "caps": function(name) {
+                return name.toUpperCase();
+            },
+            "None": function(name) {
+                return '';
+            },
+            "truncate": function(name){
+                if (name.length > 4 ) {
+                    name = name.substring(0, 4) + "...";
+                }
+                return name;
+            }
+        };
+        
+        var TOOLTIP_FORMATTERS = {
+            "default": function(d) {
+                return (d.source.name + ' -> ' + d.target.name +
+                        ': ' + d.value); 
+            },
+            "custom": function(d) { 
+                return _.template("From <%= source.name %> to <%= target.name %>: <%= value %>", d);
+            }
+        };
+
+        burst.settings.set('formatLabel', NAME_FORMATTERS['truncate']);
+
+        new SearchInfoView({
+            id: "siv",
+            "link.openSearch.visible": false,
+            managerid: "search1",
+            el: $("#cell3").append('<div></div>')
+        }).render();
+
+    });
+</script>
+
+{% endblock js %}

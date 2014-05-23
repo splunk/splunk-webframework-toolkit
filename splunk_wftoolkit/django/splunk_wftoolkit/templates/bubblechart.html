@@ -31,7 +31,7 @@
             <li>Require path: <code>splunk_wftoolkit/components/bubblechart/bubblechart</code></li>
             <li>The Bubble Chart works best with data that has magnitude and is grouped by category. For example, Splunk searches that include a <code>stats count by ...</code> tend to work well.</li>
         </ul>
-        <h4>Example Searches:</h4>
+        <h4>Example Searches</h4>
         <div class="well"><ul>
             <li>index=_internal | head 10000 | stats count by sourcetype clientip</li>
             <li>| inputlookup faa.demo.csv | stats count by OriginCityName OriginState cancellation</li>
@@ -77,6 +77,20 @@
                 <td><b>null</b></td>
                 <td>The field used for grouping data.</td>
                 <td>{% dropdown id="category-dropdown" default="OriginState" %}</td>
+            </tr>
+            <tr>
+                <td><code>formatLabel</code></td>
+                <td><b>function</b></td>
+                <td><b>"{name} {value}"</b></td>
+                <td>A custom formatting function bubble labels. Takes each node name as an input and returns a formatted name.</td>
+                <td>{% dropdown id="formatLabelDropdown" default="default" %}</td>
+            </tr>
+            <tr>
+                <td><code>formatTooltip</code></td>
+                <td><b>function</b></td>
+                <td><b>"{name}: {value}"</b></td>
+                <td>A custom formatting function for path tooltips. Takes each node as an input and returns a formatted tooltip string.</td>
+                <td>{% dropdown id="formatTooltipDropdown" default="default" %}</td>
             </tr>
         </table>
         <h4>Events</h4>
@@ -148,6 +162,8 @@
             var valuedd = mvc.Components.getInstance("value-dropdown");
             var categorydd = mvc.Components.getInstance("category-dropdown");
             var namedd = mvc.Components.getInstance("name-dropdown");
+            var formatLabelDropdown = mvc.Components.getInstance("formatLabelDropdown");
+            var formatTooltipDropdown = mvc.Components.getInstance("formatTooltipDropdown");
 
             var valueChoices = [
                                 {label: "Count", value: "count"},
@@ -179,6 +195,61 @@
                 console.log("Click Event");
                 console.log(e);
             });
+
+            // Format label logic
+            var LABEL_FORMATTERS = {
+                "default": function(d) { 
+                    var format = d3.format(",d");
+                    return d.className + " " + format(d.value); 
+                },
+                "state": function(d) { 
+                    return d.className.split(", ")[1];
+                },
+                "caps": function(d) {
+                    return d.className.toUpperCase();
+                }
+            };
+            bubbles.settings.set({
+                'formatLabel': LABEL_FORMATTERS['default']
+            });
+            
+            formatLabelDropdown.settings.set({
+                "choices": [
+                    {label: "Default", value: "default" },  
+                    {label: "States", value: "state" },  
+                    {label: "All Caps", value: "caps" }
+                ]
+            });
+            formatLabelDropdown.on("change", function(val) {
+                bubbles.settings.set("formatLabel", LABEL_FORMATTERS[val]); 
+            });
+
+            // Tooltip formatter logic
+            var TOOLTIP_FORMATTERS = {
+                "default": function(d) {
+                    var text;
+                    if(d.className === undefined || d.className === ""){
+                        text = "Event: " + d.value;
+                    } else {
+                        text = d.className+": " + d.value;
+                    }
+                    return text;
+                },
+                "custom": function(d) { 
+                    return _.template("<%= className %> has a value of <%= value %>", d);
+                }
+            };
+            formatTooltipDropdown.settings.set({
+            "choices": [
+                {label: "Default", value: "default" },  
+                {label: "Custom", value: "custom" }
+            ]
+            });
+            formatTooltipDropdown.on("change", function(val) {
+                bubbles.settings.set("formatTooltip", TOOLTIP_FORMATTERS[val]); 
+            });
+
+
         });
 </script>     
 

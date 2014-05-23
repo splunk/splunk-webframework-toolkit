@@ -12,7 +12,7 @@
 
 {% block content %}
  <!-- SEARCH CONTEXTS -->
-        <div class="dashboard-body container-fluid main-section-body component-page" data-role="main">
+        <div class="dashboard-body container-fluid main-section-body centered component-page" data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
             <h2>Search managers</h2>
@@ -193,6 +193,65 @@ new SavedSearchManager({
             <p><code>search:cancelled</code>: Fired when the search is cancelled.</p>
             <p><code>search:start</code>: Fired when the search is started.</p>
                 <p><code>search:done</code>: Fired when the search is completed and will return no more results. This event is never fired for real-time searches.</p>
+        </ul>
+
+            <div class="page-header"></div>
+            <h2>PostProcessManager</h2>
+            <p>A PostProcessManager (declared with the <code>&#123;% postprocessmanager %&#125;</code> Django template tag) provides a post-processed transformation of a parent search job.  Bind views to a PostProcessManager the same way you'd bind to a SearchManager. This example shows how to use PostProcessManager with the SearchManager example to limit the view to only those events that originate from the splunk webserver:</p>
+
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#js5" data-toggle="tab">JavaScript</a>
+                </li>
+                <li>
+                    <a href="#django5" data-toggle="tab">Django</a>
+                </li>   
+            </ul>
+            <div class="tab-content code-sample">
+                <div class="tab-pane active" id="js5">
+                    <pre class="prettyprint linenums lang-js">
+var ChartView = require("splunkjs/mvc/chartview");
+new ChartView({
+    id: "example-chart",
+    managerid: "post1",
+    el: $("#divToHangOn")
+}).render();
+
+var SearchManager = require("splunkjs/mvc/searchmanager");
+new SearchManager({
+    id: "search2",
+    latest_time: "now",
+    search: "index=_internal | stats count by sourcetype" 
+});    
+
+var PostProcessManager = require("splunkjs/mvc/postprocessmanager");
+new PostProcessManager({
+    id: "post1",
+    managerid: "search2",
+    search: "search sourcetype=splunk_web_access" 
+});
+</pre>
+                </div>
+                <div class="tab-pane django" id="django5">
+                    <pre class="prettyprint linenums lang-js">
+&#123;% chart id="example-chart" managerid="post1" type="line" %&#125;
+&#123;% searchmanager id="search1" search="index=_internal | stats count" latest_time="now" %&#125;
+&#123;% postprocessmanager id="post1" managerid="search1" search="search sourcetype=splunk_web_access" %&#125;</pre>
+                </div>
+            </div>
+
+            <h3>Options</h3>
+            <p>A Post-Process Search is server-side transformation of the parent search, and has no options of its own.</p>
+
+        <h3>Events</h3>
+        <p>The following events are fired by this post-process manager:</p>
+        <ul>
+            <p><code>search:start</code>: Fired when the search is started.</p>
+            <p><code>search:progress</code>: Fired to indicate search progress.</p>
+            <p><code>search:error</code>: Fired when an error occurs.</p>
+            <p><code>search:fail</code>: Fired when the search job fails.</p>
+            <p><code>search:cancelled</code>: Fired when the search is cancelled.</p>
+            <p><code>search:done</code>: Fired when the search is completed and will return no more results. This event is never fired for real-time searches.</p>
         </ul>
          </div>
                 </div>

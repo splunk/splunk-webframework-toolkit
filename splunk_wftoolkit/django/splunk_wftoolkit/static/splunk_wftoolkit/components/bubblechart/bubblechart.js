@@ -31,6 +31,19 @@ define(function(require, exports, module) {
             labelField: null,
             valueField: 'count',
             categoryField: null,
+            formatLabel: function(d) { 
+                var format = d3.format(",d");
+                return d.className + " " + format(d.value); 
+            },
+            formatTooltip: function(d) {
+                var text;
+                if(d.className === undefined || d.className === ""){
+                    text = "Event: " + d.value;
+                } else {
+                    text = d.className+": " + d.value;
+                }
+                return text;
+            }
         },
 
         output_mode: "json",
@@ -54,16 +67,14 @@ define(function(require, exports, module) {
             }
             this.settings.on("change:nameField", this._onNameFieldChange, this);
 
-            // Set up resize callback. The first argument is a this
-            // pointer which gets passed into the callback event
-            $(window).resize(this, _.debounce(this._handleResize, 20));
+            this.settings.on("change:formatLabel change:formatTooltip", this.render, this);
+
+            // Set up resize callback. 
+            $(window).resize(_.debounce(_.bind(this._handleResize, this), 20));
         },
 
-        _handleResize: function(e){
-            
-            // e.data is the this pointer passed to the callback.
-            // here it refers to this object and we call render()
-            e.data.render();
+        _handleResize: function() {
+            this.render();
         },
 
         // This is for compatibility. nameField is depricated and labelField should be used
@@ -123,6 +134,8 @@ define(function(require, exports, module) {
 
         updateView: function(viz, data) {
             var that = this;
+            var formatLabel = this.settings.get("formatLabel");
+            var formatTooltip = this.settings.get("formatTooltip");
 
             // Clear svg
             var svg = $(viz.svg[0]);
@@ -181,8 +194,11 @@ define(function(require, exports, module) {
             node.append("text")
                 .attr("dy", ".3em")
                 .style("text-anchor", "middle")
-                // ensure the text is truncated if the bubble is tiny
-                .text(function(d) { return (d.className + " " + format(d.value)).substring(0, d.r / 3); });
+                .text( function(d) { 
+                    var formatted = formatLabel(d);
+                    // ensure the text is truncated if the bubble is tiny
+                    return formatted.substring(0, d.r / 3.5); 
+                });
 
             // Re-flatten the child array
             function classes(data) {
@@ -202,12 +218,7 @@ define(function(require, exports, module) {
 
             // Tooltips
             function doMouseEnter(d){
-                var text;
-                if(d.className === undefined || d.className === ""){
-                    text = "Event: " + d.value;
-                } else {
-                    text = d.className+": " + d.value;
-                }
+                var text = formatTooltip(d);
                 tooltip
                     .text(text)
                     .style("opacity", function(){

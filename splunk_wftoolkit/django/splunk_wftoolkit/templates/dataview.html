@@ -28,7 +28,7 @@
 {% endblock css %}
 
 {% block content %}
-<div class="dashboard-body container-fluid main-section-body component-page">
+<div class="dashboard-body container-fluid main-section-body centered component-page">
   <div class="row">
     <div class="span12 dashboard-header clearfix">
       <h2>Data template</h2>
@@ -60,14 +60,14 @@
             
             <p>
               In this example, an Underscore template is included
-              as text in the <code>dataview</code> tag. The search manager
+              as text in the <code>datatemplateview</code> tag. The search manager
               bound to the DataTemplate view uses the <b>rangemap</b>
               search command to create a <code>range</code> field in the
               search results indicating the severity of values.
             </p>
 
             <div class="bs-docs-example">
-              {% dataview id="single-search-example"
+              {% datatemplateview id="single-search-example"
                 managerid="example-single-search" 
                 template='<div class="example-1">Event Count: <%= results[0].count %>. Status: <%= results[0].range %></div>'
               %}
@@ -75,7 +75,7 @@
 
             <pre class="prettyprint linenums lang-js">
 &#123;% block content %&#125;
-  &#123;% dataview id="single-search-example"
+  &#123;% datatemplateview id="single-search-example"
       managerid="example-single-search" 
       template='&lt;div class="example-1"&gt;Event Count: &lt;%= results[0].count %&gt;.  Status: &lt;%= results[0].range %&gt;&lt;/div&gt;'
   %&#125;
@@ -95,7 +95,7 @@
             
             <p>
               In this example, an Underscore template is included
-              by name in the <code>dataview</code> tag. The
+              by name in the <code>datatemplateview</code> tag. The
               template is embedded in the HTML page itself. The search manager 
               bound to the DataTemplate view uses the music data to
               list number of searches per artist.
@@ -118,7 +118,7 @@
                 </table>
               </script> 
 
-                {% dataview id="table-top-artist-searches"
+                {% datatemplateview id="table-top-artist-searches"
                    managerid="search-top-artist-searches"
                    templateName="top-artist-search-template" 
                 %}
@@ -136,7 +136,7 @@
     &lt;/table&gt;
   &lt;/script&gt;
 
-  &#123;% dataview id="table-top-artist-searches"
+  &#123;% datatemplateview id="table-top-artist-searches"
       managerid="search-top-artist-searches"
       templateName="top-artist-search-template"
   %&#125;
@@ -193,16 +193,16 @@
     var deps = [
       "splunkjs/mvc",
       "splunkjs/mvc/searchmanager",
-      "splunkjs/mvc/dataview"
+      "splunkjs/mvc/datatemplateview"
     ];
-    require(deps, function(mvc, SearchManager, DataView) {
+    require(deps, function(mvc, SearchManager, DataTemplateView) {
       new SearchManager({
         id: "search-top-song-downloads",
         search: "| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by track_name | sort count desc | table track_name count",
         cache: true
       });
 
-      new DataView({
+      new DataTemplateView({
         id: "table-top-song-downloads",
         managerid: "search-top-song-downloads",
         template: $('#search-top-song-template').html(),
@@ -248,16 +248,16 @@ require(["splunk_wftoolkit/contrib/prettify", "bootstrap.tab"], function(prettyP
     var deps = [
         "splunkjs/mvc",
         "splunkjs/mvc/searchmanager",
-        "splunkjs/mvc/dataview",
+        "splunkjs/mvc/datatemplateview",
     ];
-    require(deps, function(mvc, SearchManager, DataView) {
+    require(deps, function(mvc, SearchManager, DataTemplateView) {
         new SearchManager({
             id: "search-top-song-downloads",
             search: "| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by track_name | sort count desc | table track_name count",
             cache: true
         });
 
-        new DataView({
+        new DataTemplateView({
             id: "table-top-song-downloads",
             managerid: "search-top-song-downloads",
             template: $('#search-top-song-template').html(),

@@ -21,7 +21,7 @@
 {% block content %}
 
 <!-- FORMS -->
-<div class="dashboard-body container-fluid main-section-body component-page"
+<div class="dashboard-body container-fluid main-section-body centered component-page"
 data-role="main">
     <div class="row">
         <div class="span12 dashboard-header clearfix">
@@ -235,7 +235,7 @@ rbg.on("change", function(){
 &#123;% endblock content %&#125; 
 
 &#123;% block managers %&#125; 
-    &#123;% searchmanager id="indexes-search" search="| eventcount summarize=false index=* index=_* | dedup index | fields index" preview=False cache=True %&#125; 
+    &#123;% searchmanager id="indexes-search" search="| eventcount summarize=false index=* index=_* | dedup index | fields index | head 5" preview=False cache=True %&#125; 
 &#123;% endblock managers %&#125;
 </pre>
                             </div>
@@ -255,7 +255,7 @@ new RadioGroupView({
 var SearchManager = require("splunkjs/mvc/searchmanager");
 new SearchManager({
         id: "indexes-search",
-        search: "| eventcount summarize=false index=* index=_* | dedup index | fields index",
+        search: "| eventcount summarize=false index=* index=_* | dedup index | fields index | head 5",
 });</pre>
                                 </div>
                         </div>
@@ -414,7 +414,7 @@ sbg.on("change", function(){
 &#123;% endblock content %&#125;
 
 &#123;% block managers %&#125; 
-    &#123;% searchmanager id="indexes-search" search="| eventcount summarize=false index=* index=_* | dedup index | fields index" preview=False cache=True %&#125; 
+    &#123;% searchmanager id="indexes-search" search="| eventcount summarize=false index=* index=_* | dedup index | fields index | head 5" preview=False cache=True %&#125; 
 &#123;% endblock managers %&#125; 
 </pre>
                             </div>
@@ -434,7 +434,7 @@ new DropdownView({
 var SearchManager = require("splunkjs/mvc/searchmanager");
 new SearchManager({
         id: "indexes-search",
-        search: "| eventcount summarize=false index=* index=_* | dedup index | fields index",
+        search: "| eventcount summarize=false index=* index=_* | dedup index | fields index | head 5",
 });
 </pre>
                             </div>
@@ -593,7 +593,7 @@ sbg.on("change", function(){
 &#123;% endblock content %&#125;
 
 &#123;% block managers %&#125; 
-    &#123;% searchmanager id="indexes-search" search="| eventcount summarize=false index=* index=_* | dedup index | fields index" preview=False cache=True %&#125; 
+    &#123;% searchmanager id="indexes-search" search="| eventcount summarize=false index=* index=_* | dedup index | fields index | head 5" preview=False cache=True %&#125; 
 &#123;% endblock managers %&#125; 
 </pre>
                             </div>
@@ -613,7 +613,7 @@ new MultiDropdownView({
 var SearchManager = require("splunkjs/mvc/searchmanager");
 new SearchManager({
         id: "indexes-search",
-        search: "| eventcount summarize=false index=* index=_* | dedup index | fields index",
+        search: "| eventcount summarize=false index=* index=_* | dedup index | fields index | head 5",
 });
 </pre>
                             </div>
@@ -1059,7 +1059,7 @@ splunkjs.mvc.Components.getInstance("example-checkboxgroup").settings.set("choic
 &#123;% endblock content %&#125; 
 
 &#123;% block managers %&#125; 
-    &#123;% searchmanager id="indexes-search" search="| eventcount summarize=false index=* index=_* | dedup index | fields index" preview=False cache=True %&#125; 
+    &#123;% searchmanager id="indexes-search" search="| eventcount summarize=false index=* index=_* | dedup index | fields index | head 5" preview=False cache=True %&#125; 
 &#123;% endblock managers %&#125;
 </pre>
                             </div>
@@ -1079,7 +1079,7 @@ new CheckboxGroupView({
 var SearchManager = require("splunkjs/mvc/searchmanager");
 new SearchManager({
     id: "example-single-search",
-    search: "| eventcount summarize=false index=* index=_* | dedup index | fields index",
+    search: "| eventcount summarize=false index=* index=_* | dedup index | fields index | head 5",
 }); 
 </pre>
                             </div>
@@ -1225,7 +1225,7 @@ new SearchManager({
 {% block managers %}
         {% searchmanager id="example-single-search" search="index=_internal | stats count | rangemap field=count low=0-3 elevated=3-6 severe=6-10 default=severe" earliest_time="-15m" latest_time="now" %}
 
-        {% searchmanager id="indexes-search" search="| eventcount summarize=false index=* index=_* | dedup index | fields index" preview=False cache=True %}
+        {% searchmanager id="indexes-search" search="| eventcount summarize=false index=* index=_* | dedup index | fields index | head 5 | head 5" preview=False cache=True %}
 {% endblock managers %}
 
 {% block js %}

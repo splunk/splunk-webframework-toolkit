@@ -1,0 +1,272 @@
+[
+    {
+        "id": "overview",
+        "title": "Web Framework Overview",
+        "description": "A brief overview of the basic concepts of the Web Framework with links to in-depth documentation",
+        "section": "reference"
+    },
+    {
+        "id": "managers",
+        "title": "Search managers",
+        "description": "Search managers get data from Splunk and make it available to Web Framework components",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "charts",
+        "title": "Charts",
+        "description": "Various chart types for plotting Splunk data",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "tables",
+        "title": "Tables",
+        "description": "Table views for displaying Splunk data",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "forms",
+        "title": "Form",
+        "description": "Various types of form controls",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "searchcontrols",
+        "title": "Search manager controls",
+        "description": "Views that interact with and control search managers",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "map",
+        "title": "Map",
+        "description": "A map for displaying geographic Splunk data",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "dataview",
+        "title": "Data template",
+        "description": "A client-side component for rendering Splunk data in a template",
+        "section": "basiccomponents"
+    },
+    {
+        "id": "toolkitcomponents",
+        "title": "How to use the Tookit visualizations",
+        "description": "How to include the visualizations from this toolkit in your app",
+        "section": "reference"
+    },
+    {
+        "id": "sankey",
+        "title": "Sankey Chart",
+        "description": "The Sankey Chart visualizes data flow between nodes",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "bubblechart",
+        "title": "Bubble Chart",
+        "description": "The Bubble Chart visualizes the magnitude of data values as circular areas",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "forcedirected",
+        "title": "Force-Directed Graph",
+        "description": "The Force-Directed Graph displays information about connectivity and clustering between nodes in a network",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "calendarheatmap",
+        "title": "Calendar Heatmap",
+        "description": "The Calendar Heatmap displays time-series data on a timeline as a heatmap",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "parallelsets",
+        "title": "Parallel Sets",
+        "description": "The Parallel Sets graph displays multidimensional categorical data",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "parallelcoords",
+        "title": "Parallel Coordinates",
+        "description": "The Parallel Coordinates graph visualizes multidimensional data dynamically",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "punchcard",
+        "title": "Punchcard",
+        "description": "The Punchcard shows a count relationship between two data dimensions",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "sunburst",
+        "title": "Sunburst",
+        "description": "The Sunburst shows hierarchically-grouped data using a radial layout with the root at the center and the leaf nodes around the edges.",
+        "section": "toolkitvisualizations"
+    },
+    {
+        "id": "dashboarddj",
+        "title": "Example: Dashboard in Django",
+        "description": "An example showing a simple dashboard using Django template tags for creating views and managers",
+        "section": "examples"
+    },
+    {
+        "id": "dashboardjs",
+        "title": "Example: Dashboard in JavaScript",
+        "description": "An example showing a simple dashboard using JavaScript to create and connect the views and managers",
+        "section": "examples"
+    },
+    {
+        "id": "savedsearch",
+        "title": "Example: Saved reports",
+        "description": "An example showing a SavedSearchManager to power multiple views",
+        "section": "examples"
+    },
+    {
+        "id": "postprocess",
+        "title": "Example: Post-process searches",
+        "description": "An example showing post-process searches",
+        "section": "examples"
+    },
+    {
+        "id": "properties",
+        "title": "Example: Search properties",
+        "description": "An example showing how to set search properties programatically",
+        "section": "examples"
+    },
+    {
+        "id": "cache",
+        "title": "Example: Cached searches",
+        "description": "An example showing how to use pre-existing jobs to power searches",
+        "section": "examples"
+    },
+    {
+        "id": "databindingjs",
+        "title": "Example: Data binding with tokens",
+        "description": "An example showing how to set up data binding using tokens",
+        "section": "examples"
+    },
+    {
+        "id": "form",
+        "title": "Example: Form inputs with tokens",
+        "description": "An example showing how to parameterize a search query using two tokens linked to form inputs",
+        "section": "examples"
+    },
+    {
+        "id": "cascade",
+        "title": "Example: Cascading form inputs",
+        "description": "An example showing how to set up multiple form inputs, with the choice from one cascading into the others",
+        "section": "examples"
+    },
+    {
+        "id": "multidropdown",
+        "title": "Example: Multidropdown lists",
+        "description": "An example showing how to use the MultiDropdown form input",
+        "section": "examples"
+    },
+    {
+        "id": "twosearchbars",
+        "title": "Example: Compare Searchbars",
+        "description": "An example showing two different ways to make search bars that update search managers, using JavaScript events and token binding",
+        "section": "examples"
+    },
+    {
+        "id": "search",
+        "title": "Example: Search with timeline",
+        "description": "An example showing how to create a UI that is similiar to Splunk Web by adding different views, such as the Timeline view",
+        "section": "examples"
+    },
+    {
+        "id": "timerange",
+        "title": "Example: Time ranges",
+        "description": "An example showing how to set up a TimeRange view using simple Django template tags with no custom code",
+        "section": "examples"
+    },
+    {
+        "id": "timerangegroup",
+        "title": "Example: Grouped time ranges",
+        "description": "An example showing a TimeRange view that sets the timebounds for two searches that drive two Single views",
+        "section": "examples"
+    },
+    {
+        "id": "punchcardsearch",
+        "title": "Example: Punchcard with a searchbar",
+        "description": "An example showing a toolkit visualization attached to a searchbar",
+        "section": "examples"
+    },
+    {
+        "id": "interactive",
+        "title": "Example: Interactive views",
+        "description": "An example showing how to use click events to update searches and views on a page",
+        "section": "examples"
+    },
+    {
+        "id": "chartclick",
+        "title": "Example: Chart click events",
+        "description": "An example showing how to customize the drilldown action on a chart",
+        "section": "examples"
+    },
+    {
+        "id": "customtablecells",
+        "title": "Example: Custom table cells",
+        "description": "An example showing how to set up a custom table cell renderer to display an icon based on the severity value in each row",
+        "section": "examples"
+    },
+    {
+        "id": "rowexpander",
+        "title": "Example: Custom table row expander",
+        "description": "An example showing how to add custom row expander to a table",
+        "section": "examples"
+    },
+    {
+        "id": "airlinedashboard",
+        "title": "Example: Complex dashboard with drilldown",
+        "description": "An example showing airlines data in a complex dashboard using multiple views, token binding, events, and in-page drilldown",
+        "section": "examples"
+    },
+    {
+        "id": "d3chart",
+        "title": "Example: NVD3 charts",
+        "description": "An example showing how to use the NVD3 charts to display data in different ways",
+        "section": "examples"
+    },
+    {
+        "id": "jsonviewer",
+        "title": "Example: JSON results viewer",
+        "description": "An example showing how to write a custom view that simply displays Splunk data in JSON format",
+        "section": "examples"
+    },
+    {
+        "id": "dashboarddj_stencil",
+        "title": "Example: Basic layout template using Django",
+        "description": "An example and reusable template for dashboard layout using only Django",
+        "section": "examples"
+    },
+    {
+        "id": "dashboardjs_stencil",
+        "title": "Example: Basic layout template using JavaScript",
+        "description": "An example and reusable template for dashboard layout using JavaScript",
+        "section": "examples"
+    },
+    {
+        "id": "dashboard_stencil1",
+        "title": "Example: Single-panel dashboard",
+        "description": "An example showing a single panel dashboard template",
+        "section": "examples"
+    },
+    {
+        "id": "dashboard_stencil2",
+        "title": "Example: Multi-panel dashboard",
+        "description": "An example showing a dashboard template showing many-cell row layouts",
+        "section": "examples"
+    },
+    {
+        "id": "setup",
+        "title": "How to use Django setup views",
+        "description": "A demo and explanation of using Django setup views",
+        "section": "reference"
+    },
+    {
+        "id": "splunkdevcli",
+        "title": "How to use the Splunk Dev CLI",
+        "description": "An explanation of how to set up and use the Splunk developer command line interface (CLI) tool",
+        "section": "reference"
+    }
+]

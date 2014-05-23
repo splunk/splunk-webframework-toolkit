@@ -63,11 +63,13 @@
                 <td>{% dropdown id="subDomain-dropdown" default="min" %}</td>
             </tr>
             <tr>
-                <td><code>options</code></td>
-                <td><b>Dictionary</b></td>
-                <td><b>{}</td>
-                <td>This dictionary is passed to the wrapped <b>cal heat</b> control as-is and sets non-Splunk-specific options. For more on options that can be passed to <b>cal heat</b>, see the <a href="http://kamisama.github.io/cal-heatmap/" target="_blank">Cal-Heatmap documentation</a>.</td>
-                <td>-</td>
+                <td><code>domainLabelFormat</code></td>
+                <td><b>string</b></td>
+                <td><b>null</b></td>
+                <td>The way dates should be displayed for the
+                  heatmap. Not setting it will result in the default
+                  setting.</td>
+                <td>{% dropdown id="domainLabelFormat-dropdown" default="null" %}</td>
             </tr>
         </table>
         <h4>Events</h4>
@@ -130,47 +132,59 @@
         var heat = mvc.Components.getInstance("myheat");
         var domaindd = mvc.Components.getInstance("domain-dropdown");
         var subDomaindd = mvc.Components.getInstance("subDomain-dropdown");
-        heat.settings.set("options", {
-            // Define options here. Options defined in this
-            // 'options' dictionary are passed to the wrapped
-            // cal heat control. For more usage info see
-            // http://kamisama.github.io/cal-heatmap/
-            range: 5,
+        var domainLabelFormatsd = mvc.Components.getInstance("domainLabelFormat-dropdown");
+        heat.settings.set({ 
+            range: 5
         });
 
         domainChoices = [
-                        {label: "hour", value: "hour"},
-                        {label: "day", value: "day"},
-                        {label: "week", value: "week"},
-                        {label: "month", value: "month"},
-                        {label: "year", value: "year"},
-                        ];
+            {label: "hour", value: "hour"},
+            {label: "day", value: "day"},
+            {label: "week", value: "week"},
+            {label: "month", value: "month"},
+            {label: "year", value: "year"},
+        ];
         domaindd.settings.set("choices", domainChoices);
         domaindd.on("change", function(){
             heat.settings.set("domain", domaindd.val());
         });
 
         subDomainChoices = [
-                        {label: "min", value: "min"},
-                        {label: "hour", value: "hour"},
-                        {label: "day", value: "day"},
-                        {label: "week", value: "week"},
-                        {label: "month", value: "month"},
-                        {label: "x_min", value: "x_min"},
-                        {label: "x_hour", value: "x_hour"},
-                        {label: "x_day", value: "x_day"},
-                        {label: "x_week", value: "x_week"},
-                        {label: "x_month", value: "x_month"}
-                        
-                        ];
+            {label: "min", value: "min"},
+            {label: "hour", value: "hour"},
+            {label: "day", value: "day"},
+            {label: "week", value: "week"},
+            {label: "month", value: "month"},
+            {label: "x_min", value: "x_min"},
+            {label: "x_hour", value: "x_hour"},
+            {label: "x_day", value: "x_day"},
+            {label: "x_week", value: "x_week"},
+            {label: "x_month", value: "x_month"}
+        ];
         subDomaindd.settings.set("choices", subDomainChoices);
         subDomaindd.on("change", function(){
             heat.settings.set("subDomain", subDomaindd.val());
         });
-        heat.on("click", function(e){console.log("Event:");console.log(e);})
 
+        domainLabelFormatChoices = [
+            {label: "(default)", value: ""},
+            {label: "ISO-8601", value: "%Y-%m-%dT%H:%M:%S.%LZ"},
+            {label: "MM/DD/YY", value: "%m/%e/%Y"},
+            {label: "YY/MM/DD", value: "%Y/%m/%e"},
+            {label: "HH:MM:SS", value: "%H:%M:%S"},
+            {label: "HH:MM:SS AP", value: "%I:%M:%S %p"}
+        ];
+        domainLabelFormatsd.settings.set("choices", domainLabelFormatChoices);
+        // Internally, the calendareheatmap tool uses the Javascript
+        // 'null' value to set defaults.  Dropdown only understands 
+        // the empty string.  This makes Dropdown's apparent setting 
+        // match the tool's expected setting.
+        domainLabelFormatsd.val("");
+        domainLabelFormatsd.on("change", function(){
+            heat.settings.set("domainLabelFormat", domainLabelFormatsd.val())
+        });
 
-
+        heat.on("click", function(e){console.log("Event:", e);});
     });
 </script>
 

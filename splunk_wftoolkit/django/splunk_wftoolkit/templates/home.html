@@ -2,61 +2,170 @@
 
 {% load splunkmvc %}
 
-{% block title %}Toolkit Overview {% endblock title %}
+{% block title %}Web Framework Toolkit Overview{% endblock title %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunk_wftoolkit/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunk_wftoolkit/home.css" />
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
 {% endblock css %}
 
 {% block content %}
 
 <div class="dashboard-body container-fluid main-section-body">
-    <div class="row">
-        <div class="span12 dashboard-header clearfix">
-            <h2>Splunk Web Framework Toolkit </h2>
-        </div>
+    <div class="dashboard-header clearfix">
+        <h2>Splunk Web Framework Toolkit</h2>
     </div>
-    <div class="dashboard-row">
-        <div class="dashboard-cell" style="width: 100%;">
-            <div class="dashboard-panel">
-                <div class="dashboard-element">
-                    <div class="panel-head">
-                    </div>
-                    <div class="panel-body html">
-                        <p>
-                        Welcome to the Splunk Web Framework Toolkit! This app contains a collection of examples that show you how to use the components of the Web Framework. You'll find documentation and reference information, along with code templates to help you get started. You can view all of the examples in action in this app, but then be sure to look at the source code in <b>/splunk_wftoolkit/django/splunk_wftoolkit/</b> to see how it's done.</p>
-                        <p>Here's what's included:</p>
+    <p>Welcome to the Splunk Web Framework Toolkit! This app contains a collection of examples that show you how to use the components of the Web Framework. You'll find documentation and reference information, along with code templates to help you get started. View the examples in action in this app, then look at the source code in <b>/splunk_wftoolkit/django/splunk_wftoolkit/</b> to see how it's done.</p>
+    <p>If you are new to the Web Framework, read the <b><a href="../overview">Web Framework Overview</a></b> to get started.</p>
 
-                        <h3>Getting Started</h3>
-                        <p>Provides an overview of the basic concepts of the Web Framework.</p>
-
-                        <h3>Web Framework Components</h3>
-                        <p>Demonstrates all of the search managers and Splunk views that are included in the Web Framework, and includes reference information and code examples in JavaScript and Django.</p>
-
-                        <h3>Toolkit Components</h3>
-                        <p>Contains a collection of custom visualizations based on open-source libraries. These views extend SimpleSplunk view to connect to your Splunk server and work with your data.</p>
-
-                        <h3>Examples</h3>
-                        <p>Contains example dashboards that demonstrate how to work with different features of the Web Framework, including how to use tokens for data binding, add interactivity, work with events, and more.</p>
-
-                        <h3>Layout Templates</h3>
-                        <p>Provides page templates that show you how to lay out the content of your pages using the Splunk dashboard styles. You can use these layout templates as a starting point for your apps.</p>
-
-                        <h3>More Info</h3>
-                        <p>Contains useful links to resources when you need to know more.</p>
-
-                    </div>
-                </div>
-            </div>
+    <div class="section-nav">
+        <ul class="nav-buttons">
+            <li id="basic-components-button">
+                <a data-section="basiccomponents" href="#basiccomponents">
+                    <span class="icon-distributed-environment"></span>
+                    Splunk Components
+                </a>
+            </li>
+            <li id="toolkit-visualizations-button">
+                <a data-section="toolkitvisualizations" href="#toolkitvisualizations">
+                    <span class="icon-bar-beside"></span>
+                    Toolkit Visualizations
+                </a>
+            </li>
+            <li id="examples-button">
+                <a data-section="examples" href="#examples">
+                    <span class="icon-report"></span>
+                    Examples
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="basiccomponents" class="toolkit-section clearfix">
+        <h3><span class="icon-distributed-environment"></span>Splunk Components</h3>
+        <p class="list-description">Splunk Web Framework components that run searches and display visualizations</p>
+        <div id="basiccomponents-list" class="toolkit-item-list clearfix">
         </div>
+        <div id="basiccomponents-end"></div>
+    </div>
+    <div id="toolkitvisualizations" class="toolkit-section clearfix">
+        <h3><span class="icon-bar-beside"></span>Toolkit Visualizations</h3>
+        <p class="list-description">Visualizations available in the Toolkit for displaying data</p>
+        <div id="toolkitvisualizations-list" class="toolkit-item-list clearfix">
+            <!-- Tooklkit Visualizations pages here -->
+        </div>
+        <div id="toolkitvisualizations-end"></div>
+    </div>
+    <div id="examples" class="toolkit-section clearfix">
+        <h3><span class="icon-report"></span>Examples</h3>
+        <p class="list-description">Examples of using the Splunk Web Framework</p>
+        <div id="examples-list" class="toolkit-item-list clearfix">
+            <!-- Examples pages here -->
+        </div>
+        <div id="examples-end"></div>
     </div>
 </div>
             
 {% endblock content%}
 
-{% block js %}    
+{% block js %}   
+    
+
+    <script id="item-template" type="text/template">
+        <div class="toolkit-item">
+            <a class="item-link" href="../<%= id %>">
+                <img class="item-thumb" src="<%= staticUrl %>splunk_wftoolkit/img/<%= id %>.png"/>
+                <div class="item-content">
+                    <h4><%= title %></h4>
+                    <p class="item-description"><%= description %></p>
+                    <p class="view-button">View</p>
+                </div>
+            </a>
+        </div>
+    </script> 
     <script>
-        
+
+        require.config({
+            shim: {
+                "splunk_wftoolkit/contrib/waypoints": {
+                    deps: ["jquery"],
+                    exports: "waypoints"
+                },
+                "splunk_wftoolkit/contrib/waypoints-sticky": {
+                    deps: ["jquery", "splunk_wftoolkit/contrib/waypoints"],
+                    exports: "waypointsSticky"
+                }
+            }
+        });
+
+        require(["jquery", "splunk_wftoolkit/contrib/waypoints", "splunk_wftoolkit/contrib/waypoints-sticky"], function($, waypoint, waypointsSticky) {
+            $('.section-nav').waypoint('sticky', {
+                offset: -15
+            });
+        }); 
+
+        require(['jquery', 'underscore'], function($, _) {
+            $(function(){
+
+                function clearActiveButtons(){
+                    $('.active').removeClass('active');
+                }
+
+                // Set up smooth scrolling
+                // taken from: http://stackoverflow.com/questions/7717527/jquery-smooth-scrolling-when-clicking-an-anchor-link
+                $('a').click(function(){
+                    $('html, body').animate({
+                        scrollTop: $( $.attr(this, 'href') ).offset().top - 30
+                    }, 500);
+                    return false;
+                });
+
+                var staticUrl = '{{STATIC_URL}}';
+                $.getJSON(staticUrl + 'splunk_wftoolkit/json/navinfo.json', function(navdata){
+                     var template = _.template( $('#item-template').html() ); 
+                    _.each(navdata, function(item){
+                        var $sectionList = $('#' + (item['section'] || 'learnmore' ) + '-list');
+                        $sectionList.append( template(_.extend(item,{staticUrl: staticUrl})));
+                    });
+                    $('#basiccomponents').waypoint(function(dir){
+                        clearActiveButtons();
+                        if(dir === 'down') {
+                            $('#basic-components-button').addClass('active');
+                        }
+                    });
+                    $('#basiccomponents-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#basic-components-button').addClass('active');
+                        }
+                    });
+                    $('#toolkitvisualizations').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#toolkit-visualizations-button').addClass('active');
+                    });
+                    $('#toolkitvisualizations-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#toolkit-visualizations-button').addClass('active');
+                        }
+                    });
+                    $('#examples').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#examples-button').addClass('active');
+                    });
+                    $('#examples-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#examples-button').addClass('active');
+                        }
+                    });
+                })
+                .fail(function(jqxhr, textStatus, error ) {
+                    var err = textStatus + ", " + error;
+                    console.log( "Request Failed: " + err );
+                })
+
+                
+            });
+        });
     </script>
 {% endblock js %}

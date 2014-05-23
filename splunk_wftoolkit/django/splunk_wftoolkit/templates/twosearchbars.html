@@ -1,0 +1,88 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+{% load splunk_wftoolkit %}
+
+{% block title %}Two Search Bars - Web Framework Toolkit{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <style type="text/css">
+    .splunk-searchbar{
+        margin: 10px;
+    }
+    </style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-body container-fluid main-section-body" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Two Search Bars</h2>
+        </div>
+    </div>
+     <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+           <p>This page shows two different ways to make search bars that update search managers. The panel on the left does updates in JavaScript, the panel on the right uses token binding.</p>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    {% searchbar id="searchbar1" managerid="search1" %}
+                    {% table id="table1" managerid="search1" %}
+                    <div id="cell1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    {% searchbar id="searchbar2" managerid="search2" value="$search$"|token_safe default="index=_internal | head 10" %}
+                    {% table id="table2" managerid="search2" %}
+                    <div id="cell2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}
+
+{% block managers %}
+    {%  searchmanager id="search1"
+        search="index=_internal | head 10"  
+    %}
+    {%  searchmanager id="search2"
+        search="$search$"|token_safe
+    %}
+{% endblock managers %}
+
+{% block js %}
+<script>
+    require(["jquery", 
+        "underscore",
+        "splunkjs/mvc/singleview",
+        "splunkjs/ready!"], 
+        function(
+            $,
+            _,
+            single,
+            mvc) {
+        var searchbar1 = mvc.Components.getInstance('searchbar1');
+        var searchbar2 = mvc.Components.getInstance('searchbar2');
+        var search1 = mvc.Components.getInstance('search1');
+        var search2 = mvc.Components.getInstance('search2');
+
+        searchbar1.on('change', function(){
+            search1.settings.unset('search');
+            search1.settings.set('search', searchbar1.val()); 
+        });
+        
+    });
+</script>
+
+{% endblock js %}
