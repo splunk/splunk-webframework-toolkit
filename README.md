@@ -17,12 +17,11 @@ Here are the Web Framework Toolkit requirements for this release:
 
 * Operating System: Windows, Linux, or Mac OS X.
 * Web browsers: Latest versions of Chrome, Safari, or Firefox, Internet Explorer 9 or later. 
-* The Splunk Web Framework: The Web Framework is included in Splunk 6 and is available for Splunk 5 from the 
+* The Splunk Web Framework: The Web Framework is included in Splunk Enterprise 6 and is available for Splunk Enterprise 5 from the 
 [Splunk Developer Portal](http://dev.splunk.com/view/webframework-standalone/SP-CAAAEMA).
 
 #### Installing the Web Framework Toolkit 
-The Web Framework Toolkit is built as a Splunk App, enabling interactive examples running within a Splunk 5 or 6
- instance. 
+The Web Framework Toolkit is built as a Splunk App, enabling interactive examples running within an instance of Splunk Enterprise 5 or 6. 
 
 ##### Installing from Splunk Web
 If you downloaded the Web Framework Toolkit from [Splunk Apps](http://apps.splunk.com), you can install the toolkit 
