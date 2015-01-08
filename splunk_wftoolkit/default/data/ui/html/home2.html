@@ -1,15 +1,61 @@
-{% extends "splunkdj:base_with_app_bar.html" %}
 
-{% load splunkmvc %}
 
-{% block title %}Web Framework Toolkit Overview{% endblock title %}
 
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunk_wftoolkit/home.css" />
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
-{% endblock css %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Web Framework Toolkit Overview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="listen to your data">
+    <meta name="author" content="Splunk Inc.">
 
-{% block content %}
+    
+        
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="/dj/static/splunkjs/css/bootstrap.css"/>
+    
+        
+
+
+    
+
+    
+
+        
+    <link rel="stylesheet" type="text/css" href="/dj/static/splunk_wftoolkit/home.css" />
+    <link rel="stylesheet" type="text/css" href="/dj/static/splunkjs/css/dashboard.css" />
+
+    
+</head>
+
+<body class="">
+    
+        
+    <div 
+ id="header" 
+ class="splunk-view splunk-header" 
+ style=""
+ data-type="splunk-header"
+ data-component="view"
+ data-require="splunkjs/mvc/headerview"
+ data-options="{&quot;app&quot;: &quot;splunk_wftoolkit&quot;, &quot;appbar&quot;: true}">
+    
+    
+        <div id="placeholder-splunk-bar">
+            <a href="" class="brand" title="splunk &gt; listen to your data">splunk<strong>&gt;</strong></a>
+        </div>
+        
+        <div id="placeholder-app-bar"></div>
+        
+    
+</div>
+
+        
+        
 
 <div class="dashboard-body container-fluid main-section-body">
     <div class="dashboard-header clearfix">
@@ -65,9 +111,52 @@
     </div>
 </div>
             
-{% endblock content%}
 
-{% block js %}   
+        
+        
+        
+
+        
+    <div 
+ id="footer" 
+ class="splunk-view splunk-footer " 
+ style=""
+ data-type="splunk-footer"
+ data-component="view"
+ data-require="splunkjs/mvc/footerview"
+ data-options="{&quot;app&quot;: &quot;splunk_wftoolkit&quot;}"></div>
+
+        
+        
+            
+            
+            
+        
+            
+    
+            
+    <script src="/dj/en-us/page_config/?autoload=1"></script>
+
+    <script src="/dj/static/i18n.js"></script>
+    <script src="/dj/static/contrib/require.js"></script>
+    <script src="/dj/static/profiles/shared.js"></script>
+    <script src="/dj/static/splunkjs/config.js"></script>
+    <script>
+        // When non-compiled, we want to see all console output.
+        require.config({
+            paths: {
+                'util/console': 'util/console_dev'
+            }
+        });
+    </script>
+
+<script>
+    require.config({baseUrl: "/dj/static/"});
+    require(["splunkjs/ready!"]);
+</script>
+
+            
+               
     
 
     <script id="item-template" type="text/template">
@@ -119,7 +208,7 @@
                     return false;
                 });
 
-                var staticUrl = '{{STATIC_URL}}';
+                var staticUrl = '/dj/static/';
                 $.getJSON(staticUrl + 'splunk_wftoolkit/json/navinfo.json', function(navdata){
                      var template = _.template( $('#item-template').html() ); 
                     _.each(navdata, function(item){
@@ -168,4 +257,8 @@
             });
         });
     </script>
-{% endblock js %}
+
+        
+    
+</body>
+</html>
