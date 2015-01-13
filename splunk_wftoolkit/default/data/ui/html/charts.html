@@ -22,6 +22,7 @@
 <a id="navSkip"></a>
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
     <div id="content" class="centered"></div>
+    <div id="wide-content"></div>
 </div>
 <div class="footer"></div>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/config?autoload=1"></script>
@@ -29,50 +30,11 @@
 <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/i18n.js"></script>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/i18ncatalog?autoload=1"></script>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/profiles/shared.js"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/pageLoader.js"></script>
 <script type="text/javascript">
 require.config({
-    baseUrl: "{{SPLUNKWEB_URL_PREFIX}}/static/js",
-    paths: {
-        'text': './contrib/text',
-        'splunk_wftoolkit': '../app/splunk_wftoolkit',
-        'prettify': '../app/splunk_wftoolkit/contrib/prettify'
-    },
-    shim: {
-        'prettify': {
-            exports: 'prettyPrint'
-        }
-    }
+    baseUrl: "{{SPLUNKWEB_URL_PREFIX}}/static/js"
 });
-</script>
-<script type="text/javascript">
-    require([
-    "splunkjs/ready!",
-    "splunkjs/mvc/headerview",
-    "splunkjs/mvc/footerview"],
-    function(mvc, HeaderView, FooterView){
-        new HeaderView({
-            id: 'header',
-            el: $('.header'),
-        }, {tokens: true}).render();
-
-        new FooterView({
-            id: 'footer',
-            el: $('.footer')
-        }, {tokens: true}).render();
-
-        require([
-            'text!splunk_wftoolkit/chartsContent.html', 
-            'css!splunk_wftoolkit/css/charts.css', 
-            'splunk_wftoolkit/charts' 
-        ], function(
-                chartsContent, 
-                chartsCss, 
-                chartsJs
-        ){
-                $('#content').append(chartsContent);
-                chartsJs.render();
-        });
-    });
 </script>
 </body>
 </html>

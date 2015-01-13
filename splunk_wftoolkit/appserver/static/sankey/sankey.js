@@ -4,8 +4,8 @@ define([
     'prettify', 
     'splunkjs/ready!', 
     'text!splunk_wftoolkit/vizpagetemplate.tmpl',
-    'text!splunk_wftoolkit/sankeyCodeSample.txt',
-    'text!splunk_wftoolkit/sankeyUsage.html',
+    'text!splunk_wftoolkit/sankey/sankeyCodeSample.txt',
+    'text!splunk_wftoolkit/sankey/sankeyUsage.html',
     'splunkjs/mvc/searchmanager',
     'splunk_wftoolkit/components/sankey/sankey'
     ], 
