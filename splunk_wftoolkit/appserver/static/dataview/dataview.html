@@ -1,0 +1,128 @@
+<div class="dashboard-body container-fluid main-section-body centered component-page">
+  <div class="row">
+    <div class="span12 dashboard-header clearfix">
+      <h2>Data template</h2>
+    </div>
+  </div>
+
+  <div class="dashboard-row">
+    <div class="dashboard-cell">
+      <div class="dashboard-panel">
+        <div class="dashboard-element">
+          <div class="panel-head">
+          </div>
+
+          <div class="panel-body html">
+            <p>
+              The DataTemplate view provides developers with the
+              ability to render data using the client-side
+              templating engine provided by <a href=
+              "http://underscorejs.org" target="_blank">Underscore</a>.
+
+              Explaining how underscore templates work is beyond the scope
+              of this example, but the following examples should
+              help you get started.
+            </p>
+
+            <h2>
+              DataTemplate view with an embedded template using Django
+            </h2>
+            
+            <p>
+              In this example, an Underscore template is included
+              as text in the <code>datatemplateview</code> tag. The search manager
+              bound to the DataTemplate view uses the <b>rangemap</b>
+              search command to create a <code>range</code> field in the
+              search results indicating the severity of values.
+            </p>
+
+            <div class="bs-docs-example">
+              <div id="single-search-example"></div>
+            </div>
+
+            <pre class="prettyprint linenums lang-js">
+&#123;% block content %&#125;
+  &#123;% datatemplateview id="single-search-example"
+      managerid="example-single-search" 
+      template='&lt;div class="example-1"&gt;Event Count: &lt;%= results[0].count %&gt;.  Status: &lt;%= results[0].range %&gt;&lt;/div&gt;'
+  %&#125;
+&#123;% endblock content %&#125;
+
+&#123;% block managers %&#125;
+  &#123;% searchmanager id="example-single-search" 
+      search="index=_internal | stats count | rangemap field=count low=0-3 elevated=3-6 severe=6-10 default=severe"
+      earliest_time="-15m" latest_time="now" 
+  %&#125;
+&#123;% endblock managers %&#125;
+            </pre>
+            
+            
+
+              <h2>
+                DataTemplate view using JavaScript
+              </h2>
+              
+              <p>
+                In this example, the DataTemplate view is instantiated in JavaScript. 
+                The content of the template is associated with the view programmatically.
+                This technique allows you to invoke external templates using advanced loaders such as
+                <a href="http://requirejs.org/" target="_blank">RequireJS</a>.
+              </p>
+
+              <div class="bs-docs-example">
+                <div id="search-top-song-table">
+                </div>
+                <script type="text/x-underscore-tmpl" id="search-top-song-template" class="c2">
+                  <table class="example">
+                    <tbody>
+                      <% for(var i=0, l=results.length; i<l; i++) { var line=results[i]; %>
+                        <tr><td><%= line.track_name %>:</td><td>&nbsp;&nbsp;<%= line.count %></td></tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </script>
+              </div>
+
+                <pre class="prettyprint linenums lang-js">
+&#123;% block content %&#125;            
+  &lt;script type="text/x-underscore-tmpl" id="top-artist-search-template" style="display:none"&gt;
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;% for(var i=0, l=results.length; i&lt;l; i++) { var line=results[i]; %&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;%= line.track_name %&gt;&lt;/td&gt;&lt;td&gt;&lt;%= line.count %&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;% } %&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/script&gt;
+&#123;% endblock content %&#125;            
+
+&#123;% block js %&#125;            
+  &lt;script type="application/javascript"&gt;
+    var deps = [
+      "splunkjs/mvc",
+      "splunkjs/mvc/searchmanager",
+      "splunkjs/mvc/datatemplateview"
+    ];
+    require(deps, function(mvc, SearchManager, DataTemplateView) {
+      new SearchManager({
+        id: "search-top-song-downloads",
+        search: "| inputlookup musicdata.csv | search bc_uri=/sync/addtolibrary/* | stats count by track_name | sort count desc | table track_name count",
+        cache: true
+      });
+
+      new DataTemplateView({
+        id: "table-top-song-downloads",
+        managerid: "search-top-song-downloads",
+        template: $('#search-top-song-template').html(),
+        el: $('#search-top-song-table')
+      }).render();
+    });
+  &lt;/script&gt;
+&#123;% endblock js %&#125;            
+          </pre>
+        </div>
+      </div>
+  </div>
+</div>
+
+

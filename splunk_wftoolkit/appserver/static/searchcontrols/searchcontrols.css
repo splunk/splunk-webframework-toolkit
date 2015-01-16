@@ -1,0 +1,6 @@
+.allow-overflow {
+    /* panel-body sets overflow: hidden, so we need
+    to override it so that we can properly render the 
+    search control popup */
+    overflow: visible !important;
+}

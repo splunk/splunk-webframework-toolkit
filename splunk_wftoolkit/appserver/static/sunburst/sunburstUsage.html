@@ -1,0 +1,65 @@
+<p>The Sunburst shows hierarchically grouped data. This view is similar to a tree except that it uses a radial layout with the root at the center and the leaf nodes around the edges.</p>
+
+<ul>
+<li>Require path: <code>splunk_wftoolkit/components/sunburst/sunburst</code></li>
+</ul>
+<h4>Example searches</h4>
+<div class="well"><ul>
+    <li>index=_internal | head 10000 | stats count by sourcetype clientip</li>
+    <li>| inputlookup faa.demo.csv | search cancellation=* | stats count by cancellation, AirlineDescription</li>
+</ul>
+</div>
+    <h4>Properties</h4>
+<table class="table table-striped table-bordered">
+    <tr>
+        <td><b>Name</b></td>
+        <td><b>Type</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+        <td><b>Try it</b></td>
+    </tr>
+    <tr>
+        <td><code>managerid</code></td>
+        <td><b>string</b></td>
+        <td><b>null</b></td>
+        <td>The search manager bound to the chart.</td>
+        <td>-</td>
+    </tr>
+
+    <tr>
+        <td><code>chartTitle</code></td>
+        <td><b>string</b></td>
+        <td><b>null</b></td>
+        <td>The name of the root node (displayed at graph center).</td>
+        <!-- JIRA: Bring back with (DVPL-1721) -->
+        <td>-<!-- {% textbox id="chartTitle" %} --></td>
+    </tr>
+    <tr>
+        <td><code>categoryFields</code></td>
+        <td><b>string</b><p>(can be a space-separated list)</p></td>
+        <td><b>null</b></br>(defaults to all)</td>
+        <td>A list of fields by which to group children of the root node. Each field essintially indicates the group of the next level in the tree.</td>
+        <td><div id="group-dropdown"></div></td>
+    </tr>
+    <tr>
+        <td><code>valueField</code></td>
+        <td><b>string</b></td>
+        <td><b>null</b></td>
+        <td>Indicates the field used to determine the size of the radial groups. The default null value results in sizing based on number of chldren.</td>
+        <td><div id="size-dropdown"></div></td>
+    </tr>
+    <tr>
+        <td><code>formatLabel</code></td>
+        <td><b>function</b></td>
+        <td><b>_.identity</b></td>
+        <td>A custom formatting function for node names. Takes each node name as an input and returns a formatted name.</td>
+        <td><div id="label-dropdown"></div></td>
+    </tr>
+    <tr>
+        <td><code>formatTooltip</code></td>
+        <td><b>function</b></td>
+        <td><b>"{name}: {value}"</b></td>
+        <td>A custom formatting function for tooltips. Takes each node as an input and returns a formatted tooltip string.</td>
+        <td><div id="tooltip-dropdown"></div></td>
+    </tr>
+</table>

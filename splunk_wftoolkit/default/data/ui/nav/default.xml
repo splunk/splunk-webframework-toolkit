@@ -1,35 +1,34 @@
 <nav color="#424254">
     <view name="home" default="true"/>
-    <a href="/dj/redirector/splunk_wftoolkit/home">Home</a>
+    
     <a href="/dj/redirector/splunk_wftoolkit/overview">Web Framework Overview</a>
     
     <collection label="Splunk Components">
-        <a name="managers" href="/dj/redirector/splunk_wftoolkit/managers">Search managers</a>
-        <a name="charts" href="/dj/redirector/splunk_wftoolkit/charts">Charts</a>
-        <a name="tables" href="/dj/redirector/splunk_wftoolkit/tables">Tables</a>
-        <a name="forms" href="/dj/redirector/splunk_wftoolkit/forms">Forms</a>
-        <a name="searchcontrols" href="/dj/redirector/splunk_wftoolkit/searchcontrols">Search manager controls</a>
-        <a name="map" href="/dj/redirector/splunk_wftoolkit/map">Map</a>
-        <a name="dataview" href="/dj/redirector/splunk_wftoolkit/dataview">Data template</a>
+        <view name="searchmanagers"/>
+        <view name="charts"/>
+        <view name="tables"/>
+        <view name="forms"/>
+        <view name="searchcontrols"/>
+        <view name="map"/>
+        <view name="dataview"/>
     </collection>
 
     <collection label="Toolkit Visualizations">
-        <a href="/dj/redirector/splunk_wftoolkit/sankey">Sankey Chart</a>
-        <a href="/dj/redirector/splunk_wftoolkit/bubblechart">Bubble Chart</a>
-        <a href="/dj/redirector/splunk_wftoolkit/forcedirected">Force-Directed Graph</a>
-        <a href="/dj/redirector/splunk_wftoolkit/calendarheatmap">Calendar Heatmap</a>
-        <a href="/dj/redirector/splunk_wftoolkit/parallelcoords">Parallel Coordinates</a>
-        <a href="/dj/redirector/splunk_wftoolkit/parallelsets">Parallel Sets</a>
-        <a href="/dj/redirector/splunk_wftoolkit/punchcard">Punchcard</a>
-        <a href="/dj/redirector/splunk_wftoolkit/sunburst">Sunburst</a>
+        <view name="sankey"></view>
+        <view name="bubblechart"></view>
+        <view name="forcedirectedgraph"></view>
+        <view name="calendarheatmap"></view>
+        <view name="parallelcoordinates"></view>
+        <view name="parallelsets"></view>
+        <view name="punchcard"></view>
+        <view name="sunburst"></view>
     </collection>
 
     <collection label="Examples">
-        <a href="/dj/redirector/splunk_wftoolkit/dashboarddj">Dashboard in Django</a>
-        <a href="/dj/redirector/splunk_wftoolkit/dashboardjs">Dashboard in JavaScript</a>
+        <view name="dashboardjs">Dashboard in JavaScript</view>
+        <view name="savedsearch">Saved reports</view>
+        <view name="postprocess">Post-process searches</view>
 
-        <a href="/dj/redirector/splunk_wftoolkit/savedsearch">Saved reports</a>
-        <a href="/dj/redirector/splunk_wftoolkit/postprocess">Post-process searches</a>
         <a href="/dj/redirector/splunk_wftoolkit/properties">Search properties</a>
         <a href="/dj/redirector/splunk_wftoolkit/cache">Cached searches</a>
 
@@ -39,7 +38,7 @@
         <a href="/dj/redirector/splunk_wftoolkit/cascade">Cascading form inputs</a>
         <a href="/dj/redirector/splunk_wftoolkit/multidropdown">Multidropdown lists</a>
 
-        <a href="/dj/redirector/splunk_wftoolkit/twosearchbars">Compare Searchbars</a>
+        <!-- <a href="/dj/redirector/splunk_wftoolkit/twosearchbars">Compare Searchbars</a> -->
 
         <a href="/dj/redirector/splunk_wftoolkit/search">Search timeline</a>
         <a href="/dj/redirector/splunk_wftoolkit/timerange">Time ranges</a>
@@ -57,7 +56,7 @@
         <a href="/dj/redirector/splunk_wftoolkit/d3chart">NVD3 charts</a>
         <a href="/dj/redirector/splunk_wftoolkit/jsonviewer">JSON results viewer</a>
    
-        <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Basic layout template using Django</a>
+        <!-- <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Basic layout template using Django</a> -->
         <a href="/dj/redirector/splunk_wftoolkit/dashboardjs_stencil/">Basic layout template using JavaScript</a>
         <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil1/">Single-panel dashboard</a>
         <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil2/">Multi-panel dashboard</a>
@@ -66,7 +65,7 @@
     <collection label="How To">
         <a href="/dj/redirector/splunk_wftoolkit/toolkitcomponents">How to use the Tookit visualizations</a>
         <a href="/dj/redirector/splunk_wftoolkit/splunkdevcli">How to use the Splunk Dev CLI</a>
-        <a href="/dj/redirector/splunk_wftoolkit/setup">How to use Django setup views</a>
+        <!-- <a href="/dj/redirector/splunk_wftoolkit/setup">How to use Django setup views</a> -->
     </collection>
 
     <collection label="Learn More">

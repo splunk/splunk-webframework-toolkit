@@ -1,0 +1,15 @@
+table.example {
+    margin: 10px 0 20px 20px;
+    border: 1px solid #bbb;
+}
+
+table.example tr:nth-child(even) { background-color: #ddd; }
+table.example tr:nth-child(odd)  { background-color: #fff; }
+table.example td { padding: 0.2em 0.5em 0.1em 0.5em; }
+
+.example-1 {
+    margin: 10px 0 20px 20px;
+    width: 50%;
+    border: 1px solid #bbb; 
+    font-weight: bold;
+}

@@ -11,11 +11,12 @@ require.config({
     }
 });
 require([
-    "splunkjs/ready!",
-    "splunkjs/mvc/utils",
-    "splunkjs/mvc/headerview",
-    "splunkjs/mvc/footerview"],
-    function(mvc, splunkUtils, HeaderView, FooterView){
+    'splunkjs/ready!',
+    'splunkjs/mvc/utils',
+    'splunkjs/mvc/headerview',
+    'splunkjs/mvc/footerview', 
+    'prettify'],
+    function(mvc, splunkUtils, HeaderView, FooterView, prettyPrint){
         new HeaderView({
             id: 'header',
             el: $('.header'),
@@ -40,5 +41,6 @@ require([
         ){
                 $('#content').append(content);
                 pageView.render();
+                prettyPrint();
         });
 });

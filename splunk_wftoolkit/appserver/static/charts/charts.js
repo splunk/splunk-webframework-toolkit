@@ -1,7 +1,6 @@
 define([
     'jquery', 
     'underscore', 
-    'prettify', 
     'splunkjs/ready!', 
     'splunkjs/mvc/chartview',
     'splunkjs/mvc/searchmanager'
@@ -9,14 +8,12 @@ define([
     function(
         $, 
         _, 
-        prettyPrint,
         mvc,
         ChartView,
         SearchManager
     ) {
         return {
-            render: function() {
-                prettyPrint();   
+            render: function() {  
 
                 new SearchManager({
                     id: 'chart-search',

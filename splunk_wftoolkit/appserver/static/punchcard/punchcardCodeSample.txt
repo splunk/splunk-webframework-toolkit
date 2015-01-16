@@ -1,0 +1,13 @@
+
+    require([ 
+        "splunkjs/ready!", 
+        "jquery",
+        "splunk_wftoolkit/components/punchcard/punchcard",
+    ], 
+    function(mvc, $, Punchcard) {
+        var punchcard = new Punchcard({
+            'id' : 'example',
+            'managerid' : 'example-search',
+            'el' : $('#example-chart')
+        }).render();
+    });

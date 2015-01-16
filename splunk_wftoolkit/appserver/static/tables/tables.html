@@ -1,0 +1,145 @@
+<!-- TABLE -->
+<div class="dashboard-body container-fluid main-section-body centered component-page" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Tables</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                    </div>
+                    <div class="panel-body html">
+    <p>The table-style views include the Table view and the EventsViewer view.</p>
+
+    <h2>Table view</h2>
+    <p>The Table view is a fully-featured Splunk-style results table that supports pagination. The Table view is bound to a search manager and displays the processed results from that search.</p>
+    <p>When using Django Bindings, use the <code>&#123;% table %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
+
+    <div class="bs-docs-example">
+        <div id="example-table"></div>
+    </div>
+
+<ul class="nav nav-tabs">
+                
+                <li class="active">
+                    <a href="#js" data-toggle="tab">JavaScript</a>
+                </li>
+                <li>
+                    <a href="#django" data-toggle="tab">Django</a>
+                </li>
+            </ul>
+            <div class="tab-content code-sample">
+                <div class="tab-pane django" id="django">
+                    <pre class="prettyprint linenums lang-js">
+&#123;% table id="example-table" managerid="example-search" pageSize="5" %&#125;</pre>
+                </div>
+                <div class="tab-pane active" id="js">
+                    <pre class="prettyprint linenums lang-js">
+var TableView = require("splunkjs/mvc/tableview");
+new TableView({
+    id: "example-table",
+    managerid: "example-search",
+    el: $("#divToHangOn")
+}).render();</pre>
+                </div>
+            </div>
+
+
+    <h3>Options</h3>
+    <p>You can set the following properties using templates tags or JavaScript:</p>
+    <ul>
+        <p><code>managerid</code>: The search manager for the table.</p>
+
+        <p><code>data</code>: The name of the results model to use.</p>
+
+        <p><code>pageSize</code>: The number of results per page.</p>
+
+        <p><code>fields</code>: The fields to include in the table. In JavaScript, provide a list of strings. In Django, provide a space-separated list.</p>
+
+        <p><code>drilldownRedirect</code>: Indicates whether to redirect when clicked.</p>
+    </ul>
+
+<ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#js3" data-toggle="tab">JavaScript</a>
+                </li>
+                <li>
+                    <a href="#django3" data-toggle="tab">Django</a>
+                </li>
+            </ul>
+            <div class="tab-content code-sample">
+                <div class="tab-pane django" id="django3">
+                    <pre class="prettyprint linenums lang-js">
+&#123;% table id="example-table" managerid="example-search" fields="_time splunkd" %&#125;</pre>
+                </div>
+                <div class="tab-pane active" id="js3">
+                    <pre class="prettyprint linenums lang-js">
+var table= splunkjs.mvc.Components.getInstance("example-table");
+table.settings.set("fields", ["_time", "splunkd"]);</pre>
+                </div>
+            </div>
+
+    <h4>Events</h4>
+    <p>The Table view fires the following events:</p>
+    <ul>
+        <p><code>click:cell</code>: Fired when a cell is clicked.</p>
+        <p><code>click:row</code>: Fired when a row is clicked.</p>
+    </ul>
+    <p>By default, the table automatically drills down to the clicked data. You can prevent 
+        this action by setting <code>drilldownRedirect</code> to <code>false</code>, or running 
+        <code>e.preventDefault()</code> in the <code>click</code> handler.</p>
+
+<!-- EVENT TABLE -->
+    <div class="page-header"></div>
+
+    <h2>EventsViewer view</h2>
+    <p>The EventsViewer view is a fully-featured Splunk-style events viewer that supports pagination and variable formatting. The EventsViewer view is bound to a search manager and displays the events from that search.</p>
+    <p>When using Django Bindings, use the <code>&#123;% eventsviewer %&#125;</code> tag with the <code>managerid</code> property to specify the search manager.</p>
+
+    <div class="bs-docs-example">
+        <div id="example-eventsviewer"></div>
+    </div>
+
+    <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#js2" data-toggle="tab">JavaScript</a>
+                </li>
+                <li>
+                    <a href="#django2" data-toggle="tab">Django</a>
+                </li>
+            </ul>
+            <div class="tab-content code-sample">
+                <div class="tab-pane django" id="django2">
+                    <pre class="prettyprint linenums lang-js">
+&#123;% block content %&#125;
+    &#123;% eventsviewer id="example-eventsviewer" managerid="example-event-search"%&#125;
+&#123;% endblock content %&#125;
+&#123;% block managers %&#125; 
+    &#123;% searchmanager id="example-event-search" search="index=_internal | head 3"%&#125; 
+&#123;% endblock managers %&#125;</pre>
+                </div>
+                <div class="tab-pane active" id="js2">
+                    <pre class="prettyprint linenums lang-js">
+var EventsViewerView = require("splunkjs/mvc/eventsviewerview");
+new EventsViewerView({
+    id: "example-eventsviewer",
+    managerid: "example-search",
+    el: $("#divToHangOn")
+}).render();
+
+var SearchManager = require("splunkjs/mvc/searchmanager");
+new SearchManager({
+    id: "example-search",
+    search: "index=_internal | head 3" 
+});</pre>
+                </div>
+            </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

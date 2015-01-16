@@ -1,0 +1,13 @@
+
+    require([ 
+        "splunkjs/ready!", 
+        "jquery",
+        "splunk_wftoolkit/components/sunburst/sunburst",
+    ], 
+    function(mvc, $, Sunburst) {
+        var sunburst = new Sunburst({
+            'id' : 'example',
+            'managerid' : 'example-search',
+            'el' : $('#example-chart')
+        }).render()
+    });
