@@ -1,0 +1,14 @@
+.toppanes{
+    height: 140px;
+}
+.datapanes2{
+    height: 350px;
+}
+.node {
+    cursor: pointer;
+}
+
+.centered {
+    width: 100%;
+    margin: 0 auto;
+}

@@ -1,0 +1,7 @@
+.panel {
+    overflow: visible;
+}
+.panel-body h5, .splunk-multidropdown, #dropdown1-text{
+    margin-left: 10px;
+    margin-bottom: 5px;
+}

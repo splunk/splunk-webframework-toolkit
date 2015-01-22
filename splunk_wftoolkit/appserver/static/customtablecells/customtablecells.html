@@ -1,0 +1,59 @@
+<div class="dashboard-body container-fluid main-section-body" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Custom table cells</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            When rendering a table, a useful feature is the ability
+                            to customize how a particular cell is rendered. Using the 
+                            <code>BaseCellRenderer</code> class, you can
+                            implement your own cell renderers that can be reused
+                            and shared. 
+                        </p>
+                        <p>
+                            In this example, a custom icon based on the severity value
+                            is used to display a clear visual indicator in each row. 
+                            The default table output is also displayed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Custom range cell</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="table1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Default range cell</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="table2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="dashboard-body container-fluid main-section-body centered component-page" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Web Framework Overview</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                    </div>
+                    <div class="panel-body html">
+                        <p>Here's a brief overview of the basic concepts of the Web Framework. Follow the links for additional Splunk documentation on each topic.</p>
+
+                        <h3><a class="external" href="http://dev.splunk.com/view/SP-CAAAEM8" target="_blank">Search managers</a></h3>
+                        <p>A search manager is used to represent a search, and it contains the search query and the properties of the search. The manager handles the operation of the search (start, cancel, pause, etc.) and the lifetime of the search by listening for certain events, so you can monitor the progress. By default, the search manager cancels the old search and starts a new one whenever the search query or properties change.</p><p>The type of search manager you use depends on the type of search: a search job (SearchManager), a saved report (SavedSearchManager), or a post-process search (PostProcessManager).</p> 
+
+                        <h3><a class="external" href="http://dev.splunk.com/view/SP-CAAAEM7" target="_blank">Splunk views</a></h3>
+                        <p>A Splunk view is a UI widget or form control that lets you visualize your data, display a certain type of information, or control some aspect of a search or another view. Splunk views are designed to work with search managers, so you can quickly and easily run searches and display results on your page. The Web Framework contains a collection of Splunk views that you can use, or you can create your own.</p> 
+
+                        <h3><a class="external" href="http://dev.splunk.com/view/SP-CAAAES3" target="_blank">Events</a></h3>
+                        <p>You can listen for events on several views, indicating a click or change. For example, you can listen for chart and legend events on chart views, row and cell click events on table views, and change events on various form input views. Then, you can add functions for the event and respond how you like.</p> 
+
+                        <h3><a class="external" href="http://dev.splunk.com/view/SP-CAAAEME" target="_blank">Drilldown</a></h3>
+                        <p>Several Splunk views (Chart, Table, EventsViewer, and SplunkMap) provide drilldown actions when the user clicks the view. By default, a drilldown action redirects to the Search app, displaying a refined search that depends on the location the user clicked (a table row or cell, or point on a chart or map). You can enable or disable these drilldown actions, or using JavaScript you can create custom actions.</p> 
+
+                        <h3><a class="external" href="http://dev.splunk.com/view/SP-CAAAEQB" target="_blank">Data binding with tokens</a></h3>
+                        <p>To keep values in sync between search managers and views, use tokens. For example, take a search query that is based on the selection from a dropdown list&mdash;to bind these values so that the search query is updated whenever the dropdown choice changes, use a token. A token is like a variable, but is specified using the escape character "$" (for example, "$mychoice$"). You also need to use a token-safe filter to indicate that the value is a token, not a literal string containing dollar signs.</p> 
+
+                        <h3><a class="external" href="http://dev.splunk.com/view/SP-CAAAESV" target="_blank">SplunkJS Stack</a></h3>
+                        <p>SplunkJS Stack is the JavaScript component of the Web Framework, and contains tools to help you develop client apps in JavaScript. The web stack includes libraries for working with Splunk views and search managers, <a href="http://backbonejs.org/" target="_blank">Backbone.js</a> as an MVC structure for your code, <a href="http://jquery.com/" target="_blank">jQuery</a> to manage the DOM, and <a href="http://requirejs.org/" target="_blank">RequireJS</a> to manage dependencies.</p>
+
+                        <h3><a class="external" href="http://dev.splunk.com/view/SP-CAAAEM6" target="_blank">Django Bindings</a></h3>
+                        <p>Django Bindings is the Django component of the Web Framework, and uses the <a href="https://www.djangoproject.com/" target="_blank">Django</a> web framework to provide a built-in easy-to-use application server environment, including tools such as Django's URL dispatching, views, forms, and templates. In addition, the Web Framework provides Django template tags as a quick declarative way to instantiate components on your page templates.</p> 
+
+                        <h3>JavaScript vs Django</h3>
+                        <p>The Web Framework allows you to create components using Django template tags and/or JavaScript. The fundamental difference between these two methods is that Django tags are processed server-side, while JavaScript is run entirely on the client. Regardless of how you initially create the component, the result is an object that you can interact with at run time using JavaScript.</p>
+                        <p>Here's an example of using a Django template tag to create a Chart view:</p>
+<pre class="prettyprint linenums lang-js">
+&#123;% chart id="example-chart" managerid="example-search" type="pie" %&#125;
+</pre>
+                         <p>Here's the same Chart view, but created using JavaScript:</p>
+
+<pre class="prettyprint linenums lang-js">
+// Define dependencies
+var deps = [
+    "splunkjs/ready!",
+    "splunkjs/mvc/chartview"
+];
+require(deps, function(mvc) {
+    var ChartView = require("splunkjs/mvc/chartview");
+
+    // Instantiate components
+    new ChartView({
+        id: "example-chart",
+        managerid: "example-search",
+        type: "pie",
+        el: $("#mychart")
+    }).render();
+    ...
+});
+</pre>   
+                        <p>Unless otherwise noted, examples in this toolkit show how to use both JavaScript and Django.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

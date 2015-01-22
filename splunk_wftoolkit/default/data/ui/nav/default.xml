@@ -1,8 +1,7 @@
 <nav color="#424254">
     <view name="home" default="true"/>
-    
-    <a href="/dj/redirector/splunk_wftoolkit/overview">Web Framework Overview</a>
-    
+    <view name="overview" default="true"/>
+        
     <collection label="Splunk Components">
         <view name="searchmanagers"/>
         <view name="charts"/>
@@ -28,44 +27,30 @@
         <view name="dashboardjs">Dashboard in JavaScript</view>
         <view name="savedsearch">Saved reports</view>
         <view name="postprocess">Post-process searches</view>
-
-        <a href="/dj/redirector/splunk_wftoolkit/properties">Search properties</a>
-        <a href="/dj/redirector/splunk_wftoolkit/cache">Cached searches</a>
-
-        <a href="/dj/redirector/splunk_wftoolkit/databindingjs">Data binding with tokens</a>
-
-        <a href="/dj/redirector/splunk_wftoolkit/form">Form inputs with tokens</a>
-        <a href="/dj/redirector/splunk_wftoolkit/cascade">Cascading form inputs</a>
-        <a href="/dj/redirector/splunk_wftoolkit/multidropdown">Multidropdown lists</a>
-
-        <!-- <a href="/dj/redirector/splunk_wftoolkit/twosearchbars">Compare Searchbars</a> -->
-
-        <a href="/dj/redirector/splunk_wftoolkit/search">Search timeline</a>
-        <a href="/dj/redirector/splunk_wftoolkit/timerange">Time ranges</a>
-        <a href="/dj/redirector/splunk_wftoolkit/timerangegroup">Grouped time range</a>
-        <a href="/dj/redirector/splunk_wftoolkit/punchcardsearch">Search and Punchcard</a>
-
-        <a href="/dj/redirector/splunk_wftoolkit/interactive">Interactive views</a>
-        <a href="/dj/redirector/splunk_wftoolkit/chartclick">Chart clicks</a>
-        <a href="/dj/redirector/splunk_wftoolkit/customtablecells">Custom table cells</a>
-        <a href="/dj/redirector/splunk_wftoolkit/rowexpander">Custom table row expander</a>
-        <a href="/dj/redirector/splunk_wftoolkit/maps">Maps</a>
-
-        <a href="/dj/redirector/splunk_wftoolkit/airlinedashboard">Complex dashboard with drilldown</a>
-
-        <a href="/dj/redirector/splunk_wftoolkit/d3chart">NVD3 charts</a>
-        <a href="/dj/redirector/splunk_wftoolkit/jsonviewer">JSON results viewer</a>
-   
-        <!-- <a href="/dj/redirector/splunk_wftoolkit/dashboarddj_stencil/">Basic layout template using Django</a> -->
-        <a href="/dj/redirector/splunk_wftoolkit/dashboardjs_stencil/">Basic layout template using JavaScript</a>
-        <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil1/">Single-panel dashboard</a>
-        <a href="/dj/redirector/splunk_wftoolkit/dashboard_stencil2/">Multi-panel dashboard</a>
+        <view name="searchproperties">Search properties</view>
+        <view name="cachedsearches">Cached searches</view>
+        <view name="databindingjs">Data binding with tokens</view>
+        <view name="forminput">Form inputs with tokens</view>
+        <view name="cascadinginputs">Cascading form inputs</view>
+        <view name="multidropdown">Multidropdown lists</view>
+        <view name="searchtimeline">Search timeline</view>
+        <view name="timerange">Time ranges</view>
+        <view name="timerangegroup">Grouped Time ranges</view>
+        <view name="punchcardsearch">Search and Punchcard</view>
+        <view name="interactiveviews">Interactive views</view>
+        <view name="chartclicks">Chart clicks</view>
+        <view name="customtablecells">Custom table cells</view>
+        <view name="tablerowexpander">Custom table row expander</view>
+        <view name="maps">Maps</view>
+        <view name="d3chart">NVD3 charts</view>
+        <view name="jsonresultsviewer">JSON results viewer</view>
+        <view name="dashboardstencil">Multi-panel dashboard stencil</view>
+        <view name="complexdashboard">Complex dashboard with drilldown</view>       
     </collection>
 
     <collection label="How To">
-        <a href="/dj/redirector/splunk_wftoolkit/toolkitcomponents">How to use the Tookit visualizations</a>
-        <a href="/dj/redirector/splunk_wftoolkit/splunkdevcli">How to use the Splunk Dev CLI</a>
-        <!-- <a href="/dj/redirector/splunk_wftoolkit/setup">How to use Django setup views</a> -->
+        <view name="usingtoolkitcomponents">How to use the Tookit visualizations</view>
+        <view name="usingsplunkdevcli">How to use the Splunk Dev CLI</view>       
     </collection>
 
     <collection label="Learn More">

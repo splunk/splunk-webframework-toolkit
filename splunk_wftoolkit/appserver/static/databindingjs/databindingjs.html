@@ -1,0 +1,54 @@
+<div class="dashboard-body container-fluid main-section-body" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Data binding with tokens</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                    </div>
+                    <div class="panel-body">
+                    <p>
+                        This example demonstrates how to set up data binding using tokens.
+                    </p>
+                    <p>
+                        The values of both text inputs are automatically kept in sync
+                        because they are bound to the same token (<code>$fullName$</code>).
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Left side</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Who are you?</p>
+                        <div id="leftField" class="splunk-view"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Right side</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Your name is:</p>
+                        <div id="rightField" class="splunk-view"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

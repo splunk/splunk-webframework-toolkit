@@ -1,0 +1,68 @@
+<div class="dashboard-body container-fluid main-section-body" data-role="main">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>Multidropdown lists</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-body">
+                        <p>The MultiDropdown view is similar to the 
+                            Dropdown view, but allows multiple selections.</p>
+                        <div class="panel-head">
+                            <h3>Example</h3>
+                            <p>This multidropdown list is populated by a Splunk search. Each time you make
+                            a selection, a change event handler is used to update the display of selected values.</p>
+                        </div>
+                        <div class="span3">
+                            <div id="multidropdown1"></div>
+                            
+                        </div>
+                        <div class="span6">
+                        <p><h5>Selected options</h5><span id="dropdown1-text">None</span></p>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Multidropdown with a table</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>This example shows a multidropdown list that updates the visible columns in a table.</p>
+
+                        <h5>Select the columns to add:</h5>
+                        <div id="multidropdown2"></div>
+                        
+                        <div id="rt1"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 50%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                        <h3>Multidropdown with token binding</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>This example shows a multidropdown that uses a change event handler to take
+                            the selected values and set them into a token that is used by a search.</p>
+                        <h5>Select sourcetypes:</h5>
+                        <div id="multidropdown3"></div>
+                        
+                        <div id="et1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

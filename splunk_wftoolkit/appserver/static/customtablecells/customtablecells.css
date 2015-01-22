@@ -1,0 +1,20 @@
+td.icon {
+    text-align: center;
+}
+
+td.icon i {
+    font-size: 25px;
+    text-shadow: 1px 1px #aaa;
+}
+
+td.icon .severe {
+    color: red;
+}
+
+td.icon .elevated {
+    color: orangered;
+}
+
+td.icon .low {
+    color: #006400;
+}

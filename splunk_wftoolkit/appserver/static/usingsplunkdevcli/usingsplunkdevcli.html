@@ -1,0 +1,356 @@
+<div class="dashboard-body container-fluid main-section-body centered">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2>How to use the Splunk Dev CLI</h2>
+        </div>
+    </div>
+    <div class="dashboard-row">
+        <div class="dashboard-cell" style="width: 100%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head"></div>
+                    <div class="panel-body html">
+
+<h1>The Splunk Dev Command Line Interface (CLI)</h1>
+
+<p>When developing Splunk apps, you can use the Splunk Dev command-line interface (CLI) to make it easier to create and manage apps. The Splunk Dev CLI uses <a href="http://yeoman.io/">Yeoman</a> for templates and <a href="http://gruntjs.com/">Grunt</a> for watch tasks.</p>
+
+<h4>Prerequisites</h4>
+
+<p>The Node Package Manager (NPM) is used to configure and set up the Splunk Dev CLI, so Node.js must be installed first. To download the latest version of Node.js (we recommend version 0.10.<em>x</em> or later), go to the <a href="http://nodejs.org/download/">Node.js website</a>.</p>
+
+<h4>Install the Splunk Dev CLI</h4>
+
+<p>To install the Splunk Dev CLI (along with dependencies such as Yeoman), open a command prompt and enter the following command:</p>
+
+<pre><code>npm install -g splunkdev-cli
+</code></pre>
+
+<p>Now you'll have access to the Splunk Dev CLI globally, from anywhere on your system.</p>
+
+<h2>Using the Splunk Dev CLI</h2>
+
+<p>Use the <code>splunkdev</code> command to access the Splunk Dev CLI.</p>
+
+<h4>Usage</h4>
+
+<p>To use the Splunk Dev CLI, open a command prompt and use the <code>splunkdev</code> command as follows, where optional items are in square brackets:</p>
+
+<pre><code>splunkdev options
+
+splunkdev command [command options] [options]
+</code></pre>
+
+<h4>Options</h4>
+
+<p>The following table lists the possible command-line options.</p>
+
+<table class="table table-striped table-bordered">
+<tr><td><b>Option</b></td><td><b>Descripton</b></td></tr>
+<tr><td><code>-h<br>
+--help</code></td><td>Displays help.</td></tr>
+<tr><td><code>-V<br>
+--version</code></td><td>Displays the version number.</td></tr>
+<tr><td><code>-H <i>path</i><br>
+--splunkHome <i>path</i></code></td><td>Specifies a $SPLUNK_HOME directory to use with a CLI command.</td></tr>
+<tr><td><code>-v<br>
+--verbose</code></td><td>Specifies verbose output for a CLI command.</td></tr>
+</table>
+
+
+<h4>Commands</h4>
+
+<p>The following table lists the <code>splunkdev</code> commands.</p>
+
+<table class="table table-striped table-bordered">
+  <tr><td><b>Command</b></td><td><b>Description</b></td></tr>
+  <tr><td><code>apps</code></td><td>List and manage Splunk apps.</td></tr>
+  <tr><td><code>config</code></td><td>Configure the CLI login credentials for the current Splunk instance.</td></tr>
+  <tr><td><code>create</code></td><td>Create a Splunk app.</td></tr>
+  <tr><td><code>reload</code></td><td>Reload resources and configurations for all apps, without restarting Splunk.</td></tr>
+  <tr><td><code>settings</code></td><td>Specify whether to use minified files in Splunk.</td></tr>
+  <tr><td><code>service</code></td><td>Start, stop, and restart Splunk services.</td></tr>
+  <tr><td><code>watch</code></td><td>Watch for configuration changes to a specific app or to Splunk.</td></tr>
+</table>
+
+
+<h4>Examples</h4>
+
+<p>To get help for the <code>splunkdev</code> command:</p>
+
+<pre><code>splunkdev –h
+
+splunkdev –-help
+</code></pre>
+
+<p>To get help for the <code>splunkdev</code> commands <code>apps</code> and <code>watch</code>:</p>
+
+<pre><code>splunkdev apps –h
+
+splunkdev watch –-help
+</code></pre>
+
+<h2>splunkdev apps</h2>
+
+<p>Use the <code>splunkdev apps</code> command to list and manage your Splunk apps. If you don't specify any options, all non-system, enabled apps are listed.</p>
+
+<h4>Usage</h4>
+
+<pre><code>splunkdev apps [appname] [options]
+</code></pre>
+
+<h4>Options</h4>
+
+<p>The following table lists the possible command-line options.</p>
+
+<table class="table table-striped table-bordered">
+<tr><td><b>Option</b></td><td><b>Descripton</b></td></tr>
+<tr><td><code>-h<br>
+--help</code></td><td>Displays help.</td></tr>
+<tr><td><code>-s<br>
+--system</code></td><td>Lists Splunk apps, including system apps.</td></tr>
+<tr><td><code>-d<br>
+--disabled</code></td><td>Lists Splunk apps, including disabled apps.</td></tr>
+<tr><td><code>-s {<b>enabled | disabled</b>}<br>
+--state {<b>enabled | disabled</b>}</code></td><td>Changes the app state.</td></tr>
+<tr><td><code>-R<br>
+--remove</code></td><td>Removes the specified app from Splunk.</td></tr>
+</table>
+
+
+<h4>Examples</h4>
+
+<p>List installed apps:</p>
+
+<pre><code>splunkdev apps
+</code></pre>
+
+<p>List all apps, including disabled and system apps:</p>
+
+<pre><code>splunkdev apps --disabled –-system
+</code></pre>
+
+<p>List all the apps that start with "test":</p>
+
+<pre><code>splunkdev apps test*
+</code></pre>
+
+<p>Remove the app called "my_app":</p>
+
+<pre><code>splunkdev apps my_app –-remove
+</code></pre>
+
+<p>Remove all apps with names that start with "test":</p>
+
+<pre><code>splunkdev apps "test*" –-remove
+</code></pre>
+
+<p>Change the state of the "my_app" app to disabled:</p>
+
+<pre><code>splunkdev apps my_app --state disabled
+</code></pre>
+
+<p>Change the state of the "my_app" app to enabled:</p>
+
+<pre><code>splunkdev apps my_app --state enabled
+</code></pre>
+
+<h2>splunkdev config</h2>
+
+<p>Use the <code>splunkdev config</code> command to configure the CLI login credentials for the current Splunk instance. These credentials are used by <code>splunkdev</code> commands that communicate with splunkd, such as <code>watch</code>, <code>reload</code>, and <code>settings</code>.</p>
+
+<h4>Usage</h4>
+
+<pre><code>splunkdev config [options]
+</code></pre>
+
+<h4>Options</h4>
+
+<p>The following table lists the possible command-line options.</p>
+
+<table class="table table-striped table-bordered">
+<tr><td><b>Option</b></td><td><b>Descripton</b></td></tr>
+<tr><td><code>-h<br>
+--help</code></td><td>Displays help.</td></tr>
+<tr><td><code>-R<br>
+--remove</code></td><td>Removes the CLI login credentials configuration for the current Splunk instance.</td></tr>
+</table>
+
+
+<h4>Examples</h4>
+
+<p>Set the CLI login credentials:</p>
+
+<pre><code>splunkdev config
+</code></pre>
+
+<h2>splunkdev create</h2>
+
+<p>Use the <code>splunkdev create</code> command to create a Splunk app. You'll be asked whether to restart Splunk afterwards.</p>
+
+<h4>Usage</h4>
+
+<pre><code>splunkdev create appname
+
+splunkdev create [options]
+</code></pre>
+
+<h4>Options</h4>
+
+<p>The following table lists the possible command-line options.</p>
+
+<table class="table table-striped table-bordered">
+<tr><td><b>Option</b></td><td><b>Descripton</b></td></tr>
+<tr><td><code>-h<br>
+--help</code></td><td>Displays help.</td></tr>
+</table>
+
+
+<h4>Examples</h4>
+
+<p>Create an app called "my_app":</p>
+
+<pre><code>splunkdev create my_app
+</code></pre>
+
+<h2>splunkdev reload</h2>
+
+<p>Use the <code>splunkdev reload</code> command to reload resources and configurations for all apps, without restarting Splunk.</p>
+
+<h4>Usage</h4>
+
+<pre><code>splunkdev reload [options]
+</code></pre>
+
+<h4>Options</h4>
+
+<p>The following table lists the possible command-line options.</p>
+
+<table class="table table-striped table-bordered">
+<tr><td><b>Option</b></td><td><b>Descripton</b></td></tr>
+<tr><td><code>-h<br>
+--help</code></td><td>Displays help.</td></tr>
+</table>
+
+
+<h2>splunkdev settings</h2>
+
+<p>Use the <code>splunkdev settings</code> command to specify whether to use minified files in Splunk.</p>
+
+<h4>Usage</h4>
+
+<pre><code>splunkdev settings [options]
+</code></pre>
+
+<h4>Options</h4>
+
+<p>The following table lists the possible command-line options.</p>
+
+<table class="table table-striped table-bordered">
+<tr><td><b>Option</b></td><td><b>Descripton</b></td></tr>
+<tr><td><code>-h<br>
+--help</code></td><td>Displays help.</td></tr>
+<tr><td><code>-m {<b>true | false</b>}<br>
+--minified {<b>true | false</b>}</code></td><td>Indicates whether to use minified CSS and JS files.</td></tr>
+</table>
+
+
+<h4>Examples</h4>
+
+<p>Use unminified CSS and JS files in the web environment:</p>
+
+<pre><code>splunkdev settings -m false
+</code></pre>
+
+<h2>splunkdev service</h2>
+
+<p>Use the <code>splunkdev service</code> command to start, stop, and restart Splunk services. If a particular service is not specified, the action is performed on all services.</p>
+
+<h4>Usage</h4>
+
+<pre><code>splunkdev service {start | stop | restart} [options]
+</code></pre>
+
+<h4>Options</h4>
+
+<p>The following table lists the possible command-line options.</p>
+
+<table class="table table-striped table-bordered">
+<tr><td><b>Option</b></td><td><b>Descripton</b></td></tr>
+<tr><td><code>-h<br>
+--help</code></td><td>Displays help.</td></tr>
+<tr><td><code>-s {<b>splunkd | splunkweb | *</b> }<br>
+--service {<b>splunkd | splunkweb | *</b> }</code></td><td>Indicates the Splunk service to start, stop, or restart:<br>
+<b>splunkd</b>: Splunk server daemon<br>
+<b>splunkweb</b>: Splunk Web interface<br>
+<b>*</b>: both services</td></tr>
+</table>
+
+
+<h4>Examples</h4>
+
+<p>Start all Splunk services:</p>
+
+<pre><code>splunkdev service start
+</code></pre>
+
+<p>Restart all Splunk services:</p>
+
+<pre><code>splunkdev service restart
+</code></pre>
+
+<p>Stop all Splunk services:</p>
+
+<pre><code>splunkdev service stop
+</code></pre>
+
+<p>Start the splunkd service:</p>
+
+<pre><code>splunkdev service stop -s splunkd
+</code></pre>
+
+<p>Restart the splunkweb service:</p>
+
+<pre><code>splunkdev service restart --service splunkweb
+</code></pre>
+
+<h2>splunkdev watch</h2>
+
+<p>Use the <code>splunkdev watch</code> command to watch for changes to a specific app or to Splunk. When a change occurs that requires restarting a Splunk service or reloading a configuration file, that action is performed automatically. For example, changes to app configuration or Python files require the app resources to be reloaded, and changes to the app's navigation file require splunkweb to be restarted.</p>
+
+<p>To stop the current watch task, press Ctrl+C.</p>
+
+<h4>Usage</h4>
+
+<pre><code>splunkdev watch [options]
+</code></pre>
+
+<h4>Options</h4>
+
+<p>The following table lists the possible command-line options.</p>
+
+<table class="table table-striped table-bordered">
+<tr><td><b>Option</b></td><td><b>Descripton</b></td></tr>
+<tr><td><code>-h<br>
+--help</code></td><td>Displays help.</td></tr>
+<tr><td><code>-a <i>appname</i><br>
+--app <i>appname</i></code></td><td>Watches for changes to the specified app.</td></tr>
+<tr><td><code>-s<br>
+--splunk</code></td><td>Watches for changes to all apps and Splunk global files. </td></tr>
+</table>
+
+
+<h4>Examples</h4>
+
+<p>Watch for changes to the "my_app" app:</p>
+
+<pre><code>splunkdev watch --app my_app
+</code></pre>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
