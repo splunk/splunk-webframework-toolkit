@@ -7,15 +7,12 @@
         <div class="dashboard-cell">
             <div class="dashboard-panel">
                 <div class="dashboard-element">
-                    <div class="panel-head">
-                    </div>
                     <div class="panel-body html">
 
-            <p>The Chart view displays a series of data to plot in various configurable chart types.</p>
-            <p>When using Django, use the <code>&#123;% chart %&#125;</code> template tag with the <code>type</code> property to specify the type of chart to display.</p>
-            <p>This example shows how to create a chart:</p>
+                        <p>The Chart view displays a series of data to plot in various configurable chart types.</p>
+                        <p>This example shows how to create a chart:</p>
             
-<pre class="prettyprint linenums lang-js">
+                        <pre class="prettyprint linenums lang-js">
 var ChartView = require("splunkjs/mvc/chartview");
 new ChartView({
     id: "example-chart",
@@ -23,129 +20,120 @@ new ChartView({
     type: "line",
     el: $("#divToHangOn")
 }).render();
-</pre>
+                        </pre>
                 
-            <h2>Chart types</h2>
-            <p>You can use the following types of charts:</p>
-            <ul>
-                <li>Area</li>
-                <li>Bar</li>
-                <li>Column</li>
-                <li>Filler gauge</li>
-                <!--<li>hybrid</li>-->
-                <li>Line</li>
-                <li>Marker gauge</li>
-                <li>Pie</li>
-                <li>Radial gauge</li>
-                <li>Scatter</li>
-            </ul>   
+                        <h2>Chart types</h2>
+                        <p>You can use the following types of charts:</p>
+                        <ul>
+                            <li>Area</li>
+                            <li>Bar</li>
+                            <li>Column</li>
+                            <li>Filler gauge</li>
+                            <li>Line</li>
+                            <li>Marker gauge</li>
+                            <li>Pie</li>
+                            <li>Radial gauge</li>
+                            <li>Scatter</li>
+                        </ul>   
 
-            <h3>Area</h3>
-            <p>An area chart (type=<code>"area"</code>) renders each series in a data set as a filled area with an optional line. The data table upon which the chart is structured must contain at least two columns: the first column contains the values to plot on the x-axis (such as <b>_time</b> values for a time chart), and each additional column contains a series of values to plot on the y-axis.</p>
+                        <h3>Area</h3>
+                        <p>An area chart (type=<code>"area"</code>) renders each series in a data set as a filled area with an optional line. The data table upon which the chart is structured must contain at least two columns: the first column contains the values to plot on the x-axis (such as <b>_time</b> values for a time chart), and each additional column contains a series of values to plot on the y-axis.</p>
 
-            <div class="bs-docs-example">
-                <div id="example-chart-area"></div>
-            </div>
+                        <div class="bs-docs-example">
+                            <div id="example-chart-area"></div>
+                        </div>
 
-            <h3>Bar</h3>
-            <p>A bar chart (type=<code>"bar"</code>) renders data as horizontal bars. The data set must contain at least two columns: the first column contains the values to plot on the y-axis, and each additional column contains a series of values to plot on the x-axis.</p>
+                        <h3>Bar</h3>
+                        <p>A bar chart (type=<code>"bar"</code>) renders data as horizontal bars. The data set must contain at least two columns: the first column contains the values to plot on the y-axis, and each additional column contains a series of values to plot on the x-axis.</p>
 
-            <div class="bs-docs-example">
-                <div id="example-chart-bar"></div>
-            </div>
+                        <div class="bs-docs-example">
+                            <div id="example-chart-bar"></div>
+                        </div>
 
-            <h3>Column</h3>
-            <p>A column chart (type=<code>"column"</code>) renders data as vertical columns. The data table upon which the chart is structured must contain at least two columns: the first column contains the values to plot on the x-axis, and each additional column contains a series of values to plot on the y-axis.</p>
-            
-            <div class="bs-docs-example">
-                <div id="example-chart-column"></div>
-            </div>
+                        <h3>Column</h3>
+                        <p>A column chart (type=<code>"column"</code>) renders data as vertical columns. The data table upon which the chart is structured must contain at least two columns: the first column contains the values to plot on the x-axis, and each additional column contains a series of values to plot on the y-axis.</p>
+                        
+                        <div class="bs-docs-example">
+                            <div id="example-chart-column"></div>
+                        </div>
 
-            <h3>Filler gauge</h3>
-            <p>A filler gauge chart (type=<code>"fillerGauge"</code>) enables the visualization of a single numerical value mapped against a range of colors that may have particular business meaning or logic. The filler gauge is similar in appearance to a thermometer, with a liquid-like filler indicator that changes color as it rises or lowers and passes range boundaries. At least two range values are required to define a minimum and maximum range. Additional values can be supplied to define intervals between the minimum and maximum values.</p>
+                        <h3>Filler gauge</h3>
+                        <p>A filler gauge chart (type=<code>"fillerGauge"</code>) enables the visualization of a single numerical value mapped against a range of colors that may have particular business meaning or logic. The filler gauge is similar in appearance to a thermometer, with a liquid-like filler indicator that changes color as it rises or lowers and passes range boundaries. At least two range values are required to define a minimum and maximum range. Additional values can be supplied to define intervals between the minimum and maximum values.</p>
 
-            <div class="bs-docs-example gauge-wrapper">
-                <div id="example-chart-fillerGauge"></div>
-            </div>
+                        <div class="bs-docs-example gauge-wrapper">
+                            <div id="example-chart-fillerGauge"></div>
+                        </div>
 
-            <!--
-            <h3>hybrid</h3>
-            <p>TBD</p>
+           
 
-            <div class="bs-docs-example">
-                {% chart id="example-chart-hybrid" managerid="example-search" type="hybrid" %}
-            </div>
-        -->
+                        <h3>Line</h3>
+                        <p>A line chart (type=<code>"line"</code>) is a basic line graph that renders each series in a data set as a line with optional markers. The data table upon which the chart is structured must contain at least two columns: the first column contains the values to plot on the x-axis (such as <b>_time</b> values for a time chart), and each additional column contains a series of values to plot on the y-axis</p>
 
-        <h3>Line</h3>
-        <p>A line chart (type=<code>"line"</code>) is a basic line graph that renders each series in a data set as a line with optional markers. The data table upon which the chart is structured must contain at least two columns: the first column contains the values to plot on the x-axis (such as <b>_time</b> values for a time chart), and each additional column contains a series of values to plot on the y-axis</p>
+                        <div class="bs-docs-example">
+                            <div id="example-chart-line"></div>
+                        </div>
 
-        <div class="bs-docs-example">
-            <div id="example-chart-line"></div>
-        </div>
+                        <h3>MarkerGauge</h3>
+                        <p>A marker gauge chart (type=<code>"markerGauge"</code>) enables the visualization of a single numerical value mapped against a range of colors that may have particular business meaning or logic. The marker gauge is similar in appearance to a slide rule, with a linear range scale and a sliding marker that rests at the value returned by the search. At least two range values are required to define a minimum and maximum range. Additional values can be supplied to define intervals between the minimum and maximum values. </p>
 
-        <h3>MarkerGauge</h3>
-        <p>A marker gauge chart (type=<code>"markerGauge"</code>) enables the visualization of a single numerical value mapped against a range of colors that may have particular business meaning or logic. The marker gauge is similar in appearance to a slide rule, with a linear range scale and a sliding marker that rests at the value returned by the search. At least two range values are required to define a minimum and maximum range. Additional values can be supplied to define intervals between the minimum and maximum values. </p>
+                        <div class="bs-docs-example gauge-wrapper">
+                            <div id="example-chart-markerGauge"></div>
+                        </div>
 
-        <div class="bs-docs-example gauge-wrapper">
-            <div id="example-chart-markerGauge"></div>
-        </div>
+                        <h3>Pie</h3>
+                        <p>A pie chart (type=<code>"pie"</code>) renders data as a circle divided into slices. The data table upon which the chart is structured must contain at least two columns: the first column contains the labels for each pie chart slice, and the second column contains the values for those slices.</p>
 
-        <h3>Pie</h3>
-        <p>A pie chart (type=<code>"pie"</code>) renders data as a circle divided into slices. The data table upon which the chart is structured must contain at least two columns: the first column contains the labels for each pie chart slice, and the second column contains the values for those slices.</p>
+                        <div class="bs-docs-gauge">
+                            <div id="example-chart-pie"></div>
+                        </div>
 
-        <div class="bs-docs-gauge">
-            <div id="example-chart-pie"></div>
-        </div>
+                        <h3>Radial gauge</h3>
+                        <p>A radial gauge chart (type=<code>"radialGauge"</code>) enables the visualization of a single numerical value mapped against a range of colors that may have particular business meaning or logic. The radial gauge is similar in appearance to a speedometer in appearance with an arced range scale and a rotating needle. At least two range values are required to define a minimum and maximum range. Additional values can be supplied to define intervals between the minimum and maximum values.</p>
 
-        <h3>Radial gauge</h3>
-        <p>A radial gauge chart (type=<code>"radialGauge"</code>) enables the visualization of a single numerical value mapped against a range of colors that may have particular business meaning or logic. The radial gauge is similar in appearance to a speedometer in appearance with an arced range scale and a rotating needle. At least two range values are required to define a minimum and maximum range. Additional values can be supplied to define intervals between the minimum and maximum values.</p>
+                        <div class="bs-docs-example gauge-wrapper">
+                            <div id="example-chart-radialGauge"></div>
+                        </div>
 
-        <div class="bs-docs-example gauge-wrapper">
-            <div id="example-chart-radialGauge"></div>
-        </div>
+                        <h3>Scatter</h3>
+                        <p>A scatter chart (type=<code>"scatter"</code>) is a Cartesian chart that renders data as scattered markers, and supports single and multiple series.</p>
 
-        <h3>Scatter</h3>
-        <p>A scatter chart (type=<code>"scatter"</code>) is a Cartesian chart that renders data as scattered markers, and supports single and multiple series.</p>
+                        <div class="bs-docs-example">
+                            <div id="example-chart-scatter"></div>
+                        </div>
 
-        <div class="bs-docs-example">
-            <div id="example-chart-scatter"></div>
-        </div>
+                        <h2>Options</h2>
+                        <p>For a complete list of chart options, see the <a href="http://docs.splunk.com/Documentation/Splunk/latest/Viz/ChartConfigurationReference" target="_blank">Chart Configuration Reference</a>.</p>
+                        <p>These properties must be set in JavaScript, for example:</p>
 
-        <h2>Options</h2>
-        <p>For a complete list of chart options, see the <a href="http://docs.splunk.com/Documentation/Splunk/latest/Viz/ChartConfigurationReference" target="_blank">Chart Configuration Reference</a>.</p>
-        <p>These properties must be set in JavaScript, for example:</p>
-
-<pre class="prettyprint linenums lang-js">
+                        <pre class="prettyprint linenums lang-js">
 splunkjs.mvc.Components.getInstance("example-chart").settings.set({
     "charting.axisTitleX.text": " x-axis title ",
     "charting.axisTitleY.text": " y-axis title ",
     "charting.legend.placement": "none",
 });
-</pre>
+                        </pre>
 
-    <p>In addition to the charting library options, you can set the following properties using templates tags or JavaScript:</p>
-    <ul>
-        <p><code>managerid</code>: The search manager of the chart.</p>
+                        <p>In addition to the charting library options, you can set the following properties using templates tags or JavaScript:</p>
+                        <ul>
+                            <p><code>managerid</code>: The search manager of the chart.</p>
 
-        <p><code>type</code>: The type of chart.</p>
+                            <p><code>type</code>: The type of chart.</p>
 
-        <p><code>data</code>: The name of the results model to use.</p>
+                            <p><code>data</code>: The name of the results model to use.</p>
 
-        <p><code>drilldownRedirect</code>: Whether to redirect when clicked.</p>
-    </ul>
+                            <p><code>drilldownRedirect</code>: Whether to redirect when clicked.</p>
+                        </ul>
 
-    <h2>Events</h2>
-    <p>The following events are fired by charts:</p>
-    <ul>
-        <p><code>click:chart</code>: Fired when the chart is clicked.</p>
-        <p><code>click:legend</code>: Fired when the legend is clicked.</p>
-    </ul>
-    <p>By default, the chart automatically drills down to the clicked data. You can prevent 
-        this action by setting <code>drilldownRedirect</code> to <code>false</code>, or running 
-        <code>e.preventDefault()</code> in the <code>click</code> handler.</p>
-</div>
+                        <h2>Events</h2>
+                        <p>The following events are fired by charts:</p>
+                        <ul>
+                            <p><code>click:chart</code>: Fired when the chart is clicked.</p>
+                            <p><code>click:legend</code>: Fired when the legend is clicked.</p>
+                        </ul>
+                        <p>By default, the chart automatically drills down to the clicked data. You can prevent this action by setting <code>drilldownRedirect</code> to <code>false</code>, or running <code>e.preventDefault()</code> in the <code>click</code> handler.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

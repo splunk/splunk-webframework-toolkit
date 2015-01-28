@@ -8,8 +8,6 @@
         <div class="dashboard-cell" >
             <div class="dashboard-panel">
                 <div class="dashboard-element">
-                    <div class="panel-head">
-                    </div>
                     <div class="panel-body html">
                         <p>The SplunkMap view binds a map to a search that interprets geographic data and displays it on a map. Data with <code>lat</code> and <code>lon</code> fields are used to populate map markers according to location. The SplunkMap view works best with the <b>geostats</b> search command, which provides clustering and spatial statistics in the Splunk search language.</p>
 
@@ -18,30 +16,9 @@
 
                         <div class="bs-docs-example">
                             <div id="example-map"></div>
-                     </div>
+                        </div>
 
-                     <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#js" data-toggle="tab">JavaScript</a>
-                        </li>
-                        <li >
-                            <a href="#django" data-toggle="tab">Django</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content code-sample">
-                        <div class="tab-pane django" id="django">
-                            <pre class="prettyprint linenums lang-js">
-&#123;% block content %&#125;
-    &#123;% splunkmap id="example-map" managerid="geosearch" tileSource="openStreetMap" %&#125;
-&#123;% endblock content %&#125;
-
-&#123;% block managers %&#125; 
-    &#123;% searchmanager id="geosearch" search="| inputlookup earthquakes.csv | rename Lat as lat Lon as lon | geostats count" %&#125; 
-&#123;% endblock managers%&#125;
-                            </pre>
-                            </div>
-                            <div class="tab-pane active" id="js">
-                                <pre class="prettyprint linenums lang-js">
+                        <pre class="prettyprint linenums lang-js">
 var MapView = require("splunkjs/mvc/splunkmapview");
     new MapView({
     id: "example-map",
@@ -55,15 +32,11 @@ new SearchManager({
     search: "| inputlookup earthquakes.csv | rename Lat as latitude Lon as longitude | geostats count",
     tileSource: "openStreetMap"
 });
-                            </div>
-                        </div>  
-
+                        </pre>
                         <h3>Options</h3>
                         <ul>
                             <p><code>tileSource</code>: Tiles to use for map rendering. Valid values are <code>openStreetMap</code> or <code>splunk</code> (default).</p>
                         </ul>
-
-
                     </div>
                 </div>
             </div>

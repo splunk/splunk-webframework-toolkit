@@ -6,7 +6,7 @@
         "section": "reference"
     },
     {
-        "id": "managers",
+        "id": "searchmanagers",
         "title": "Search managers",
         "description": "Search managers get data from Splunk and make it available to Web Framework components",
         "section": "basiccomponents"
@@ -66,7 +66,7 @@
         "section": "toolkitvisualizations"
     },
     {
-        "id": "forcedirected",
+        "id": "forcedirectedgraph",
         "title": "Force-Directed Graph",
         "description": "The Force-Directed Graph displays information about connectivity and clustering between nodes in a network",
         "section": "toolkitvisualizations"
@@ -84,7 +84,7 @@
         "section": "toolkitvisualizations"
     },
     {
-        "id": "parallelcoords",
+        "id": "parallelcoordinates",
         "title": "Parallel Coordinates",
         "description": "The Parallel Coordinates graph visualizes multidimensional data dynamically",
         "section": "toolkitvisualizations"
@@ -100,12 +100,6 @@
         "title": "Sunburst",
         "description": "The Sunburst shows hierarchically-grouped data using a radial layout with the root at the center and the leaf nodes around the edges.",
         "section": "toolkitvisualizations"
-    },
-    {
-        "id": "dashboarddj",
-        "title": "Example: Dashboard in Django",
-        "description": "An example showing a simple dashboard using Django template tags for creating views and managers",
-        "section": "examples"
     },
     {
         "id": "dashboardjs",
@@ -126,13 +120,13 @@
         "section": "examples"
     },
     {
-        "id": "properties",
+        "id": "searchproperties",
         "title": "Example: Search properties",
         "description": "An example showing how to set search properties programatically",
         "section": "examples"
     },
     {
-        "id": "cache",
+        "id": "cachedsearches",
         "title": "Example: Cached searches",
         "description": "An example showing how to use pre-existing jobs to power searches",
         "section": "examples"
@@ -144,13 +138,13 @@
         "section": "examples"
     },
     {
-        "id": "form",
+        "id": "forminput",
         "title": "Example: Form inputs with tokens",
         "description": "An example showing how to parameterize a search query using two tokens linked to form inputs",
         "section": "examples"
     },
     {
-        "id": "cascade",
+        "id": "cascadinginputs",
         "title": "Example: Cascading form inputs",
         "description": "An example showing how to set up multiple form inputs, with the choice from one cascading into the others",
         "section": "examples"
@@ -162,13 +156,7 @@
         "section": "examples"
     },
     {
-        "id": "twosearchbars",
-        "title": "Example: Compare Searchbars",
-        "description": "An example showing two different ways to make search bars that update search managers, using JavaScript events and token binding",
-        "section": "examples"
-    },
-    {
-        "id": "search",
+        "id": "searchtimeline",
         "title": "Example: Search with timeline",
         "description": "An example showing how to create a UI that is similiar to Splunk Web by adding different views, such as the Timeline view",
         "section": "examples"
@@ -192,13 +180,13 @@
         "section": "examples"
     },
     {
-        "id": "interactive",
+        "id": "interactiveviews",
         "title": "Example: Interactive views",
         "description": "An example showing how to use click events to update searches and views on a page",
         "section": "examples"
     },
     {
-        "id": "chartclick",
+        "id": "chartclicks",
         "title": "Example: Chart click events",
         "description": "An example showing how to customize the drilldown action on a chart",
         "section": "examples"
@@ -210,13 +198,13 @@
         "section": "examples"
     },
     {
-        "id": "rowexpander",
+        "id": "tablerowexpander",
         "title": "Example: Custom table row expander",
         "description": "An example showing how to add custom row expander to a table",
         "section": "examples"
     },
     {
-        "id": "airlinedashboard",
+        "id": "complexdashboard",
         "title": "Example: Complex dashboard with drilldown",
         "description": "An example showing airlines data in a complex dashboard using multiple views, token binding, events, and in-page drilldown",
         "section": "examples"
@@ -228,40 +216,16 @@
         "section": "examples"
     },
     {
-        "id": "jsonviewer",
+        "id": "jsonresultsviewer",
         "title": "Example: JSON results viewer",
         "description": "An example showing how to write a custom view that simply displays Splunk data in JSON format",
         "section": "examples"
     },
     {
-        "id": "dashboarddj_stencil",
-        "title": "Example: Basic layout template using Django",
-        "description": "An example and reusable template for dashboard layout using only Django",
-        "section": "examples"
-    },
-    {
-        "id": "dashboardjs_stencil",
+        "id": "dashboardstencil",
         "title": "Example: Basic layout template using JavaScript",
         "description": "An example and reusable template for dashboard layout using JavaScript",
         "section": "examples"
-    },
-    {
-        "id": "dashboard_stencil1",
-        "title": "Example: Single-panel dashboard",
-        "description": "An example showing a single panel dashboard template",
-        "section": "examples"
-    },
-    {
-        "id": "dashboard_stencil2",
-        "title": "Example: Multi-panel dashboard",
-        "description": "An example showing a dashboard template showing many-cell row layouts",
-        "section": "examples"
-    },
-    {
-        "id": "setup",
-        "title": "How to use Django setup views",
-        "description": "A demo and explanation of using Django setup views",
-        "section": "reference"
     },
     {
         "id": "splunkdevcli",

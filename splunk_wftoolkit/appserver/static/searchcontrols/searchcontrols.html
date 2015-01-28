@@ -16,8 +16,6 @@
                         <h2>SearchBar view</h2>
                         <p>The SearchBar view represents a search input that is bound to a search manager. Because the SearchBar view modifies a search manager, you must use tokens or listen for <code>change</code> events to update the search manager when the SearchBar view's value changes.</p>
 
-                        <p>When using Django Bindings, use the <code>&#123;% searchbar %&#125;</code> template tag with the <code>managerid</code> property to specify the search manager.</p>
-
                         <h4>Options</h4>
                         <p>You can set the following property:</p>
                         <ul>
@@ -55,7 +53,7 @@ new SearchManager({
     search: "index=_internal | head 100 | timechart count by sourcetype span=100s",
 });    
 
-// Hooking up events (both JavaScript and Django)
+// Hooking up events 
 var manager = splunkjs.mvc.Components.getInstance("example-bar-search");
 var searchbar = splunkjs.mvc.Components.getInstance("example-search-bar");
 var timerange = searchbar.timerange;
@@ -77,8 +75,6 @@ timerange.on("change", function() {
                         <h2>SearchControls view</h2>
                         <p>The SearchControls view allows users to control a search in various ways such as pausing, continuing, or cancelling a search.</p>
 
-                        <p>When using Django Bindings, use the <code>&#123;% searchcontrols %&#125;</code> template tag with the <code>managerid</code> property to specify the search manager.</p>
-
                         <h4>Example</h4>
                         <p>In this example, a SearchBar view, a SearchControls view, and a Table view are bound to the same search. The search bar runs a search when a new search query is entered. The search controls control the operation of the search.</p>
 
@@ -96,10 +92,8 @@ timerange.on("change", function() {
                         <h2>Timeline view</h2>
                         <p>The Timeline view displays an event timeline of a given search and allows interactive modification of the search time range. Because the Timeline view modifies the search manager, you must listen for <code>change</code> events to update the search manager when the Timeline view's value changes</p>
 
-                        <p>When using Django Bindings, use the <code>&#123;% timeline %&#125;</code> template tag with the <code>managerid</code> property to specify the search manager.</p>
-
                         <h4>Options</h4>
-                        <p>You can set the following property using templates tags or JavaScript:</p>
+                        <p>You can set the following property in JavaScript:</p>
                         <ul>
                             <p><code>data</code>: The name of the results model.</p>
                         </ul>
@@ -145,7 +139,7 @@ new SearchManager({
     status_buckets: 300
 });
 
-// Hooking up events (for JavaScript and Django)
+// Hooking up events 
 var manager = splunkjs.mvc.Components.getInstance("example-timeline-search");
 var timerange = splunkjs.mvc.Components.getInstance("timeline-timerange");
 var timeline = splunkjs.mvc.Components.getInstance("example-timeline");
@@ -167,10 +161,8 @@ timeline.on("change", function() {
                         <h2>TimeRange view</h2>
                         <p>A TimeRange view can be used alone to modify the time range for a search manager. This view can be used with a SearchBar view to modify the time range for the search bar's search. Because the TimeRange view modifies the search manager, you must use tokens or listen for <code>change</code> events to update the search manager when the TimeRange view's value changes.</p>
 
-                        <p>When using Django Bindings, use the <code>&#123;% timerange %&#125;</code> template tag with the <code>managerid</code> property to specify the search manager.</p>
-
                         <h4>Options</h4>
-                        <p>You can set the following property using templates tags or JavaScript:</p>
+                        <p>You can set the following property in JavaScript:</p>
                         <ul>
                             <p><code>preset</code>: When set, the TimeRange view starts with the selected time range. For a list of possible values, see the TimeRange view in the <a href="http://docs.splunk.com/Documentation/WebFramework" target="_blank">Component Reference</a>.
                         </ul>
@@ -216,4 +208,3 @@ new SearchManager({
         </div>
     </div>
 </div>
-<!-- END TIME RANGE INPUT -->

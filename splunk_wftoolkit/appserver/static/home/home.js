@@ -27,7 +27,7 @@ define(['jquery', 'underscore', 'waypoints', 'waypoints-sticky'], function($, _,
 
                 var itemTemplate = '\
                 <div class="toolkit-item">\
-                    <a class="item-link" href="../<%= id %>">\
+                    <a class="item-link" href="<%= id %>">\
                         <img class="item-thumb" src="<%= staticUrl %>/img/<%= id %>.png"/>\
                         <div class="item-content">\
                             <h4><%= title %></h4>\

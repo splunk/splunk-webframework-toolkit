@@ -31,16 +31,7 @@
                         <h3><a class="external" href="http://dev.splunk.com/view/SP-CAAAESV" target="_blank">SplunkJS Stack</a></h3>
                         <p>SplunkJS Stack is the JavaScript component of the Web Framework, and contains tools to help you develop client apps in JavaScript. The web stack includes libraries for working with Splunk views and search managers, <a href="http://backbonejs.org/" target="_blank">Backbone.js</a> as an MVC structure for your code, <a href="http://jquery.com/" target="_blank">jQuery</a> to manage the DOM, and <a href="http://requirejs.org/" target="_blank">RequireJS</a> to manage dependencies.</p>
 
-                        <h3><a class="external" href="http://dev.splunk.com/view/SP-CAAAEM6" target="_blank">Django Bindings</a></h3>
-                        <p>Django Bindings is the Django component of the Web Framework, and uses the <a href="https://www.djangoproject.com/" target="_blank">Django</a> web framework to provide a built-in easy-to-use application server environment, including tools such as Django's URL dispatching, views, forms, and templates. In addition, the Web Framework provides Django template tags as a quick declarative way to instantiate components on your page templates.</p> 
-
-                        <h3>JavaScript vs Django</h3>
-                        <p>The Web Framework allows you to create components using Django template tags and/or JavaScript. The fundamental difference between these two methods is that Django tags are processed server-side, while JavaScript is run entirely on the client. Regardless of how you initially create the component, the result is an object that you can interact with at run time using JavaScript.</p>
-                        <p>Here's an example of using a Django template tag to create a Chart view:</p>
-<pre class="prettyprint linenums lang-js">
-&#123;% chart id="example-chart" managerid="example-search" type="pie" %&#125;
-</pre>
-                         <p>Here's the same Chart view, but created using JavaScript:</p>
+                         <p>Here's an example of fcreating a chart using JavaScript:</p>
 
 <pre class="prettyprint linenums lang-js">
 // Define dependencies
@@ -61,7 +52,6 @@ require(deps, function(mvc) {
     ...
 });
 </pre>   
-                        <p>Unless otherwise noted, examples in this toolkit show how to use both JavaScript and Django.</p>
                     </div>
                 </div>
             </div>
