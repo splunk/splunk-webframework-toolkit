@@ -39,7 +39,7 @@ define([
                   search1.set('search', searchbar1.val());
                 });
                 $('#console-spill').on('click', function(){
-                    console.log(viewer.getData());
+                    console.log(resultsView.getData());
                 });   
             }
         }
