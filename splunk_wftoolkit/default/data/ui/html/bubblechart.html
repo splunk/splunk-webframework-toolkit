@@ -21,7 +21,12 @@
 </div>
 <a id="navSkip"></a>
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
-    <div id="content" class="centered"></div>
+    <div id="content" class="centered">
+        <!-- Examples content goes here -->
+        <div>
+            
+        </div>
+    </div>
     <div id="wide-content"></div>
 </div>
 <div class="footer"></div>
@@ -30,11 +35,12 @@
 <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/i18n.js"></script>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/i18ncatalog?autoload=1"></script>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/profiles/shared.js"></script>
-<script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/pageLoader.js"></script>
 <script type="text/javascript">
 require.config({
     baseUrl: "{{SPLUNKWEB_URL_PREFIX}}/static/js"
 });
 </script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/examples_common.js"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/bubblechart/bubblechart.js"></script>
 </body>
 </html>
