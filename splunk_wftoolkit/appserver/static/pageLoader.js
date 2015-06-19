@@ -31,15 +31,12 @@ require([
         var pagePath = ['splunk_wftoolkit', pageName, pageName].join('/'); 
 
         require([
-            'text!' + pagePath + '.html', 
             'css!' + pagePath + '.css', 
             pagePath 
         ], function(
-                content, 
                 css, 
                 pageView
         ){
-                $('#content').append(content);
                 pageView.render();
                 prettyPrint();
         });
