@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Splunk Toolkit</title>
+    <title>Search timeline</title>
     <link rel="shortcut icon" href="{{SPLUNKWEB_URL_PREFIX}}/static/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/pages/dashboard-simple-bootstrap.min.css" />
@@ -21,7 +21,42 @@
 </div>
 <a id="navSkip"></a>
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
-    <div id="content" class="centered"></div>
+    <div id="content" class="centered">
+        <!-- Example content -->
+        <div class="dashboard-body container-fluid main-section-body" data-role="main">
+            <div class="row">
+                <div class="span12 dashboard-header clearfix">
+                    <h2>Search timeline</h2>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 100%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                This example shows how to create a UI that is similiar to Splunk Web
+                                by simply adding different views, such as the Timeline view. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-body" id="section-body">
+                <div class="section-inner">
+                    <div id="main-searchbar"></div>
+                    <div id="main-searchcontrols"></div>
+                </div>
+            </div>
+            <div id="main-area">
+                <div id="main-timeline"></div>
+                <div id="main-events"></div>
+            </div>
+        </div>
+    </div>
     <div id="wide-content"></div>
 </div>
 <div class="footer"></div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Splunk Toolkit</title>
+    <title>Cascading form inputs</title>
     <link rel="shortcut icon" href="{{SPLUNKWEB_URL_PREFIX}}/static/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/pages/dashboard-simple-bootstrap.min.css" />
@@ -21,7 +21,76 @@
 </div>
 <a id="navSkip"></a>
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
-    <div id="content" class="centered"></div>
+    <div id="content" class="centered">
+        <!-- Example content -->
+        <div class="dashboard-body container-fluid main-section-body" data-role="main">
+            <div class="row">
+                <div class="span12 dashboard-header clearfix">
+                    <h2>Cascading form inputs</h2>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 100%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                            </div>
+                            <div class="panel-body">
+                            <p>
+                            This example shows two form inputs (Dropdown views), and the 
+                            choice of one cascades into the other. Selecting an index from the first 
+                            dropdown list runs a search that finds the available sourcetypes in that 
+                            index and populates the second dropdown list. Then, when you select a 
+                            sourcetype and click the <b>Search</b> button, the values from both  
+                            dropdown lists are used to run the final search.
+                            </p>
+                            
+                            <p>
+                            The approach in this example is the same as the 
+                            <a href="/dj/redirector/splunk_wftoolkit/form">Form inputs with tokens</a>
+                            example. There is no difference between a search that populates a form 
+                            and a search that populates a view.
+                            </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 50%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                                <h3>Cascading dropdown lists</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>Which index should we find sourcetypes for?</p>
+                                <div id="indexes"></div>
+                                
+                                <p>Which sourcetype should we use?</p>
+                                <div id="sourcetypes"></div>
+                                
+                                <button id="searchbutton" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-cell" style="width: 50%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                            </div>
+                            <div class="panel-body">
+                                <div id="singlevalue"></div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
     <div id="wide-content"></div>
 </div>
 <div class="footer"></div>

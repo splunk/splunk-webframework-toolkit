@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Splunk Toolkit</title>
+    <title>JSON results viewer</title>
     <link rel="shortcut icon" href="{{SPLUNKWEB_URL_PREFIX}}/static/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/pages/dashboard-simple-bootstrap.min.css" />
@@ -21,7 +21,50 @@
 </div>
 <a id="navSkip"></a>
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
-    <div id="content" class="centered"></div>
+    <div id="content" class="centered">
+        <!-- Example content -->
+        
+        <div class="dashboard-body container-fluid main-section-body" data-role="main">
+            <div class="row">
+                <div class="span12 dashboard-header clearfix">
+                    <h2>JSON results viewer</h2>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 100%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                                <h3>Enter a search to view JSON data</h3>
+                            </div>
+                            <div id="searchbar1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 100%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                                <h3>Returned JSON</h3>
+                            </div>
+                            <div class="panel-body">
+                               
+                                <div id="resultsview"></div>
+                                <div class="row">
+                                    <div id="button-controls">
+                                        <div class="btn" id="console-spill">Send complete results to console</div>
+                                        <!-- <div class="btn">Copy to clipboard</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="wide-content"></div>
 </div>
 <div class="footer"></div>

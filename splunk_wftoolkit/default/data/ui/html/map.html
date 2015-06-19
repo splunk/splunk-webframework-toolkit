@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Splunk Toolkit</title>
+    <title>Map</title>
     <link rel="shortcut icon" href="{{SPLUNKWEB_URL_PREFIX}}/static/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/pages/dashboard-simple-bootstrap.min.css" />
@@ -21,7 +21,56 @@
 </div>
 <a id="navSkip"></a>
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
-    <div id="content" class="centered"></div>
+    <div id="content" class="centered">
+        <!-- Example content -->
+        <div class="dashboard-body container-fluid main-section-body centered component-page" data-role="main">
+            <div class="row">
+                <div class="span12 dashboard-header clearfix">
+                    <h2>Map</h2>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" >
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-body html">
+                                <p>The SplunkMap view binds a map to a search that interprets geographic data and displays it on a map. Data with <code>lat</code> and <code>lon</code> fields are used to populate map markers according to location. The SplunkMap view works best with the <b>geostats</b> search command, which provides clustering and spatial statistics in the Splunk search language.</p>
+        
+                                <h4>Example</h4>
+                                <p>In this example, we create a SplunkMap view and bind it to a search that includes latitude and longitude values. Search results (markers) are automatically displayed at their locations on the map and are sized based on the output of <b>geostats</b>.</p>
+        
+                                <div class="bs-docs-example">
+                                    <div id="example-map"></div>
+                                </div>
+        
+                                <pre class="prettyprint linenums lang-js">
+        var MapView = require("splunkjs/mvc/splunkmapview");
+            new MapView({
+            id: "example-map",
+            managerid: "geosearch",
+            el: $("#divToHangOn")
+        }).render();
+        
+        var SearchManager = require("splunkjs/mvc/searchmanager");
+        new SearchManager({
+            id: "geosearch",
+            search: "| inputlookup earthquakes.csv | rename Lat as latitude Lon as longitude | geostats count",
+            tileSource: "openStreetMap"
+        });
+                                </pre>
+                                <h3>Options</h3>
+                                <ul>
+                                    <p><code>tileSource</code>: Tiles to use for map rendering. Valid values are <code>openStreetMap</code> or <code>splunk</code> (default).</p>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
     <div id="wide-content"></div>
 </div>
 <div class="footer"></div>

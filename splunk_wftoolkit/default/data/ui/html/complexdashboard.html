@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Splunk Toolkit</title>
+    <title>Complex dashboard with drilldown</title>
     <link rel="shortcut icon" href="{{SPLUNKWEB_URL_PREFIX}}/static/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/pages/dashboard-simple-bootstrap.min.css" />
@@ -21,7 +21,119 @@
 </div>
 <a id="navSkip"></a>
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
-    <div id="content" class="centered"></div>
+    <div id="content" class="centered">
+        <!-- Example content -->
+        <div class="dashboard-body container-fluid main-section-body">
+        
+            <div class="row">
+                <div class="span12 dashboard-header clearfix">
+                    <h2>Complex dashboard with drilldown</h2>
+                    <p><br/>This dashboard displays airline data for a selected city, and demonstrates drilldown actions, events, and token binding. When you select a different city, all the searches on this page are updated to display data for it.</p>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 70%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element toppanes" >
+                            <div class="panel-head">
+                                <h3>Select a city from the list</h3>
+                            </div>
+                            <div style="margin: 20px;">
+                                <div id="city-select-dropdown"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-cell" style="width: 30%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element toppanes" >
+                            <div class="panel-head">
+                                <h3>Arrival volume in <span class="city-heading">Seattle</span></h3>
+                            </div>
+                            <div id="single1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12 dashboard-header clearfix">
+                    <h2>Origin cities for <span class="city-heading">Seattle</span> air traffic</h2>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell " style="width: 50%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element" style="height: 440px;" >
+                            <div class="panel-head">
+                                <h3>Click a bubble to select a city</h3>
+                            </div>
+                            <div style="margin: 20px;">
+                            <div id="bubble1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-cell" style="width: 50%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element" >
+                            <div class="panel-head">
+                                <h3>Origin city location</h3>
+                            </div>
+                            <div id="map-div"></div>
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12 dashboard-header clearfix">
+                    <h2>Details by carrier</h2>
+                </div>
+            </div>
+            <div class="dashboard-row" style="margin-top: 0px;">
+                <div class="dashboard-cell" style="width: 33.33%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element datapanes2" >
+                           <div class="panel-head">
+                                <h3>Volume by carrier in <span class="city-heading">Seattle</span></h3>
+                            </div>
+                            <div style="margin-left: 20px;">
+                                <p>Select a carrier to view details:</p>
+                            </div>
+                            <div class="panel-body">
+                                <div class="panel-body">
+                                    <div style="margin-top: 15px;">
+                                        <div id="carrier-chart1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="dashboard-cell" style="width: 33.33%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element datapanes2" >
+                            <div class="panel-head">
+                                <h3>Cities served by <span class="carrier-heading">Delta Air Lines, Inc.</span></h3>
+                            </div>
+                            <div id="carrier-cities"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-cell" style="width: 33.33%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element datapanes2" >
+                            <div class="panel-head">
+                                <h3>Cities served by <span class="carrier-heading">Delta Air Lines, Inc.</span></h3>
+                            </div>
+                            <div id="carrier-cities-table"></div>
+                        </div>
+                    </div>
+                </div>     
+            </div>
+           
+        </div>
+    </div>
     <div id="wide-content"></div>
 </div>
 <div class="footer"></div>

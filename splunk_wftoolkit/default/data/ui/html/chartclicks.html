@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Splunk Toolkit</title>
+    <title>Chart clicks</title>
     <link rel="shortcut icon" href="{{SPLUNKWEB_URL_PREFIX}}/static/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/pages/dashboard-simple-bootstrap.min.css" />
@@ -21,7 +21,71 @@
 </div>
 <a id="navSkip"></a>
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
-    <div id="content" class="centered"></div>
+    <div id="content" class="centered">
+        <!-- Example content -->
+        <div class="dashboard-body container-fluid main-section-body" data-role="main">
+            <div class="row">
+                <div class="span12 dashboard-header clearfix">
+                    <h2>Chart clicks</h2>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 100%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                Many pages display information using charts, such as pie charts, 
+                                bar charts, and other types. These charts can be very useful for 
+                                displaying summary information, so we want to allow users to 
+                                drill down and get more fine-tuned detail.
+                                </p>
+                                
+                                <p>
+                                This example shows how to customize the drilldown action on a chart.
+                                By default, the drilldown action redirects to the search page. 
+                                Here, a custom action has been created using a <code>"click:chart"</code>
+                                event handler so that when you click on a wedge of the
+                                pie chart, the single-value view on the same page is populated 
+                                with this information. In this example, the drilldown action simply
+                                powers another search, but you can customize the click handler for
+                                the chart any way you like.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 50%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                                <h3>Chart</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="sourcetype-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-cell" style="width: 50%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                                <h3>Event count</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="detail-single"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="wide-content"></div>
 </div>
 <div class="footer"></div>

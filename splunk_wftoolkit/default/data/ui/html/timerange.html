@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Splunk Toolkit</title>
+    <title>Time ranges</title>
     <link rel="shortcut icon" href="{{SPLUNKWEB_URL_PREFIX}}/static/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/pages/dashboard-simple-bootstrap.min.css" />
@@ -21,7 +21,67 @@
 </div>
 <a id="navSkip"></a>
 <div class="dashboard-body container-fluid main-section-body" data-role="main">
-    <div id="content" class="centered"></div>
+    <div id="content" class="centered">
+        <!-- Example content -->
+        <div class="dashboard-body container-fluid main-section-body" data-role="main">
+            <div class="row">
+                <div class="span12 dashboard-header clearfix">
+                    <h2>Time ranges</h2>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 100%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                Using a time range is a common way to control the time
+                                bounds of a search. 
+                                </p>
+                                
+                                <p>
+                                Multiple time ranges can be used simultanenously on the page,
+                                controlling different searches (or even the same search).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 100%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                                <h3>Time range 1</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="timerange1"></div>
+                                <div id="single1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-row">
+                <div class="dashboard-cell" style="width: 100%;">
+                    <div class="dashboard-panel">
+                        <div class="dashboard-element">
+                            <div class="panel-head">
+                                <h3>Time range 2</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="timerange2"></div>
+                                <div id="single2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="wide-content"></div>
 </div>
 <div class="footer"></div>
