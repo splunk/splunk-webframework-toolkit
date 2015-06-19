@@ -25,7 +25,9 @@ define([
                     id: 'example-map',
                     managerid: 'geosearch',
                     tileSource: 'openStreetMap',
-                    el: $('#example-map')
+                    el: $('#example-map'),
+                    'mapping.map.center': '(17.3,-39.9)',
+                    'mapping.map.zoom': 2
                 }).render();
             }
         }
