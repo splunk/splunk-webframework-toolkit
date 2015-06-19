@@ -1,4 +1,4 @@
-define([
+require([
     'jquery', 
     'underscore', 
     'prettify', 
@@ -12,10 +12,6 @@ define([
         mvc,
         SearchManager
     ) {
-        return {
-            render: function() {
-                
-            }
-        }
+      // nothin to do here
     }
 );
