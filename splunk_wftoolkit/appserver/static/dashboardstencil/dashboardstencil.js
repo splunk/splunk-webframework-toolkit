@@ -1,4 +1,4 @@
-define([
+require([
     'jquery', 
     'underscore', 
     'splunkjs/ready!', 
@@ -10,10 +10,6 @@ define([
         mvc,
         SearchManager
     ) {
-        return {
-            render: function() {
-                
-            }
-        }
+      // Doing nothing 
     }
 );
