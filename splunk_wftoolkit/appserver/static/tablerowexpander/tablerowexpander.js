@@ -57,8 +57,8 @@ require([
         */
         var SearchBasedRowExpansionRenderer = TableView.BaseRowExpansionRenderer.extend({
             initialize: function(args) {
-                if (!args.templateSelector) {
-                    throw new Error('templateSelector should be set.');
+                if (!args.templateSelector && !args.template) {
+                    throw new Error('template or templateSelector should be set.');
                 }
  
                 if (!args.queryBuilder) {
@@ -67,7 +67,7 @@ require([
  
                 var that = this;
  
-                that._templateSelector = args.templateSelector;
+                that._template = _.template(args.template || $(args.templateSelector).html());
                 that._queryBuilder = args.queryBuilder;
  
                 // Because only one row can be expanded at a time we can
@@ -76,7 +76,7 @@ require([
  
                 that._searchManager = new SearchManager({
                     id: 'example1-details-search-manager',
-                    preview: false 
+                    preview: false
                 });
                 that._searchManager.data('results', {count: 0, output_mode: 'json'})
                     .on('data', function(results) {
@@ -99,7 +99,7 @@ require([
                 that._deferred = new $.Deferred();
  
                 that._deferred.done(function(result) {
-                    $container.html(_.template($(that._templateSelector).html(), result));
+                    $container.html(that._template(result));
                     that._deferred = null;
                 });
  
@@ -130,7 +130,13 @@ require([
  
         // Add SearchBasedRowExpansionRenderer to example1.
         var table1RowExpansionRenderer = new SearchBasedRowExpansionRenderer({
-            templateSelector: '#row-expansion-template',
+            template: '\
+              <div>\
+                  <strong>Statistics for the last 5 days</strong>\
+                  <ul class="unstyled">\
+                      <% _.each(obj, function(stat) { %> <li><%= (new Date(stat._time)).toLocaleDateString() %> - <%= stat.count %></li> <% }); %>\
+                  </ul>\
+              </div>',
             queryBuilder: buildQuery
         });
         tableView1.addRowExpansionRenderer(table1RowExpansionRenderer);
