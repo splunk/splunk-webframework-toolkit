@@ -1,0 +1,12 @@
+require([ 
+    "splunkjs/ready!", 
+    "jquery",
+    "splunk_wftoolkit/components/calendarheatmap/calendarheatmap",
+], 
+function(mvc, $, CalendarHeatmap) {
+    var calendar = new CalendarHeatmap({
+        'id' : 'example',
+        'managerid' : 'example-search',
+        'el' : $('#example-chart')
+    }).render();
+});

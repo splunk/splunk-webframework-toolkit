@@ -1,0 +1,78 @@
+<p>The Calendar Heatmap displays time-series data on a timeline as a heatmap. This view is good for visualizing time-based events and activity and can be configured extensively.</p>
+
+<ul>
+    <li>Require path: <code>splunk_wftoolkit/components/calendarheatmap/calendarheatmap</code></li>
+    <li>The Calendar Heatmap works best with Splunk searches that use the <b>timechart</b> command.</li>
+    <li>The Calendar Heatmap displays a different timeline for each field in the results that are returned from a <b>timechart</b> search.</li>
+</ul>
+<h4>Example searches</h4>
+<div class="well"><ul>
+    <li>index=_internal sourcetype=splunkd_access | head 2000 | timechart span=1m count by status</li>
+</ul>
+</div>
+<h4>Properties</h4>
+<table class="table table-striped table-bordered">
+    <tr>
+        <td><b>Name</b></td>
+        <td><b>Type</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+        <td><b>Try it</b></td>
+    </tr>
+    <tr>
+        <td><code>managerid</code></td>
+        <td><b>string</b></td>
+        <td><b>null</b></td>
+        <td>The search manager bound to the chart.</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td><code>domain</code></td>
+        <td><b>string</b></td>
+        <td><b>'hour'</b></td>
+        <td>The largest unit the heatmap will differentiate by (represented as blocks of squares). Possible values are: <b>hour, day, week, month, year</b>.</td>
+        <td>
+            <div id="domain-dropdown"></div>
+        </td>
+    </tr>
+    <tr>
+        <td><code>subDomain</code></td>
+        <td><b>string</b></td>
+        <td><b>'min'</b></td>
+        <td>The smaller unit the heatmap differentiates by (represented as squares). Not all values are allowed, depending on the domain. Possible values are: <b>min, x_min, hour, x_hour, day, x_day, week, x_week, month, x_month</b> (x_ variants are used to rotate the reading order to left to right, then top to bottom).</td>
+        <td>
+            <div id="subDomain-dropdown"></div>
+        </td>
+    </tr>
+    <tr>
+        <td><code>domainLabelFormat</code></td>
+        <td><b>string</b></td>
+        <td><b>null</b></td>
+        <td>The way dates should be displayed for the
+          heatmap. Not setting it will result in the default
+          setting.</td>
+        <td>
+            <div id="domainLabelFormat-dropdown"></div>
+        </td>
+    </tr>
+</table>
+<h4>Events</h4>
+<table class="table table-striped table-bordered">
+    <tr>
+        <td><b>Name</b></td>
+        <td><b>Properties</b></td>
+    </tr>
+    <tr>
+        <td><code>click</code></td>
+        <td>
+            <ul>
+                <li>
+                    <code>date</code>: The timestamp of the clicked cell.
+                </li>
+                <li>
+                    <code>value</code>: The value of the field at that time.
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
