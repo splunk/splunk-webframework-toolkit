@@ -3,6 +3,10 @@
     float: right;
 } 
 
+.splunk-single {
+  clear: both;
+}
+
 .panel {
     overflow: visible;
 }
