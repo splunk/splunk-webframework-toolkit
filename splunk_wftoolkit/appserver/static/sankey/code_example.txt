@@ -1,0 +1,13 @@
+
+require([ 
+    "splunkjs/ready!", 
+    "jquery",
+    "splunk_wftoolkit/components/sankey/sankey",
+], 
+function(mvc, $, Sankey) {
+    var sankey = new Sankey({
+        'id' : 'example',
+        'managerid' : 'example-search',
+        'el' : $('#example-chart')
+    }).render();
+});

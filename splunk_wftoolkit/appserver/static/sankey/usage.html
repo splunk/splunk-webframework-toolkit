@@ -1,0 +1,85 @@
+<p>The Sankey Chart visualizes the magnitude of flow between nodes. Sources nodes are positioned on the left of the graph, sink nodes on the right, and intermediate nodes are placed in between. 
+</p>
+<ul>
+    <li>Require path: <code>splunk_wftoolkit/components/sankey/sankey</code></li>
+    <li>The Sankey Chart works best for data that includes a source and a sink. Splunk searches that include <code>stats count by &ltsource&gt &ltsink&gt</code> work well.</li>
+</ul>
+<h4>Example searches</h4>
+<div class="well"><ul>
+    <li>index=_internal | head 20000 | stats count by sourcetype clientip</li>
+    <li>| inputlookup musicdata.csv | stats count by artist_name, eventtype</li>
+</ul>
+</div>
+<h4>Properties</h4>
+<table class="table table-striped table-bordered">
+    <tr>
+        <td><b>Name</b></td>
+        <td><b>Type</b></td>
+        <td><b>Default</b></td>
+        <td><b>Description</b></td>
+        <td><b>Try it</b></td>
+    </tr>
+    <tr>
+        <td><code>managerid</code></td>
+        <td><b>string</b></td>
+        <td><b>null</b></td>
+        <td>The search manager bound to the chart.</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td><code>formatLabel</code></td>
+        <td><b>function</b></td>
+        <td><b>_.identity</b></td>
+        <td>A custom formatting function for node names. Takes each node name as an input and returns a formatted name.</td>
+        <td><div id="format-name"></div></td>
+    </tr>
+    <tr>
+        <td><code>formatTooltip</code></td>
+        <td><b>function</b></td>
+        <td><b>"{source} -> {target}: {value}"</b></td>
+        <td>A custom formatting function for path tooltips. Takes each node as an input and returns a formatted tooltip string.</td>
+        <td><div id="format-tooltip"></div></td>
+    </tr>
+</table>
+<h4>Events</h4>
+<table class="table table-striped table-bordered">
+    <tr>
+        <td><b>Name</b></td>
+        <td><b>Properties</b></td>
+    </tr>
+    <tr>
+        <td><code>click:link</code></td>
+        <td>
+            <ul>
+                <li>
+                    <code>source</code>: The source node name.
+                </li>
+                <li>
+                    <code>target</code>: The target node name.
+                </li>
+                <li>
+                    <code>value</code>: The node value.
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><code>click:node</code></td>
+        <td>
+            <ul>
+                <li>
+                    <code>name</code>: The node name.
+                </li>
+                <li>
+                    <code>value</code>: The node value.
+                </li>
+                <li>
+                    <code>incomingLinks</code>: A dictionary of links coming into this node.
+                </li>
+                <li>
+                    <code>outgoingLinks</code>: A dictionary of links going out of this node.
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
