@@ -1,4 +1,4 @@
-define([
+require([
     'jquery', 
     'underscore', 
     'prettify', 
@@ -14,22 +14,19 @@ define([
         SearchManager,
         SplunkMapView
     ) {
-        return {
-            render: function() {
-                new SearchManager({
-                    id: 'geosearch',
-                    search: '| inputlookup earthquakes.csv | rename Lat as lat Lon as lon | geostats count'
-                });
-                
-                new SplunkMapView({
-                    id: 'example-map',
-                    managerid: 'geosearch',
-                    tileSource: 'openStreetMap',
-                    el: $('#example-map'),
-                    'mapping.map.center': '(17.3,-39.9)',
-                    'mapping.map.zoom': 2
-                }).render();
-            }
-        }
+
+        new SearchManager({
+            id: 'geosearch',
+            search: '| inputlookup earthquakes.csv | rename Lat as lat Lon as lon | geostats count'
+        });
+        
+        new SplunkMapView({
+            id: 'example-map',
+            managerid: 'geosearch',
+            tileSource: 'openStreetMap',
+            el: $('#example-map'),
+            'mapping.map.center': '(17.3,-39.9)',
+            'mapping.map.zoom': 2
+        }).render();
     }
 );
