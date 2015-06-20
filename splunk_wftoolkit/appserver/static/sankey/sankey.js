@@ -1,10 +1,10 @@
-define([
+require([
     'jquery', 
     'underscore', 
     'splunkjs/ready!', 
     'text!splunk_wftoolkit/vizpagetemplate.tmpl',
-    'text!splunk_wftoolkit/sankey/sankeyCodeSample.txt',
-    'text!splunk_wftoolkit/sankey/sankeyUsage.html',
+    'text!splunk_wftoolkit/sankey/code_example.txt',
+    'text!splunk_wftoolkit/sankey/usage.html',
     'splunkjs/mvc/searchmanager',
     'splunkjs/mvc/dropdownview',
     'splunk_wftoolkit/components/sankey/sankey'
@@ -20,8 +20,6 @@ define([
         DropdownView,
         SankeyChart
     ) {
-        return {
-            render: function() {
                 var pageContent = _.template(
                     VizTemplate, 
                     {
@@ -108,7 +106,5 @@ define([
                     console.log("Node click");
                     console.log(e);
                 });
-            }
-        }
     }
 );
