@@ -58,25 +58,25 @@
       
                                <p>Here's an example of fcreating a chart using JavaScript:</p>
       
-        <pre class="prettyprint linenums lang-js">
-          // Define dependencies
-          var deps = [
-              "splunkjs/ready!",
-              "splunkjs/mvc/chartview"
-          ];
-          require(deps, function(mvc) {
-              var ChartView = require("splunkjs/mvc/chartview");
-          
-              // Instantiate components
-              new ChartView({
-                  id: "example-chart",
-                  managerid: "example-search",
-                  type: "pie",
-                  el: $("#mychart")
-              }).render();
-              ...
-          });
-        </pre>   
+<pre class="prettyprint linenums lang-js">
+  // Define dependencies
+  var deps = [
+      "splunkjs/ready!",
+      "splunkjs/mvc/chartview"
+  ];
+  require(deps, function(mvc) {
+      var ChartView = require("splunkjs/mvc/chartview");
+  
+      // Instantiate components
+      new ChartView({
+          id: "example-chart",
+          managerid: "example-search",
+          type: "pie",
+          el: $("#mychart")
+      }).render();
+      ...
+  });
+</pre>   
                             </div>
                         </div>
                     </div>
@@ -92,11 +92,11 @@
 <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/i18n.js"></script>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/i18ncatalog?autoload=1"></script>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/profiles/shared.js"></script>
-<script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/pageLoader.js"></script>
 <script type="text/javascript">
 require.config({
     baseUrl: "{{SPLUNKWEB_URL_PREFIX}}/static/js"
 });
 </script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/examples_common.js"></script>
 </body>
 </html>
