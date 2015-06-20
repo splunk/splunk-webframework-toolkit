@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" media="all" href="{{SPLUNKWEB_URL_PREFIX}}/static/app/search/dashboard.css" />
     <link rel="stylesheet" href="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/contrib/prettify.css"/>
     <link rel="stylesheet" href="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/css/custom.css"/>
+<link rel="stylesheet" href="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/maps/maps.css"/>
 </head>
 <body>
 <a class="navSkip" href="#navSkip" tabindex="1">Screen reader users, click here to skip the navigation bar</a>
@@ -99,11 +100,12 @@
 <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/i18n.js"></script>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/i18ncatalog?autoload=1"></script>
 <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/profiles/shared.js"></script>
-<script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/pageLoader.js"></script>
 <script type="text/javascript">
 require.config({
     baseUrl: "{{SPLUNKWEB_URL_PREFIX}}/static/js"
 });
 </script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/examples_common.js"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_wftoolkit/maps/maps.js"></script>
 </body>
 </html>
