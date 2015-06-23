@@ -1,0 +1,15 @@
+require([ 
+    "splunkjs/ready!", 
+    "jquery",
+    "splunk_wftoolkit/components/bubblechart/bubblechart",
+], 
+function(mvc, $, BubbleChart) {
+    var bubbles = new BubbleChart({
+        'id' : 'example',
+        'managerid' : 'example-search',
+        'el' : $('#example-chart')
+    }).render();
+    bubbles.on('click', function(e) {
+        alert('Clicked on: ' + e.name);
+    });
+});
