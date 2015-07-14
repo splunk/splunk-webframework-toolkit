@@ -1,7 +1,7 @@
 require([
-    'jquery', 
-    'underscore', 
-    'splunkjs/ready!', 
+    'jquery',
+    'underscore',
+    'splunkjs/ready!',
     'splunkjs/mvc/searchmanager',
     'splunkjs/mvc/searchbarview',
     'splunkjs/mvc/tableview',
@@ -10,10 +10,10 @@ require([
     'splunkjs/mvc/timelineview',
     'splunkjs/mvc/singleview',
     'css!splunk_wftoolkit/searchcontrols/searchcontrols.css'
-    ], 
+    ],
     function(
-        $, 
-        _, 
+        $,
+        _,
         mvc,
         SearchManager,
         SearchBarView,
@@ -36,7 +36,7 @@ require([
 
         new SearchManager({
             id: 'timerange-search',
-            search: 'index=_internal | head 10000 |stats count'
+            search: 'index=_internal | stats count'
         });
 
         new SearchManager({
@@ -120,11 +120,11 @@ require([
             var manager = splunkjs.mvc.Components.getInstance("example-timeline-search");
             var timerange = splunkjs.mvc.Components.getInstance("timeline-timerange");
             var timeline = splunkjs.mvc.Components.getInstance("example-timeline");
-            
+
             timerange.on("change", function() {
                 manager.search.set(timerange.val());
             });
-            
+
             timeline.on("change", function() {
                 manager.search.set(timeline.val());
             });
@@ -135,9 +135,9 @@ require([
             var manager = splunkjs.mvc.Components.getInstance("example-searchcontrols-search");
             var searchbar = splunkjs.mvc.Components.getInstance("searchcontrols-searchbar");
             var searchcontrols = splunkjs.mvc.Components.getInstance("example-searchcontrols");
-            
+
             searchbar.on("change", function() {
-                manager.set("search", searchbar.val()); 
+                manager.set("search", searchbar.val());
             });
         })();
 
@@ -149,22 +149,22 @@ require([
             var timerange = searchbar.timerange;
 
             searchbar.on("change", function() {
-                manager.set("search", searchbar.val()); 
+                manager.set("search", searchbar.val());
             });
 
             timerange.on("change", function() {
-                manager.search.set(timerange.val()); 
+                manager.search.set(timerange.val());
             });
         })();
-        
+
         // Time range input sample
         (function() {
             var manager = splunkjs.mvc.Components.getInstance("timerange-search");
             var timerange = splunkjs.mvc.Components.getInstance("example-timerange")
 
             timerange.on("change", function() {
-                manager.search.set(timerange.val()); 
+                manager.search.set(timerange.val());
             });
-        })();              
+        })();
     }
 );
