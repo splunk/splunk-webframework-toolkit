@@ -1,6 +1,6 @@
 # The Splunk Web Framework Toolkit
 
-#### Version 1.1
+#### Version 2.0
 
 The Splunk Web Framework Toolkit is a resource to help developers learn how to
 build rich applications using the [Splunk Web Framework](http://dev.splunk.com/view/web-framework/SP-CAAAER6). 
@@ -17,12 +17,10 @@ Here are the Web Framework Toolkit requirements for this release:
 
 * Operating System: Windows, Linux, or Mac OS X.
 * Web browsers: Latest versions of Chrome, Safari, or Firefox, Internet Explorer 9 or later. 
-* The Splunk Web Framework: The Web Framework is included in Splunk 6 and is available for Splunk 5 from the 
-[Splunk Developer Portal](http://dev.splunk.com/view/webframework-standalone/SP-CAAAEMA).
+* The Splunk Web Framework: The Web Framework is included in Splunk Enterprise.
 
 #### Installing the Web Framework Toolkit 
-The Web Framework Toolkit is built as a Splunk App, enabling interactive examples running within a Splunk 5 or 6
- instance. 
+The Web Framework Toolkit is built as a Splunk App, enabling interactive examples running within a Splunk instance. 
 
 ##### Installing from Splunk Web
 If you downloaded the Web Framework Toolkit from [Splunk Apps](http://apps.splunk.com), you can install the toolkit 
@@ -36,7 +34,7 @@ within Splunk Web.
 or clone the repository from [GitHub](https://github.com/splunk). 
 2. Copy the `/splunk_wftoolkit` subdirectory into `$SPLUNK_HOME/etc/apps/`. 
 3. Restart Splunk.
-4. In Splunk Web, navigate to the Web Framework Toolkit (*http://localhost:8000/dj/splunk_wftoolkit*).
+4. In Splunk Web, navigate to the Web Framework Toolkit.
 
 ## Documentation and resources
 
@@ -68,7 +66,7 @@ Stay connected with other developers building on Splunk.
 
 <tr>
 <td><b>Answers</b>
-<td>http://splunk-base.splunk.com/tags/appfx/</td>
+<td>http://answers.splunk.com</td>
 </tr>
 
 <tr>
