@@ -13,7 +13,9 @@
 <ul>
 <li>Because Splunk is no longer investing in the Splunk Web Framework Toolkit, any new app development should be done using other approaches:<p>
 <ul><li>Use the SplunkUI Toolkit (<a href="https://splunkui.splunk.com/">splunkui.splunk.com</a>).</li>
-<li>For existing apps that use the Splunk Web Framework Toolkit, we request that developers begin the migration process away from the Splunk Web Framework Toolkit. We encourage developers to provide feedback to Splunk at <a href="mailto:devinfo@splunk.com">devinfo@splunk.com</a> if there are any issues with migration. </li></ul>
+<li>SplunkUI <a href="https://splunkui.splunk.com/Create/ExamplesGallery/">examples gallery</a> with GitHub links.</li>
+<li>For existing apps that use the Splunk Web Framework Toolkit, we request that developers migrate away from the Splunk Web Framework Toolkit. We encourage developers to provide feedback to Splunk at <a href="mailto:devinfo@splunk.com">devinfo@splunk.com</a> if there are any issues with migration. </li></ul></ul>
+
 <p>Notice of removal:</p>
 <ul><li>The Splunk Web Framework Toolkit will continue to be available as a public archive on GitHub, should other developers want to clone or fork the project.</li></ul>
 </blockquote>
