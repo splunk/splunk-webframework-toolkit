@@ -7,7 +7,7 @@
 <p>The Splunk Web Framework Toolkit is deprecated.  </p>
 <p>What deprecation means:</p>
 <ul>
-<li>The resources relating to the Splunk Web Framework Toolkit have been removed from dev.splunk.com and the Splunk Web Framework Toolkit app is archived on Splunkbase.</li>
+<li>The resources relating to the Splunk Web Framework Toolkit have been removed from dev.splunk.com. Documentation for the Splunk Web Framework is still <a href="https://dev.splunk.com/enterprise/docs/developapps/visualizedata/usewebframework">available</a>. Only the Splunk Web Framework Toolkit app is deprecated at this time, and the Splunk Web Framework app is archived on Splunkbase.</li>
 <li>Splunk will no longer provide feature enhancements, engineering support, or customer support for the Splunk Web Framework Toolkit.</li></ul>
 <p>Recommendation on new app development and app migration:</p>
 <ul>
